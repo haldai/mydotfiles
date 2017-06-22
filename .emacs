@@ -52,6 +52,9 @@
 ;; common config
 ;;--------------------------------------------------
 
+;; unset ctrl-z
+(global-unset-key (kbd "C-z"))
+
 ;; ansi color
 (define-derived-mode fundamental-ansi-mode fundamental-mode "fundamental ansi"
   "Fundamental mode that understands ansi colors."
@@ -142,6 +145,9 @@
  '(column-number-mode t)
  '(display-time-mode t)
  '(ediprolog-program "/home/daiwz/.local/bin/swipl")
+ '(exec-path
+   (quote
+    ("/usr/local/bin" "/usr/bin" "/bin" "/usr/local/games" "/usr/games" "/usr/local/libexec/emacs/25.1/x86_64-unknown-linux-gnu" "/home/daiwz/.local/bin")))
  '(font-use-system-font t)
  '(gdb-many-windows t)
  '(inhibit-startup-screen t)
@@ -153,7 +159,7 @@
      ("melpa" . "https://melpa.org/packages/"))))
  '(package-selected-packages
    (quote
-    (matlab-mode magit smex slime-clj slime scpaste python-mode pos-tip popwin paredit multiple-cursors marmalade-demo marmalade json-mode ido-ubiquitous idle-highlight-mode gnugo flyspell-correct find-file-in-project ediprolog company-auctex better-defaults auto-complete-auctex auctex-latexmk ac-python ac-octave ac-math ac-ispell ac-geiser)))
+    (julia-mode julia-shell ac-js2 html5-schema js2-mode ein elpy matlab-mode magit smex slime-clj slime scpaste pos-tip popwin paredit multiple-cursors marmalade-demo marmalade json-mode ido-ubiquitous idle-highlight-mode gnugo flyspell-correct find-file-in-project ediprolog company-auctex better-defaults auto-complete-auctex auctex-latexmk ac-python ac-octave ac-math ac-ispell ac-geiser)))
  '(send-mail-function (quote mailclient-send-it))
  '(show-paren-mode t))
 (custom-set-faces
@@ -200,11 +206,11 @@
 ;;(require 'semantic-ia)
 (require 'cedet)
 
-;; (semantic-load-enable-minimum-features)
-;; (semantic-load-enable-code-helpers)
-;; (semantic-load-enable-guady-code-helpers)
-;; (semantic-load-enable-excessive-code-helpers)
-;; (semantic-load-enable-semantic-debugging-helpers)
+(semantic-load-enable-minimum-features)
+(semantic-load-enable-code-helpers)
+;;(semantic-load-enable-guady-code-helpers)
+(semantic-load-enable-excessive-code-helpers)
+;;(semantic-load-enable-semantic-debugging-helpers)
 
 ;; set ede
 (global-ede-mode t)
@@ -353,9 +359,9 @@
 ;;(c-set-offset 'substatement-open 0)
 
 ;; default indent
+(setq-default c-basic-offset 4)
 (setq-default c-indent-tabs-mode t
 			  c-indent-level 4
-			  c-basic-offset 4
 			  c-argdecl-indent 0)
 
 ;; newline and indent
@@ -366,9 +372,13 @@
   '("linux"
 	(c-offsets-alist
 	 (innamespace . -)
+     (substatement . 4)     
+     (topmost-intro . -)
 	 (inline-open . 0)
 	 (block-open . +)
+     (statement-block-intro . 4)
 	 (defun-block-intro . 4)
+     (brace-list-intro . +)
 	 (substatement-open . 0)
 	 (brace-list-open . +)
 	 (arglist-intro . +))))
@@ -422,38 +432,12 @@
 ;;----------------------
 ;; Python config
 ;;----------------------
-(require 'python-mode)
-;;(require 'pymacs)
-;;(require 'pycomplete)
+(require 'elpy)
+(elpy-enable)
+(require 'ein)
 
-;; rope and pymacs
-;;(autoload 'pymacs-apply "pymacs")
-;;(autoload 'pymacs-call "pymacs")
-;;(autoload 'pymacs-eval "pymacs" nil t)
-;;(autoload 'pymacs-exec "pymacs" nil t)
-;;(autoload 'pymacs-load "pymacs" nil t)
-;;(pymacs-load "ropemacs" "rope-")
-;;(setq ropemacs-enable-autoimport t)
-
-;; ropemacs
-;;(defun load-ropemacs ()
-;;  "Load pymacs and ropemacs"
-;;  (interactive)
-;;  (pymacs-load "ropemacs" "rope-")
-;;    ;; Automatically save project python buffers before refactorings
-;;  (setq ropemacs-confirm-saving 'nil)
-;;)
-
-;; python-mode
-(setq ipython-command "ipython")
-(autoload 'py-shell "python-mode" "Python shell" t)
-(setq auto-mode-alist (cons '("\\.py$" . python-mode) auto-mode-alist))
-(autoload 'python-mode "python-mode" "Python editing mode." t)
-(setq interpreter-mode-alist(cons '("python" . python-mode)
-                           interpreter-mode-alist))
-				      
 ;;-----------------------
-;; LATEX config
+;; Latex config
 ;;-----------------------
 
 ;; AucTex
@@ -677,7 +661,7 @@
 ;;-------------
 (require 'color-theme)
 (color-theme-initialize)
-(color-theme-clarity)
+(color-theme-calm-forest)
 
 ;;--------------
 ;; prolog Mode.
@@ -807,7 +791,34 @@
 ;; matlab
 ;;-----------
 (autoload 'matlab-mode "matlab" "Matlab Editing Mode" t)
-(add-to-list
- 'auto-mode-alist
- '("\\.m$" . matlab-mode))
+(add-to-list 'auto-mode-alist '("\\.m$" . matlab-mode))
 (setq matlab-indent-function t)
+
+;;--------
+;; ccrypt
+;;--------
+(require 'ps-ccrypt)
+
+;;-------------
+;; nxml-mode
+;;-------------
+(add-to-list 'auto-mode-alist '("\\.xml$" . nxml-mode))
+(add-to-list 'auto-mode-alist '("\\.xsd$" . nxml-mode))
+(add-to-list 'auto-mode-alist '("\\.sch$" . nxml-mode))
+(add-to-list 'auto-mode-alist '("\\.rng$" . nxml-mode))
+(add-to-list 'auto-mode-alist '("\\.xslt$" . nxml-mode))
+;;(add-to-list 'auto-mode-alist '("\\.svg$" . nxml-mode))
+(add-to-list 'auto-mode-alist '("\\.rss$" . nxml-mode))
+
+(unify-8859-on-decoding-mode)
+
+(setq magic-mode-alist
+	  (cons '("<＼＼?xml " . nxml-mode)
+            magic-mode-alist))
+(fset 'xml-mode 'nxml-mode)
+(fset 'html-mode 'nxml-mode)
+
+;;------------
+;; julia mode
+;;------------
+(require 'julia-mode)
