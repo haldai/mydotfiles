@@ -16,8 +16,11 @@
 ;; use package
 ;;----------------------
 (require 'package)
+(package-initialize) ;; You might already have this line
 (setq package-enable-at-startup nil)
-(package-initialize)
+(setq package-check-signature nil)
+(add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 
 ;;------------------
 ;; language setting
@@ -153,13 +156,9 @@
  '(inhibit-startup-screen t)
  '(markdown-command "pandoc -f markdown -t html")
  '(matlab-shell-command "/home/daiwz/APPs/MATLAB/R2016b/bin/matlab")
- '(package-archives
-   (quote
-    (("gnu" . "http://elpa.gnu.org/packages/")
-     ("melpa" . "https://melpa.org/packages/"))))
  '(package-selected-packages
    (quote
-    (julia-mode julia-shell ac-js2 html5-schema js2-mode ein elpy matlab-mode magit smex slime-clj slime scpaste pos-tip popwin paredit multiple-cursors marmalade-demo marmalade json-mode ido-ubiquitous idle-highlight-mode gnugo flyspell-correct find-file-in-project ediprolog company-auctex better-defaults auto-complete-auctex auctex-latexmk ac-python ac-octave ac-math ac-ispell ac-geiser)))
+    (realgud multiple-cursors mc-extras mc-jump ess julia-mode ac-js2 js2-mode ein elpy matlab-mode magit smex slime-clj slime scpaste pos-tip popwin paredit marmalade-demo marmalade json-mode idle-highlight-mode flyspell-correct find-file-in-project ediprolog company-auctex better-defaults auto-complete-auctex auctex-latexmk ac-python ac-octave ac-math ac-ispell ac-geiser)))
  '(send-mail-function (quote mailclient-send-it))
  '(show-paren-mode t))
 (custom-set-faces
@@ -180,14 +179,12 @@
 (setq-default tab-width 4)
 (setq-default default-tab-width 4)
 
-
 ;;--------------------
 ;; better-defaults
 ;;--------------------
 
 (add-to-list 'load-path "~/.emacs.d/plugins/better-defaults")
 (require 'better-defaults)
-
 
 ;;-------------------------
 ;; cedet config
@@ -770,7 +767,6 @@
 ;;-----------------------
 (require 'magit)
 (require 'smex)
-(require 'ido-ubiquitous)
 (require 'paredit)
 (require 'idle-highlight-mode)
 (require 'find-file-in-project)
@@ -822,3 +818,4 @@
 ;; julia mode
 ;;------------
 (require 'julia-mode)
+(require 'ess-site)
