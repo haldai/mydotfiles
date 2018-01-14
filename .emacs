@@ -4,7 +4,7 @@
 ;;(add-to-list 'load-path "/home/daiwz/.emacs.d/plugins/benchmark-init-el")
 ;;(require 'benchmark-init-loaddefs)
 ;;(benchmark-init/activate)
-;;
+
 ;;--------------------------------------
 ;; load path
 ;;--------------------------------------
