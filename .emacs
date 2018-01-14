@@ -92,13 +92,14 @@
 
 ;; use tramp
 (require 'tramp)
-(auto-image-file-mode t)
 (global-linum-mode t)
+(auto-image-file-mode t)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(LaTeX-command "latex -synctex=1")
  '(TeX-command-list
    (quote
     (("TeX" "%(PDF)%(tex) %(file-line-error) %(extraopts) %`%S%(PDFout)%(mode)%' %t" TeX-run-TeX nil
@@ -107,6 +108,9 @@
      ("LaTeX" "%`%l%(mode)%' %t" TeX-run-TeX nil
       (latex-mode doctex-mode)
       :help "Run LaTeX")
+     ("XeTeX" "xetex -synctex=1 %t" TeX-run-TeX nil
+      (latex-mode doctex-mode)
+      :help "Run an xetex")
      ("Makeinfo" "makeinfo %(extraopts) %t" TeX-run-compile nil
       (texinfo-mode)
       :help "Run Makeinfo with Info output")
@@ -142,12 +146,13 @@
      ("Clean" "TeX-clean" TeX-run-function nil t :help "Delete generated intermediate files")
      ("Clean All" "(TeX-clean t)" TeX-run-function nil t :help "Delete generated intermediate and output files")
      ("Other" "" TeX-run-command t t :help "Run an arbitrary command")
-     ("XeLaTex" "xelatex%(mode) %t" TeX-run-TeX nil
+     ("XeLaTex" "xelatex%(mode) -synctex=1 %t" TeX-run-TeX nil
       (latex-mode doctex-mode)
       :help "XeLaTex for CJK languages"))))
  '(column-number-mode t)
  '(display-time-mode t)
- '(ediprolog-program "/home/daiwz/.local/bin/swipl")
+ '(ediprolog-program "swipl")
+ '(ein:jupyter-default-server-command "/home/daiwz/.local/bin/jupyter")
  '(exec-path
    (quote
     ("/usr/local/bin" "/usr/bin" "/bin" "/usr/local/games" "/usr/games" "/usr/local/libexec/emacs/25.1/x86_64-unknown-linux-gnu" "/home/daiwz/.local/bin")))
@@ -156,17 +161,25 @@
  '(inhibit-startup-screen t)
  '(markdown-command "pandoc -f markdown -t html")
  '(matlab-shell-command "/home/daiwz/APPs/MATLAB/R2016b/bin/matlab")
+ '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
-    (realgud multiple-cursors mc-extras mc-jump ess julia-mode ac-js2 js2-mode ein elpy matlab-mode magit smex slime-clj slime scpaste pos-tip popwin paredit marmalade-demo marmalade json-mode idle-highlight-mode flyspell-correct find-file-in-project ediprolog company-auctex better-defaults auto-complete-auctex auctex-latexmk ac-python ac-octave ac-math ac-ispell ac-geiser)))
+    (pdf-tools org-pdfview ediprolog web-mode show-css markdown-mode markdown-preview-mode autopair auctex realgud multiple-cursors mc-extras mc-jump ess julia-mode ac-js2 js2-mode ein elpy matlab-mode magit smex slime-clj slime scpaste pos-tip popwin paredit marmalade-demo marmalade json-mode idle-highlight-mode flyspell-correct find-file-in-project company-auctex better-defaults auto-complete-auctex auctex-latexmk ac-python ac-octave ac-math ac-ispell ac-geiser)))
+ '(pdf-info-epdfinfo-program
+   "/home/daiwz/.emacs.d/elpa/pdf-tools-20171012.2226/epdfinfo")
+ '(pdf-view-incompatible-modes
+   (quote
+    (linum-relative-mode helm-linum-relative-mode nlinum-mode nlinum-hl-mode nlinum-relative-mode yalinum-mode)))
+ '(safe-local-variable-values (quote ((TeX-master . t))))
  '(send-mail-function (quote mailclient-send-it))
- '(show-paren-mode t))
+ '(show-paren-mode t)
+ '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((t (:inherit nil :stipple nil :background "gray12" :foreground "green" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 150 :width normal :foundry "MS  " :family "Yahei Mono")))))
 
 ;; display column number
 (column-number-mode t)
@@ -178,6 +191,9 @@
 (setq-default tab-always-indent 'complete)
 (setq-default tab-width 4)
 (setq-default default-tab-width 4)
+
+;; paste problem
+(setq x-selection-timeout 300)
 
 ;;--------------------
 ;; better-defaults
@@ -226,8 +242,8 @@
 ;  (define-key semantic-tag-folding-mode-map (kbd "C-+") 'semantic-tag-folding-show-all)
 
 ; syntax highlighting
-(global-font-lock-mode t)
-(setq font-lock-maximum-decoration t)	
+;(global-font-lock-mode t)
+;(setq font-lock-maximum-decoration t)
 
 ; semanticdb file search
 ;; (setq semanticdb-project-roots (list (expand-file-name "/")))
@@ -440,10 +456,14 @@
 ;; AucTex
 ;; (load "auctex.el" nil t t)
 ;; (load "preview-latex.el" nil t t)
- 	
+
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
 (setq-default TeX-master nil)
+(setq TeX-source-correlate-mode t)
+
+;; Enable synctex correlation
+(setq TeX-source-correlate-method 'synctex)
 
 (if (string-equal system-type "windows-nt")
     (require 'tex-mik))
@@ -475,10 +495,12 @@
 (setq TeX-view-program-list
       '(("Acrobat" "Acrobat.exe %o")
         ("Gsview" "gsview32.exe %o")
-        ("Okular" "okular --unique %o")
+        ("gv" "gv %o")
+        ("qpdfview" "qpdfview --unique %o")
+        ("MasterPDF" "masterpdfeditor4 %o")
         ("Evince" "evince %o")
         ("Firefox" "firefox %o")
-	("Yap" "yap %o")))
+        ("Yap" "yap.exe %o")))
 (cond
  ((eq system-type 'windows-nt)
   (add-hook 'LaTeX-mode-hook
@@ -489,8 +511,10 @@
  ((eq system-type 'gnu/linux)
   (add-hook 'LaTeX-mode-hook
             (lambda ()
-              (setq TeX-view-program-selection '((output-pdf "Okular")
-                                                 (output-dvi "Okular")))))))
+              (setq TeX-view-program-selection '((output-pdf "PDF Tools")
+                                                 (output-dvi "gv")))))))
+
+(add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
 
 ;; mpview
 (defun mpost-compile ()
@@ -520,8 +544,6 @@
   (ispell-word)
   )
 (global-set-key (kbd "M-<f8>") 'flyspell-check-next-highlighted-word)
-
-
 
 ;; Reftex
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)   ; with AUCTeX LaTeX mode
@@ -819,3 +841,42 @@
 ;;------------
 (require 'julia-mode)
 (require 'ess-site)
+
+;;-------------
+;; web mode
+;;-------------
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.js?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
+
+(defun my-web-mode-hook ()
+  "Hooks for Web mode."
+  ((setq web-mode-markup-indent-offset 2)
+   (setq web-mode-css-indent-offset 2)
+   (setq web-mode-code-indent-offset 2)
+   (setq web-mode-enable-auto-pairing t))
+)
+(add-hook 'web-mode-hook  'my-web-mode-hook)
+
+;;-----------
+;; pdf-tools
+;;----------
+(pdf-tools-install)
+(add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
+
+(add-hook 'pdf-view-mode-hook 'my-inhibit-global-linum-mode)
+
+(defun my-inhibit-global-linum-mode ()
+  "Counter-act global-linum-mode'."
+    (add-hook 'after-change-major-mode-hook
+                (lambda () (linum-mode 0))
+		            :append :local))
+
