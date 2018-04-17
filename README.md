@@ -8,6 +8,12 @@ All of dependencies can be installed from Archlinux repository and AUR.
 * powerline-fonts-git
 * conky
 * compton
+* lm_sensors
+
+For conky weather script:
+
+* jq
+* curl
 
 ## Screenshot ##
 
