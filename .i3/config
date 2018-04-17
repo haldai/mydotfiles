@@ -76,7 +76,7 @@ bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
 bindsym $mod+F2 exec firefox
 bindsym $mod+F3 exec thunar
 bindsym $mod+t exec --no-startup-id pkill compton
-bindsym $mod+Ctrl+t exec --no-startup-id compton -b
+bindsym $mod+Ctrl+t exec --no-startup-id compton -b --xrender-sync and --xrender-sync-fence
 bindsym Print exec --no-startup-id deepin-screenshot -f
 bindsym $mod+Print --release exec --no-startup-id deepin-screenshot
 # bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
@@ -283,7 +283,7 @@ bindsym $mod+9 exec --no-startup-id xscreensaver-command -activate
 # Autostart applications
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id gnome-settings-daemon
-exec --no-startup-id nitrogen --restore; sleep 1; compton -b; 
+exec --no-startup-id nitrogen --restore; sleep 1; compton -b --xrender-sync and --xrender-sync-fence;
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id xfce4-clipman
