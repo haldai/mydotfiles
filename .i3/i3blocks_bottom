@@ -1,0 +1,103 @@
+# i3blocks config file
+#
+# Please see man i3blocks for a complete reference!
+# The man page is also hosted at http://vivien.github.io/i3blocks
+#
+# List of valid properties:
+#
+# align
+# color
+# background
+# border
+# command
+# full_text
+# instance
+# interval
+# label
+# min_width
+# name
+# separator
+# separator_block_width
+# short_text
+# signal
+# urgent
+
+# Global properties
+#
+# The top properties below are applied to every block, but can be overridden.
+# Each block command defaults to the script name to avoid boilerplate.
+command=/home/daiwz/.i3/blocks/$BLOCK_NAME
+separator_block_width=20
+markup=none
+
+# The type defaults to "mem" if the instance is not specified.
+[wireless]
+#instance=wlp2s0
+color=#94f397
+interval=30
+
+[cpu]
+label=
+color=#8bc3e7
+interval=10
+
+[memory]
+label=
+#separator=false
+color=#bc8c1c
+interval=30
+
+[memory]
+label=
+instance=swap
+color=#ac8c8c
+#separator=false
+interval=30
+
+# Disk usage
+#
+# The directory defaults to $HOME if the instance is not specified.
+# The script may be called with a optional argument to set the alert
+# (defaults to 10 for 10%).
+
+[disk]
+label=
+color=#f48942
+instance=/
+interval=60
+#separator=true
+#separator_block_width=9
+#border=#1990B7
+#border_top=0
+#border_right=0
+#border_left=0
+#border_bottom=2
+
+[disk]
+label=
+color=colorpicker
+instance=/home/
+interval=60
+#separator=true
+#separator_block_width=9
+#border=#1990B7
+#border_top=0
+#border_right=0
+#border_left=0
+#border_bottom=2
+
+#[temperature]
+[temp]
+label=
+command=sensors | grep CPU | awk '{print $2}'
+color=#baba55
+interval=10
+
+[fan]
+label=
+color=#1aba55
+interval=10
+
+[battery]
+color=#a4dc6a
+interval=60

@@ -1,0 +1,27 @@
+#/bin/zsh!
+connectedOutputs=$(xrandr | grep " connected" | sed -e "s/\([A-Z0-9]\+\) connected.*/\1/")
+activeOutputs=$(xrandr | grep -E " connected (primary )?[1-9]+" | sed -e "s/\([A-Z0-9]\+\) connected .*/\1/")
+
+#echo $connectedOutputs
+#echo $activeOutputs
+
+dp_c=0
+dp_a=0
+
+if echo "${connectedOutputs[@]}" | grep -w "DP1" &>/dev/null; then
+    dp_c=1
+    #echo "Found"
+fi
+
+if echo "${activeOutputs[@]}" | grep -w "DP1" &>/dev/null; then
+    dp_a=1
+    #echo "Active"
+fi
+
+if [ $dp_c -eq 1 -a $dp_a -eq 0 ]; then
+    #echo "Connect"
+    xrandr --output DP1 --mode 1024x768 --right-of eDP1
+elif [ $dp_c -eq 1 -a $dp_a -eq 1 ]; then
+    xrandr --output DP1 --off --output eDP1 --auto
+    #echo "Disconnect"
+fi

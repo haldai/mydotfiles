@@ -1,0 +1,128 @@
+conky.config = {
+-------------------------------------
+--  Generic Settings
+-------------------------------------
+background=true,
+update_interval=5,
+double_buffer=true,
+no_buffers=true,
+imlib_cache_size=10,
+alignment='top_left',
+
+draw_shades=false,
+draw_outline=false,
+draw_borders=false,
+draw_graph_borders=true,
+show_graph_scale=false,
+show_graph_range=false,
+
+
+-------------------------------------
+--  Window Specifications
+-------------------------------------
+gap_x=50,
+gap_y=50,
+minimum_height=800,
+minimum_width=450,
+maximum_width=450,
+own_window=true,
+own_window_type='override',
+own_window_transparent = true,
+own_window_hints="undecorated,below,sticky,skip_taskbar,skip_pager",
+border_inner_margin=0,
+border_outer_margin=0,
+--alignment="middle_middle",
+--own_window_argb_visual=true,
+--own_window_argb_value=0,
+
+
+-------------------------------------
+--  Text Settings
+-------------------------------------
+use_xft=true,
+xftalpha=1,
+font="Droid Sans:size=12",
+text_buffer_size=256,
+override_utf8_locale=true,
+
+
+-------------------------------------
+--  Color Scheme
+-------------------------------------
+default_color="FFFFFF",
+color0="FFFFFF",
+color1="FFA300",
+color2="FFA300",
+color3="D64937",
+color4="F9F9F9",
+color5="484848",
+color6="2D2D2D",
+
+}
+
+conky.text = [[
+\
+\
+${execi 1800 ~/.conky/Myconky/get_weather}\
+\
+\
+${image ~/.conky/Myconky/assets/bg_img/separator-v.png -p 145,160 -s 2x83}\
+${image ~/.conky/Myconky/assets/bg_img/separator-v.png -p 305,160 -s 2x83}\
+${image ~/.conky/Myconky/assets/bg_img/separator-h.png -p 10,135 -s 430x2}\
+${image ~/.conky/Myconky/assets/bg_img/separator-h.png -p 10,270 -s 430x2}\
+\
+\
+${color2}${voffset 142}${alignc 160}${font MySong:size=12}${execi 1800 date +%^A}${font}
+${color2}${voffset -24}${alignc}${font MySong:size=12}${execi 1800 date -d +1day +%^A}${font}
+${color2}${voffset -24}${alignc -160}${font MySong:size=12}${execi 1800 date -d +2day +%^A}${font}
+\
+\
+${color2}${voffset 70}${alignc 160}${execi 1800 ~/.conky/Myconky/parse_weather 'min' '.main.temp_min' '0'} °C/${execi 1800 ~/.conky/Myconky/parse_weather 'max' '.main.temp_max' '0'} °C
+${color2}${voffset -22}${alignc}${execi 1800 ~/.conky/Myconky/parse_weather 'min' '.main.temp_min' '1'} °C/${execi 1800 ~/.conky/Myconky/parse_weather 'max' '.main.temp_max' '1'} °C
+${color2}${voffset -22}${alignc -160}${execi 1800 ~/.conky/Myconky/parse_weather 'min' '.main.temp_min' '2'} °C/${execi 1800 ~/.conky/Myconky/parse_weather 'max' '.main.temp_max' '2'} °C
+\
+\
+${color2}${font Droid Sans:size=40}${goto 100}${voffset -205}${execi 1800 jq -r '.main.temp' ~/.cache/weather.json | awk '{print int($1+0.5)}'} °C${font}${font MySong:size=36}${voffset -43} ${execi 1800 jq -r .weather[0].description ~/.cache/weather.json | sed "s|\<.|\U&|g"}${color}${font}
+${font Droid Sans:size=12}${color0}${alignr 32}${voffset -76}${execi 1800 jq -r '.main.pressure' ~/.cache/weather.json | awk '{print int($1+0.5)}' # round num} hPa${font}
+${font Droid Sans:size=12}${color0}${alignr 32}${voffset 8}${execi 1800 jq -r '.main.humidity' ~/.cache/weather.json | awk '{print int($1+0.5)}' # round num} %${color}${font}
+${font Droid Sans:size=12}${color0}${alignr 32}${voffset 6}${execi 1800 jq -r '.wind.speed' ~/.cache/weather.json | awk '{print int($1+0.5)}' # round num} m/s${color}${font}
+\
+\
+${image ~/.conky/Myconky/assets/bg_img/pressure.svg.png -p 320,35 -s 20x20}\
+${image ~/.conky/Myconky/assets/bg_img/humidity.svg.png -p 320,65 -s 20x20}\
+${image ~/.conky/Myconky/assets/bg_img/wind.svg.png -p 320,95 -s 20x20}\
+${execi 1800 cp -f ~/.conky/Myconky/assets/icons/$(jq '.weather[0].id' ~/.cache/weather.json).png ~/.cache/weather-0.png}${image ~/.cache/weather-0.png -p 20,45 -s 64x64}\
+${execi 1800 cp -f ~/.conky/Myconky/assets/icons/$(~/.conky/Myconky/parse_weather 'first' '.weather[0].id' '0').png ~/.cache/weather-1.png}${image ~/.cache/weather-1.png -p 35,170 -s 64x64}\
+${execi 1800 cp -f ~/.conky/Myconky/assets/icons/$(~/.conky/Myconky/parse_weather 'first' '.weather[0].id' '1').png ~/.cache/weather-2.png}${image ~/.cache/weather-2.png -p 195,170 -s 64x64}\
+${execi 1800 cp -f ~/.conky/Myconky/assets/icons/$(~/.conky/Myconky/parse_weather 'first' '.weather[0].id' '2').png ~/.cache/weather-3.png}${image ~/.cache/weather-3.png -p 355,170 -s 64x64}${font}${voffset -24}\
+\
+\
+${voffset 190}${font Droid Sans:pixelsize=12}${color FFA300}HOME ${offset 5}$color${fs_used /home} / ${fs_size /home}${offset 10}${color FFA300}ROOT ${offset 5}$color${fs_used /} / ${fs_size /}${offset 10}${color FFA300}RAM ${offset 5}$color${mem} / ${memmax}
+\
+${voffset 15}${font Droid Sans:size=12}${color2}CPU${color}${alignr 10}${execi 1800 uname -nr}${font}
+${cpugraph cpu0 50,450 -t 000000 FFFFFF}
+${cpugauge cpu1 50,100}${offset 15}${cpugauge cpu2 50,100}${offset 15}${cpugauge cpu3 50,100}${offset 15}${cpugauge cpu4 50,100}\
+${voffset 10}
+${cpugauge cpu5 50,100}${offset 15}${cpugauge cpu6 50,100}${offset 15}${cpugauge cpu7 50,100}${offset 15}${cpugauge cpu8 50,100}
+${font Droid Sans:size=10}${voffset -95}${color0}${goto 0}1 ${goto 115}2 ${goto 230}3 ${goto 0} ${goto 345}4 ${voffset 80}${goto 0}5 ${goto 115}6 ${goto 230}7 ${goto 345}8${font}
+${font Droid Sans:size=10}${voffset -104}${color0}${goto 45}${freq_g (1)}GHz ${goto 160}${freq_g (2)}GHz ${goto 275}${freq_g (3)}GHz ${goto 390}${freq_g (4)}GHz${font}\
+${font Droid Sans:size=10}${voffset 78}${goto 45}${freq_g (5)}GHz ${goto 160}${freq_g (6)}GHz ${goto 275}${freq_g (7)}GHz ${goto 390}${freq_g (8)}GHz${font}\
+\
+${voffset 15}
+${color2}CPU ${color0}${alignr}${cpu cpu0}%
+${cpubar cpu0 10,}
+${top name 1} $alignr ${top cpu 1}%
+${top name 2} $alignr ${top cpu 2}%
+${top name 3} $alignr ${top cpu 3}%
+${top name 4} $alignr ${top cpu 4}%
+${top name 5} $alignr ${top cpu 5}%
+
+${color2}RAM ${color0}${alignr}${mem}
+${membar 10,}
+${top_mem name 1} $alignr ${top_mem mem_res 1}
+${top_mem name 2} $alignr ${top_mem mem_res 2}
+${top_mem name 3} $alignr ${top_mem mem_res 3}
+${top_mem name 4} $alignr ${top_mem mem_res 4}
+${top_mem name 5} $alignr ${top_mem mem_res 5}
+
+]];

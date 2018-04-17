@@ -1,0 +1,7 @@
+#!/bin/bash
+
+BUFFER=$(sensors | grep 'Processor Fan' | awk '{print $3}')
+
+echo "${BUFFER}RPM"
+echo "${BUFFER}RPM"
+

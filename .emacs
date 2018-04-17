@@ -159,14 +159,13 @@
  '(font-use-system-font t)
  '(gdb-many-windows t)
  '(inhibit-startup-screen t)
+ '(ispell-dictionary "en_GB")
  '(markdown-command "pandoc -f markdown -t html")
  '(matlab-shell-command "/home/daiwz/APPs/MATLAB/R2016b/bin/matlab")
  '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
-    (pdf-tools org-pdfview ediprolog web-mode show-css markdown-mode markdown-preview-mode autopair auctex realgud multiple-cursors mc-extras mc-jump ess julia-mode ac-js2 js2-mode ein elpy matlab-mode magit smex slime-clj slime scpaste pos-tip popwin paredit marmalade-demo marmalade json-mode idle-highlight-mode flyspell-correct find-file-in-project company-auctex better-defaults auto-complete-auctex auctex-latexmk ac-python ac-octave ac-math ac-ispell ac-geiser)))
- '(pdf-info-epdfinfo-program
-   "/home/daiwz/.emacs.d/elpa/pdf-tools-20171012.2226/epdfinfo")
+    (lua-mode pdf-tools org-pdfview ediprolog web-mode show-css markdown-mode markdown-preview-mode autopair auctex realgud multiple-cursors mc-extras mc-jump ess julia-mode ac-js2 js2-mode ein elpy matlab-mode magit smex slime-clj slime scpaste pos-tip popwin paredit marmalade-demo marmalade json-mode idle-highlight-mode flyspell-correct find-file-in-project company-auctex better-defaults auto-complete-auctex auctex-latexmk ac-python ac-octave ac-math ac-ispell ac-geiser)))
  '(pdf-view-incompatible-modes
    (quote
     (linum-relative-mode helm-linum-relative-mode nlinum-mode nlinum-hl-mode nlinum-relative-mode yalinum-mode)))

@@ -1,0 +1,90 @@
+# i3blocks config file
+#
+# Please see man i3blocks for a complete reference!
+# The man page is also hosted at http://vivien.github.io/i3blocks
+#
+# List of valid properties:
+#
+# align
+# color
+# background
+# border
+# command
+# full_text
+# instance
+# interval
+# label
+# min_width
+# name
+# separator
+# separator_block_width
+# short_text
+# signal
+# urgent
+
+# Global properties
+#
+# The top properties below are applied to every block, but can be overridden.
+# Each block command defaults to the script name to avoid boilerplate.
+command=/home/daiwz/.i3/blocks/$BLOCK_NAME
+separator_block_width=15
+markup=none
+
+# Volume indicator
+#
+# The first parameter sets the step (and units to display)
+# The second parameter overrides the mixer selection
+# See the script for details.
+#
+
+[focused window]
+label=
+color=#ffc700
+command=xtitle -s
+interval=persist
+min_width=1295
+align=left
+
+[brightness]
+label=
+interval=5
+color=#ac8c8c
+min_width=70
+align=center
+
+[volume]
+color=#e156f7
+instance=Master
+interval=60
+signal=10
+min_width=70
+align=center
+
+[microphone]
+color=#888c8c
+interval=5
+min_width=70
+align=center
+
+[date]
+label=
+color=#ff797b
+interval=60
+min_width=170
+align=center
+
+[time]
+label=
+color=#00ffc7
+interval=60
+command=date '+%H:%M'
+min_width=70
+align=center
+
+[user]
+label=
+color=#8badf9
+command=whoami
+interval=once
+min_width=70
+align=center
