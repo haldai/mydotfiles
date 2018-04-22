@@ -2,18 +2,25 @@
 
 # One of the following: xrandr, xbacklight, kernel
 METHOD="xbacklight"
-URGENT_VALUE=10
+URGENT_VALUE=5
 
-# Left click
 curB=$(xbacklight -get)
-if [[ "${BLOCK_BUTTON}" -eq 4 ]]; then
-    xbacklight -inc 5
-    # Right click
-elif [[ "${BLOCK_BUTTON}" -eq 5 ]]; then
-    if [[ "${curB%.*}" -gt 10 ]]; then
-        xbacklight -dec 5
+
+backlight_toggle() {
+    if [[ "$1" -eq 100 ]]; then
+        xbacklight -set 5
+    else
+        xbacklight -set 100
     fi
-fi
+}
+
+case $BLOCK_BUTTON in
+    1) backlight_toggle ${curB%.*} ;;
+    4) xbacklight -inc 5 ;;
+    5) if [[ "${curB%.*}" -gt 6 ]]; then
+           xbacklight -dec 5
+       fi ;;
+esac
 
 if [[ "${METHOD}" = "xrandr" ]]; then
     device="${BLOCK_INSTANCE:-primary}"
