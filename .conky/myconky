@@ -82,7 +82,7 @@ ${color2}${voffset -22}${alignc}${execi 1800 ~/.conky/Myconky/parse_weather 'min
 ${color2}${voffset -22}${alignc -160}${execi 1800 ~/.conky/Myconky/parse_weather 'min' '.main.temp_min' '2'} °C/${execi 1800 ~/.conky/Myconky/parse_weather 'max' '.main.temp_max' '2'} °C
 \
 \
-${color2}${font Droid Sans:size=40}${goto 80}${voffset -205}${execi 1800 jq -r '.main.temp' ~/.cache/weather.json | awk '{print int($1+0.5)}'} °C${font}${font MySong:size=36}${voffset -43} ${execi 1800 jq -r .weather[0].description ~/.cache/weather.json | sed "s|\<.|\U&|g"}${color}${font}
+${color2}${font Droid Sans:size=40}${goto 0}${voffset -205}${execi 1800 jq -r '.main.temp' ~/.cache/weather.json | awk '{print int($1+0.5)}'} °C${font}${font MySong:size=24}${voffset -24} ${execi 1800 jq -r .weather[0].description ~/.cache/weather.json | sed "s|\<.|\U&|g"}${color}${font}
 ${font Droid Sans:size=12}${color0}${alignr 12}${voffset -76}${execi 1800 jq -r '.main.pressure' ~/.cache/weather.json | awk '{print int($1+0.5)}' # round num} hPa${font}
 ${font Droid Sans:size=12}${color0}${alignr 12}${voffset 8}${execi 1800 jq -r '.main.humidity' ~/.cache/weather.json | awk '{print int($1+0.5)}' # round num} %${color}${font}
 ${font Droid Sans:size=12}${color0}${alignr 12}${voffset 6}${execi 1800 jq -r '.wind.speed' ~/.cache/weather.json | awk '{print int($1+0.5)}' # round num} m/s${color}${font}
@@ -91,7 +91,7 @@ ${font Droid Sans:size=12}${color0}${alignr 12}${voffset 6}${execi 1800 jq -r '.
 ${image ~/.conky/Myconky/assets/bg_img/pressure.svg.png -p 340,35 -s 20x20}\
 ${image ~/.conky/Myconky/assets/bg_img/humidity.svg.png -p 340,65 -s 20x20}\
 ${image ~/.conky/Myconky/assets/bg_img/wind.svg.png -p 340,95 -s 20x20}\
-${execi 1800 cp -f ~/.conky/Myconky/assets/icons/$(jq '.weather[0].id' ~/.cache/weather.json).png ~/.cache/weather-0.png}${image ~/.cache/weather-0.png -p 5,45 -s 64x64}\
+${execi 1800 cp -f ~/.conky/Myconky/assets/icons/$(jq '.weather[0].id' ~/.cache/weather.json).png ~/.cache/weather-0.png}${image ~/.cache/weather-0.png -p 256,30 -s 64x64}\
 ${execi 1800 cp -f ~/.conky/Myconky/assets/icons/$(~/.conky/Myconky/parse_weather 'first' '.weather[0].id' '0').png ~/.cache/weather-1.png}${image ~/.cache/weather-1.png -p 35,170 -s 64x64}\
 ${execi 1800 cp -f ~/.conky/Myconky/assets/icons/$(~/.conky/Myconky/parse_weather 'first' '.weather[0].id' '1').png ~/.cache/weather-2.png}${image ~/.cache/weather-2.png -p 195,170 -s 64x64}\
 ${execi 1800 cp -f ~/.conky/Myconky/assets/icons/$(~/.conky/Myconky/parse_weather 'first' '.weather[0].id' '2').png ~/.cache/weather-3.png}${image ~/.cache/weather-3.png -p 355,170 -s 64x64}${font}${voffset -24}\
