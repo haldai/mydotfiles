@@ -82,7 +82,7 @@ ${color2}${voffset -22}${alignc}${execi 1800 ~/.conky/Myconky/parse_weather 'min
 ${color2}${voffset -22}${alignc -160}${execi 1800 ~/.conky/Myconky/parse_weather 'min' '.main.temp_min' '2'} °C/${execi 1800 ~/.conky/Myconky/parse_weather 'max' '.main.temp_max' '2'} °C
 \
 \
-${color2}${font Droid Sans:size=40}${goto 0}${voffset -205}${execi 1800 jq -r '.main.temp' ~/.cache/weather.json | awk '{print int($1+0.5)}'} °C${font}${font MySong:size=24}${voffset -24} ${execi 1800 jq -r .weather[0].description ~/.cache/weather.json | sed "s|\<.|\U&|g"}${color}${font}
+${color2}${font Droid Sans:size=40}${goto 0}${voffset -205}${execi 1800 jq -r '.main.temp' ~/.cache/weather.json | awk '{print int($1+0.5)}'} °C${font}${font MySong:size=24}${voffset -24}${alignc 10}${execi 1800 jq -r .weather[0].description ~/.cache/weather.json | sed "s|\<.|\U&|g"}${color}${font}
 ${font Droid Sans:size=12}${color0}${alignr 12}${voffset -76}${execi 1800 jq -r '.main.pressure' ~/.cache/weather.json | awk '{print int($1+0.5)}' # round num} hPa${font}
 ${font Droid Sans:size=12}${color0}${alignr 12}${voffset 8}${execi 1800 jq -r '.main.humidity' ~/.cache/weather.json | awk '{print int($1+0.5)}' # round num} %${color}${font}
 ${font Droid Sans:size=12}${color0}${alignr 12}${voffset 6}${execi 1800 jq -r '.wind.speed' ~/.cache/weather.json | awk '{print int($1+0.5)}' # round num} m/s${color}${font}
