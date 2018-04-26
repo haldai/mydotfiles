@@ -33,10 +33,12 @@ bindsym $mod+Return exec urxvt
 bindsym $mod+Shift+q kill
 
 # start program launcher
-bindsym $mod+d exec --no-startup-id /home/daiwz/.i3/bin/dmenu_recency
+bindsym $mod+d exec --no-startup-id rofi -combi-modi window#drun#run#ssh -theme gruvbox-dark -show combi
+
 
 # launch categorized menu
-bindsym $mod+z exec --no-startup-id morc_menu
+bindsym $mod+z exec --no-startup-id /home/daiwz/.i3/bin/dmenu_recency
+
 
 ################################################################################################
 ## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
@@ -76,7 +78,7 @@ bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
 bindsym $mod+F2 exec firefox
 bindsym $mod+F3 exec thunar
 bindsym $mod+t exec --no-startup-id pkill compton
-bindsym $mod+Ctrl+t exec --no-startup-id compton -b --xrender-sync --xrender-sync-fence
+bindsym $mod+Ctrl+t exec --no-startup-id compton -b --config /home/daiwz/.config/compton.conf
 bindsym Print exec --no-startup-id deepin-screenshot -f
 bindsym $mod+Print --release exec --no-startup-id deepin-screenshot
 # bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
@@ -288,7 +290,7 @@ bindsym $mod+9 exec --no-startup-id xscreensaver-command -activate
 # Autostart applications
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id gnome-settings-daemon
-exec --no-startup-id nitrogen --restore; sleep 1; compton -b --xrender-sync --xrender-sync-fence;
+exec --no-startup-id nitrogen --restore; sleep 1; compton -b --config /home/daiwz/.config/compton.conf
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id xfce4-clipman
