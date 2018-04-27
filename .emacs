@@ -5,6 +5,17 @@
 ;;(require 'benchmark-init-loaddefs)
 ;;(benchmark-init/activate)
 
+;;-----------------
+;; unset ctrl z
+;;-----------------
+(global-unset-key (kbd "C-z"))
+
+;;--------------
+;; transparency
+;;--------------
+(set-frame-parameter (selected-frame) 'alpha '(95 . 50))
+(add-to-list 'default-frame-alist '(alpha . (95 . 50)))
+
 ;;--------------------------------------
 ;; load path
 ;;--------------------------------------
