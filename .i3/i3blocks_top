@@ -38,7 +38,7 @@ markup=none
 #
 
 [focused window]
-label=
+label= 
 color=#ffc700
 command=xtitle -s
 interval=persist

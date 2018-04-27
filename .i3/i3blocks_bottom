@@ -32,17 +32,16 @@ markup=none
 
 # The type defaults to "mem" if the instance is not specified.
 [wireless]
-#instance=wlp2s0
 color=#94f397
 interval=30
 
 [cpu]
-label=
+label=
 color=#8bc3e7
 interval=10
 
 [memory]
-label=
+label=
 #separator=false
 color=#bc8c1c
 interval=30
@@ -94,7 +93,7 @@ color=#baba55
 interval=10
 
 [fan]
-label=
+label=
 color=#1aba55
 interval=10
 
