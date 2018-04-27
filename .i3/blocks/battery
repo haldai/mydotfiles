@@ -20,11 +20,11 @@ elif [[ "${BATTERY_STATE0}" = "Discharging" ]]; then
   else
     BATTERY_ICON=""
   fi
-  echo "${BATTERY_ICON}${BATTERY_POWER0}%-"
-  echo "${BATTERY_ICON}${BATTERY_POWER0}%-"
+  echo "${BATTERY_ICON} ${BATTERY_POWER0}%-"
+  echo "${BATTERY_ICON} ${BATTERY_POWER0}%-"
 else
-  echo "${BATTERY_POWER0}%"
-  echo "${BATTERY_POWER0}%"
+  echo " ${BATTERY_POWER0}%"
+  echo " ${BATTERY_POWER0}%"
 fi
 
 if [[ "${BATTERY_POWER0}" -le "${URGENT_VALUE}" ]]; then
