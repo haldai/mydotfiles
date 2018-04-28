@@ -18,6 +18,10 @@ For conky weather script:
 * jq
 * curl
 
+For network traffic monitor
+
+* vnstat
+
 ## Screenshot ##
 
 ![Screenshot](./screenshot.png "screenshot")
