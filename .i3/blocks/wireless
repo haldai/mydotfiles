@@ -45,7 +45,7 @@ if [[ $is_eth -eq 0 ]] ; then
     quality=$(grep ${IF} /proc/net/wireless | awk '{ print int($3 * 100 / 70) }')
 fi
 
-BD=$(vnstat -i "$IF" -tr -s)
+BD=$(vnstat -i "$IF" -tr -s -ru)
 USAGE_IN=$(echo "$BD" | grep "rx" | awk '{ print $2 $3 }')
 USAGE_OUT=$(echo "$BD" | grep "tx" | awk '{ print $2 $3 }')
 
