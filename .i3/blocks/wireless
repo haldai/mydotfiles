@@ -105,12 +105,12 @@ echo "${BYTES_OUT}" >> "${PREV_FILE}"
 
 if [[ $is_eth -eq 0 ]] ; then
     if [[ "${SSID_NAME}" != "" ]]; then
-        echo " [${quality}%][${SSID_NAME}][$IPADDR]  ${USAGE_IN}  ${USAGE_OUT}" # full text
-        echo " [${quality}%][${SSID_NAME}][$IPADDR]  ${USAGE_IN}  ${USAGE_OUT}" # full text
+        echo " [${quality}%][${SSID_NAME}][$IPADDR]  ${USAGE_IN}  ${USAGE_OUT}" # full text
+        echo " [${quality}%][${SSID_NAME}][$IPADDR]  ${USAGE_IN}  ${USAGE_OUT}" # full text
     fi
 elif [[ $is_eth -eq 1 ]] ; then
-    echo " $IPADDR  ${USAGE_IN}  ${USAGE_OUT}" # full text
-    echo " $IPADDR  ${USAGE_IN}  ${USAGE_OUT}" # full text
+    echo " $IPADDR  ${USAGE_IN}  ${USAGE_OUT}" # full text
+    echo " $IPADDR  ${USAGE_IN}  ${USAGE_OUT}" # full text
     exit
     if [[ $IPADDR == "" ]] ; then
         echo " off"
