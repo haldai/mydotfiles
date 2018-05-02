@@ -182,9 +182,22 @@ main () {
     prop="$2"
     day="$3"
     
+    # robustness
+    if [[ $(jq ".object" $forecast 2>&1 | grep "parse error" | wc -l) -gt 0 ]] ;
+    then
+        echo "N/A"
+        exit
+    fi
+
+    if [[ $(jq ".object" $weather 2>&1 | grep "parse error" | wc -l) -gt 0 ]] ;
+    then
+        echo "N/A"
+        exit
+    fi
+
     if [[ $(grep "404 Not Found" ~/.cache/weather.json | wc -l) -gt 0 ]]; then
         echo "N/A"
-	exit 33
+	    exit
     fi
     
     if [[ $type == "avg" ]] ; then
