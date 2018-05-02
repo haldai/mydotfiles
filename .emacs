@@ -179,7 +179,7 @@
  '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
-    (nimbus-theme tangotango-theme lua-mode pdf-tools org-pdfview ediprolog web-mode show-css markdown-mode markdown-preview-mode autopair auctex realgud multiple-cursors mc-extras mc-jump ess julia-mode ac-js2 js2-mode ein elpy matlab-mode magit smex slime-clj slime scpaste pos-tip popwin paredit marmalade-demo marmalade json-mode idle-highlight-mode flyspell-correct find-file-in-project company-auctex better-defaults auto-complete-auctex auctex-latexmk ac-python ac-octave ac-math ac-ispell ac-geiser)))
+    (tangotango-theme lua-mode pdf-tools org-pdfview ediprolog web-mode show-css markdown-mode markdown-preview-mode autopair auctex realgud multiple-cursors mc-extras mc-jump ess julia-mode ac-js2 js2-mode ein elpy matlab-mode magit smex slime-clj slime scpaste pos-tip popwin paredit marmalade-demo marmalade json-mode idle-highlight-mode flyspell-correct find-file-in-project company-auctex better-defaults auto-complete-auctex auctex-latexmk ac-python ac-octave ac-math ac-ispell ac-geiser)))
  '(pdf-view-incompatible-modes
    (quote
     (linum-relative-mode helm-linum-relative-mode nlinum-mode nlinum-hl-mode nlinum-relative-mode yalinum-mode)))
