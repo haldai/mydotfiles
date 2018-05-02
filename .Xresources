@@ -12,51 +12,47 @@ XTerm*pointerColor: #16A085
 XTerm*faceName: Fixed
 XTerm*faceSize: 11
 
-*background:                      #272827
-*foreground:                      #657b83
-*fading:                          15
-*fadeColor:                       black
-*cursorColor:                     #16A085
-*pointerColorBackground:          #2B2C2B
-*pointerColorForeground:          #16A085
+*.foreground:   #cdcdcd
+*.background:   #121317
+*.cursorColor:  #cdcdcd
 
-!! black dark/light
-*color0:                          #232423
-*color8:                          #282928
+! black
+*.color0:       #282a2e
+*.color8:       #373b41
 
-!! red dark/light
-*color1:                          #BA2922
-*color9:                          #CC372C
+! red
+*.color1:       #922230
+*.color9:       #923a45
 
-!! green dark/light
-*color2:                          #7E807E
-*color10:                         #8D8F8D
+! green
+*.color2:       #0f8c61
+*.color10:      #198873
 
-!! yellow dark/light
-*color3:                          #4C4F4D
-*color11:                         #4E524F
+! yellow
+*.color3:       #ba883d
+*.color11:      #ba9153
 
-!! blue dark/light
-*color4:                          #16A085
-*color12:                         #13BF9D
+! blue
+*.color4:       #277896
+*.color12:      #3c7e96
 
-!! magenta dark/light
-*color5:                          #43746A
-*color13:                         #487D72
+! magenta
+*.color5:       #4b4574
+*.color13:      #53569b
 
-!! cyan dark/light
-*color6:                          #00CCCC
-*color14:                         #00D1D1
+! cyan
+*.color6:       #638b83
+*.color14:      #7dbfb8
 
-!! white dark/light
-*color7:                          #E0E0E0
-*color15:                         #E8E8E8
+! white
+*.color7:       #cdcdcd
+*.color15:      #cdcdcd
 
 Xcursor.theme: xcursor-breeze
 Xcursor.size:                     0
 
-XTerm*background:                 #272827
-XTerm*foreground:                 #fdf6e3
+!XTerm*background:                 #272827
+!XTerm*foreground:                 #fdf6e3
 XTerm*reverseVideo:               on
 XTerm*faceName:                   Terminus:size=11:antialias=true
 XTerm*selectToClipboard:          true

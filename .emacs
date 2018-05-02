@@ -161,6 +161,9 @@
       (latex-mode doctex-mode)
       :help "XeLaTex for CJK languages"))))
  '(column-number-mode t)
+ '(custom-safe-themes
+   (quote
+    ("4e63466756c7dbd78b49ce86f5f0954b92bf70b30c01c494b37c586639fa3f6f" "6350f0cf3091e574a5de01d7309c0b456d814756a79867eac02c11b262d04a2e" default)))
  '(display-time-mode t)
  '(ediprolog-program "swipl")
  '(ein:jupyter-default-server-command "/home/daiwz/.local/bin/jupyter")
@@ -176,7 +179,7 @@
  '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
-    (lua-mode pdf-tools org-pdfview ediprolog web-mode show-css markdown-mode markdown-preview-mode autopair auctex realgud multiple-cursors mc-extras mc-jump ess julia-mode ac-js2 js2-mode ein elpy matlab-mode magit smex slime-clj slime scpaste pos-tip popwin paredit marmalade-demo marmalade json-mode idle-highlight-mode flyspell-correct find-file-in-project company-auctex better-defaults auto-complete-auctex auctex-latexmk ac-python ac-octave ac-math ac-ispell ac-geiser)))
+    (nimbus-theme tangotango-theme lua-mode pdf-tools org-pdfview ediprolog web-mode show-css markdown-mode markdown-preview-mode autopair auctex realgud multiple-cursors mc-extras mc-jump ess julia-mode ac-js2 js2-mode ein elpy matlab-mode magit smex slime-clj slime scpaste pos-tip popwin paredit marmalade-demo marmalade json-mode idle-highlight-mode flyspell-correct find-file-in-project company-auctex better-defaults auto-complete-auctex auctex-latexmk ac-python ac-octave ac-math ac-ispell ac-geiser)))
  '(pdf-view-incompatible-modes
    (quote
     (linum-relative-mode helm-linum-relative-mode nlinum-mode nlinum-hl-mode nlinum-relative-mode yalinum-mode)))
@@ -688,11 +691,12 @@
 ;;-------------
 ;; color-theme
 ;;-------------
-(require 'color-theme)
-(color-theme-initialize)
+;;(require 'color-theme)
+;;(color-theme-initialize)
 ;;(color-theme-calm-forest)
-(color-theme-solarized)
-(load-theme 'solarized t)
+;;(color-theme-solarized)
+;;(load-theme 'solarized t)
+(load-theme 'tangotango t)
 
 ;;--------------
 ;; prolog Mode.
