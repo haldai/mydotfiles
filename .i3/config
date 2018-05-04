@@ -455,3 +455,5 @@ exec --no-startup-id caffeine
 # autostart evolution
 exec --no-startup-id i3-msg 'workspace 4; exec thunderbird'
 
+# flashes current active window
+bindsym $mod+BackSpace exec --no-startup-id /home/daiwz/.i3/bin/flash-win.sh
