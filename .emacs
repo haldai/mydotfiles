@@ -779,6 +779,7 @@
 (setq ess-use-company 'script-only)
 (define-key company-active-map (kbd "TAB") 'company-complete-common)
 (add-hook 'julia-mode-hook 'auto-complete-mode)
+(add-hook 'julia-mode-hook 'my-highlight)
 
 ;;-------------
 ;; web mode
@@ -818,3 +819,12 @@
                 (lambda () (linum-mode 0))
 		            :append :local))
 
+;;--------------
+;; my functions
+;;-------------
+(defun my-highlight ()
+  "highlight some words."
+  (interactive)
+  (font-lock-add-keywords nil
+                          '(("\\<\\(FIXME\\|TODO\\|QUESTION\\|NOTE\\)"
+                             1 font-lock-warning-face t))))
