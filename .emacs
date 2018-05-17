@@ -170,7 +170,6 @@
  '(exec-path
    (quote
     ("/usr/local/bin" "/usr/bin" "/bin" "/usr/local/games" "/usr/games" "/usr/local/libexec/emacs/25.1/x86_64-unknown-linux-gnu" "/home/daiwz/.local/bin")))
- '(font-use-system-font t)
  '(gdb-many-windows t)
  '(inhibit-startup-screen t)
  '(ispell-dictionary "en_GB")
@@ -192,7 +191,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "gray12" :foreground "green" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 150 :width normal :foundry "MS  " :family "Yahei Mono")))))
+ '(default ((t (:inherit nil :stipple nil :background "gray12" :foreground "green" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 151 :width normal :foundry "MS  " :family "Yahei Mono")))))
 
 ;; display column number
 (column-number-mode t)
@@ -460,7 +459,12 @@
 ;;----------------------
 (require 'elpy)
 (elpy-enable)
+
+;;---------------------
+;; ipython notebook
+;;---------------------
 (require 'ein)
+(setq ein:use-auto-complete t)
 
 ;;-----------------------
 ;; Latex config
@@ -595,98 +599,13 @@
 ;;----------------------------
 ;; auto complete
 ;;----------------------------
-;;(add-to-list 'load-path "~/.emacs.d/elpa/auto-complete-1.4")
-
-;; auto-complete
 (require 'auto-complete)
 (require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/elpa/auto-complete-20160710.1544")
-(setq ac-fuzzy-enable nil) ;; fuzzy matching
-
-;; default configuration
 (ac-config-default)
-(setq ac-auto-start nil) ;; use trigger key to start ac
-(setq ac-quick-help-delay 0.5)
-(define-key ac-mode-map  [(control return)] 'auto-complete)
-(ac-set-trigger-key "<tab>")
-(ac-set-trigger-key "TAB")
-(global-auto-complete-mode t)
 
-;; clang completion
-(add-to-list 'load-path "~/.emacs.d/plugins/auto-complete-clang/")
-(require 'auto-complete-clang)
-
-;; (setq ac-auto-start t)
-
-;; clang look-up places
-(setq ac-clang-flags
-      (mapcar (lambda (item)(concat "-I" item))
-              (split-string
-               "
- /usr/include/c++/5
- /usr/include/x86_64-linux-gnu/c++/5
- /usr/include/c++/5/backward
- /usr/lib/gcc/x86_64-linux-gnu/5/include
- /usr/local/include
- /usr/lib/gcc/x86_64-linux-gnu/5/include-fixed
- /usr/include/c++/6
- /usr/include/x86_64-linux-gnu/c++/6
- /usr/include/c++/6/backward
- /usr/lib/gcc/x86_64-linux-gnu/6/include
- /usr/lib/gcc/x86_64-linux-gnu/6/include-fixed
- /usr/include
- /home/daiwz/.local/include
- /home/daiwz/.local/lib/swipl/include
-"
-               )))
-
-(defun my-ac-config ()
-  (setq-default ac-sources '(ac-source-abbrev ac-source-dictionary ac-source-words-in-same-mode-buffers))
-  (add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup)
-  (add-hook 'c-mode-common-hook 'ac-cc-mode-setup)
-  (add-hook 'c++-mode-hook 'ac-cc-mode-setup) 
-  (add-hook 'ruby-mode-hook 'ac-ruby-mode-setup)
-  (add-hook 'css-mode-hook 'ac-css-mode-setup)
-  (add-hook 'auto-complete-mode-hook 'ac-common-setup)
-  (global-auto-complete-mode t))
-(defun my-ac-cc-mode-setup ()
-  (setq ac-sources (append '(ac-source-clang ac-source-yasnippet) ac-sources)))
-(add-hook 'c-mode-common-hook 'my-ac-cc-mode-setup)
-;; ac-source-gtags
-(my-ac-config)
-
-;;-------------
-;; ac-clang
-;;-------------
-;;(add-to-list 'load-path "~/.emacs.d/elpa/ac-clang-20150906.1008/")
-;;(require 'ac-clang)
-
-;;(ac-clang-initialize)
-
-;;(setq ac-clang-flags
-;;      (mapcar (lambda (item)(concat "-I" item))
-;;              (split-string
-;;               "
-;; /usr/include/c++/5
-;; /usr/include/x86_64-linux-gnu/c++/5
-;; /usr/include/c++/5/backward
-;; /usr/lib/gcc/x86_64-linux-gnu/5/include
-;; /usr/local/include
-;; /usr/lib/gcc/x86_64-linux-gnu/5/include-fixed
-;; /usr/include/x86_64-linux-gnu
-;; /usr/include
-;; /home
-;;"
-;;               )))
-
-;;(defun my-ac-config ()
-;;  (add-hook 'c-mode-common-hook 'ac-cc-mode-setup)
-;;  (add-hook 'auto-complete-mode-hook 'ac-common-setup)
-;;  (global-auto-complete-mode t)
-;;  (ac-clang-activate))
-;;
-;;(my-ac-config)
+(require 'company)
+(add-hook 'global-init-hook 'global-company-mode)
+(add-to-list 'company-backends 'company-c-headers)
 
 ;;-------------
 ;; color-theme
@@ -856,7 +775,10 @@
 ;; julia mode
 ;;------------
 (require 'julia-mode)
-(require 'ess-site)
+(require 'ess)
+(setq ess-use-company 'script-only)
+(define-key company-active-map (kbd "TAB") 'company-complete-common)
+(add-hook 'julia-mode-hook 'auto-complete-mode)
 
 ;;-------------
 ;; web mode
