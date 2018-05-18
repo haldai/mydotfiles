@@ -4,12 +4,13 @@ BATTERY=0
 BATTERY_INFO0=$(acpi -b | grep "Battery ${BATTERY}")
 BATTERY_STATE0=$(echo "${BATTERY_INFO0}" | grep -wo "Full\|Charging\|Discharging")
 BATTERY_POWER0=$(echo "${BATTERY_INFO0}" | grep -o '[0-9]\+%' | tr -d '%')
+BATTERY_TIME0=$(echo "${BATTERY_INFO0}" | grep -o '[0-9]\+:[0-9]\+:[0-9]\+' | tr -d 'remaining')
 
 URGENT_VALUE=10
 
 if [[ "${BATTERY_STATE0}" = "Charging" ]]; then
-  echo "${BATTERY_POWER0}%+"
-  echo "${BATTERY_POWER0}%+"
+  echo " ${BATTERY_POWER0}%+ ${BATTERY_TIME0}"
+  echo " ${BATTERY_POWER0}%+ ${BATTERY_TIME0}"
 elif [[ "${BATTERY_STATE0}" = "Discharging" ]]; then
   if [[ ${BATTERY_POWER0} -gt 90 ]]; then
     BATTERY_ICON=""
@@ -20,8 +21,8 @@ elif [[ "${BATTERY_STATE0}" = "Discharging" ]]; then
   else
     BATTERY_ICON=""
   fi
-  echo "${BATTERY_ICON} ${BATTERY_POWER0}%-"
-  echo "${BATTERY_ICON} ${BATTERY_POWER0}%-"
+  echo "${BATTERY_ICON} ${BATTERY_POWER0}%- ${BATTERY_TIME0}"
+  echo "${BATTERY_ICON} ${BATTERY_POWER0}%- ${BATTERY_TIME0}"
 else
   echo " ${BATTERY_POWER0}%"
   echo " ${BATTERY_POWER0}%"
