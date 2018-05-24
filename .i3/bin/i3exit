@@ -16,9 +16,9 @@ case "$1" in
     suspend)
         xscreensaver-command -activate && $logind suspend
         ;;
-    hibernate)
-        xscreensaver-command -activate && $logind hibernate
-        ;;
+    #hibernate)
+    #    xscreensaver-command -activate && $logind hibernate
+    #    ;;
     reboot)
         $logind reboot
         ;;

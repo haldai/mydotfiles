@@ -1,0 +1,8 @@
+[Unit]
+Description=Undervolt Service
+
+[Service]
+ExecStart=/usr/local/bin/undervolt.sh
+
+[Install]
+WantedBy=multi-user.target
