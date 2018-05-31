@@ -781,6 +781,13 @@
 (add-hook 'julia-mode-hook 'auto-complete-mode)
 (add-hook 'julia-mode-hook 'my-highlight)
 
+;;------------
+;; javascript
+;;-----------
+(require 'js2-mode)
+(add-to-list 'auto-mode-alist '("\\.js?\\'" . js2-mode))
+(add-hook 'js2-mode-hook (lambda () (setq js2-basic-offset 2)))
+
 ;;-------------
 ;; web mode
 ;;-------------
@@ -793,16 +800,34 @@
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.js?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.ejs\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
 
 (defun my-web-mode-hook ()
   "Hooks for Web mode."
-  ((setq web-mode-markup-indent-offset 2)
-   (setq web-mode-css-indent-offset 2)
-   (setq web-mode-code-indent-offset 2)
-   (setq web-mode-enable-auto-pairing t))
-)
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-code-indent-offset 2)
+  (setq web-mode-attr-indent-offset 2)
+  (setq web-mode-enable-auto-pairing t)
+  (add-to-list 'web-mode-indentation-params '("lineup-args" . nil))
+  (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil))
+  (add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
+  (add-to-list 'web-mode-indentation-params '("lineup-ternary" . nil))
+  (setq web-mode-style-padding 1)
+  (setq web-mode-script-padding 1)
+  (setq web-mode-block-padding 0)
+  (setq web-mode-comment-style 2)
+  (setq web-mode-enable-css-colorization t)
+  (setq web-mode-enable-current-element-highlight t)
+  (setq web-mode-enable-current-column-highlight t)
+  (setq web-mode-ac-sources-alist
+        '(("css" . (ac-source-css-property))
+          ("html" . (ac-source-words-in-buffer ac-source-abbrev))))
+  (setq web-mode-engines-alist
+      '(("php"    . "\\.phtml\\'")
+        ("blade"  . "\\.blade\\.")
+        ("erb"    . "\\.ejs\\'"))))
 (add-hook 'web-mode-hook  'my-web-mode-hook)
 
 ;;-----------
