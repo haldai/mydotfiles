@@ -12,6 +12,7 @@ All of dependencies can be installed from Archlinux repository and AUR.
 * zsh
 * oh-my-zsh-git
 * bullet-train-oh-my-zsh-theme-git
+* [spacemacs](http://spacemacs.org/)
 
 For conky weather script:
 
