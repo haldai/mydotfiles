@@ -63,8 +63,8 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #d
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 
 # Presentation
-bindsym $mod+F8 exec /home/kuroneko/.i3/bin/presentation
-bindsym $mod+Shift+F8 exec /home/kuroneko/.i3/bin/presentation-x
+bindsym $mod+F8 exec /home/daiwz/.i3/bin/presentation
+bindsym $mod+Shift+F8 exec /home/daiwz/.i3/bin/presentation-x
 
 # Media player controls
 bindsym XF86AudioPlay exec playerctl play
