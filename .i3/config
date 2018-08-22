@@ -231,6 +231,7 @@ for_window [class="Xfburn"] floating enable
 for_window [class="electronic-wechat"] floating enable border normal
 for_window [class="Crossover"] floating enable border normal
 for_window [class="Wine"] floating enable border normal
+for_window [class="WINWORD.EXE"] floating disable
 for_window [class="netease-cloud-music"] floating enable border normal
 
 # switch to workspace with urgent window automatically
@@ -296,11 +297,11 @@ exec --no-startup-id gnome-settings-daemon
 exec --no-startup-id feh --bg-scale /home/daiwz/Pictures/Arms_wall.jpeg; sleep 1; compton -b --xrender-sync --xrender-sync-fence --config /home/daiwz/.config/compton.conf
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
-exec --no-startup-id xfce4-clipman
+exec --no-startup-id xfce4-clipman # clip manager
 exec --no-startup-id blueman-applet
 exec_always --no-startup-id sbxkb
 exec --no-startup-id xscreensaver -nosplash
-exec --no-startup-id sslocal -c /etc/shadowsocks/hk2.json
+exec --no-startup-id sslocal -c /etc/shadowsocks/jp6.json
 exec --no-startup-id libinput-gestures-setup start
 exec --no-startup-id /home/daiwz/.conky/myconky-start.sh
 

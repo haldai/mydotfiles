@@ -7,14 +7,21 @@ activeOutputs=$(xrandr | grep -E " connected (primary )?[1-9]+" | sed -e "s/\([A
 
 dp_c=0
 dp_a=0
+hdmi_c=0
+hdmi_a=0
 
 if echo "${connectedOutputs[@]}" | grep -w "DP1" &>/dev/null; then
     dp_c=1
     #echo "Found"
+elif echo "${connectedOutputs[@]}" | grep -w "HDMI1" &>/dev/null; then
+    hdmi_c=1
 fi
 
 if echo "${activeOutputs[@]}" | grep -w "DP1" &>/dev/null; then
     dp_a=1
+    #echo "Active"
+elif echo "${activeOutputs[@]}" | grep -w "HDMI1" &>/dev/null; then
+    hdmi_a=1
     #echo "Active"
 fi
 
@@ -24,4 +31,8 @@ if [ $dp_c -eq 1 -a $dp_a -eq 0 ]; then
 elif [ $dp_c -eq 1 -a $dp_a -eq 1 ]; then
     xrandr --output DP1 --off --output eDP1 --auto
     #echo "Disconnect"
+elif [ $hdmi_c -eq 1 -a $hdmi_a -eq 0 ]; then
+    xrandr --output HDMI1 --auto --same-as eDP1
+elif [ $hdmi_c -eq 1 -a $hdmi_a -eq 1 ]; then
+    xrandr --output HDMI1 --off --output eDP1 --auto
 fi

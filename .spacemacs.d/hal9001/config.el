@@ -67,3 +67,11 @@
             (lambda ()
               (setq TeX-view-program-selection '((output-pdf "PDF Tools")
                                                  (output-dvi "gv")))))))
+;;---------------------------
+;; Markdownmode with mathjax
+;;---------------------------
+(setq markdown-command
+      (concat
+       "/usr/local/bin/pandoc"
+       " --from=markdown --to=html"
+       " --standalone --mathjax --highlight-style=pygments"))
