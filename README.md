@@ -23,6 +23,12 @@ For network traffic monitor
 
 * vnstat
 
+Misc:
+
+* [dunst](https://dunst-project.org/)
+* [ranger](https://github.com/ranger/ranger)
+* [feh](https://github.com/derf/feh)
+
 ## Screenshot ##
 
 ![Screenshot](./screenshot.png "screenshot")
