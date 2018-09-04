@@ -64,7 +64,8 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute s
 
 # Presentation
 bindsym $mod+F8 exec /home/daiwz/.i3/bin/presentation
-bindsym $mod+Shift+F8 exec /home/daiwz/.i3/bin/presentation-x
+bindsym $mod+Shift+F8 exec /home/daiwz/.i3/bin/presentation-x -r
+bindsym $mod+Ctrl+F8 exec /home/daiwz/.i3/bin/presentation-x -l
 
 # Media player controls
 bindsym XF86AudioPlay exec playerctl play
@@ -73,8 +74,9 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
 # Start Applications
+bindsym $mod+F1 exec emacs
 bindsym $mod+F2 exec firefox
-bindsym $mod+F3 exec thunar
+bindsym $mod+F3 exec exec urxvt -e ranger
 bindsym $mod+t exec --no-startup-id pkill compton
 bindsym $mod+Ctrl+t exec --no-startup-id compton -b --xrender-sync --xrender-sync-fence --config /home/daiwz/.config/compton.conf
 bindsym Print exec --no-startup-id deepin-screenshot -f
@@ -301,7 +303,7 @@ exec --no-startup-id xfce4-clipman # clip manager
 exec --no-startup-id blueman-applet
 exec_always --no-startup-id sbxkb
 exec --no-startup-id xscreensaver -nosplash
-exec --no-startup-id sslocal -c /etc/shadowsocks/jp6.json
+exec --no-startup-id sslocal -c /etc/shadowsocks/hk1.json
 exec --no-startup-id libinput-gestures-setup start
 exec --no-startup-id /home/daiwz/.conky/myconky-start.sh
 

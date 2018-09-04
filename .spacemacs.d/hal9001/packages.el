@@ -40,6 +40,8 @@
     markdown-preview-mode
     (prolog-mode :location built-in)
     ediprolog
+    ob-prolog
+    pinentry
     )
   "The list of Lisp packages required by the hal9001 layer.
 
@@ -110,6 +112,18 @@ Each entry is either:
 
 (defun hal9001/init-ediprolog ()
   (use-package ediprolog
+    :defer t
+    :init)
+  )
+
+(defun hal9001/init-ob-prolog ()
+  (use-package ob-prolog
+    :defer t
+    :init)
+  )
+
+(defun hal9001/init-pinentry ()
+  (use-package pinentry
     :defer t
     :init)
   )
