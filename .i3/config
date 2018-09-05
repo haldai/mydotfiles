@@ -205,6 +205,7 @@ assign [class="TIM.exe"] $ws5
 assign [class="Steam"] $ws6
 assign [class="Crossover"] $ws6
 assign [class="netease-cloud-music"] $ws7
+assign [class="ss-qt5"] $ws4
 
 # Open specific applications in floating mode
 for_window [title="alsamixer"] floating enable border pixel 1
@@ -235,6 +236,7 @@ for_window [class="Crossover"] floating enable border normal
 for_window [class="Wine"] floating enable border normal
 for_window [class="WINWORD.EXE"] floating disable
 for_window [class="netease-cloud-music"] floating enable border normal
+for_window [class="ss-qt5"] floating enable border normal
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
