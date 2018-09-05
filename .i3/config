@@ -304,7 +304,8 @@ exec --no-startup-id xfce4-clipman # clip manager
 exec --no-startup-id blueman-applet
 exec_always --no-startup-id sbxkb
 exec --no-startup-id xscreensaver -nosplash
-exec --no-startup-id sslocal -c /etc/shadowsocks/hk1.json
+# exec --no-startup-id sslocal -c /etc/shadowsocks/hk1.json
+exec --no-startup-id ss-qt5
 exec --no-startup-id libinput-gestures-setup start
 exec --no-startup-id /home/daiwz/.conky/myconky-start.sh
 
