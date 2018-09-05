@@ -506,8 +506,6 @@ before packages are loaded."
   ;; Latex revert mode
   (add-hook 'doc-view-mode-hook 'auto-revert-mode)
   ;; EasyPG
-  (require 'epa-file)
-  (epa-file-enable)
   (setq epa-file-select-keys nil)
   (pinentry-start)
   ;; org mode customizations
