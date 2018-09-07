@@ -1,4 +1,3 @@
-
 ;;; packages.el --- hal9001 layer packages file for Spacemacs.
 ;;
 ;; Copyright (c) 2012-2018 Sylvain Benner & Contributors
@@ -42,6 +41,7 @@
     ediprolog
     ob-prolog
     pinentry
+    ;; cnfonts
     )
   "The list of Lisp packages required by the hal9001 layer.
 
@@ -174,5 +174,17 @@ Each entry is either:
     :defer t
     :init)
   )
+
+;;(defun hal9001/init-cnfonts ()
+;;  (use-package cnfonts
+;;    :defer t
+;;    :init
+;;    (progn
+;;      (require 'cnfonts)
+;;      ;; 让 cnfonts 随着 Emacs 自动生效。
+;;      (cnfonts-enable)
+;;      ;; 让 spacemacs mode-line 中的 Unicode 图标正确显示。
+;;      (cnfonts-set-spacemacs-fallback-fonts)))
+;;  )
 
 ;;; packages.el ends here
