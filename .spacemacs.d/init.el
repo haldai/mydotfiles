@@ -47,7 +47,7 @@ This function should only modify configuration layer settings."
      git
      ;; markdown
      (org :variables
-          org-enable-reveal-js-support t)
+          org-enable-reveal-js-support nil)
      neotree
      ;; (shell :variables
      ;;        shell-default-height 30
@@ -513,7 +513,7 @@ before packages are loaded."
    'org-babel-load-languages
    '((ditaa . t)
      (gnuplot . t)))
-  )
+   )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
