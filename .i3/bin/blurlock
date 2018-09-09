@@ -1,14 +1,26 @@
 #!/bin/bash
-# /usr/bin/blurlock
+IMAGE=/tmp/i3lock.png
+TEXT="请输入口令以解锁"
+SCRIPT=`realpath $0`
+SCRIPTPATH=`dirname $SCRIPT`
+LOCK=$SCRIPTPATH/lock.png
+RES=$(xrandr --current | grep '*' | uniq | awk '{print $1}')
+#This is a bit cheaty
+BOXSIZE=$(expr $(echo $RES | cut -d 'x' -f1) / 2)
 
-# take screenshot
-import -window root /tmp/screenshot.png
+if [[ $1 != "" ]]; then
+    TEXT=$1
+fi
 
-# blur it
-convert /tmp/screenshot.png -blur 0x5 /tmp/screenshotblur.png
-rm /tmp/screenshot.png
+ffmpeg -f x11grab -video_size $RES -y -i $DISPLAY -i $LOCK -filter_complex "boxblur=5,drawtext=/usr/share/fonts/TTF/Founder_Song_Carving_Kai.ttf:text=$TEXT:fontcolor='#ffffffe0':fontsize=60:x=(w-tw)/2:y=(h/PHI)+th:shadowcolor='#1d1f21d0':shadowx=2:shadowy=2:box=1:boxcolor=#1a1b22@0.4:boxborderw=$BOXSIZE,overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2" -vframes 1 $IMAGE
 
-# lock the screen
-i3lock -i /tmp/screenshotblur.png
+i3lock -ni $IMAGE \
+       --insidecolor=ffffff1c --ringcolor=ffffff3e \
+       --linecolor=ffffff00 --keyhlcolor=00000080 --ringvercolor=00000000 \
+       --separatorcolor=22222260 --insidevercolor=0000001c \
+       --ringwrongcolor=00000055 --insidewrongcolor=0000001c \
+       --verifcolor=00000000 --wrongcolor=ff000000 --timecolor=00000000 \
+       --datecolor=00000000 --layoutcolor=00000000
 
-exit 0
+
+rm $IMAGE
