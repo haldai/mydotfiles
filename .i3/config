@@ -302,8 +302,12 @@ exec --no-startup-id feh --bg-scale /home/daiwz/Pictures/Arms_wall.jpeg; sleep 1
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-clipman # clip manager
 exec --no-startup-id blueman-applet
-exec --no-startup-id /home/daiwz/.i3/bin/lightsOn.sh &
 exec_always --no-startup-id sbxkb
+exec --no-startup-id /home/daiwz/.i3/bin/lightsOn.sh &
+exec --no-startup-id fcitx -d
+exec --no-startup-id xautolock -time 5 -locker '~/.i3/bin/blurlock' &
+exec --no-startup-id i3-msg 'workspace 4; exec thunderbird'
+exec --no-startup-id caffeine &
 # exec --no-startup-id sslocal -c /etc/shadowsocks/hk1.json
 exec --no-startup-id ss-qt5
 exec --no-startup-id libinput-gestures-setup start
@@ -455,13 +459,6 @@ mode "$mode_gaps_outer" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-
-# autostarts
-exec --no-startup-id fcitx -d
-exec --no-startup-id xautolock -time 5 -locker '~/.i3/bin/blurlock' &
-
-# autostart evolution
-exec --no-startup-id i3-msg 'workspace 4; exec thunderbird'
 
 # flashes current active window
 bindsym $mod+BackSpace exec --no-startup-id /home/daiwz/.i3/bin/flash-win.sh
