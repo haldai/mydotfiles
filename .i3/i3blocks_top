@@ -38,7 +38,8 @@ markup=none
 #
 
 [focused window]
-label= 
+#label=
+label=
 color=#ffc700
 command=xtitle -s
 interval=persist
@@ -47,6 +48,7 @@ align=left
 
 [brightness]
 label=
+#label=
 interval=5
 color=#ac8c8c
 min_width=70
@@ -68,6 +70,7 @@ align=center
 
 [date]
 label=
+#label=
 color=#ff797b
 interval=60
 min_width=170
@@ -82,7 +85,8 @@ min_width=70
 align=center
 
 [user]
-label=
+#label=
+label=
 color=#8badf9
 command=whoami
 interval=once
