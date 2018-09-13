@@ -5,7 +5,7 @@
 
 case "$1" in
     lock)
-        xautolock -locknow
+        xscreensaver-command -activate
         ;;
     logout)
         i3-msg exit
