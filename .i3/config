@@ -298,7 +298,7 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 # exec --no-startup-id gnome-settings-daemon
 exec --no-startup-id xhost +
 exec --no-startup-id dunst
-exec --no-startup-id feh --bg-scale /home/daiwz/Pictures/Arms_wall.jpeg; sleep 1; compton -b --xrender-sync --xrender-sync-fence --config /home/daiwz/.config/compton.conf
+exec --no-startup-id feh --bg-scale /home/daiwz/Pictures/DD.jpg; sleep 1; compton -b --xrender-sync --xrender-sync-fence --config /home/daiwz/.config/compton.conf
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-clipman # clip manager
 exec --no-startup-id blueman-applet
@@ -357,7 +357,7 @@ bar {
     separator_symbol "  "
 
     colors {
-        background #00000000
+        background #00000066
         statusline #FFFFFF
         separator  #3399FF
         # 工作区颜色         边框    背景    文字
@@ -370,6 +370,7 @@ bar {
 }
 
 bar {
+    i3bar_command i3bar -t
     tray_output none
     workspace_buttons no
     position top
@@ -377,7 +378,7 @@ bar {
     separator_symbol "  "
 
     colors {
-	background #00000000
+	background #00000066
         statusline #FFFFFF
         separator #666666
 
