@@ -135,7 +135,8 @@ Each entry is either:
     :config
     (progn
       (add-hook 'julia-mode-hook 'my-highlight)
-      (define-key company-active-map (kbd "TAB") 'company-complete-common)
+      (with-eval-after-load 'company
+        (define-key company-active-map (kbd "TAB") 'company-complete-common))
       (add-hook 'julia-mode-hook 'auto-complete-mode)
       )
     )
