@@ -33,15 +33,12 @@
   '(
     multiple-cursors
     pdf-tools
-    julia-mode
-    ess
     markdown-mode
     markdown-preview-mode
     (prolog-mode :location built-in)
     ediprolog
     ob-prolog
     pinentry
-    ;; cnfonts
     )
   "The list of Lisp packages required by the hal9001 layer.
 
@@ -128,32 +125,6 @@ Each entry is either:
     :init)
   )
 
-(defun hal9001/init-julia-mode ()
-  (use-package julia-mode
-    :defer t
-    :init
-    :config
-    (progn
-      (add-hook 'julia-mode-hook 'my-highlight)
-      (with-eval-after-load 'company
-        (define-key company-active-map (kbd "TAB") 'company-complete-common))
-      (add-hook 'julia-mode-hook 'auto-complete-mode)
-      )
-    )
-  )
-
-(defun hal9001/init-ess ()
-  (use-package ess
-    :defer t
-    :init
-    :config
-    (progn
-      ;;(setq ess-use-company 'script-only)
-      (setq ess-eval-visibly nil)
-      (setq ess-ask-for-ess-directory nil))
-    )
-  )
-
 (defun hal9001/init-markdown-mode ()
   (use-package markdown-mode
     :defer t
@@ -175,17 +146,5 @@ Each entry is either:
     :defer t
     :init)
   )
-
-;;(defun hal9001/init-cnfonts ()
-;;  (use-package cnfonts
-;;    :defer t
-;;    :init
-;;    (progn
-;;      (require 'cnfonts)
-;;      ;; 让 cnfonts 随着 Emacs 自动生效。
-;;      (cnfonts-enable)
-;;      ;; 让 spacemacs mode-line 中的 Unicode 图标正确显示。
-;;      (cnfonts-set-spacemacs-fallback-fonts)))
-;;  )
 
 ;;; packages.el ends here
