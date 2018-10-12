@@ -117,9 +117,6 @@ alias rm='rm -i'
 export YAOURT_COLORS="nb=1:pkg=1:ver=1;32:lver=1;45:installed=1;42:grp=1;34:od=1;41;5:votes=1;44:dsc=0:other=1;35"
 
 # user environment
-MATLAB_PATH=${HOME}/MATLAB/R2018a/bin/
-MATLAB_INCLUDE_PATH=${HOME}/MATLAB/R2018a/extern/include/
-
 I3_PATH="/home/daiwz/.i3/bin"
 
 # most
@@ -136,13 +133,11 @@ export LD_LIBRARY_PATH
 export LD_RUN_PATH
 export PYTHON_EGG_CACHE=/tmp/python-eggs/
 
-# emacs alias
+# My alias
 alias emacs='emacs -nw'
-
-# prolog alias
 alias pl='swipl'
-
-# matlab locale alias
+alias jl='julia'
+alias jlo='optirun julia'
 alias matlab='LANG=en_US.utf-8 matlab'
 
 # optimus
