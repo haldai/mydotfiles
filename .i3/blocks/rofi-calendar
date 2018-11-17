@@ -1,0 +1,10 @@
+#! /bin/sh
+
+DATEFTM="${DATEFTM:-+%Y/%m/%d %A}"
+SHORTFMT="${SHORTFMT:-+%Y/%m/%d}"
+LABEL="${LABEL:-}"
+blockdate=$(date "$DATEFTM")
+shortblockdate=$(date "$SHORTFMT")
+
+echo "$LABEL$blockdate"
+echo "$LABEL$shortblockdate"
