@@ -211,6 +211,7 @@ assign [class="netease-cloud-music"] $ws7
 assign [class="shadowsocks-qt5"] $ws4
 
 # Open specific applications in floating mode
+for_window [instance="my_scratchpad"] move scratchpad
 for_window [class="TIM.exe"] floating enable border pixel 0
 for_window [title="alsamixer"] floating enable border pixel 1
 for_window [class="Calamares"] floating enable border normal
@@ -313,6 +314,7 @@ exec --no-startup-id caffeine &
 exec --no-startup-id ss-qt5
 exec --no-startup-id libinput-gestures-setup start
 exec --no-startup-id /home/daiwz/.conky/myconky-start.sh
+exec --no-startup-id urxvt -name my_scratchpad -e zsh -c "neofetch;zsh"
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:
