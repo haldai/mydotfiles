@@ -52,10 +52,10 @@ bindsym $mod+z exec --no-startup-id /home/daiwz/.i3/bin/dmenu_recency
 ################################################################################################
 
 # Screen brightness controls
-# bindsym XF86MonBrightnessUp exec "xbacklight -inc 5; notify-send 'brightness up'"
-# bindsym XF86MonBrightnessDown exec "xbacklight -dec 5; notify-send 'brightness down'"
-bindsym $mod+F12 exec "xbacklight -inc 5; notify-send 'brightness up'"
-bindsym $mod+F11 exec "xbacklight -dec 5; notify-send 'brightness down'"
+bindsym XF86MonBrightnessUp exec "xbacklight -inc 5; notify-send 'brightness up'"
+bindsym XF86MonBrightnessDown exec "xbacklight -dec 5; notify-send 'brightness down'"
+# bindsym $mod+F12 exec "xbacklight -inc 5; notify-send 'brightness up'"
+# bindsym $mod+F11 exec "xbacklight -dec 5; notify-send 'brightness down'"
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
@@ -201,6 +201,7 @@ bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
 # Open applications on specific workspaces
 assign [class="Firefox"] $ws2
 assign [class="Google-chrome"] $ws2
+assign [class="Chromium"] $ws2
 assign [class="Thunderbird"] $ws4
 assign [class="electronic-wechat"] $ws5
 assign [class="TIM.exe"] $ws5
@@ -210,6 +211,7 @@ assign [class="netease-cloud-music"] $ws7
 assign [class="shadowsocks-qt5"] $ws4
 
 # Open specific applications in floating mode
+for_window [class="TIM.exe"] floating enable border pixel 0
 for_window [title="alsamixer"] floating enable border pixel 1
 for_window [class="Calamares"] floating enable border normal
 for_window [class="Clipgrab"] floating enable
@@ -234,7 +236,7 @@ for_window [class="Timeset-gui"] floating enable border normal
 #for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
 for_window [class="electronic-wechat"] floating enable border normal
-for_window [class="Crossover"] floating enable border normal
+for_window [class="Crossover"] floating enable border pixel 0
 for_window [class="Wine"] floating enable border normal
 for_window [class="WINWORD.EXE"] floating disable
 for_window [class="netease-cloud-music"] floating enable border normal
@@ -357,7 +359,7 @@ bar {
     separator_symbol "  "
 
     colors {
-        background #00000066
+        background #00000000
         statusline #FFFFFF
         separator  #3399FF
         # 工作区颜色         边框    背景    文字
