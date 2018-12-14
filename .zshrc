@@ -120,7 +120,10 @@ export YAOURT_COLORS="nb=1:pkg=1:ver=1;32:lver=1;45:installed=1;42:grp=1;34:od=1
 I3_PATH="/home/daiwz/.i3/bin"
 
 # most
-export PAGER=most
+export PAGER="most"
+
+# visual
+export VISUAL="jed"
 
 PATH=$I3_PATH:$MATLAB_PATH:$HOME/.local/bin/:$PATH
 
@@ -137,6 +140,7 @@ export PYTHON_EGG_CACHE=/tmp/python-eggs/
 alias emacs='emacs -nw'
 alias pl='swipl'
 alias jl='julia'
+alias sc='scheme'
 alias jlo='optirun julia'
 alias matlab='LANG=en_US.utf-8 matlab'
 
