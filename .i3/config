@@ -314,7 +314,7 @@ exec --no-startup-id caffeine &
 exec --no-startup-id ss-qt5
 exec --no-startup-id libinput-gestures-setup start
 exec --no-startup-id /home/daiwz/.conky/myconky-start.sh
-exec --no-startup-id urxvt -name my_scratchpad -e zsh -c "neofetch --ascii ~/.i3/juv.ascii;zsh"
+exec --no-startup-id urxvt -name my_scratchpad -e zsh -c "neofetch --ascii ~/.i3/peace.ascii;zsh"
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:
