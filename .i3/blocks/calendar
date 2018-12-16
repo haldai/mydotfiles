@@ -1,0 +1,28 @@
+#! /bin/sh
+
+DATEFTM="${DATEFTM:-+%Y/%m/%d %A}"
+SHORTFMT="${SHORTFMT:-+%Y/%m/%d}"
+LABEL="${LABEL:-}"
+blockdate=$(date "$DATEFTM")
+shortblockdate=$(date "$SHORTFMT")
+
+HEIGHT=180
+WIDTH=220
+WIDTH=${WIDTH:-200}
+HEIGHT=${HEIGHT:+15}
+
+case "$BLOCK_BUTTON" in
+    1|2|3)
+	      # the position of the upper left corner of the popup
+	      posX=$(($BLOCK_X - $WIDTH / 2))
+	      posY=$(($BLOCK_Y + $HEIGHT))
+	      i3-msg -q "exec yad --calendar \
+        --width=$WIDTH --height=$HEIGHT \
+	    --undecorated --fixed \
+	    --close-on-unfocus --no-buttons \
+	    --posx=$posX --posy=$posY \
+	    > /dev/null"
+esac
+
+echo "$LABEL$blockdate"
+echo "$LABEL$shortblockdate"

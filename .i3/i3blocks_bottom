@@ -37,7 +37,7 @@ interval=30
 
 [cpu]
 #label=
-label=
+label=
 color=#8bc3e7
 interval=10
 
@@ -89,7 +89,6 @@ interval=60
 #[temperature]
 [temp]
 label=
-#label=
 command=sensors | grep "Package id 0" | awk '{ print $4 }'
 color=#baba55
 interval=10

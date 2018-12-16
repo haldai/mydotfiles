@@ -43,8 +43,8 @@ bindsym $mod+z exec --no-startup-id /home/daiwz/.i3/bin/dmenu_recency
 ## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
 ################################################################################################
 
-# exec --no-startup-id volumeicon
-# bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
+exec --no-startup-id volumeicon
+bindsym $mod+Ctrl+m exec urxvt -name volume_control -e zsh -c 'alsamixer'
 #exec --no-startup-id pulseaudio
 #exec --no-startup-id pa-applet
 #bindsym $mod+Ctrl+m exec pavucontrol
@@ -212,6 +212,7 @@ assign [class="shadowsocks-qt5"] $ws4
 
 # Open specific applications in floating mode
 for_window [instance="my_scratchpad"] move scratchpad
+for_window [instance="volume_control"] floating enable border pixel normal
 for_window [class="TIM.exe"] floating enable border pixel 0
 for_window [title="alsamixer"] floating enable border pixel 1
 for_window [class="Calamares"] floating enable border normal
@@ -241,6 +242,7 @@ for_window [class="Crossover"] floating enable border pixel 0
 for_window [class="Wine"] floating enable border normal
 for_window [class="WINWORD.EXE"] floating disable
 for_window [class="netease-cloud-music"] floating enable border normal
+for_window [class="Yad"] floating enable
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus

@@ -43,50 +43,33 @@ label=
 color=#ffc700
 command=xtitle -s
 interval=persist
-min_width=1295
+min_width=1475
 align=left
 
 [brightness]
 label=
-#label=
-interval=5
+interval=1
 color=#ac8c8c
 min_width=70
 align=center
 
-[volume]
-color=#e156f7
-instance=Master
-interval=60
-signal=10
-min_width=70
-align=center
-
-[microphone]
-color=#888c8c
-interval=5
-min_width=70
-align=center
-
-[date]
+[calendar]
+interval=360
 label=
-#label=
 color=#ff797b
-interval=60
 min_width=170
 align=center
 
 [time]
 label=
 color=#00ffc7
-interval=60
+interval=30
 command=date '+%H:%M'
 min_width=70
 align=center
 
 [user]
-#label=
-label=
+label=
 color=#8badf9
 command=whoami
 interval=once

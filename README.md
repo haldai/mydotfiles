@@ -6,8 +6,9 @@ All of dependencies can be installed from Archlinux repository and AUR.
 * i3blocks-gaps
 * nerd-fonts-source-code-pro
 * powerline-fonts-git
+* ttf-font-awesome-4
 * conky
-* compton
+* compton-git
 * lm_sensors
 * zsh
 * oh-my-zsh-git
@@ -29,6 +30,7 @@ Misc:
 * [dunst](https://dunst-project.org/)
 * [ranger](https://github.com/ranger/ranger)
 * [feh](https://github.com/derf/feh)
+* [yad](https://github.com/v1cont/yad)
 
 ## Screenshot ##
 
