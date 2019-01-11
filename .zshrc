@@ -127,13 +127,17 @@ export VISUAL="jed"
 
 PATH=$I3_PATH:$MATLAB_PATH:$HOME/.local/bin/:$PATH
 
-LD_LIBRARY_PATH=$MATLAB_INCLUDE_PATH:$MATLAB_PATH:${HOME}/.local/include/:${HOME}/.local/lib:${HOME}/APPs/MATLAB/R2018a/extern/include/:$LD_LIBRARY_PATH
+LD_LIBRARY_PATH=/usr/local/lib/swipl/lib/x86_64-linux:$MATLAB_INCLUDE_PATH:$MATLAB_PATH:${HOME}/.local/include/:${HOME}/.local/lib:${HOME}/APPs/MATLAB/R2018a/extern/include/:$LD_LIBRARY_PATH
 
 LD_RUN_PATH=$MATLAB_PATH:$LD_RUN_PATH
+
+PKG_CONFIG_PATH=$HOME/.local/lib/pkgconfig/:$PKG_CONFIG_PATH
 
 export PATH
 export LD_LIBRARY_PATH
 export LD_RUN_PATH
+export PKG_CONFIG_PATH
+
 export PYTHON_EGG_CACHE=/tmp/python-eggs/
 
 # My alias

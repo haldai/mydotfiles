@@ -208,6 +208,7 @@ assign [class="TIM.exe"] $ws5
 assign [class="Steam"] $ws6
 assign [class="Crossover"] $ws6
 assign [class="netease-cloud-music"] $ws7
+assign [class="Deadbeef"] $ws7
 assign [class="shadowsocks-qt5"] $ws4
 
 # Open specific applications in floating mode
@@ -242,6 +243,7 @@ for_window [class="Crossover"] floating enable border pixel 0
 for_window [class="Wine"] floating enable border normal
 for_window [class="WINWORD.EXE"] floating disable
 for_window [class="netease-cloud-music"] floating enable border normal
+for_window [class="Deadbeef"] floating enable border normal
 for_window [class="Yad"] floating enable
 
 # switch to workspace with urgent window automatically
@@ -310,7 +312,7 @@ exec --no-startup-id blueman-applet
 exec_always --no-startup-id sbxkb
 exec --no-startup-id fcitx -d
 exec --no-startup-id xscreensaver -nosplash
-exec --no-startup-id i3-msg 'workspace 4; exec thunderbird'
+exec --no-startup-id i3-msg 'exec thunderbird'
 exec --no-startup-id caffeine &
 # exec --no-startup-id sslocal -c /etc/shadowsocks/hk1.json
 exec --no-startup-id ss-qt5
