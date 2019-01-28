@@ -109,20 +109,17 @@ Each entry is either:
 
 (defun hal9001/init-ediprolog ()
   (use-package ediprolog
-    :defer t
-    :init)
+	  :defer t)
   )
 
 (defun hal9001/init-ob-prolog ()
   (use-package ob-prolog
-    :defer t
-    :init)
+	  :defer t)
   )
 
 (defun hal9001/init-pinentry ()
   (use-package pinentry
-    :defer t
-    :init)
+	       :defer t)
   )
 
 (defun hal9001/init-markdown-mode ()
@@ -143,8 +140,7 @@ Each entry is either:
 
 (defun hal9001/init-markdown-preview-mode ()
   (use-package markdown-preview-mode
-    :defer t
-    :init)
+	  :defer t)
   )
 
 ;;; packages.el ends here
