@@ -75,7 +75,8 @@ bindsym XF86AudioPrev exec playerctl previous
 
 # Start Applications
 bindsym $mod+F1 exec emacs
-bindsym $mod+F2 exec firefox
+bindsym $mod+F2 exec chromium
+bindsym $mod+Shift+F2 exec chromium --disable-web-security --user-data-dir
 bindsym $mod+F3 exec exec urxvt -e ranger
 bindsym $mod+t exec --no-startup-id pkill compton
 bindsym $mod+Ctrl+t exec --no-startup-id compton -b --xrender-sync --xrender-sync-fence --config /home/daiwz/.config/compton.conf
@@ -154,7 +155,7 @@ bindsym $mod+Ctrl+Left workspace prev
 # something like: set $ws1 1:mail
 #                 set $ws2 2:
 set $ws1 1:
-set $ws2 2:
+set $ws2 2:
 #set $ws3 3:
 set $ws3 3:
 set $ws4 4:
