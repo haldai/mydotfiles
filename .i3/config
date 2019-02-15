@@ -34,6 +34,7 @@ bindsym $mod+Shift+q kill
 
 # start program launcher
 bindsym $mod+d exec --no-startup-id rofi -combi-modi window#drun#run#ssh -theme gruvbox-dark -show combi
+bindsym $mod+c exec --no-startup-id rofi -modi "clipboard:greenclip print" -theme gruvbox-dark -show clipboard
 
 # launch categorized menu
 bindsym $mod+z exec --no-startup-id /home/daiwz/.i3/bin/dmenu_recency
@@ -308,7 +309,7 @@ exec --no-startup-id xhost +
 exec --no-startup-id dunst
 exec --no-startup-id feh --bg-scale /home/daiwz/Pictures/DD.jpg; sleep 1; compton -b --xrender-sync --xrender-sync-fence --config /home/daiwz/.config/compton.conf
 exec --no-startup-id nm-applet
-exec --no-startup-id xfce4-clipman # clip manager
+exec --no-startup-id greenclip daemon # xfce4-clipman # clip manager
 exec --no-startup-id blueman-applet
 exec_always --no-startup-id sbxkb
 exec --no-startup-id fcitx -d
@@ -320,6 +321,7 @@ exec --no-startup-id ss-qt5
 exec --no-startup-id libinput-gestures-setup start
 exec --no-startup-id /home/daiwz/.conky/myconky-start.sh
 exec --no-startup-id urxvt -name my_scratchpad -e zsh -c "neofetch;zsh"
+exec --no-startup-id udiskie -ans &
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:
