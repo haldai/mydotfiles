@@ -32,9 +32,10 @@ bindsym $mod+Return exec urxvt
 # kill focused window
 bindsym $mod+Shift+q kill
 
-# start program launcher
+# start rofi
 bindsym $mod+d exec --no-startup-id rofi -combi-modi window#drun#run#ssh -theme gruvbox-dark -show combi
 bindsym $mod+c exec --no-startup-id rofi -modi "clipboard:greenclip print" -theme gruvbox-dark -show clipboard
+bindsym $mod+Ctrl+c exec --no-startup-id greenclip clear
 
 # launch categorized menu
 bindsym $mod+z exec --no-startup-id /home/daiwz/.i3/bin/dmenu_recency
