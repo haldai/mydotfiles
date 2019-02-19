@@ -314,7 +314,7 @@ exec --no-startup-id greenclip daemon # xfce4-clipman # clip manager
 exec --no-startup-id blueman-applet
 exec_always --no-startup-id sbxkb
 exec --no-startup-id fcitx -d
-exec --no-startup-id xscreensaver -nosplash
+exec --no-startup-id xautolock -detectsleep -time 5 -locker /usr/bin/i3lock-fancy -p
 exec --no-startup-id i3-msg 'exec thunderbird'
 exec --no-startup-id caffeine &
 # exec --no-startup-id sslocal -c /etc/shadowsocks/hk1.json
