@@ -12,8 +12,11 @@ All of dependencies can be installed from Archlinux repository and AUR.
 * lm_sensors
 * zsh
 * oh-my-zsh-git
+* zsh-autosuggestions
 * udiskie
 * rofi-greenclip
+* most
+* jed
 * [spacemacs](http://spacemacs.org/)
 * [spaceship-prompt](https://github.com/denysdovhan/spaceship-prompt)
 * [urxvt-perls](urxvt-perls)

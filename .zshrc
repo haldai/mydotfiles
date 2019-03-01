@@ -99,6 +99,7 @@ if [[ ! -d $ZSH_CACHE_DIR ]]; then
 fi
 
 source $ZSH/oh-my-zsh.sh
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # alias
 alias cp="cp -i"                          # confirm before overwriting something
@@ -121,9 +122,10 @@ I3_PATH="/home/daiwz/.i3/bin"
 
 # most
 export PAGER="most"
+export MOST_EDITOR="jed %s -g %d"
 
 # visual
-export VISUAL="jed"
+export VISUAL="most"
 
 PATH=$I3_PATH:$MATLAB_PATH:$HOME/.local/bin/:$PATH
 
