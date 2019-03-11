@@ -76,7 +76,7 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
 # Start Applications
-bindsym $mod+F1 exec emacs
+bindsym $mod+F1 exec  emacsclient -c -a emacs
 bindsym $mod+F2 exec chromium
 bindsym $mod+Shift+F2 exec chromium --disable-web-security --user-data-dir
 bindsym $mod+F3 exec exec urxvt -e ranger
@@ -316,13 +316,13 @@ exec_always --no-startup-id sbxkb
 exec --no-startup-id fcitx -d
 exec --no-startup-id xautolock -detectsleep -time 5 -locker /usr/bin/i3lock-fancy -p
 exec --no-startup-id i3-msg 'exec thunderbird'
-exec --no-startup-id caffeine &
+exec --no-startup-id caffeine
 # exec --no-startup-id sslocal -c /etc/shadowsocks/hk1.json
 exec --no-startup-id ss-qt5
 exec --no-startup-id libinput-gestures-setup start
 exec --no-startup-id /home/daiwz/.conky/myconky-start.sh
 exec --no-startup-id urxvt -name my_scratchpad -e zsh -c "neofetch;zsh"
-exec --no-startup-id udiskie -ans &
+exec --no-startup-id udiskie -ans
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:
