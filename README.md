@@ -17,6 +17,7 @@ All of dependencies can be installed from Archlinux repository and AUR.
 * rofi-greenclip
 * most
 * jed
+* dash
 * [spacemacs](http://spacemacs.org/)
 * [spaceship-prompt](https://github.com/denysdovhan/spaceship-prompt)
 * [urxvt-perls](urxvt-perls)
