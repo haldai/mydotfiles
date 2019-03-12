@@ -122,6 +122,7 @@ export YAOURT_COLORS="nb=1:pkg=1:ver=1;32:lver=1;45:installed=1;42:grp=1;34:od=1
 
 # user environment
 I3_PATH="/home/daiwz/.i3/bin"
+SCRIPTS_PATH="/home/daiwz/.scripts"
 
 # most
 export PAGER="most"
@@ -130,7 +131,7 @@ export MOST_EDITOR="jed %s -g %d"
 # visual
 export VISUAL="most"
 
-PATH=$I3_PATH:$MATLAB_PATH:$HOME/.local/bin/:$PATH
+PATH=$SCRIPTS_PATH:$I3_PATH:$MATLAB_PATH:$HOME/.local/bin/:$PATH
 
 LD_LIBRARY_PATH=/usr/local/lib/swipl/lib/x86_64-linux:$MATLAB_INCLUDE_PATH:$MATLAB_PATH:${HOME}/.local/include/:${HOME}/.local/lib:${HOME}/APPs/MATLAB/R2018a/extern/include/:$LD_LIBRARY_PATH
 
