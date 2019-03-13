@@ -1,7 +1,3 @@
--- If LuaRocks is installed, make sure that packages installed through it are
--- found (e.g. lgi). If LuaRocks is not installed, do nothing.
-pcall(require, "luarocks.loader")
-
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
@@ -12,7 +8,6 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
--- local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
@@ -45,12 +40,16 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
+beautiful.init(awful.util.getdir("config") .. "/themes/zenburn/theme.lua")
 
--- This is used later as the default terminal and editor to run.
+-- Default apps
 terminal = "urxvtc"
 editor = os.getenv("EDITOR") or "emacsclient -c -a emacs"
 editor_cmd = terminal .. " -e " .. editor
+browser = "google-chrome-stable"
+filemanager = "pcmanfm"
+
+
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -63,7 +62,7 @@ modkey = "Mod4"
 awful.layout.layouts = {
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
-     awful.layout.suit.tile.bottom,
+    awful.layout.suit.tile.bottom,
     awful.layout.suit.tile.top,
     awful.layout.suit.fair,
     awful.layout.suit.fair.horizontal,
@@ -94,6 +93,9 @@ local function client_menu_toggle_fn()
   end
 end
 
+-- Icon path
+icon_path = "/usr/share/icons/Numix/24@2x/"
+
 -- Create a launcher widget and a main menu
 myawesomemenu = {
    { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
@@ -104,26 +106,23 @@ myawesomemenu = {
 }
 
 myexitmenu = {
-  { "log out", function() awesome.quit() end, "/usr/share/icons/Paper/24x24@2x/actions/system-log-out.png" },
-  { "suspend", "systemctl suspend", "/usr/share/icons/Paper/24x24@2x/actions/system-suspend.png" },
-  { "hibernate", "systemctl hibernate", "/usr/share/icons/Paper/24x24@2x/actions/system-hibernate.png" },
-  { "reboot", "systemctl reboot", "/usr/share/icons/Paper/24x24@2x/actions/system-reboot.png" },
-  { "shutdown", "poweroff", "/usr/share/icons/Paper/24x24@2x/actions/system-shutdown.png" }
+  { "Log out", function() awesome.quit() end, icon_path .. "actions/system-log-out.png" },
+  { "Suspend", "systemctl suspend", icon_path .. "actions/system-suspend.png" },
+  { "Hibernate", "systemctl hibernate", icon_path .. "actions/system-hibernate.png" },
+  { "Reboot", "systemctl reboot", icon_path .. "actions/system-reboot.png" },
+  { "Shutdown", "poweroff", icon_path .. "actions/system-shutdown.png" }
 }
 
 mymainmenu = awful.menu({ items = {
-      { "Terminal", terminal, "/usr/share/icons/Paper/24x24@2x/apps/terminal.png" },
-      { "Browser", browser, "/usr/share/icons/Paper/24x24@2x/apps/chrome.png" },
-      { "Files", filemanager, "/usr/share/icons/Paper/24x24@2x/apps/nemo.png" },
+      { "Terminal", terminal, icon_path .. "apps/terminal.png" },
+      { "Browser", browser, icon_path .. "apps/chrome.png" },
+      { "Files", filemanager, icon_path .. "apps/nemo.png" },
       { "Awesome", myawesomemenu, "/usr/share/awesome/icons/awesome16.png" },
-      { "Exit", myexitmenu, "/usr/share/icons/Paper/24x24@2x/actions/system-shutdown.png" }}
+      { "Exit", myexitmenu, icon_path .. "actions/system-shutdown.png" }}
                        })
 
 mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                                      menu = mymainmenu })
-
--- Menubar configuration
--- menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
 
 -- Keyboard map indicator and switcher
@@ -132,9 +131,6 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 -- {{{ Wibar
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock("%H:%M ")
-
-blue = "#9EBABA"
-red = "EB8F8F"
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -191,13 +187,15 @@ end
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
 
+taglist = { "", "", "", "", "", "", "", "", "" }
+
 awful.screen.connect_for_each_screen(
   function(s)
     -- Wallpaper
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "一", "二", "三", "四", "五", "六", "七", "八", "九" }, s, awful.layout.layouts[1])
+    awful.tag(taglist, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -224,21 +222,24 @@ awful.screen.connect_for_each_screen(
     }
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s })
+    s.mywibox = awful.wibar({
+        position = "bottom",
+        height = 28,
+        screen = s })
 
     -- Add widgets to the wibox
     s.mywibox:setup {
       layout = wibox.layout.align.horizontal,
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
-            mylauncher,
+            -- mylauncher,
             s.mytaglist,
-            s.mypromptbox,
+            -- s.mypromptbox,
         },
         s.mytasklist, -- Middle widget
         { -- Right widgets
           layout = wibox.layout.fixed.horizontal,
-          mykeyboardlayout,
+          -- mykeyboardlayout,
           wibox.widget.systray(),
           mytextclock,
           s.mylayoutbox,
@@ -286,7 +287,7 @@ globalkeys = gears.table.join(
     {description = "swap with rightward client", group = "client"}),
   awful.key({ modkey }, "u", awful.client.urgent.jumpto,
               {description = "jump to urgent client", group = "client"}),
-    awful.key({ modkey }, "Tab",
+  awful.key({ modkey }, "Tab",
         function ()
             awful.client.focus.history.previous()
             if client.focus then
@@ -295,63 +296,40 @@ globalkeys = gears.table.join(
         end,
         {description = "go back", group = "client"}),
 
-    -- Standard program
+    -- Multimedia keys
+    awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer set Master 2%+", false) end),
+    awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer set Master 2%-", false) end),
+    awful.key({ }, "XF86AudioMute", function () awful.util.spawn("amixer set Master toggle", false) end),
+
+    -- Standard programs
     awful.key({ modkey }, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
-    awful.key({ modkey, "Control" }, "r", awesome.restart,
+    awful.key({ modkey, "Shift" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
-    awful.key({ modkey, "Shift" }, "Esc", awesome.quit,
+    awful.key({ modkey, "Control" }, "Esc", awesome.quit,
               {description = "quit awesome", group = "awesome"}),
 
-    awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
-              {description = "increase master width factor", group = "layout"}),
-    awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)          end,
-              {description = "decrease master width factor", group = "layout"}),
-    awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1, nil, true) end,
-              {description = "increase the number of master clients", group = "layout"}),
-    awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1, nil, true) end,
-              {description = "decrease the number of master clients", group = "layout"}),
-    awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1, nil, true)    end,
-              {description = "increase the number of columns", group = "layout"}),
-    awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1, nil, true)    end,
-              {description = "decrease the number of columns", group = "layout"}),
-    awful.key({ modkey,           }, "space", function () awful.layout.inc( 1)                end,
-              {description = "select next", group = "layout"}),
-    awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1)                end,
-              {description = "select previous", group = "layout"}),
-
-    awful.key({ modkey, "Control" }, "n",
-      function ()
-        local c = awful.client.restore()
-        -- Focus restored client
-        if c then
-          c:emit_signal(
-            "request::activate", "key.unminimize", {raise = true}
-          )
-        end
-      end,
-      {description = "restore minimized", group = "client"}),
-
-    -- Prompt
-    awful.key({ modkey }, "r", function () awful.screen.focused().mypromptbox:run() end,
-      {description = "run prompt", group = "launcher"}),
-
-    awful.key({ modkey }, "x",
-      function ()
-        awful.prompt.run {
-          prompt       = "Run Lua code: ",
-          textbox      = awful.screen.focused().mypromptbox.widget,
-          exe_callback = awful.util.eval,
-          history_path = awful.util.get_cache_dir() .. "/history_eval"
-        }
-      end,
-      {description = "lua execute prompt", group = "awesome"}),
-
     -- Rofi
-    -- awful.key({ modkey }, "z", function() menubar.show() end,
-    --   {description = "show the menubar", group = "launcher"}),
     awful.key({ modkey }, "d",  function () awful.spawn("/usr/bin/rofi -show") end,
-      {description = "launch rofi", group = "launcher"})
+      {description = "launch rofi", group = "launcher"}),
+
+    -- Applications
+    awful.key({ modkey }, "F1",  function () awful.spawn("emacsclient -c -a emacs") end,
+      {description = "launch Emacs", group = "launcher"}),
+    awful.key({ modkey }, "F2",  function () awful.spawn("google-chrome-stable") end,
+      {description = "launch rofi", group = "launcher"}),
+    awful.key({ modkey, "Shift" }, "F2",  function () awful.spawn("google-chrome-stable --disable-web-security --user-data-dir") end,
+      {description = "launch Chrome with user data dir", group = "launcher"}),
+    awful.key({ modkey }, "F3",  function () awful.spawn("urxvt -e ranger") end,
+      {description = "launch ranger", group = "launcher"}),
+    awful.key({ modkey, "Ctrl" }, "t",  function () awful.spawn("pkill compton") end,
+      {description = "kill compton", group = "launcher"}),
+    awful.key({ modkey }, "t",  function () awful.spawn("compton --config /home/daiwz/.config/compton.conf") end,
+      {description = "launch compton", group = "launcher"}),
+    awful.key({ }, "Print",  function () awful.spawn("deepin-screenshot -f") end,
+      {description = "print full screen", group = "launcher"}),
+    awful.key({ modkey }, "Print",  function () awful.spawn("deepin-screenshot") end,
+      {description = "launch deepin-screenshot", group = "launcher"})
 )
 
 clientkeys = gears.table.join(
@@ -479,7 +457,7 @@ awful.rules.rules = {
                    keys = clientkeys,
                    buttons = clientbuttons,
                    screen = awful.screen.preferred,
-                   size_hints_honor = true, -- gaps
+                   size_hints_honor = false, -- gaps
                    placement = awful.placement.no_overlap+awful.placement.no_offscreen
     }
   },

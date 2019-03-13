@@ -79,7 +79,7 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym $mod+F1 exec  emacsclient -c -a emacs
 bindsym $mod+F2 exec chromium
 bindsym $mod+Shift+F2 exec chromium --disable-web-security --user-data-dir
-bindsym $mod+F3 exec exec urxvt -e ranger
+bindsym $mod+F3 exec urxvt -e ranger
 bindsym $mod+t exec --no-startup-id pkill compton
 bindsym $mod+Ctrl+t exec --no-startup-id compton -b --xrender-sync --xrender-sync-fence --config /home/daiwz/.config/compton/compton.conf
 bindsym Print exec --no-startup-id deepin-screenshot -f

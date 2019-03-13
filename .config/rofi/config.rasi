@@ -1,90 +1,86 @@
-/**
- * ROFI Color theme
- * User: Qball
- * Copyright: Dave Davenport
- */
+/*-*- mode: css; -*-*/
+/** ROFI Color theme */
 
 configuration {
-	modi: 							"combi,:~/.scripts/rofind";
-	//combi-modi: 					"window,drun,\/:~/.scripts/rofind,run";
-	combi-modi: 					"window,drun,run";
-	me-select-entry:				"MouseSecondary";
-	me-accept-entry:				"MousePrimary";
-	scroll-method: 1;
+    modi: "combi";
+	  combi-modi:	"window,drun,run,ssh";
+	  me-select-entry: "MouseSecondary";
+	  me-accept-entry: "MousePrimary";
+	  scroll-method: 1;
     // The display name of this browser
-    display-ssh:                   "ssh";
+    display-ssh: "ssh";
     // The display name of this browser
-    display-run:                    "#! ";
+    display-run: "#! ";
     // The display name of this browser
-    display-drun:                   "";
+    display-drun: "";
     // The display name of this browser
-    display-window:                 "";
-    display-combi:                  "Go to: ";
+    display-window: "";
+    display-combi: "Go to: ";
     show-icons: true;
 }
-
 
 /**
  * User: Qball
  * Copyright: Dave Davenport
  */
 * {
-    foreground:  #ffeedd;
-    backlight:   #ccffeedd;
-    background-color:  transparent;
-    dark: #1c1c1c;
+    foreground: #dcdccc;
+    backlight: #ccffeedd;
+    background-color: transparent;
+    dark: #434443;
     // Black
-    black:       #2f343f;
-    lightblack:  #554444;
-    tlightblack:  #554444cc;
+    black:       #333333;
+    lightblack:  #2f2f2f;
+    tlightblack:  #2f2f2fcc;
     //
     // Red
-    red:         #cd5c5c;
-    lightred:    #cc5533;
+    red:         #cc9393;
+    lightred:    #ecbcbc;
     //
     // Green
-    green:       #86af80;
-    lightgreen:  #88cc22;
+    green:       #88b090;
+    lightgreen:  #9ece9e;
     //
     // Yellow
-    yellow:      #e8ae5b;
-    lightyellow:     #ffa75d;
+    yellow:      #efef8f;
+    lightyellow: #efefaf;
     //
     // Blue
-    blue:      #6495ed;
-    lightblue:     #87ceeb;
+    blue:        #90A0E1;
+    lightblue:   #CCD9F1;
     //
     // Magenta
-    magenta:      #deb887;
-    lightmagenta:     #996600;
+    magenta:      #bc6c9c;
+    lightmagenta: #bc8cbc;
     //
     // Cyan
-    cyan:      #1ABB9B;
-    tcyan:      #ccb0c4de;
-    lightcyan:     #b0c4de;
+    cyan:      #8cd0d3;
+    tcyan:     #8cd0d3de;
+    lightcyan: #cbecd0;
     //
     // White
-    white:      #bbaa99;
-    lightwhite:     #ddccbb;
+    white:      #ffffff;
+    lightwhite: #dcdccc;
     //
     // Bold, Italic, Underline
-    highlight:     underline bold #ffffff;
+    highlight:  underline bold #ffffff;
 
     transparent: rgba(0,0,0,0);
-    font: "Source Code Pro 16";
+    font: "Source Code Pro 14";
 }
 #window {
     location: center;
-    anchor:   center;
+    anchor: center;
     transparency: "screenshot";
     padding: 10px;
-    border:  0px;
-    border-radius: 10px;
+    border: 0px;
+    radius: 15px;
     color: @magenta;
     background-color: @transparent;
     spacing: 0;
     children:  [vertb, mainbox];
     orientation: horizontal;
+    font: "Source Code Pro 10";
 }
 
 #mainbox {
@@ -97,21 +93,19 @@ configuration {
     border:  0px 2px 2px 2px;
 //    border-radius: 10px;
     padding: 5;
-    background-color: @tcyan;
-}
-#message {
+    background-color: @yellow;
     font: "Source Code Pro 10";
     color: @black;
 }
 
 #inputbar {
-    color: @cyan;
+    color: @foreground;
     padding: 11px;
-    background-color: @black;
+    background-color: @dark;
     border: 2px 2px 2px 2px;
-    border-radius:  30px 30px 0px 0px;
+    border-radius:  15px 15px 0px 0px;
     border-color: @foreground;
-    font: "Source Code Pro 18";
+    font: "Source Code Pro 10";
 }
 #entry,prompt,case-indicator {
     text-font: inherit;
@@ -119,46 +113,46 @@ configuration {
 }
 #listview {
     padding: 8px;
-    border-radius: 0px 0px 30px 30px;
+    border-radius: 0px 0px 15px 15px;
     border-color: @foreground;
     border: 0px 2px 2px 2px;
     background-color: #1c1c1ccc;
-    dynamic: false;
-    lines: 15;
+    dynamic: true;
+    lines: 20;
 }
 #element {
     padding: 3px;
     vertical-align: 0.5;
 //    border: 2px;
-    border-radius: 4px;
+//    border-radius: 4px;
     background-color: transparent;
     color: @foreground;
     font:inherit;
 }
 #element selected.normal {
-    background-color: @cyan;
+    background-color: @black;
 }
 #element normal active {
-    foreground: @lightblue;
+    foreground: @lightred;
 }
 #element normal urgent {
-    foreground: @lightred;
+    foreground: @red;
 }
 #element alternate normal {
 }
 #element alternate active {
-    foreground: @lightblue;
+    foreground: @red;
 }
 #element alternate urgent {
-    foreground: @lightred;
+    foreground: @red;
 }
 #element selected active {
-    background-color: @cyan;
-    foreground: @dark;
+    background-color: @black;
+    foreground: @foreground;
 }
 #element selected urgent {
     background-color: @lightred;
-    foreground: @dark;
+    foreground: @foreground;
 }
 #element normal normal {
 
