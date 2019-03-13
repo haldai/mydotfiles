@@ -1,0 +1,34 @@
+#!/bin/sh
+
+# with openrc use loginctl
+[[ $(cat /proc/1/comm) == "systemd" ]] && logind=systemctl || logind=loginctl
+
+case "$1" in
+    lock)
+        /usr/bin/i3lock-fancy -p -f 方正宋刻本秀楷 -t "请输入密码"
+        ;;
+    logout)
+        i3-msg exit
+        ;;
+    switch_user)
+        dm-tool switch-to-greeter
+        ;;
+    suspend)
+        /usr/bin/i3lock-fancy -p -f 方正宋刻本秀楷 -t "请输入密码" && $logind suspend
+        ;;
+    #hibernate)
+    #    xscreensaver-command -activate && $logind hibernate
+    #    ;;
+    reboot)
+        $logind reboot
+        ;;
+    shutdown)
+        $logind poweroff
+        ;;
+    *)
+        echo "== ! i3exit: missing or invalid argument ! =="
+        echo "Try again with: lock | logout | switch_user | suspend | hibernate | reboot | shutdown"
+        exit 2
+esac
+
+exit 0

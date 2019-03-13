@@ -1,17 +1,21 @@
--- Standard awesome library
+-- {{{ Required libraries
+local awesome, client, mouse, screen, tag = awesome, client, mouse, screen, tag
+local ipairs, string, os, table, tostring, tonumber, type = ipairs, string, os, table, tostring, tonumber, type
+
 local gears = require("gears")
 local awful = require("awful")
 require("awful.autofocus")
--- Widget and layout library
 local wibox = require("wibox")
--- Theme handling library
 local beautiful = require("beautiful")
--- Notification library
 local naughty = require("naughty")
-local hotkeys_popup = require("awful.hotkeys_popup")
--- Enable hotkeys help widget for VIM and other apps
--- when client with a matching name is opened:
+local lain = require("lain")
+--local menubar = require("menubar")
+local freedesktop = require("freedesktop")
+local scratch = require("scratch")
+local hotkeys_popup = require("awful.hotkeys_popup").widget
 require("awful.hotkeys_popup.keys")
+local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
+-- }}}
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -36,6 +40,25 @@ do
       in_error = false
   end)
 end
+-- }}}
+
+-- {{{ Function definitions
+-- Print debug_info
+local function debug_info(t)
+  naughty.notify({ preset = naughty.config.presets.critical,
+                   text = tostring(t) })
+end
+
+-- Return the tag index of focust client
+local function tag_num(c)
+  local tag_idx = {}
+  for k, v in pairs(c.screen.tags) do
+    tag_idx[v] = k
+  end
+  local t = c and c.first_tag or nil
+  return tag_idx[t]
+end
+
 -- }}}
 
 -- {{{ Variable definitions
@@ -94,18 +117,18 @@ local function client_menu_toggle_fn()
 end
 
 -- Icon path
-icon_path = "/usr/share/icons/Numix/24@2x/"
+local icon_path = "/usr/share/icons/Paper/24@2x/"
 
--- Create a launcher widget and a main menu
-myawesomemenu = {
-   { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
-   { "manual", terminal .. " -e man awesome" },
-   { "edit config", editor_cmd .. " " .. awesome.conffile },
-   { "restart", awesome.restart },
-   { "quit", function() awesome.quit() end },
+-- {{{ Menu
+local myawesomemenu = {
+  { "hotkeys", function() return false, hotkeys_popup.show_help end },
+  { "manual", terminal .. " -e man awesome" },
+  { "edit config", string.format("%s -e %s %s", terminal, editor, awesome.conffile) },
+  { "restart", awesome.restart },
+  { "quit", function() awesome.quit() end }
 }
 
-myexitmenu = {
+local myexitmenu = {
   { "Log out", function() awesome.quit() end, icon_path .. "actions/system-log-out.png" },
   { "Suspend", "systemctl suspend", icon_path .. "actions/system-suspend.png" },
   { "Hibernate", "systemctl hibernate", icon_path .. "actions/system-hibernate.png" },
@@ -113,16 +136,22 @@ myexitmenu = {
   { "Shutdown", "poweroff", icon_path .. "actions/system-shutdown.png" }
 }
 
-mymainmenu = awful.menu({ items = {
-      { "Terminal", terminal, icon_path .. "apps/terminal.png" },
-      { "Browser", browser, icon_path .. "apps/chrome.png" },
-      { "Files", filemanager, icon_path .. "apps/nemo.png" },
-      { "Awesome", myawesomemenu, "/usr/share/awesome/icons/awesome16.png" },
-      { "Exit", myexitmenu, icon_path .. "actions/system-shutdown.png" }}
-                       })
+awful.util.mymainmenu = freedesktop.menu.build({
+    icon_size = beautiful.menu_height or 16,
+    before = {
+      { "Awesome", myawesomemenu, beautiful.awesome_icon },
+      -- other triads can be put here
+    },
+    after = {
+      { "Open terminal", terminal },
+      -- other triads can be put here
+      { "Exit", myexitmenu, icon_path .. "actions/system-shutdown.png" },
+    }
+})
+-- hide menu when mouse leaves it
+--awful.util.mymainmenu.wibox:connect_signal("mouse::leave", function() awful.util.mymainmenu:hide() end)
 
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
-                                     menu = mymainmenu })
+--menubar.utils.terminal = terminal -- Set the Menubar terminal for applications that require it
 -- }}}
 
 -- Keyboard map indicator and switcher
@@ -209,8 +238,8 @@ awful.screen.connect_for_each_screen(
                             awful.button({ }, 5, function () awful.layout.inc(-1) end)))
     -- Create a taglist widget
     s.mytaglist = awful.widget.taglist {
-      screen  = s,
-      filter  = awful.widget.taglist.filter.all,
+      screen = s,
+      filter = awful.widget.taglist.filter.all,
       buttons = taglist_buttons
     }
 
@@ -250,9 +279,9 @@ end)
 
 -- {{{ Mouse bindings
 root.buttons(gears.table.join(
-               awful.button({ }, 3, function () mymainmenu:toggle() end),
-               awful.button({ }, 4, awful.tag.viewnext),
-               awful.button({ }, 5, awful.tag.viewprev)
+               awful.button({ }, 3, function () awful.util.mymainmenu:toggle() end),
+               awful.button({ }, 4, awful.tag.viewprev),
+               awful.button({ }, 5, awful.tag.viewnext)
 ))
 -- }}}
 
@@ -275,6 +304,18 @@ globalkeys = gears.table.join(
     {description = "focus left", group = "client"}),
   awful.key({ modkey }, "f", function () awful.client.focus.bydirection("right") end,
     {description = "focus right", group = "client"}),
+  awful.key({ modkey, "Ctrl" }, "p", function ()
+      awful.screen.focus_bydirection("up", awful.screen.focused()) end,
+    {description = "focus screen up", group = "client"}),
+  awful.key({ modkey, "Ctrl" }, "n", function ()
+      awful.screen.focus_bydirection("down", awful.screen.focused()) end,
+    {description = "focus screen down", group = "client"}),
+  awful.key({ modkey, "Ctrl" }, "b", function ()
+      awful.screen.focus_bydirection("left", awful.screen.focused()) end,
+    {description = "focus screen left", group = "client"}),
+  awful.key({ modkey, "Ctrl" }, "f", function ()
+      awful.screen.focus_bydirection("right", awful.screen.focused()) end,
+    {description = "focus screen right", group = "client"}),
 
   -- Layout manipulation
   awful.key({ modkey, "Shift" }, "p", function () awful.client.swap.bydirection("up") end,
@@ -301,6 +342,12 @@ globalkeys = gears.table.join(
     awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer set Master 2%-", false) end),
     awful.key({ }, "XF86AudioMute", function () awful.util.spawn("amixer set Master toggle", false) end),
 
+    -- Brightness
+    awful.key({ }, "XF86MonBrightnessUp", function () os.execute("xbacklight -inc 10") end,
+      {description = "+10%", group = "hotkeys"}),
+    awful.key({ }, "XF86MonBrightnessDown", function () os.execute("xbacklight -dec 10") end,
+      {description = "-10%", group = "hotkeys"}),
+
     -- Standard programs
     awful.key({ modkey }, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
@@ -313,23 +360,42 @@ globalkeys = gears.table.join(
     awful.key({ modkey }, "d",  function () awful.spawn("/usr/bin/rofi -show") end,
       {description = "launch rofi", group = "launcher"}),
 
+    -- Scratchpad
+    awful.key({ modkey }, "F4", function ()
+        scratch.drop(terminal, "center", "center", 720, 400) end,
+      {description = "display a scratchpad of urxvt", group = "launcher"}),
+
     -- Applications
-    awful.key({ modkey }, "F1",  function () awful.spawn("emacsclient -c -a emacs") end,
+    awful.key({ modkey }, "F1", function () awful.spawn("emacsclient -c -a emacs") end,
       {description = "launch Emacs", group = "launcher"}),
-    awful.key({ modkey }, "F2",  function () awful.spawn("google-chrome-stable") end,
+    awful.key({ modkey }, "F2", function () awful.spawn("google-chrome-stable") end,
       {description = "launch rofi", group = "launcher"}),
-    awful.key({ modkey, "Shift" }, "F2",  function () awful.spawn("google-chrome-stable --disable-web-security --user-data-dir") end,
+    awful.key({ modkey, "Shift" }, "F2", function () awful.spawn("google-chrome-stable --disable-web-security --user-data-dir") end,
       {description = "launch Chrome with user data dir", group = "launcher"}),
-    awful.key({ modkey }, "F3",  function () awful.spawn("urxvt -e ranger") end,
+    awful.key({ modkey }, "F3", function () awful.spawn("urxvt -e ranger") end,
       {description = "launch ranger", group = "launcher"}),
-    awful.key({ modkey, "Ctrl" }, "t",  function () awful.spawn("pkill compton") end,
+    awful.key({ modkey, "Ctrl" }, "t", function () awful.spawn("pkill compton") end,
       {description = "kill compton", group = "launcher"}),
     awful.key({ modkey }, "t",  function () awful.spawn("compton --config /home/daiwz/.config/compton.conf") end,
       {description = "launch compton", group = "launcher"}),
-    awful.key({ }, "Print",  function () awful.spawn("deepin-screenshot -f") end,
+    awful.key({ }, "Print", function () awful.spawn("deepin-screenshot -f") end,
       {description = "print full screen", group = "launcher"}),
-    awful.key({ modkey }, "Print",  function () awful.spawn("deepin-screenshot") end,
-      {description = "launch deepin-screenshot", group = "launcher"})
+    awful.key({ modkey }, "Print", function () awful.spawn("deepin-screenshot") end,
+      {description = "launch deepin-screenshot", group = "launcher"}),
+
+    -- Custom scripts
+    awful.key({ modkey }, "Escape", function ()
+        awful.util.spawn_with_shell("~/.scripts/flash-win.sh") end,
+      {description = "flash current screen", group = "launcher"}),
+    awful.key({ modkey }, "F8", function ()
+        awful.util.spawn_with_shell("~/.scripts/presentation") end,
+      {description = "External screen copy", group = "launcher"}),
+    awful.key({ modkey, "Ctrl" }, "F8", function ()
+        awful.util.spawn_with_shell("~/.scripts/presentation-x -r") end,
+      {description = "External screen on the right", group = "launcher"}),
+    awful.key({ modkey, "Shift" }, "F8", function ()
+        awful.util.spawn_with_shell("~/.scripts/presentation-x -l") end,
+      {description = "External screen on the left", group = "launcher"})
 )
 
 clientkeys = gears.table.join(
@@ -392,16 +458,6 @@ for i = 1, 9 do
         end
       end,
       {description = "view tag #"..i, group = "tag"}),
-    -- Toggle tag display.
-    awful.key({ modkey, "Shift" }, "#" .. i + 9,
-      function ()
-        local screen = awful.screen.focused()
-        local tag = screen.tags[i]
-        if tag then
-          awful.tag.viewtoggle(tag)
-        end
-      end,
-      {description = "toggle tag #" .. i, group = "tag"}),
     -- Move client to tag.
     awful.key({ modkey, "Control" }, "#" .. i + 9,
       function ()
@@ -413,17 +469,24 @@ for i = 1, 9 do
         end
       end,
       {description = "move focused client to tag #"..i, group = "tag"}),
-    -- Toggle tag on focused client.
-    awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
+    -- Move client to screen on the same tag
+    awful.key({ modkey, "Shift" }, "#" .. i + 9,
       function ()
-        if client.focus then
-          local tag = client.focus.screen.tags[i]
-          if tag then
-            client.focus:toggle_tag(tag)
+        if client.focus
+          and 0 < i
+          and i <= screen.count()
+        then
+          local cnt = 0
+          for s in screen do
+            cnt = cnt + 1
+            if cnt == i and s ~= client.focus.screen then
+              client.focus:move_to_tag(s.tags[tag_num(client.focus)])
+              break
+            end
           end
         end
       end,
-      {description = "toggle focused client on tag #" .. i, group = "tag"})
+      {description = "move focused client to screen #" .. i .. " in the same tag", group = "tag"})
   )
 end
 
@@ -501,6 +564,16 @@ awful.rules.rules = {
   -- Set Firefox to always map on the tag named "2" on screen 1.
   -- { rule = { class = "Firefox" },
   --   properties = { screen = 1, tag = "2" } },
+  -- { rule = {class = "URxvt" },
+  --   properties = { tag = taglist[1] } },
+  { rule = {class = "Emacs" },
+    properties = { tag = taglist[2] } },
+  { rule = {class = "Chrome" },
+    properties = { tag = taglist[3] } },
+  { rule = {class = "Thunderbird" },
+    properties = { tag = taglist[4] } },
+  { rule = {class = "electronic-wechat" },
+    properties = { tag = taglist[5] } }
 }
 -- }}}
 
