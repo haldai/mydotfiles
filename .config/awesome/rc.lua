@@ -82,12 +82,14 @@ modkey = "Mod4"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
     awful.layout.suit.tile,
-    awful.layout.suit.tile.left,
-    awful.layout.suit.tile.bottom,
-    awful.layout.suit.tile.top,
-    awful.layout.suit.fair,
+    -- awful.layout.suit.tile.left,
+    -- awful.layout.suit.tile.bottom,
+    -- awful.layout.suit.tile.top,
+    -- awful.layout.suit.fair,
+    lain.layout.centerwork,
+    lain.layout.termfair,
     awful.layout.suit.fair.horizontal,
-    awful.layout.suit.spiral,
+    -- awful.layout.suit.spiral,
     awful.layout.suit.spiral.dwindle,
     awful.layout.suit.floating,
     -- awful.layout.suit.max,
@@ -224,8 +226,8 @@ end
 screen.connect_signal("property::geometry", set_wallpaper)
 
 taglist = { "", "", "", "", "", "", "", "", "" }
-layoutlist = { awful.layout.layouts[1], awful.layout.layouts[1], awful.layout.layouts[1],
-               awful.layout.layouts[1], awful.layout.suit.floating, awful.layout.layouts[1],
+layoutlist = { awful.layout.layouts[2], awful.layout.layouts[1], awful.layout.layouts[1],
+               awful.layout.layouts[1], awful.layout.layouts[1], awful.layout.suit.floating,
                awful.layout.layouts[1], awful.layout.layouts[1], awful.layout.layouts[1] }
 
 awful.screen.connect_for_each_screen(
@@ -568,15 +570,15 @@ awful.rules.rules = {
   { rule = {class = "Emacs"},
     properties = { tag = taglist[2] } },
   { rule = {class = "Google-chrome"},
-    properties = { tag = taglist[3] } },
+    properties = { tag = taglist[3], maximized = true } },
   { rule = {class = "Thunderbird"},
     properties = { tag = taglist[4] } },
   { rule = {class = "shadowsocks-qt5"},
-    properties = { tag = taglist[4] } },
+    properties = { tag = taglist[4], minimized = true } },
   { rule = {class = "Pcmanfm"},
     properties = { tag = taglist[5] } },
-  { rule = {class = "electronic-wechat"},
-    properties = { tag = taglist[6] } }
+  { rule_any = {class = { "electronic-wechat", "qq.exe" } },
+    properties = { tag = taglist[6] } },
 }
 -- }}}
 
