@@ -780,7 +780,7 @@ xloadcols(void)
 		}
 
 	/* set alpha value of bg color */
-  if (USE_ARGB) {
+	if (USE_ARGB) {
     // X11 uses premultiplied alpha values (i.e. 50% opacity white is
     // 0x7f7f7f7f, not 0x7fffffff), so multiply color by alpha
     dc.col[defaultbg].color.alpha = (0xffff * alpha) / OPAQUE; //0xcccc;
@@ -1443,22 +1443,11 @@ xdrawglyphfontspecs(const XftGlyphFontSpec *specs, Glyph base, int len, int x, i
 		}
 	}
 
-  if (base.mode & ATTR_REVERSE) {
-		if (bg == fg) {
-			bg = &dc.col[defaultfg];
-			fg = &dc.col[defaultbg];
-		} else {
-			temp = fg;
-			fg = bg;
-			bg = temp;
-		}
-	}
-
 	if ((base.mode & ATTR_BOLD_FAINT) == ATTR_FAINT) {
 		colfg.red = fg->color.red / 2;
 		colfg.green = fg->color.green / 2;
 		colfg.blue = fg->color.blue / 2;
-		//colfg.alpha = fg->color.alpha;
+		colfg.alpha = fg->color.alpha;
 		XftColorAllocValue(xw.dpy, xw.vis, xw.cmap, &colfg, &revfg);
 		fg = &revfg;
 	}

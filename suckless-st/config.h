@@ -16,7 +16,7 @@ static int borderpx = 2;
  * 4: value of shell in /etc/passwd
  * 5: value of shell in config.h
  */
-static char *shell = "/bin/zsh";
+static char *shell = "/bin/sh";
 char *utmp = NULL;
 char *stty_args = "stty raw pass8 nl -echo -iexten -cstopb 38400";
 
@@ -83,7 +83,7 @@ char *termname = "st-256color";
 unsigned int tabspaces = 8;
 
 /* bg opacity */
-unsigned int alpha = 0xef;
+unsigned int alpha = 0xed;
 
 static const char *colorname[] = {
 	"#282828", /* hard contrast: #1d2021 / soft contrast: #32302f */
@@ -113,10 +113,10 @@ static const char *colorname[] = {
  * Default colors (colorname index)
  * foreground, background, cursor, reverse cursor
  */
-unsigned int defaultfg = 188;
-unsigned int defaultbg = 237;
-static unsigned int defaultcs = 188;
-static unsigned int defaultrcs = 257;
+unsigned int defaultfg = 15;
+unsigned int defaultbg = 0;
+static unsigned int defaultcs = 15;
+static unsigned int defaultrcs = 0;
 
 /*
  * Default shape of cursor
@@ -125,7 +125,7 @@ static unsigned int defaultrcs = 257;
  * 6: Bar ("|")
  * 7: Snowman ("☃")
  */
-static unsigned int cursorshape = 1;
+static unsigned int cursorshape = 2;
 
 /*
  * Default columns and rows numbers
@@ -205,7 +205,7 @@ MouseKey mkeys[] = {
 	{ Button5,              MODKEY|ShiftMask,         zoom,    {.f =  -1} },
 };
 
-static char *openurlcmd[] = { "/bin/zsh", "-c",
+static char *openurlcmd[] = { "/bin/sh", "-c",
     "xurls | uniq | dmenu -l 10 | xargs -r xdg-open",
     "externalpipe", NULL };
 
@@ -234,12 +234,12 @@ static Shortcut shortcuts[] = {
 	{ MODKEY,            	XK_Down,   	kscrolldown,    {.i =  1} },
 	{ MODKEY,	        XK_u,		kscrollup,      {.i = -1} },
 	{ MODKEY,  		XK_d,		kscrolldown,   	{.i = -1} },
-	//{ MODKEY|ShiftMask,     XK_Up,          zoom,           {.f = +1} },
-	//{ MODKEY|ShiftMask,     XK_Down,        zoom,           {.f = -1} },
-	//{ MODKEY|ShiftMask,     XK_K,           zoom,           {.f = +1} },
-	//{ MODKEY|ShiftMask,     XK_J,           zoom,           {.f = -1} },
-	//{ MODKEY|ShiftMask,     XK_U,           zoom,           {.f = +2} },
-	//{ MODKEY|ShiftMask,     XK_D,           zoom,           {.f = -2} },
+	{ MODKEY|ShiftMask,     XK_Up,          zoom,           {.f = +1} },
+	{ MODKEY|ShiftMask,     XK_Down,        zoom,           {.f = -1} },
+	{ MODKEY|ShiftMask,     XK_K,           zoom,           {.f = +1} },
+	{ MODKEY|ShiftMask,     XK_J,           zoom,           {.f = -1} },
+	{ MODKEY|ShiftMask,     XK_U,           zoom,           {.f = +2} },
+	{ MODKEY|ShiftMask,     XK_D,           zoom,           {.f = -2} },
     	{ MODKEY,		XK_l,		externalpipe,	{ .v = openurlcmd } },
 };
 
