@@ -61,6 +61,7 @@ DISABLE_AUTO_UPDATE="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
+  extract
 )
 
 
@@ -100,7 +101,7 @@ alias np='nano -w PKGBUILD'
 alias more=less
 alias la='ls -a'
 alias ll='ls -l'
-alias e='emacsclient -c -a emacs'
+alias e='emacsclient --with-x-toolkit=lucid -c -a emacs'
 alias ek="emacsclient -e '(client-save-kill-emacs)'"
 alias et="emacsclient -nw"
 
@@ -121,8 +122,7 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 export YAOURT_COLORS="nb=1:pkg=1:ver=1;32:lver=1;45:installed=1;42:grp=1;34:od=1;41;5:votes=1;44:dsc=0:other=1;35"
 
 # user environment
-I3_PATH="/home/daiwz/.i3/bin"
-SCRIPTS_PATH="/home/daiwz/.scripts"
+SCRIPTS_PATH="/home/daiwz/.scripts/"
 
 # most
 export PAGER="most"
@@ -131,7 +131,7 @@ export MOST_EDITOR="jed %s -g %d"
 # visual
 export VISUAL="most"
 
-PATH=$SCRIPTS_PATH:$I3_PATH:$MATLAB_PATH:$HOME/.local/bin/:$PATH
+PATH=$SCRIPTS_PATH:$HOME/.local/bin/:$PATH
 
 LD_LIBRARY_PATH=/usr/local/lib/swipl/lib/x86_64-linux:$MATLAB_INCLUDE_PATH:$MATLAB_PATH:${HOME}/.local/include/:${HOME}/.local/lib:${HOME}/APPs/MATLAB/R2018a/extern/include/:$LD_LIBRARY_PATH
 
@@ -143,7 +143,6 @@ export PATH
 export LD_LIBRARY_PATH
 export LD_RUN_PATH
 export PKG_CONFIG_PATH
-
 export PYTHON_EGG_CACHE=/tmp/python-eggs/
 
 # My alias
@@ -171,7 +170,7 @@ SPACESHIP_PROMPT_ORDER=(
     # package     # Package version (Disabled)
     # node          # Node.js section
     # ruby          # Ruby section
-    # elixir        # Elixir section
+    # elixir        # Elixir sections
     # xcode       # Xcode section (Disabled)
     # swift         # Swift section
     # golang        # Go section
@@ -206,6 +205,6 @@ SPACESHIP_USER_SUFFIX=
 SPACESHIP_HOST_PREFIX=@
 SPACESHIP_HOST_SUFFIX=
 SPACESHIP_DIR_PREFIX=:
-SPACESHIP_CHAR_SYMBOL=⊢\ 
+SPACESHIP_CHAR_SYMBOL=⊨\ 
 SPACESHIP_JULIA_SYMBOL=julia-
 
