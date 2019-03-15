@@ -63,7 +63,7 @@ static unsigned int max_bold_weight_infelicity = 20;
 static char stty_args[] = "stty raw pass8 nl -echo -iexten -cstopb 38400";
 static unsigned int xfps = 60;
 static unsigned int actionfps = 30;
-static char *termname = "xst";
+static char *termname = "xst-256color";
 static char *colorname[] =
   {
    /* 8 normal colors */
