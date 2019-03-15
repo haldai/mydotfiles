@@ -6,79 +6,44 @@ Xft.autohint: false
 Xft.hintstyle: hintslight
 Xft.lcdfilter: lcddefault
 
-XTerm*background: #2b2b2b
-XTerm*foreground: #e7e7e7
-XTerm*pointerColor: #16A085
-XTerm*faceName: Fixed
-XTerm*faceSize: 11
-
-*.foreground:   #cdcdcd
-*.background:   #121317
-*.cursorColor:  #cdcdcd
+*.foreground:   #DCDCCC
+*.background:   #3F3F3F
+*.cursorColor:  #BFBFBF
 
 ! black
-*.color0:       #282a2e
-*.color8:       #373b41
+*.color0:       #3F3F3F
+*.color8:       #7F7F7F
 
 ! red
-*.color1:       #922230
-*.color9:       #923a45
+*.color1:       #CC9393
+*.color9:       #9C6363
 
 ! green
-*.color2:       #0f8c61
-*.color10:      #198873
+*.color2:       #7F9F7F
+*.color10:      #5F7F5F
 
 ! yellow
-*.color3:       #ba883d
-*.color11:      #ba9153
+*.color3:       #F0DFAF
+*.color11:      #D0BF8F
 
 ! blue
-*.color4:       #277896
-*.color12:      #3c7e96
+*.color4:       #8CD0D3
+*.color12:      #94BFF3
 
 ! magenta
-*.color5:       #4b4574
-*.color13:      #53569b
+*.color5:       #DC8CC3
+*.color13:      #CB7BB2
 
 ! cyan
-*.color6:       #638b83
-*.color14:      #7dbfb8
+*.color6:       #93E0E3
+*.color14:      #82CFD2
 
 ! white
-*.color7:       #cdcdcd
-*.color15:      #cdcdcd
+*.color7:       #DCDCCC
+*.color15:      #FFFFEF
 
 !Xcursor.theme: xcursor-breeze
 !Xcursor.size:                     0
 
-XTerm*reverseVideo:               on
-XTerm*selectToClipboard:          true
-
-#define font1         Source Code Pro
-#define font2         SauceCodePro Nerd Font
-#define font3         Source Han Sans CN
-#define font4         Symbola
-#define font5         Noto Color Emoji
-
-URxvt*letterSpace:    0
-URxvt*font:           xft:font1:pixelsize=16, xft:font2:pixelsize=16:minspace=false, xft:font3:pixelsize=16,xft:font4:pixelsize=16, xft:font5:pixelsize=16
-URxvt*boldFont:       xft:font1:bold:pixelsize=16, xft:font2:pixelsize=16:minspace=False,xft:font3:pixelsize=16,xft:font4:pixelsize=16, xft:font5:pixelsize=16
-URxvt*italicFont:     xft:font1:italic:pixelsize=16, xft:font2:pixelsize=16:minspace=False,xft:font3:pixelsize=16,xft:font4:pixelsize=16, xft:font5:pixelsize=16
-URxvt*boldItalicFont: xft:font1:bold:italic:pixelsize=16, xft:font2:pixelsize=16:minspace=False, xft:font3:pixelsize=16, xft:font4:pixelsize=16, xft:font5:pixelsize=16
-
-URxvt.depth:                      32
-URxvt.background:                 [80]#000000
-URxvt*scrollBar:                  false
-URxvt*mouseWheelScrollPage:       false
-URxvt*cursorBlink:                true
-URxvt*background:                 black
-URxvt*foreground:                 grey
-URxvt*saveLines:                  5000
-
-! Keyboard select
-URxvt.perl-ext-common:      default,clipboard,url-select,keyboard-select
-URxvt.url-select.launcher:  google-chrome-stable
-URxvt.url-select.underline: true
-URxvt.keysym.M-u:           perl:url-select:select_next
-URxvt.keysym.M-Escape:      perl:keyboard-select:activate
-URxvt.keysym.M-s:           perl:keyboard-select:search
+st.font: SauceCodePro Nerd Font:pixelsize=16:antialias=true:autohint=true;方正宋刻本秀楷:pixelsize=16:antialias=true:autohint=true;FontAwesome:pixelsize=16:antialias=true:autohint=true;
+st.alpha: 240
