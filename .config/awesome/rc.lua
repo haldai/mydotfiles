@@ -66,7 +66,7 @@ end
 beautiful.init(awful.util.getdir("config") .. "/themes/zenburn/theme.lua")
 
 -- Default apps
-terminal = "xst"
+terminal = "st"
 editor = os.getenv("EDITOR") or "emacsclient -c -a emacs"
 editor_cmd = terminal .. " -e " .. editor
 browser = "google-chrome-stable"
@@ -223,7 +223,10 @@ end
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
 
-taglist = { "", "", "", "", "", "", "", "", "" }
+taglist = { "", "", "", "", "", "", "", "", "" }
+layoutlist = { awful.layout.layouts[1], awful.layout.layouts[1], awful.layout.layouts[1],
+               awful.layout.layouts[1], awful.layout.suit.floating, awful.layout.layouts[1],
+               awful.layout.layouts[1], awful.layout.layouts[1], awful.layout.layouts[1] }
 
 awful.screen.connect_for_each_screen(
   function(s)
@@ -231,7 +234,7 @@ awful.screen.connect_for_each_screen(
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag(taglist, s, awful.layout.layouts[1])
+    awful.tag(taglist, s, layoutlist)
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -378,10 +381,10 @@ globalkeys = gears.table.join(
     {description = "launch Chrome with user data dir", group = "launcher"}),
   awful.key({ modkey }, "F4", function () awful.spawn("thunderbird") end,
     {description = "launch thunderbird", group = "launcher"}),
-  awful.key({ modkey }, "F5", function () awful.spawn("electronic-wechat") end,
-    {description = "launch wechat", group = "launcher"}),
-  awful.key({ modkey }, "F6", function () awful.spawn("xst -e ranger") end,
+  awful.key({ modkey }, "F5", function () awful.spawn("st -e ranger") end,
     {description = "launch ranger", group = "launcher"}),
+  awful.key({ modkey }, "F6", function () awful.spawn("electronic-wechat") end,
+    {description = "launch wechat", group = "launcher"}),
   awful.key({ modkey, "Ctrl" }, "t", function () awful.spawn("pkill compton") end,
     {description = "kill compton", group = "launcher"}),
   awful.key({ modkey }, "t",  function () awful.spawn("compton --config /home/daiwz/.config/compton.conf") end,
@@ -570,9 +573,9 @@ awful.rules.rules = {
     properties = { tag = taglist[4] } },
   { rule = {class = "shadowsocks-qt5"},
     properties = { tag = taglist[4] } },
-  { rule = {class = "electronic-wechat"},
-    properties = { tag = taglist[5] } },
   { rule = {class = "Pcmanfm"},
+    properties = { tag = taglist[5] } },
+  { rule = {class = "electronic-wechat"},
     properties = { tag = taglist[6] } }
 }
 -- }}}

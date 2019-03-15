@@ -10,8 +10,8 @@ function run {
 run /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 run undervolt.sh
 run compton --config ~/.config/compton.conf
+run ibus-daemon --xim -d
 run nm-applet
-run fcitx -d
 run volumeicon
 run caffeine
 run udiskie -ans

@@ -101,7 +101,7 @@ alias np='nano -w PKGBUILD'
 alias more=less
 alias la='ls -a'
 alias ll='ls -l'
-alias e='emacsclient --with-x-toolkit=lucid -c -a emacs'
+alias e='emacsclient -c -a emacs'
 alias ek="emacsclient -e '(client-save-kill-emacs)'"
 alias et="emacsclient -nw"
 

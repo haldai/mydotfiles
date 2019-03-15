@@ -61,7 +61,9 @@ This function should only modify configuration layer settings."
             latex-enable-auto-fill t
             latex-enable-folding t
             latex-enable-magic t)
+     lua
      python
+     yaml
      ipython-notebook
      (c-c++ :variables
             c-c++-enable-clang-support t)
@@ -462,7 +464,7 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
-  ;; emacs server
+  ;; start server
   (server-start)
   ;; tuna sources
   (setq configuration-layer-elpa-archives
@@ -497,6 +499,8 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+  ;; global disable super-space
+  (global-set-key (kbd "s-SPC") 'nil)
   ;; gloabal visual line mode
   (global-visual-line-mode 1)
   ;; disable x clipboard manager
