@@ -7,3 +7,5 @@ patch:
     Shift_R: noop
     Control_L: commit_code
     Control_R: commit_code
+  schema_list:
+    - schema: luna_pinyin
