@@ -7,7 +7,7 @@ function run {
 }
 
 # Startups
-run exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+run /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 run undervolt.sh
 run compton --config ~/.config/compton.conf
 run nm-applet
@@ -16,8 +16,8 @@ run volumeicon
 run caffeine
 run udiskie -ans
 run blueman-applet
-run urxvtd
-run sbxkb
 run libinput-gestures-setup start
 run copyq
-run sleep 1; /home/daiwz/.conky/myconky-start.sh
+run thunderbird
+run ss-qt5
+sleep 1; /home/daiwz/.conky/myconky-start.sh
