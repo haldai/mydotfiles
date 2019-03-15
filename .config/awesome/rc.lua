@@ -66,13 +66,11 @@ end
 beautiful.init(awful.util.getdir("config") .. "/themes/zenburn/theme.lua")
 
 -- Default apps
-terminal = "urxvtc"
+terminal = "xst"
 editor = os.getenv("EDITOR") or "emacsclient -c -a emacs"
 editor_cmd = terminal .. " -e " .. editor
 browser = "google-chrome-stable"
 filemanager = "pcmanfm"
-
-
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -117,7 +115,7 @@ local function client_menu_toggle_fn()
 end
 
 -- Icon path
-local icon_path = "/usr/share/icons/Paper/24@2x/"
+local icon_path = "/usr/share/icons/Paper/24x24@2x/"
 
 -- {{{ Menu
 local myawesomemenu = {
@@ -157,9 +155,18 @@ awful.util.mymainmenu = freedesktop.menu.build({
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
 
+
+-- {{{ Mouse bindings
+root.buttons(gears.table.join(
+               awful.button({ }, 3, function () awful.util.mymainmenu:toggle() end),
+               awful.button({ }, 4, awful.tag.viewprev),
+               awful.button({ }, 5, awful.tag.viewnext)
+))
+-- }}}
+
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock("%H:%M ")
+mytextclock = wibox.widget.textclock(" %H:%M ")
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -175,8 +182,8 @@ local taglist_buttons = gears.table.join(
         client.focus:toggle_tag(t)
       end
   end),
-  awful.button({ }, 4, function(t) awful.tag.viewnext(t.screen) end),
-  awful.button({ }, 5, function(t) awful.tag.viewprev(t.screen) end)
+  awful.button({ }, 4, function(t) awful.tag.viewprev(t.screen) end),
+  awful.button({ }, 5, function(t) awful.tag.viewnext(t.screen) end)
 )
 
 local tasklist_buttons = gears.table.join(
@@ -216,7 +223,7 @@ end
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
 
-taglist = { "", "", "", "", "", "", "", "", "" }
+taglist = { "", "", "", "", "", "", "", "", "" }
 
 awful.screen.connect_for_each_screen(
   function(s)
@@ -252,38 +259,31 @@ awful.screen.connect_for_each_screen(
 
     -- Create the wibox
     s.mywibox = awful.wibar({
-        position = "bottom",
+        position = "top",
         height = 28,
         screen = s })
 
     -- Add widgets to the wibox
     s.mywibox:setup {
       layout = wibox.layout.align.horizontal,
-        { -- Left widgets
-            layout = wibox.layout.fixed.horizontal,
-            -- mylauncher,
-            s.mytaglist,
-            -- s.mypromptbox,
-        },
-        s.mytasklist, -- Middle widget
-        { -- Right widgets
-          layout = wibox.layout.fixed.horizontal,
-          -- mykeyboardlayout,
-          wibox.widget.systray(),
-          mytextclock,
-          s.mylayoutbox,
-        },
+      { -- Left widgets
+        layout = wibox.layout.fixed.horizontal,
+        -- mylauncher,
+        s.mytaglist,
+        -- s.mypromptbox,
+      },
+      s.mytasklist, -- Middle widget
+      { -- Right widgets
+        layout = wibox.layout.fixed.horizontal,
+        -- mykeyboardlayout,
+        wibox.widget.systray(),
+        mytextclock,
+        s.mylayoutbox,
+      },
     }
 end)
 -- }}}
 
--- {{{ Mouse bindings
-root.buttons(gears.table.join(
-               awful.button({ }, 3, function () awful.util.mymainmenu:toggle() end),
-               awful.button({ }, 4, awful.tag.viewprev),
-               awful.button({ }, 5, awful.tag.viewnext)
-))
--- }}}
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
@@ -329,76 +329,86 @@ globalkeys = gears.table.join(
   awful.key({ modkey }, "u", awful.client.urgent.jumpto,
               {description = "jump to urgent client", group = "client"}),
   awful.key({ modkey }, "Tab",
-        function ()
-            awful.client.focus.history.previous()
-            if client.focus then
-              client.focus:raise()
-            end
-        end,
-        {description = "go back", group = "client"}),
+    function ()
+      awful.client.focus.history.previous()
+      if client.focus then
+        client.focus:raise()
+      end
+    end,
+    {description = "go back", group = "client"}),
 
-    -- Multimedia keys
-    awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer set Master 2%+", false) end),
-    awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer set Master 2%-", false) end),
-    awful.key({ }, "XF86AudioMute", function () awful.util.spawn("amixer set Master toggle", false) end),
+   -- ALSA volume control
+  awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer set Master 2%+", false) end),
+  awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer set Master 2%-", false) end),
+  awful.key({ }, "XF86AudioMute", function () awful.util.spawn("amixer set Master toggle", false) end),
 
-    -- Brightness
-    awful.key({ }, "XF86MonBrightnessUp", function () os.execute("xbacklight -inc 10") end,
-      {description = "+10%", group = "hotkeys"}),
-    awful.key({ }, "XF86MonBrightnessDown", function () os.execute("xbacklight -dec 10") end,
-      {description = "-10%", group = "hotkeys"}),
+  -- Brightness
+  awful.key({ }, "XF86MonBrightnessUp", function () os.execute("xbacklight -inc 10") end),
+  awful.key({ }, "XF86MonBrightnessDown", function () os.execute("xbacklight -dec 10") end),
 
-    -- Standard programs
-    awful.key({ modkey }, "Return", function () awful.spawn(terminal) end,
-              {description = "open a terminal", group = "launcher"}),
-    awful.key({ modkey, "Shift" }, "r", awesome.restart,
-              {description = "reload awesome", group = "awesome"}),
-    awful.key({ modkey, "Control" }, "Esc", awesome.quit,
-              {description = "quit awesome", group = "awesome"}),
+  -- On the fly useless gaps change
+  awful.key({ altkey, "Control" }, "+", function () lain.util.useless_gaps_resize(1) end,
+    {description = "increment useless gaps", group = "tag"}),
+  awful.key({ altkey, "Control" }, "-", function () lain.util.useless_gaps_resize(-1) end,
+    {description = "decrement useless gaps", group = "tag"}),
 
-    -- Rofi
-    awful.key({ modkey }, "d",  function () awful.spawn("/usr/bin/rofi -show") end,
-      {description = "launch rofi", group = "launcher"}),
+  -- Standard programs
+  awful.key({ modkey }, "Return", function () awful.spawn(terminal) end,
+    {description = "open a terminal", group = "launcher"}),
+  awful.key({ modkey, "Shift" }, "r", awesome.restart,
+    {description = "reload awesome", group = "awesome"}),
+  awful.key({ modkey, "Control" }, "Esc", awesome.quit,
+    {description = "quit awesome", group = "awesome"}),
 
-    -- Scratchpad
-    awful.key({ modkey }, "F4", function ()
-        scratch.drop(terminal, "center", "center", 720, 400) end,
-      {description = "display a scratchpad of urxvt", group = "launcher"}),
+  -- Rofi
+  awful.key({ modkey }, "d",  function () awful.spawn("/usr/bin/rofi -show") end,
+    {description = "launch rofi", group = "launcher"}),
 
-    -- Applications
-    awful.key({ modkey }, "F1", function () awful.spawn("emacsclient -c -a emacs") end,
-      {description = "launch Emacs", group = "launcher"}),
-    awful.key({ modkey }, "F2", function () awful.spawn("google-chrome-stable") end,
-      {description = "launch rofi", group = "launcher"}),
-    awful.key({ modkey, "Shift" }, "F2", function () awful.spawn("google-chrome-stable --disable-web-security --user-data-dir") end,
-      {description = "launch Chrome with user data dir", group = "launcher"}),
-    awful.key({ modkey }, "F3", function () awful.spawn("urxvt -e ranger") end,
-      {description = "launch ranger", group = "launcher"}),
-    awful.key({ modkey, "Ctrl" }, "t", function () awful.spawn("pkill compton") end,
-      {description = "kill compton", group = "launcher"}),
-    awful.key({ modkey }, "t",  function () awful.spawn("compton --config /home/daiwz/.config/compton.conf") end,
-      {description = "launch compton", group = "launcher"}),
-    awful.key({ }, "Print", function () awful.spawn("deepin-screenshot -f") end,
-      {description = "print full screen", group = "launcher"}),
-    awful.key({ modkey }, "Print", function () awful.spawn("deepin-screenshot") end,
-      {description = "launch deepin-screenshot", group = "launcher"}),
+  -- Scratchpad
+  awful.key({ modkey }, "F1", function ()
+      scratch.drop(terminal, "center", "center", 720, 400) end,
+    {description = "display a scratchpad of terminal", group = "launcher"}),
 
-    -- Custom scripts
-    awful.key({ modkey }, "Escape", function ()
-        awful.util.spawn_with_shell("~/.scripts/flash-win.sh") end,
-      {description = "flash current screen", group = "launcher"}),
-    awful.key({ modkey }, "F8", function ()
-        awful.util.spawn_with_shell("~/.scripts/presentation") end,
-      {description = "External screen copy", group = "launcher"}),
-    awful.key({ modkey, "Ctrl" }, "F8", function ()
-        awful.util.spawn_with_shell("~/.scripts/presentation-x -r") end,
-      {description = "External screen on the right", group = "launcher"}),
-    awful.key({ modkey, "Shift" }, "F8", function ()
-        awful.util.spawn_with_shell("~/.scripts/presentation-x -l") end,
-      {description = "External screen on the left", group = "launcher"})
+  -- Applications
+  awful.key({ modkey }, "F2", function () awful.spawn("emacsclient -c -a emacs") end,
+    {description = "launch Emacs", group = "launcher"}),
+  awful.key({ modkey }, "F3", function () awful.spawn("google-chrome-stable") end,
+    {description = "launch chrome", group = "launcher"}),
+  awful.key({ modkey, "Shift" }, "F3", function () awful.spawn("google-chrome-stable --disable-web-security --user-data-dir") end,
+    {description = "launch Chrome with user data dir", group = "launcher"}),
+  awful.key({ modkey }, "F4", function () awful.spawn("thunderbird") end,
+    {description = "launch thunderbird", group = "launcher"}),
+  awful.key({ modkey }, "F5", function () awful.spawn("electronic-wechat") end,
+    {description = "launch wechat", group = "launcher"}),
+  awful.key({ modkey }, "F6", function () awful.spawn("xst -e ranger") end,
+    {description = "launch ranger", group = "launcher"}),
+  awful.key({ modkey, "Ctrl" }, "t", function () awful.spawn("pkill compton") end,
+    {description = "kill compton", group = "launcher"}),
+  awful.key({ modkey }, "t",  function () awful.spawn("compton --config /home/daiwz/.config/compton.conf") end,
+    {description = "launch compton", group = "launcher"}),
+  awful.key({ }, "Print", function () awful.spawn("deepin-screenshot -f") end,
+    {description = "print full screen", group = "launcher"}),
+  awful.key({ modkey }, "Print", function () awful.spawn("deepin-screenshot") end,
+    {description = "launch deepin-screenshot", group = "launcher"}),
+
+  -- Custom scripts
+  awful.key({ modkey }, "Escape", function ()
+      awful.util.spawn_with_shell("~/.scripts/flash-win.sh") end,
+    {description = "flash current screen", group = "launcher"}),
+  awful.key({ modkey }, "F8", function ()
+      awful.util.spawn_with_shell("~/.scripts/presentation") end,
+    {description = "External screen copy", group = "launcher"}),
+  awful.key({ modkey, "Ctrl" }, "F8", function ()
+      awful.util.spawn_with_shell("~/.scripts/presentation-x -r") end,
+    {description = "External screen on the right", group = "launcher"}),
+  awful.key({ modkey, "Shift" }, "F8", function ()
+      awful.util.spawn_with_shell("~/.scripts/presentation-x -l") end,
+    {description = "External screen on the left", group = "launcher"})
 )
 
 clientkeys = gears.table.join(
+  awful.key({ modkey, "Shift" }, "m", lain.util.magnify_client,
+    {description = "magnify client", group = "client"}),
   awful.key({ modkey }, "j",
         function (c)
             c.fullscreen = not c.fullscreen
@@ -422,24 +432,12 @@ clientkeys = gears.table.join(
             c.minimized = true
         end ,
         {description = "minimize", group = "client"}),
-    awful.key({ modkey}, "m",
-        function (c)
-          c.maximized = not c.maximized
-          c:raise()
-        end ,
-        {description = "(un)maximize", group = "client"}),
-    awful.key({ modkey, "Control" }, "m",
+    awful.key({ modkey }, "m",
       function (c)
-        c.maximized_vertical = not c.maximized_vertical
+        c.maximized = not c.maximized
         c:raise()
-      end ,
-      {description = "(un)maximize vertically", group = "client"}),
-    awful.key({ modkey, "Shift" }, "m",
-      function (c)
-        c.maximized_horizontal = not c.maximized_horizontal
-        c:raise()
-      end ,
-      {description = "(un)maximize horizontally", group = "client"})
+      end,
+      {description = "maximize", group = "client"})
 )
 
 -- Bind all key numbers to tags.
@@ -564,16 +562,18 @@ awful.rules.rules = {
   -- Set Firefox to always map on the tag named "2" on screen 1.
   -- { rule = { class = "Firefox" },
   --   properties = { screen = 1, tag = "2" } },
-  -- { rule = {class = "URxvt" },
-  --   properties = { tag = taglist[1] } },
-  { rule = {class = "Emacs" },
+  { rule = {class = "Emacs"},
     properties = { tag = taglist[2] } },
-  { rule = {class = "Chrome" },
+  { rule = {class = "Google-chrome"},
     properties = { tag = taglist[3] } },
-  { rule = {class = "Thunderbird" },
+  { rule = {class = "Thunderbird"},
     properties = { tag = taglist[4] } },
-  { rule = {class = "electronic-wechat" },
-    properties = { tag = taglist[5] } }
+  { rule = {class = "shadowsocks-qt5"},
+    properties = { tag = taglist[4] } },
+  { rule = {class = "electronic-wechat"},
+    properties = { tag = taglist[5] } },
+  { rule = {class = "Pcmanfm"},
+    properties = { tag = taglist[6] } }
 }
 -- }}}
 
@@ -638,7 +638,18 @@ client.connect_signal(
     c:emit_signal("request::activate", "mouse_enter", {raise = false})
 end)
 
-client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
+-- No border for maximized clients
+function border_adjust(c)
+  if c.maximized then -- no borders if only 1 client visible
+    c.border_width = 0
+  elseif #awful.screen.focused().clients > 1 then
+    c.border_width = beautiful.border_width
+    c.border_color = beautiful.border_focus
+  end
+end
+
+client.connect_signal("property::maximized", border_adjust)
+client.connect_signal("focus", border_adjust)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 

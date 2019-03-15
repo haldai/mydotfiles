@@ -1,18 +1,25 @@
 -------------------------------
 --  "Zenburn" awesome theme  --
 --    By Adrian C. (anrxc)   --
+--     Modified by haldai    --
 -------------------------------
 
 local themes_path = require("gears.filesystem").get_themes_dir()
 local dpi = require("beautiful.xresources").apply_dpi
+local gears = require("gears")
+local lain  = require("lain")
+local awful = require("awful")
+local wibox = require("wibox")
+
+local os = os
 
 -- {{{ Main
 local theme = {}
-theme.wallpaper = themes_path .. "zenburn/zenburn-background.png"
+theme.wallpaper = "~/Pictures/DD.jpg"
 -- }}}
 
 -- {{{ Styles
-theme.font      = "方正宋刻本秀楷 12"
+theme.font      = "方正宋刻本秀楷 13"
 
 -- {{{ Colors
 theme.fg_normal  = "#DCDCCC"
@@ -25,7 +32,7 @@ theme.bg_systray = theme.bg_normal
 -- }}}
 
 -- {{{ Borders
-theme.useless_gap   = dpi(0)
+theme.useless_gap   = dpi(2)
 theme.border_width  = dpi(2)
 theme.border_normal = "#3F3F3F"
 theme.border_focus  = "#6F6F6F"
@@ -67,8 +74,8 @@ theme.mouse_finder_color = "#CC9393"
 -- Variables set for theming the menu:
 -- menu_[bg|fg]_[normal|focus]
 -- menu_[border_color|border_width]
-theme.menu_height = dpi(15)
-theme.menu_width  = dpi(100)
+theme.menu_height = dpi(28)
+theme.menu_width  = dpi(200)
 -- }}}
 
 -- {{{ Icons
