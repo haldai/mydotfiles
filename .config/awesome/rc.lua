@@ -332,7 +332,7 @@ globalkeys = gears.table.join(
   awful.key({ modkey, "Shift" }, "f", function () awful.client.swap.bydirection("right") end,
     {description = "swap with rightward client", group = "client"}),
   awful.key({ modkey }, "u", awful.client.urgent.jumpto,
-              {description = "jump to urgent client", group = "client"}),
+    {description = "jump to urgent client", group = "client"}),
   awful.key({ modkey }, "Tab",
     function ()
       awful.client.focus.history.previous()
@@ -341,6 +341,10 @@ globalkeys = gears.table.join(
       end
     end,
     {description = "go back", group = "client"}),
+  awful.key({ modkey }, "l", function () awful.layout.inc(1) end,
+    {description = "select next", group = "layout"}),
+  awful.key({ modkey, "Control" }, "l", function () awful.layout.inc(-1) end,
+    {description = "select previous", group = "layout"}),
 
    -- ALSA volume control
   awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer set Master 2%+", false) end),
@@ -368,9 +372,11 @@ globalkeys = gears.table.join(
   -- Rofi
   awful.key({ modkey }, "d",  function () awful.spawn("/usr/bin/rofi -show") end,
     {description = "launch rofi", group = "launcher"}),
+  awful.key({ modkey }, "0",  function () awful.util.spawn_with_shell("~/.scripts/myexit") end,
+    {description = "lauch exit menu", group = "launcher"}),
 
   -- Scratchpad
-  awful.key({ modkey }, "F1", function ()
+  awful.key({ modkey }, "-", function ()
       scratch.drop(terminal, "center", "center", 720, 400) end,
     {description = "display a scratchpad of terminal", group = "launcher"}),
 
@@ -424,12 +430,10 @@ clientkeys = gears.table.join(
       {description = "close", group = "client"}),
     awful.key({ modkey, "Shift" }, "space",  awful.client.floating.toggle,
       {description = "toggle floating", group = "client"}),
-    awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
-      {description = "move to master", group = "client"}),
     awful.key({ modkey }, "o", function (c) c:move_to_screen() end,
       {description = "move to screen", group = "client"}),
-    awful.key({ modkey }, "t", function (c) c.ontop = not c.ontop end,
-      {description = "toggle keep on top", group = "client"}),
+    awful.key({ modkey }, "F1", function (c) c:swap(awful.client.getmaster()) end,
+      {description = "move to master", group = "client"}),
     awful.key({ modkey }, "z",
         function (c)
             -- The client currently has the input focus, so it cannot be
