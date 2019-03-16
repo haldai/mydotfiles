@@ -72,9 +72,9 @@ ${image ~/.conky/Myconky/assets/bg_img/separator-h.png -p 10,135 -s 430x2}\
 ${image ~/.conky/Myconky/assets/bg_img/separator-h.png -p 10,270 -s 430x2}\
 \
 \
-${color2}${voffset 142}${alignc 160}${font MySong:size=12}${execi 1800 date +%^A}${font}
-${color2}${voffset -24}${alignc}${font MySong:size=12}${execi 1800 date -d +1day +%^A}${font}
-${color2}${voffset -24}${alignc -160}${font MySong:size=12}${execi 1800 date -d +2day +%^A}${font}
+${color2}${voffset 142}${alignc 160}${font 方正宋刻本秀楷:size=12}${execi 1800 date +%^A}${font}
+${color2}${voffset -24}${alignc}${font 方正宋刻本秀楷:size=12}${execi 1800 date -d +1day +%^A}${font}
+${color2}${voffset -24}${alignc -160}${font 方正宋刻本秀楷:size=12}${execi 1800 date -d +2day +%^A}${font}
 \
 \
 ${color2}${voffset 70}${alignc 160}${execi 1800 ~/.conky/Myconky/parse_weather 'min' '.main.temp_min' '0'} °C/${execi 1800 ~/.conky/Myconky/parse_weather 'max' '.main.temp_max' '0'} °C
@@ -82,33 +82,33 @@ ${color2}${voffset -22}${alignc}${execi 1800 ~/.conky/Myconky/parse_weather 'min
 ${color2}${voffset -22}${alignc -160}${execi 1800 ~/.conky/Myconky/parse_weather 'min' '.main.temp_min' '2'} °C/${execi 1800 ~/.conky/Myconky/parse_weather 'max' '.main.temp_max' '2'} °C
 \
 \
-${color2}${font Droid Sans:size=40}${goto 0}${voffset -205}${execi 1800 jq -r '.main.temp' ~/.cache/weather.json | awk '{print int($1+0.5)}'} °C${font}${font MySong:size=24}${voffset -24}${alignc 10}${execi 1800 jq -r .weather[0].description ~/.cache/weather.json | sed "s|\<.|\U&|g"}${color}${font}
-${font Droid Sans:size=12}${color0}${alignr 12}${voffset -76}${execi 1800 jq -r '.main.pressure' ~/.cache/weather.json | awk '{print int($1+0.5)}' # round num} hPa${font}
-${font Droid Sans:size=12}${color0}${alignr 12}${voffset 8}${execi 1800 jq -r '.main.humidity' ~/.cache/weather.json | awk '{print int($1+0.5)}' # round num} %${color}${font}
-${font Droid Sans:size=12}${color0}${alignr 12}${voffset 6}${execi 1800 jq -r '.wind.speed' ~/.cache/weather.json | awk '{print int($1+0.5)}' # round num} m/s${color}${font}
+${color2}${font 方正宋刻本秀楷:size=40}${goto 0}${voffset -205}${execi 1800 jq -r '.main.temp' ~/.cache/weather.json | awk '{print int($1+0.5)}'} °C${font}${font 方正宋刻本秀楷:size=24}${voffset -15}${alignc 10}${execi 1800 jq -r .weather[0].description ~/.cache/weather.json | sed "s|\<.|\U&|g"}${color}${font}
+${font 方正宋刻本秀楷:size=12}${color0}${alignr 12}${voffset -86}${execi 1800 jq -r '.main.pressure' ~/.cache/weather.json | awk '{print int($1+0.5)}' # round num} hPa${font}
+${font 方正宋刻本秀楷:size=12}${color0}${alignr 12}${voffset 8}${execi 1800 jq -r '.main.humidity' ~/.cache/weather.json | awk '{print int($1+0.5)}' # round num} %${color}${font}
+${font 方正宋刻本秀楷:size=12}${color0}${alignr 12}${voffset 6}${execi 1800 jq -r '.wind.speed' ~/.cache/weather.json | awk '{print int($1+0.5)}' # round num} m/s${color}${font}
 \
 \
-${image ~/.conky/Myconky/assets/bg_img/pressure.svg.png -p 340,35 -s 20x20}\
-${image ~/.conky/Myconky/assets/bg_img/humidity.svg.png -p 340,65 -s 20x20}\
-${image ~/.conky/Myconky/assets/bg_img/wind.svg.png -p 340,95 -s 20x20}\
-${execi 1800 cp -f ~/.conky/Myconky/assets/icons/$(jq '.weather[0].id' ~/.cache/weather.json).png ~/.cache/weather-0.png}${image ~/.cache/weather-0.png -p 256,30 -s 64x64}\
+${image ~/.conky/Myconky/assets/bg_img/pressure.svg.png -p 340,45 -s 20x20}\
+${image ~/.conky/Myconky/assets/bg_img/humidity.svg.png -p 340,78 -s 20x20}\
+${image ~/.conky/Myconky/assets/bg_img/wind.svg.png -p 340,111 -s 20x20}\
+${execi 1800 cp -f ~/.conky/Myconky/assets/icons/$(jq '.weather[0].id' ~/.cache/weather.json).png ~/.cache/weather-0.png}${image ~/.cache/weather-0.png -p 240,40 -s 64x64}\
 ${execi 1800 cp -f ~/.conky/Myconky/assets/icons/$(~/.conky/Myconky/parse_weather 'first' '.weather[0].id' '0').png ~/.cache/weather-1.png}${image ~/.cache/weather-1.png -p 35,170 -s 64x64}\
 ${execi 1800 cp -f ~/.conky/Myconky/assets/icons/$(~/.conky/Myconky/parse_weather 'first' '.weather[0].id' '1').png ~/.cache/weather-2.png}${image ~/.cache/weather-2.png -p 195,170 -s 64x64}\
 ${execi 1800 cp -f ~/.conky/Myconky/assets/icons/$(~/.conky/Myconky/parse_weather 'first' '.weather[0].id' '2').png ~/.cache/weather-3.png}${image ~/.cache/weather-3.png -p 355,170 -s 64x64}${font}${voffset -24}\
 \
 \
-${voffset 190}${font Droid Sans:pixelsize=12}${color FFA300}HOME ${offset 5}$color${fs_used /home} / ${fs_size /home}${offset 10}${color FFA300}ROOT ${offset 5}$color${fs_used /} / ${fs_size /}${offset 10}${color FFA300}RAM ${offset 5}$color${mem} / ${memmax}
+${voffset 190}${font 方正宋刻本秀楷:size=12}${color FFA300}HOME ${offset 5}$color${fs_used /home} / ${fs_size /home}${offset 10}${color FFA300}ROOT ${offset 5}$color${fs_used /} / ${fs_size /}${offset 10}${color FFA300}RAM ${offset 5}$color${mem} / ${memmax}
 \
-${voffset 15}${font Droid Sans:size=12}${color2}CPU${color}${alignr 10}${execi 1800 uname -nr}${font}
+${voffset 15}${font 方正宋刻本秀楷:size=12}${color2}CPU${color}${alignr 10}${execi 1800 uname -nr}${font}
 ${cpugraph cpu0 50,450 -t 000000 FFFFFF}
 ${cpugauge cpu1 50,100}${offset 15}${cpugauge cpu2 50,100}${offset 15}${cpugauge cpu3 50,100}${offset 15}${cpugauge cpu4 50,100}\
 ${voffset 10}
 ${cpugauge cpu5 50,100}${offset 15}${cpugauge cpu6 50,100}${offset 15}${cpugauge cpu7 50,100}${offset 15}${cpugauge cpu8 50,100}
-${font Droid Sans:size=10}${voffset -95}${color0}${goto 0}1 ${goto 115}2 ${goto 230}3 ${goto 0} ${goto 345}4 ${voffset 80}${goto 0}5 ${goto 115}6 ${goto 230}7 ${goto 345}8${font}
-${font Droid Sans:size=10}${voffset -104}${color0}${goto 45}${freq_g (1)}GHz ${goto 160}${freq_g (2)}GHz ${goto 275}${freq_g (3)}GHz ${goto 390}${freq_g (4)}GHz${font}\
-${font Droid Sans:size=10}${voffset 78}${goto 45}${freq_g (5)}GHz ${goto 160}${freq_g (6)}GHz ${goto 275}${freq_g (7)}GHz ${goto 390}${freq_g (8)}GHz${font}\
+${font 方正宋刻本秀楷:size=10}${voffset -95}${color0}${goto 0}1 ${goto 115}2 ${goto 230}3 ${goto 0} ${goto 345}4 ${voffset 80}${goto 0}5 ${goto 115}6 ${goto 230}7 ${goto 345}8
+${voffset -98}${color0}${goto 45}${freq_g (1)}GHz ${goto 160}${freq_g (2)}GHz ${goto 275}${freq_g (3)}GHz ${goto 390}${freq_g (4)}GHz\
+${voffset 81}${goto 45}${freq_g (5)}GHz ${goto 160}${freq_g (6)}GHz ${goto 275}${freq_g (7)}GHz ${goto 390}${freq_g (8)}GHz${font}\
 \
-${voffset 15}
+${font 方正宋刻本秀楷}${voffset 15}
 ${color2}CPU ${color0}${alignr}${cpu cpu0}%
 ${cpubar cpu0 10,}
 ${top name 1} $alignr ${top cpu 1}%
@@ -124,5 +124,5 @@ ${top_mem name 2} $alignr ${top_mem mem_res 2}
 ${top_mem name 3} $alignr ${top_mem mem_res 3}
 ${top_mem name 4} $alignr ${top_mem mem_res 4}
 ${top_mem name 5} $alignr ${top_mem mem_res 5}
-
+${font}
 ]];
