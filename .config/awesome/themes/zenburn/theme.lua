@@ -3,13 +3,13 @@
 --    By Adrian C. (anrxc)   --
 --     Modified by haldai    --
 -------------------------------
-
 local themes_path = require("gears.filesystem").get_themes_dir()
 local dpi = require("beautiful.xresources").apply_dpi
 local gears = require("gears")
 local lain  = require("lain")
 local awful = require("awful")
 local wibox = require("wibox")
+local vicious = require("vicious")
 
 local os = os
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
@@ -82,6 +82,14 @@ theme.titlebar_bg_normal = black2
 -- tooltip_[font|opacity|fg_color|bg_color|border_width|border_color]
 -- Example:
 --theme.taglist_bg_focus = "#CC9393"
+theme.tooltip_border_color = white2
+theme.tooltip_bg = black2
+theme.tooltip_fg = white1
+theme.tooltip_font = theme.font
+theme.tooltip_border_width = 2
+theme.tooltip_opacity = 90
+-- theme.tooltip_shape = nil
+theme.tooltip_align = bottom_right
 -- }}}
 
 -- {{{ Widgets
@@ -93,6 +101,12 @@ theme.titlebar_bg_normal = black2
 --theme.fg_end_widget    = "#FF5656"
 --theme.bg_widget        = "#494B4F"
 --theme.border_widget    = "#3F3F3F"
+theme.widget_main_color = white1
+theme.widget_red = red1
+theme.widget_yellow = yellow1
+theme.widget_green = green1
+theme.widget_black = black2
+theme.widget_transparent = "#00000000"
 -- }}}
 
 -- {{{ Mouse finder
@@ -173,6 +187,12 @@ theme.titlebar_maximized_button_focus_active  = themes_path .. "zenburn/titlebar
 theme.titlebar_maximized_button_normal_active = themes_path .. "zenburn/titlebar/maximized_normal_active.png"
 theme.titlebar_maximized_button_focus_inactive  = themes_path .. "zenburn/titlebar/maximized_focus_inactive.png"
 theme.titlebar_maximized_button_normal_inactive = themes_path .. "zenburn/titlebar/maximized_normal_inactive.png"
+
+theme.widget_ac = themes_path .. "zenburn/myicon/ac.png"
+theme.widget_battery = themes_path .. "zenburn/myicon/battery.png"
+theme.widget_battery_mid = themes_path .. "zenburn/myicon/battery_mid.png"
+theme.widget_battery_low = themes_path .. "zenburn/myicon/battery_low.png"
+theme.widget_battery_empty = themes_path .. "zenburn/myicon/battery_empty.png"
 -- }}}
 -- }}}
 
@@ -184,6 +204,112 @@ local separators = lain.util.separators
 --- {{{ Widgets
 local mytextclock = wibox.widget.textclock(" %H:%M ")
 mytextclock.font = theme.font
+
+-- {{{ CPU load
+theme.cpugraph = wibox.widget {
+  forced_width = 40,
+  paddings = 1,
+  border_width = 1,
+  border_color = white2,
+  color = white1,
+  background_color = black2,
+  widget = wibox.widget.graph
+}
+vicious.register(theme.cpugraph, vicious.widgets.cpu, "$1")
+local cpubg = wibox.container.background(theme.cpugraph, black2, gears.shape.rectangle)
+local cpuwidget = wibox.container.margin(cpubg, 7, 7, 5, 5)
+--- }}}
+
+--- {{{ Volume bar
+theme.volume = lain.widget.alsabar {
+  ticks = true, width = 67,
+  colors = {
+    background = black0,
+    mute = red1,
+    unmute = white1
+  },
+  notification_preset = { font = "方正宋刻本秀楷 10" }
+}
+theme.volume.bar:buttons(
+  my_table.join (
+    awful.button({}, 1, function()
+        awful.spawn(string.format("%s -e alsamixer", terminal))
+    end),
+    awful.button({}, 2, function()
+        os.execute(string.format("%s set %s 100%%", theme.volume.cmd, theme.volume.channel))
+        theme.volume.update()
+    end),
+    awful.button({}, 3, function()
+        os.execute(string.format("%s set %s toggle", theme.volume.cmd, theme.volume.togglechannel or theme.volume.channel))
+        theme.volume.update()
+    end),
+    awful.button({}, 4, function()
+        os.execute(string.format("%s set %s 2%%+", theme.volume.cmd, theme.volume.channel))
+        theme.volume.update()
+    end),
+    awful.button({}, 5, function()
+        os.execute(string.format("%s set %s 2%%-", theme.volume.cmd, theme.volume.channel))
+        theme.volume.update()
+    end)
+))
+local volumebg = wibox.container.background(theme.volume.bar, black2, gears.shape.rectangle)
+local volumewidget = wibox.container.margin(volumebg, 7, 7, 9, 9)
+--- }}}
+--- {{{ Battery
+local baticon = wibox.widget.imagebox(theme.widget_battery)
+local bat = lain.widget.bat({
+    settings = function()
+      if bat_now.status and bat_now.status ~= "N/A" then
+        if bat_now.ac_status == 1 then
+          baticon:set_image(theme.widget_ac)
+        elseif not bat_now.perc and tonumber(bat_now.perc) <= 15 then
+          baticon:set_image(theme.widget_battery_empty)
+        elseif not bat_now.perc and tonumber(bat_now.perc) <= 50 then
+          baticon:set_image(theme.widget_battery_low)
+        elseif not bat_now.perc and tonumber(bat_now.perc) <= 85 then
+          baticon:set_image(theme.widget_battery_mid)
+        else
+          baticon:set_image(theme.widget_battery)
+        end
+        widget:set_markup(markup.font(theme.font, " " .. bat_now.perc .. "% "))
+      else
+        baticon:set_image(theme.widget_ac)
+        widget:set_markup(markup.font(theme.font, " AC "))
+      end
+    end
+})
+--- }}}
+theme.membar = wibox.widget {
+  {
+    max_value = 100,
+    forced_height = 20,
+    forced_width = 40,
+    paddings = 1,
+    border_width = 1,
+    border_color = white2,
+    color = white1,
+    background_color = black2,
+    widget = wibox.widget.progressbar,
+  },
+  layout = wibox.layout.rotate
+}
+
+-- RAM usage tooltip
+memwidget_t = awful.tooltip({ objects = { theme.membar },})
+
+vicious.cache(vicious.widgets.mem)
+vicious.register(theme.membar, vicious.widgets.mem,
+                 function (widget, args)
+                   local p = io.popen("ps -eo user,pid,rss,args --sort=-rss | head -11 | awk '{hr[1024*1024]=\"GB\"; hr[1024]=\"MB\"; h=0; for (x=1024*1024*1024; x>=1024; x/=1024) { if ($3>=x) { h=x; break } } { proc=\"\"; for(i = 4; i <= NF; i++) proc = proc $i \" \" } { if(NR != 1) { printf (\"\\n%-10s %-6s %-6.2f%s %-30s\", $1, $2, $3/h, hr[h], substr(proc, 0, 30)) } else { printf (\"\\n%-10s %-6s %s %-30s\", $1, $2, \"SIZE    \", substr(proc, 0, 30)) }}}'")
+                   local o = p:read("*all")
+                   p:close()
+                   memwidget_t:set_text(string.format("RAM: %sMB / %sMB%s", args[2], args[3], o))
+                   widget.widget:set_value(args[1])
+                   return args[1]
+                 end, 6)
+local membg = wibox.container.background(theme.membar, black2, gears.shape.rectangle)
+local memwidget = wibox.container.margin(membg, 7, 7, 5, 5)
+
 --- }}}
 
 -- {{{ Wibar
@@ -238,6 +364,11 @@ function theme.at_screen_connect(s)
     { -- Right widgets
       layout = wibox.layout.fixed.horizontal,
       -- mykeyboardlayout,
+      baticon,
+      bat,
+      volumewidget,
+      memwidget,
+      cpuwidget,
       wibox.widget.systray(),
       mytextclock,
       s.mylayoutbox,

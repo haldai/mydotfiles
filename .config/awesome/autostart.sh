@@ -12,7 +12,6 @@ run undervolt.sh
 run compton --config ~/.config/compton.conf
 run ibus-daemon --xim -d
 run nm-applet
-run volumeicon
 run caffeine
 run udiskie -ans
 run blueman-applet

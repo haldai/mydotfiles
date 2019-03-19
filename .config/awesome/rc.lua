@@ -288,9 +288,9 @@ globalkeys = gears.table.join(
     {description = "select previous", group = "layout"}),
 
    -- ALSA volume control
-  awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer set Master 2%+", false) end),
-  awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer set Master 2%-", false) end),
-  awful.key({ }, "XF86AudioMute", function () awful.util.spawn("amixer set Master toggle", false) end),
+  awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("pactl set-sink-volume 0 +5%", false) end),
+  awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("pactl set-sink-volume 0 -5%", false) end),
+  awful.key({ }, "XF86AudioMute", function () awful.util.spawn("pactl set-sink-mute 0 toggle", false) end),
 
   -- Brightness
   awful.key({ }, "XF86MonBrightnessUp", function () os.execute("xbacklight -inc 10") end),
