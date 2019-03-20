@@ -187,12 +187,6 @@ theme.titlebar_maximized_button_focus_active  = themes_path .. "zenburn/titlebar
 theme.titlebar_maximized_button_normal_active = themes_path .. "zenburn/titlebar/maximized_normal_active.png"
 theme.titlebar_maximized_button_focus_inactive  = themes_path .. "zenburn/titlebar/maximized_focus_inactive.png"
 theme.titlebar_maximized_button_normal_inactive = themes_path .. "zenburn/titlebar/maximized_normal_inactive.png"
-
-theme.widget_ac = themes_path .. "zenburn/myicon/ac.png"
-theme.widget_battery = themes_path .. "zenburn/myicon/battery.png"
-theme.widget_battery_mid = themes_path .. "zenburn/myicon/battery_mid.png"
-theme.widget_battery_low = themes_path .. "zenburn/myicon/battery_low.png"
-theme.widget_battery_empty = themes_path .. "zenburn/myicon/battery_empty.png"
 -- }}}
 -- }}}
 
@@ -207,24 +201,38 @@ mytextclock.font = theme.font
 
 -- {{{ CPU load
 theme.cpugraph = wibox.widget {
-  forced_width = 40,
+  forced_width = 32,
   paddings = 1,
   border_width = 1,
   border_color = white2,
   color = white1,
-  background_color = black2,
+  background_color = black1,
   widget = wibox.widget.graph
 }
-vicious.register(theme.cpugraph, vicious.widgets.cpu, "$1")
+cpuwidget_t = awful.tooltip({ objects = { theme.cpugraph },})
+-- vicious.register(theme.cpugraph, vicious.widgets.cpu, "$1", 5)
+vicious.register(theme.cpugraph, vicious.widgets.cpu,
+                 function (widget, args)
+                   cpuwidget_t:set_text(string.format("CPU: %s%%\nCPUs: %s%%, %s%%, %s%%, %s%%, %s%%, %s%%, %s%%, %s%%", args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9]))
+                   return args[1]
+                 end, 2)
 local cpubg = wibox.container.background(theme.cpugraph, black2, gears.shape.rectangle)
 local cpuwidget = wibox.container.margin(cpubg, 7, 7, 5, 5)
 --- }}}
 
---- {{{ Volume bar
-theme.volume = lain.widget.alsabar {
-  ticks = true, width = 67,
+--- {{{ Volume bar, add borders to lain.widget.alsabar
+local myalsabar = require("myalsabar")
+theme.volume = myalsabar {
+  ticks = false,
+  width = 64,
+  height = 16,
+  paddings = 1,
+  border_width = 1,
+  border_color = white2,
+  timeout = 5, -- time interval
   colors = {
-    background = black0,
+    color = white1,
+    background = black1,
     mute = red1,
     unmute = white1
   },
@@ -232,13 +240,6 @@ theme.volume = lain.widget.alsabar {
 }
 theme.volume.bar:buttons(
   my_table.join (
-    awful.button({}, 1, function()
-        awful.spawn(string.format("%s -e alsamixer", terminal))
-    end),
-    awful.button({}, 2, function()
-        os.execute(string.format("%s set %s 100%%", theme.volume.cmd, theme.volume.channel))
-        theme.volume.update()
-    end),
     awful.button({}, 3, function()
         os.execute(string.format("%s set %s toggle", theme.volume.cmd, theme.volume.togglechannel or theme.volume.channel))
         theme.volume.update()
@@ -253,67 +254,161 @@ theme.volume.bar:buttons(
     end)
 ))
 local volumebg = wibox.container.background(theme.volume.bar, black2, gears.shape.rectangle)
-local volumewidget = wibox.container.margin(volumebg, 7, 7, 9, 9)
+local volumewidget = wibox.container.margin(volumebg, 7, 7, 7, 7)
 --- }}}
---- {{{ Battery
-local baticon = wibox.widget.imagebox(theme.widget_battery)
-local bat = lain.widget.bat({
-    settings = function()
-      if bat_now.status and bat_now.status ~= "N/A" then
-        if bat_now.ac_status == 1 then
-          baticon:set_image(theme.widget_ac)
-        elseif not bat_now.perc and tonumber(bat_now.perc) <= 15 then
-          baticon:set_image(theme.widget_battery_empty)
-        elseif not bat_now.perc and tonumber(bat_now.perc) <= 50 then
-          baticon:set_image(theme.widget_battery_low)
-        elseif not bat_now.perc and tonumber(bat_now.perc) <= 85 then
-          baticon:set_image(theme.widget_battery_mid)
-        else
-          baticon:set_image(theme.widget_battery)
-        end
-        widget:set_markup(markup.font(theme.font, " " .. bat_now.perc .. "% "))
-      else
-        baticon:set_image(theme.widget_ac)
-        widget:set_markup(markup.font(theme.font, " AC "))
-      end
-    end
-})
---- }}}
+
+--- {{{ RAM
 theme.membar = wibox.widget {
   {
     max_value = 100,
-    forced_height = 20,
-    forced_width = 40,
+    color = white1,
+    background_color = black1,
     paddings = 1,
     border_width = 1,
     border_color = white2,
-    color = white1,
-    background_color = black2,
+    ticks = false,
     widget = wibox.widget.progressbar,
   },
-  layout = wibox.layout.rotate
+  forced_height = 5,
+  forced_width = 10,
+  direction = 'east',
+  layout = wibox.container.rotate,
 }
-
--- RAM usage tooltip
 memwidget_t = awful.tooltip({ objects = { theme.membar },})
-
 vicious.cache(vicious.widgets.mem)
 vicious.register(theme.membar, vicious.widgets.mem,
                  function (widget, args)
-                   local p = io.popen("ps -eo user,pid,rss,args --sort=-rss | head -11 | awk '{hr[1024*1024]=\"GB\"; hr[1024]=\"MB\"; h=0; for (x=1024*1024*1024; x>=1024; x/=1024) { if ($3>=x) { h=x; break } } { proc=\"\"; for(i = 4; i <= NF; i++) proc = proc $i \" \" } { if(NR != 1) { printf (\"\\n%-10s %-6s %-6.2f%s %-30s\", $1, $2, $3/h, hr[h], substr(proc, 0, 30)) } else { printf (\"\\n%-10s %-6s %s %-30s\", $1, $2, \"SIZE    \", substr(proc, 0, 30)) }}}'")
-                   local o = p:read("*all")
-                   p:close()
-                   memwidget_t:set_text(string.format("RAM: %sMB / %sMB%s", args[2], args[3], o))
+                   memwidget_t:set_text(string.format("RAM: %sMiB / %sMiB", args[2], args[3]))
                    widget.widget:set_value(args[1])
                    return args[1]
-                 end, 6)
+                 end, 13)
 local membg = wibox.container.background(theme.membar, black2, gears.shape.rectangle)
-local memwidget = wibox.container.margin(membg, 7, 7, 5, 5)
+local memwidget = wibox.container.margin(membg, 5, 5, 5, 5)
+--- }}}
+
+-- {{{ Battery
+theme.batbar = wibox.widget {
+  {
+    max_value = 100,
+    -- color = white1,
+    background_color = black1,
+    paddings = 1,
+    border_width = 1,
+    border_color = white2,
+    ticks = false,
+    widget = wibox.widget.progressbar,
+  },
+  forced_height = 5,
+  forced_width = 10,
+  direction = 'east',
+  layout = wibox.container.rotate,
+}
+batwidget_t = awful.tooltip({ objects = { theme.batbar },})
+vicious.cache(vicious.widgets.bat)
+vicious.register(theme.batbar, vicious.widgets.bat,
+                 function (widget, args)
+                   widget.widget:set_value(args[2])
+                   if args[1] == "+" then
+                     widget.widget:set_color(green1)
+                     batwidget_t:set_text(string.format("Charging: %s%%, %s left", args[2], args[3]))
+                   elseif args[1] == "-" then
+                     local bat_val = tonumber(args[2])
+                     batwidget_t:set_text(string.format("Discharging: %s%%, %s left", args[2], args[3]))
+                     if bat_val >= 20 then
+                       widget.widget:set_color(white1)
+                     elseif bat_val < 20 and bat_val >= 10 then
+                       widget.widget:set_color(orange)
+                     else
+                       widget.widget:set_color(red1)
+                     end
+                   else
+                     widget.widget:set_color(white1)
+                     batwidget_t:set_text(string.format("Cable Plugged: %s%%", args[2]))
+                   end
+                 end, 61, "BAT0")
+local batbg = wibox.container.background(theme.batbar, black2, gears.shape.rectangle)
+local batwidget = wibox.container.margin(batbg, 5, 5, 5, 5)
+--- }}}
+
+--- {{{ Brightness
+theme.backlightbar = wibox.widget {
+  max_value     = 1,
+  forced_width = 64,
+  forced_height = 16,
+  border_width  = 1,
+  border_color = white2,
+  paddings = 1,
+  color = white1,
+  background_color = black1,
+  widget = wibox.widget.progressbar,
+}
+backlightwidget_t = awful.tooltip({ objects = { theme.backlightbar },})
+-- text widget (which also updates the progressbar)
+local backlight = awful.widget.watch("xbacklight -get", 31,
+                                     function(widget, stdout)
+                                       local perc = tonumber(stdout:match("(%d+).%d"))
+                                       widget:set_text("Brightness: "..perc.."%")
+                                       theme.backlightbar:set_value(perc/100)
+                                       backlightwidget_t:set_text(string.format("Brightness: %s%%", perc))
+                                     end
+)
+theme.backlightbar:buttons(
+  my_table.join (
+    awful.button({}, 1, function()
+        os.execute(string.format("xbacklight -set 100"))
+    end),
+    awful.button({}, 3, function()
+        os.execute(string.format("xbacklight -set 5"))
+    end)
+))
+local backlightbg = wibox.container.background(theme.backlightbar, black2, gears.shape.rectangle)
+local backlightwidget = wibox.container.margin(backlightbg, 7, 7, 8, 8)
+--- }}}
+
+-- {{{ Thermal
+theme.thermalbar = wibox.widget {
+  {
+    max_value = 100,
+    -- color = white1,
+    background_color = black1,
+    paddings = 1,
+    border_width = 1,
+    border_color = white2,
+    ticks = false,
+    widget = wibox.widget.progressbar,
+  },
+  forced_height = 5,
+  forced_width = 10,
+  direction = 'east',
+  layout = wibox.container.rotate,
+}
+thermalwidget_t = awful.tooltip({ objects = { theme.thermalbar },})
+vicious.cache(vicious.widgets.thermal)
+vicious.register(theme.thermalbar, vicious.widgets.thermal,
+                 function (widget, args)
+                   local temp = tonumber(args[1])
+                   thermalwidget_t:set_text(string.format("CPU Temp: %s ℃", args[1]))
+                   if temp >= 80 then
+                     widget.widget:set_color(red1)
+                   elseif temp < 80 and temp >= 70 then
+                     widget.widget:set_color(orange)
+                   elseif temp < 70 and temp >= 40 then
+                     widget.widget:set_color(white1)
+                   else
+                     widget.widget:set_color(blue1)
+                   end
+                   widget.widget:set_value(args[1])
+                 end, 11, "thermal_zone10")
+local thermalbg = wibox.container.background(theme.thermalbar, black2, gears.shape.rectangle)
+local thermalwidget = wibox.container.margin(thermalbg, 5, 5, 5, 5)
+--- }}}
+--- {{{ Network
+
+--- }}}
 
 --- }}}
 
 -- {{{ Wibar
--- Create a textclock widget
 local layoutlist = { lain.layout.centerwork, awful.layout.suit.tile, awful.layout.suit.tile,
                      awful.layout.suit.tile, awful.layout.suit.tile, awful.layout.suit.floating,
                      awful.layout.suit.tile, awful.layout.suit.tile, awful.layout.suit.tile }
@@ -364,10 +459,17 @@ function theme.at_screen_connect(s)
     { -- Right widgets
       layout = wibox.layout.fixed.horizontal,
       -- mykeyboardlayout,
-      baticon,
-      bat,
+      -- wibox.widget.textbox(""),
+      backlightwidget,
+      -- wibox.widget.textbox(""),
       volumewidget,
+      -- wibox.widget.textbox(""),
+      batwidget,
+      -- wibox.widget.textbox(""),
+      thermalwidget,
+      -- wibox.widget.textbox(""),
       memwidget,
+      -- wibox.widget.textbox(""),
       cpuwidget,
       wibox.widget.systray(),
       mytextclock,

@@ -123,6 +123,7 @@ export YAOURT_COLORS="nb=1:pkg=1:ver=1;32:lver=1;45:installed=1;42:grp=1;34:od=1
 
 # user environment
 SCRIPTS_PATH="/home/daiwz/.scripts/"
+CUDAPATH="/opt/cuda/"
 
 # most
 export PAGER="most"
@@ -131,11 +132,11 @@ export MOST_EDITOR="jed %s -g %d"
 # visual
 export VISUAL="most"
 
-PATH=$SCRIPTS_PATH:$HOME/.local/bin/:$PATH
+PATH=$SCRIPTS_PATH:$CUDAPATH/bin:$HOME/.local/bin/:$PATH
 
-LD_LIBRARY_PATH=/usr/local/lib/swipl/lib/x86_64-linux:$MATLAB_INCLUDE_PATH:$MATLAB_PATH:${HOME}/.local/include/:${HOME}/.local/lib:${HOME}/APPs/MATLAB/R2018a/extern/include/:$LD_LIBRARY_PATH
+LD_LIBRARY_PATH=/usr/local/lib/swipl/lib/x86_64-linux:$CUDAPATH/include/:${HOME}/.local/include/:${HOME}/.local/lib:${HOME}/APPs/MATLAB/R2018a/extern/include/:$LD_LIBRARY_PATH
 
-LD_RUN_PATH=$MATLAB_PATH:$LD_RUN_PATH
+LD_RUN_PATH=$CUD_PATH/lib64/:$LD_RUN_PATH
 
 PKG_CONFIG_PATH=$HOME/.local/lib/pkgconfig/:$PKG_CONFIG_PATH
 

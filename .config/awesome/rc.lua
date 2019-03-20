@@ -9,8 +9,7 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 local naughty = require("naughty")
 local lain = require("lain")
---local menubar = require("menubar")
-local freedesktop = require("freedesktop")
+local menubar = require("menubar")
 local scratch = require("scratch")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 require("awful.hotkeys_popup.keys")
@@ -51,6 +50,23 @@ local function tag_num(c)
   end
   local t = c and c.first_tag or nil
   return tag_idx[t]
+end
+-- Notify volume control
+local function notify_vol(n)
+  local status = io.popen("amixer get Master"):read("*all")
+  local vol = string.match(status, "(%d?%d?%d)%%")
+  local stat = string.match(status, "%[(o[nf]*)%]")
+  if n == 1 then -- up
+    naughty.notify({ text = "音量增加：" .. vol .. "%", timeout = 0.5 })
+  elseif n == -1 then -- down
+    naughty.notify({ text = "音量減少：" .. vol .. "%", timeout = 0.5 })
+  elseif n == 0 then -- toggle
+    if stat == "on" then
+      naughty.notify({ text = "音量：開", timeout = 0.5 })
+    else
+      naughty.notify({ text = "音量：關", timeout = 0.5 })
+    end
+  end
 end
 -- }}}
 
@@ -121,7 +137,7 @@ local altkey = "Mod1"
 local terminal = "st"
 local editor = os.getenv("EDITOR") or "emacsclient -c -a emacs"
 local editor_cmd = terminal .. " -e " .. editor
-local browser = "google-chrome-stable"
+local browser = "chromium"
 local filemanager = "pcmanfm"
 
 
@@ -184,18 +200,11 @@ local myexitmenu = {
   { "Shutdown", "poweroff", icon_path .. "actions/system-shutdown.png" }
 }
 
-awful.util.mymainmenu = freedesktop.menu.build({
-    icon_size = beautiful.menu_height or 16,
-    before = {
-      { "Awesome", myawesomemenu, beautiful.awesome_icon },
-      -- other triads can be put here
-    },
-    after = {
-      { "Open terminal", terminal },
-      -- other triads can be put here
-      { "Exit", myexitmenu, icon_path .. "actions/system-shutdown.png" },
-    }
+awful.util.mymainmenu = awful.menu({
+    items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
+      { "Exit", myexitmenu } }
 })
+
 -- hide menu when mouse leaves it
 --awful.util.mymainmenu.wibox:connect_signal("mouse::leave", function() awful.util.mymainmenu:hide() end)
 
@@ -288,9 +297,9 @@ globalkeys = gears.table.join(
     {description = "select previous", group = "layout"}),
 
    -- ALSA volume control
-  awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("pactl set-sink-volume 0 +5%", false) end),
-  awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("pactl set-sink-volume 0 -5%", false) end),
-  awful.key({ }, "XF86AudioMute", function () awful.util.spawn("pactl set-sink-mute 0 toggle", false) end),
+  awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer sset Master 1%+", false) notify_vol(1) end),
+  awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer sset Master 1%-", false) notify_vol(-1) end),
+  awful.key({ }, "XF86AudioMute", function () awful.util.spawn("amixer sset Master toggle", false) notify_vol(0) end),
 
   -- Brightness
   awful.key({ }, "XF86MonBrightnessUp", function () os.execute("xbacklight -inc 10") end),
@@ -324,9 +333,9 @@ globalkeys = gears.table.join(
   -- Applications
   awful.key({ modkey }, "F2", function () awful.spawn("emacsclient -c -a emacs") end,
     {description = "launch Emacs", group = "launcher"}),
-  awful.key({ modkey }, "F3", function () awful.spawn("google-chrome-stable") end,
+  awful.key({ modkey }, "F3", function () awful.spawn("chromium") end,
     {description = "launch chrome", group = "launcher"}),
-  awful.key({ modkey, "Shift" }, "F3", function () awful.spawn("google-chrome-stable --disable-web-security --user-data-dir") end,
+  awful.key({ modkey, "Shift" }, "F3", function () awful.spawn("chromium --disable-web-security --user-data-dir") end,
     {description = "launch Chrome with user data dir", group = "launcher"}),
   awful.key({ modkey }, "F4", function () awful.spawn("thunderbird") end,
     {description = "launch thunderbird", group = "launcher"}),
@@ -342,6 +351,10 @@ globalkeys = gears.table.join(
     {description = "print full screen", group = "launcher"}),
   awful.key({ modkey }, "Print", function () awful.spawn("deepin-screenshot") end,
     {description = "launch deepin-screenshot", group = "launcher"}),
+  awful.key({ modkey }, "c", function () awful.util.spawn_with_shell("~/.scripts/myclip.sh") end,
+    {description = "show clipboard", group = "launcher"}),
+  awful.key({ modkey, "Ctrl" }, "c", function () awful.spawn('greenclip clear') end,
+    {description = "clear clipboard", group = "launcher"}),
 
   -- Custom scripts
   awful.key({ modkey }, "Escape", function ()
@@ -514,7 +527,7 @@ awful.rules.rules = {
   --   properties = { screen = 1, tag = "2" } },
   { rule = {class = "Emacs"},
     properties = { tag = awful.util.tagnames[2] } },
-  { rule = {class = "Google-chrome"},
+  { rule = {class = "Chromium"},
     properties = { tag = awful.util.tagnames[3], maximized = true } },
   { rule = {class = "Thunderbird"},
     properties = { tag = awful.util.tagnames[4] } },
