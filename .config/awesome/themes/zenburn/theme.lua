@@ -88,7 +88,7 @@ theme.tooltip_fg = white1
 theme.tooltip_font = theme.font
 theme.tooltip_border_width = 2
 theme.tooltip_opacity = 90
--- theme.tooltip_shape = nil
+theme.tooltip_shape = nil
 theme.tooltip_align = bottom_right
 -- }}}
 
@@ -213,7 +213,7 @@ cpuwidget_t = awful.tooltip({ objects = { theme.cpugraph },})
 -- vicious.register(theme.cpugraph, vicious.widgets.cpu, "$1", 5)
 vicious.register(theme.cpugraph, vicious.widgets.cpu,
                  function (widget, args)
-                   cpuwidget_t:set_text(string.format("CPU: %s%%\nCPUs: %s%%, %s%%, %s%%, %s%%, %s%%, %s%%, %s%%, %s%%", args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9]))
+                   cpuwidget_t:set_text(string.format("CPU使用率：%s%%\n核心使用率：%s%%, %s%%, %s%%, %s%%, %s%%, %s%%, %s%%, %s%%", args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9]))
                    return args[1]
                  end, 2)
 local cpubg = wibox.container.background(theme.cpugraph, black2, gears.shape.rectangle)
@@ -278,7 +278,7 @@ memwidget_t = awful.tooltip({ objects = { theme.membar },})
 vicious.cache(vicious.widgets.mem)
 vicious.register(theme.membar, vicious.widgets.mem,
                  function (widget, args)
-                   memwidget_t:set_text(string.format("RAM: %sMiB / %sMiB", args[2], args[3]))
+                   memwidget_t:set_text(string.format("內存消耗：%sMiB / %sMiB", args[2], args[3]))
                    widget.widget:set_value(args[1])
                    return args[1]
                  end, 13)
@@ -310,10 +310,10 @@ vicious.register(theme.batbar, vicious.widgets.bat,
                    widget.widget:set_value(args[2])
                    if args[1] == "+" then
                      widget.widget:set_color(green1)
-                     batwidget_t:set_text(string.format("Charging: %s%%, %s left", args[2], args[3]))
+                     batwidget_t:set_text(string.format("充電：%s%%，剩餘 %s ", args[2], args[3]))
                    elseif args[1] == "-" then
                      local bat_val = tonumber(args[2])
-                     batwidget_t:set_text(string.format("Discharging: %s%%, %s left", args[2], args[3]))
+                     batwidget_t:set_text(string.format("放電： %s%%，剩餘 %s", args[2], args[3]))
                      if bat_val >= 20 then
                        widget.widget:set_color(white1)
                      elseif bat_val < 20 and bat_val >= 10 then
@@ -323,7 +323,7 @@ vicious.register(theme.batbar, vicious.widgets.bat,
                      end
                    else
                      widget.widget:set_color(white1)
-                     batwidget_t:set_text(string.format("Cable Plugged: %s%%", args[2]))
+                     batwidget_t:set_text(string.format("電源已連接：%s%%", args[2]))
                    end
                  end, 61, "BAT0")
 local batbg = wibox.container.background(theme.batbar, black2, gears.shape.rectangle)
@@ -347,9 +347,9 @@ backlightwidget_t = awful.tooltip({ objects = { theme.backlightbar },})
 local backlight = awful.widget.watch("xbacklight -get", 31,
                                      function(widget, stdout)
                                        local perc = tonumber(stdout:match("(%d+).%d"))
-                                       widget:set_text("Brightness: "..perc.."%")
+                                       widget:set_text("亮度："..perc.."%")
                                        theme.backlightbar:set_value(perc/100)
-                                       backlightwidget_t:set_text(string.format("Brightness: %s%%", perc))
+                                       backlightwidget_t:set_text(string.format("亮度：%s%%", perc))
                                      end
 )
 theme.backlightbar:buttons(
@@ -387,7 +387,7 @@ vicious.cache(vicious.widgets.thermal)
 vicious.register(theme.thermalbar, vicious.widgets.thermal,
                  function (widget, args)
                    local temp = tonumber(args[1])
-                   thermalwidget_t:set_text(string.format("CPU Temp: %s ℃", args[1]))
+                   thermalwidget_t:set_text(string.format("核心溫度：%s ℃", args[1]))
                    if temp >= 80 then
                      widget.widget:set_color(red1)
                    elseif temp < 80 and temp >= 70 then
@@ -402,8 +402,14 @@ vicious.register(theme.thermalbar, vicious.widgets.thermal,
 local thermalbg = wibox.container.background(theme.thermalbar, black2, gears.shape.rectangle)
 local thermalwidget = wibox.container.margin(thermalbg, 5, 5, 5, 5)
 --- }}}
---- {{{ Network
-
+--- {{{ Calendar
+-- load the widget code
+local calendar = require("calendar")
+-- attach it as popup to your text clock widget:
+calendar({
+    today_color = red1,
+    html = '<span font_desc="SauceCodePro Nerd Font Mono">\n%s</span>'
+}):attach(mytextclock)
 --- }}}
 
 --- }}}

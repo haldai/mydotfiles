@@ -16,3 +16,6 @@
 [submodule "suckless/st"]
 	path = suckless/st
 	url = https://github.com/LukeSmithxyz/st.git
+[submodule ".config/awesome/calendar"]
+	path = .config/awesome/calendar
+	url = https://github.com/deficient/calendar.git
