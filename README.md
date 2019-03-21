@@ -53,5 +53,5 @@ For network traffic monitor
 
 ## Screenshot ##
 
-![Screenshot](./screenshot.png "screenshot")
+![Screenshot](./screenshot.jpg "screenshot")
 
