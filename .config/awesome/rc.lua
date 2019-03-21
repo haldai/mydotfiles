@@ -555,7 +555,7 @@ awful.rules.rules = {
   --   properties = { screen = 1, tag = "2" } },
   { rule = {class = "Emacs"},
     properties = { tag = awful.util.tagnames[2] } },
-  { rule = {class = "Chromium"},
+  { rule_any = {class = {"Chromium", "qutebrowser" } },
     properties = { tag = awful.util.tagnames[3], maximized = true } },
   { rule = {class = "Thunderbird"},
     properties = { tag = awful.util.tagnames[4] } },
