@@ -40,7 +40,7 @@ ZENITY_OPTIONS=(${ZENITY_OPTIONS:---column= --hide-header})
 #######################################################################
 
 # Whether to ask for user's confirmation
-enable_confirmation=${ENABLE_CONFIRMATIONS:-false}
+enable_confirmation=${ENABLE_CONFIRMATIONS:-true}
 
 # Preferred launcher if both are available
 preferred_launcher="${LAUNCHER:-rofi}"
@@ -103,8 +103,8 @@ typeset -A menu
 # Menu with keys/commands
 menu=(
     ["	1:Cancel"]=""
-    ["	2:Lock"]="i3lock-fancy-dualmonitor -f 方正宋刻本秀楷"
-    ["	3:Logout"]="kill -9 -1"
+    ["	2:Lock"]="slock"
+    ["	3:Exit"]="kill -9 -1"
     ["	4:Reboot"]="systemctl reboot"
     ["	5:Shutdown"]="systemctl poweroff"
     ["	6:Suspend"]="systemctl suspend"

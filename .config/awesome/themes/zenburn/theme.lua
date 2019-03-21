@@ -134,6 +134,10 @@ theme.taglist_squares_unsel = themes_path .. "zenburn/taglist/squarez.png"
 -- {{{ Misc
 theme.awesome_icon           = themes_path .. "zenburn/awesome-icon.png"
 theme.menu_submenu_icon      = themes_path .. "default/submenu.png"
+theme.tasklist_font = "方正宋刻本秀楷 10"
+theme.tasklist_font_focus = "方正宋刻本秀楷 Bold 10"
+theme.tasklist_bg_focus = orange
+theme.tasklist_fg_focus = white1
 -- }}}
 
 -- {{{ Layout
@@ -196,8 +200,9 @@ local markup     = lain.util.markup
 local separators = lain.util.separators
 
 --- {{{ Widgets
-local mytextclock = wibox.widget.textclock(" %H:%M ")
+local mytextclock = wibox.widget.textclock(" %a/%b/%d %H:%M ")
 mytextclock.font = theme.font
+mytextclock.forced_width = 144
 
 -- {{{ CPU load
 theme.cpugraph = wibox.widget {
@@ -217,7 +222,7 @@ vicious.register(theme.cpugraph, vicious.widgets.cpu,
                    return args[1]
                  end, 2)
 local cpubg = wibox.container.background(theme.cpugraph, black2, gears.shape.rectangle)
-local cpuwidget = wibox.container.margin(cpubg, 7, 7, 5, 5)
+local cpuwidget = wibox.container.margin(cpubg, 5, 8, 5, 5)
 --- }}}
 
 --- {{{ Volume bar, add borders to lain.widget.alsabar
@@ -231,7 +236,6 @@ theme.volume = myalsabar {
   border_color = white2,
   timeout = 5, -- time interval
   colors = {
-    color = white1,
     background = black1,
     mute = red1,
     unmute = white1
@@ -254,7 +258,7 @@ theme.volume.bar:buttons(
     end)
 ))
 local volumebg = wibox.container.background(theme.volume.bar, black2, gears.shape.rectangle)
-local volumewidget = wibox.container.margin(volumebg, 7, 7, 7, 7)
+local volumewidget = wibox.container.margin(volumebg, 5, 8, 7, 7)
 --- }}}
 
 --- {{{ RAM
@@ -265,7 +269,7 @@ theme.membar = wibox.widget {
     background_color = black1,
     paddings = 1,
     border_width = 1,
-    border_color = white2,
+    border_color = white1,
     ticks = false,
     widget = wibox.widget.progressbar,
   },
@@ -283,7 +287,7 @@ vicious.register(theme.membar, vicious.widgets.mem,
                    return args[1]
                  end, 13)
 local membg = wibox.container.background(theme.membar, black2, gears.shape.rectangle)
-local memwidget = wibox.container.margin(membg, 5, 5, 5, 5)
+local memwidget = wibox.container.margin(membg, 5, 8, 5, 5)
 --- }}}
 
 -- {{{ Battery
@@ -294,7 +298,7 @@ theme.batbar = wibox.widget {
     background_color = black1,
     paddings = 1,
     border_width = 1,
-    border_color = white2,
+    border_color = white1,
     ticks = false,
     widget = wibox.widget.progressbar,
   },
@@ -327,7 +331,7 @@ vicious.register(theme.batbar, vicious.widgets.bat,
                    end
                  end, 61, "BAT0")
 local batbg = wibox.container.background(theme.batbar, black2, gears.shape.rectangle)
-local batwidget = wibox.container.margin(batbg, 5, 5, 5, 5)
+local batwidget = wibox.container.margin(batbg, 5, 8, 5, 5)
 --- }}}
 
 --- {{{ Brightness
@@ -362,7 +366,7 @@ theme.backlightbar:buttons(
     end)
 ))
 local backlightbg = wibox.container.background(theme.backlightbar, black2, gears.shape.rectangle)
-local backlightwidget = wibox.container.margin(backlightbg, 7, 7, 8, 8)
+local backlightwidget = wibox.container.margin(backlightbg, 5, 8, 8, 8)
 --- }}}
 
 -- {{{ Thermal
@@ -373,7 +377,7 @@ theme.thermalbar = wibox.widget {
     background_color = black1,
     paddings = 1,
     border_width = 1,
-    border_color = white2,
+    border_color = white1,
     ticks = false,
     widget = wibox.widget.progressbar,
   },
@@ -400,7 +404,7 @@ vicious.register(theme.thermalbar, vicious.widgets.thermal,
                    widget.widget:set_value(args[1])
                  end, 11, "thermal_zone10")
 local thermalbg = wibox.container.background(theme.thermalbar, black2, gears.shape.rectangle)
-local thermalwidget = wibox.container.margin(thermalbg, 5, 5, 5, 5)
+local thermalwidget = wibox.container.margin(thermalbg, 5, 8, 5, 5)
 --- }}}
 --- {{{ Calendar
 -- load the widget code
@@ -447,8 +451,52 @@ function theme.at_screen_connect(s)
   s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, awful.util.taglist_buttons)
 
   -- Create a tasklist widget
-  s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
-
+  s.mytasklist = awful.widget.tasklist{
+    screen = s,
+    filter = awful.widget.tasklist.filter.currenttags,
+    buttons = awful.util.tasklist_buttons,
+    style = {
+      spacing_widget = {
+        {
+          thickness = 1,
+          color = white1,
+        },
+        valign = 'center',
+        halign = 'center',
+        widget = wibox.container.place,
+      },
+      spacing = 1,
+      layout  = wibox.layout.fixed.horizontal
+    },
+    widget_template = {
+      {
+        wibox.widget.base.make_widget(),
+        forced_height = 3,
+        id = 'background_role',
+        widget = wibox.container.background,
+      },
+      {
+        {
+          {
+            id = 'icon_role',
+            widget = wibox.widget.imagebox,
+          },
+          margins = 5,
+          widget = wibox.container.margin
+        },
+        {
+          {
+            id = 'text_role',
+            widget = wibox.widget.textbox,
+          },
+          margins = 5,
+          widget = wibox.container.margin
+        },
+        layout = wibox.layout.align.horizontal,
+      },
+      layout = wibox.layout.align.vertical,
+    },
+  }
   -- Create the wibox
   s.mywibox = awful.wibar({ position = "top", height = 28, screen = s, bg = theme.bg_normal, fg = theme.fg_normal })
 
@@ -465,17 +513,17 @@ function theme.at_screen_connect(s)
     { -- Right widgets
       layout = wibox.layout.fixed.horizontal,
       -- mykeyboardlayout,
-      -- wibox.widget.textbox(""),
+      wibox.widget.textbox("<b>亮</b>"),
       backlightwidget,
-      -- wibox.widget.textbox(""),
+      wibox.widget.textbox("<b>聲</b>"),
       volumewidget,
-      -- wibox.widget.textbox(""),
+      wibox.widget.textbox("<b>電</b>"),
       batwidget,
-      -- wibox.widget.textbox(""),
+      wibox.widget.textbox("<b>溫</b>"),
       thermalwidget,
-      -- wibox.widget.textbox(""),
+      wibox.widget.textbox("<b>存</b>"),
       memwidget,
-      -- wibox.widget.textbox(""),
+      wibox.widget.textbox("<b>核</b>"),
       cpuwidget,
       wibox.widget.systray(),
       mytextclock,

@@ -88,11 +88,11 @@ local function factory(args)
                 alsabar.bar:set_value(alsabar._current_level / 100)
                 if alsabar._current_level == 0 or playback == "off" then
                     alsabar._playback = playback
-                    alsabar.tooltip:set_text("[Muted]")
+                    alsabar.tooltip:set_text("靜音")
                     alsabar.bar.color = alsabar.colors.mute
                 else
                     alsabar._playback = "on"
-                    alsabar.tooltip:set_text(string.format("%s: %s", alsabar.channel, vol))
+                    alsabar.tooltip:set_text(string.format("音量「%s」： %s%%", alsabar.channel, vol))
                     alsabar.bar.color = alsabar.colors.unmute
                 end
 
