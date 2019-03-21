@@ -1,3 +1,7 @@
+-------------------------------------------
+--        "Zenburn" awesome theme        --
+--        By Wang-Zhou Dai (haldai)      --
+-------------------------------------------
 -- {{{ Required libraries
 local awesome, client, mouse, screen, tag = awesome, client, mouse, screen, tag
 local ipairs, string, os, table, tostring, tonumber, type = ipairs, string, os, table, tostring, tonumber, type

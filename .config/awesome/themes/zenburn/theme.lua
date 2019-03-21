@@ -1,8 +1,8 @@
--------------------------------
---  "Zenburn" awesome theme  --
---    By Adrian C. (anrxc)   --
---     Modified by haldai    --
--------------------------------
+-------------------------------------------
+--        "Zenburn" awesome theme        --
+--        By Wang-Zhou Dai (haldai)      --
+-- Based on Adrian C. (anrxc)'s settings --
+-------------------------------------------
 local themes_path = require("gears.filesystem").get_themes_dir()
 local dpi = require("beautiful.xresources").apply_dpi
 local gears = require("gears")

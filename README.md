@@ -12,10 +12,10 @@ For [i3-wm](https://i3wm.org/):
 * rxvt-unicode
 * [urxvt-perls](urxvt-perls)
 
-For [awesomewm](https://awesomewm.org/): 
+For [awesomewm](https://awesomewm.org/)-zenburn:
 
 * awesome
-* [st](https://github.com/lukesmithxyz/st), or see my tweak in `suckless/st/`
+* [st](https://github.com/lukesmithxyz/st), or use my tweaks in `suckless/st.patches/` to use the zenburn theme and fix ime.
 
 Fonts:
 * nerd-fonts-source-code-pro
