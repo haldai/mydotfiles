@@ -72,6 +72,16 @@ local function notify_vol(n)
     end
   end
 end
+
+local function notify_bright(n)
+  local status = io.popen("xbacklight -get"):read("*all")
+  local bri = tonumber(status)
+  if n == 1 then -- up
+    naughty.notify({ text = "亮度增加：" .. bri .. "%", timeout = 0.5 })
+  elseif n == -1 then -- down
+    naughty.notify({ text = "亮度增加：" .. bri .. "%", timeout = 0.5 })
+  end
+end
 -- }}}
 
 -- Default modkey.
@@ -320,6 +330,8 @@ globalkeys = gears.table.join(
   -- Brightness
   awful.key({ }, "XF86MonBrightnessUp", function () os.execute("xbacklight -inc 10") end),
   awful.key({ }, "XF86MonBrightnessDown", function () os.execute("xbacklight -dec 10") end),
+  awful.key({ modkey }, "F12", function () os.execute("xbacklight -inc 10") notify_bright(1) end),
+  awful.key({ modkey }, "F11", function () os.execute("xbacklight -dec 10") notify_bright(-1) end),
 
   -- On the fly useless gaps change
   awful.key({ altkey, "Control" }, "+", function () lain.util.useless_gaps_resize(1) end,
