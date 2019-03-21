@@ -3,7 +3,7 @@ conky.config = {
 --  Generic Settings
 -------------------------------------
 background=true,
-update_interval=7207,
+update_interval=5,
 double_buffer=true,
 no_buffers=true,
 imlib_cache_size=10,
@@ -97,6 +97,32 @@ ${execi 1800 cp -f ~/.conky/Myconky/assets/icons/$(~/.conky/Myconky/parse_weathe
 ${execi 1800 cp -f ~/.conky/Myconky/assets/icons/$(~/.conky/Myconky/parse_weather 'first' '.weather[0].id' '2').png ~/.cache/weather-3.png}${image ~/.cache/weather-3.png -p 355,170 -s 64x64}${font}${voffset -24}\
 \
 \
-${voffset 190}${font 方正宋刻本秀楷:size=12}${color FFA300}HOME ${offset 5}$color${fs_used /home} / ${fs_size /home}${offset 100}${color FFA300}ROOT ${offset 5}$color${fs_used /} / ${fs_size /}
+${voffset 190}${font 方正宋刻本秀楷:size=12}${color FFA300}HOME ${offset 5}$color${fs_used /home} / ${fs_size /home}${offset 10}${color FFA300}ROOT ${offset 5}$color${fs_used /} / ${fs_size /}${offset 10}${color FFA300}RAM ${offset 5}$color${mem} / ${memmax}
 \
+${voffset 15}${font 方正宋刻本秀楷:size=12}${color2}CPU${color}${alignr 10}${execi 1800 uname -nr}${font}
+${cpugraph cpu0 50,450 -t 000000 FFFFFF}
+${cpugauge cpu1 50,100}${offset 15}${cpugauge cpu2 50,100}${offset 15}${cpugauge cpu3 50,100}${offset 15}${cpugauge cpu4 50,100}\
+${voffset 10}
+${cpugauge cpu5 50,100}${offset 15}${cpugauge cpu6 50,100}${offset 15}${cpugauge cpu7 50,100}${offset 15}${cpugauge cpu8 50,100}
+${font 方正宋刻本秀楷:size=10}${voffset -95}${color0}${goto 0}1 ${goto 115}2 ${goto 230}3 ${goto 0} ${goto 345}4 ${voffset 80}${goto 0}5 ${goto 115}6 ${goto 230}7 ${goto 345}8
+${voffset -98}${color0}${goto 45}${freq_g (1)}GHz ${goto 160}${freq_g (2)}GHz ${goto 275}${freq_g (3)}GHz ${goto 390}${freq_g (4)}GHz\
+${voffset 81}${goto 45}${freq_g (5)}GHz ${goto 160}${freq_g (6)}GHz ${goto 275}${freq_g (7)}GHz ${goto 390}${freq_g (8)}GHz${font}\
+\
+${font 方正宋刻本秀楷}${voffset 15}
+${color2}CPU ${color0}${alignr}${cpu cpu0}%
+${cpubar cpu0 10,}
+${top name 1} $alignr ${top cpu 1}%
+${top name 2} $alignr ${top cpu 2}%
+${top name 3} $alignr ${top cpu 3}%
+${top name 4} $alignr ${top cpu 4}%
+${top name 5} $alignr ${top cpu 5}%
+
+${color2}RAM ${color0}${alignr}${mem}
+${membar 10,}
+${top_mem name 1} $alignr ${top_mem mem_res 1}
+${top_mem name 2} $alignr ${top_mem mem_res 2}
+${top_mem name 3} $alignr ${top_mem mem_res 3}
+${top_mem name 4} $alignr ${top_mem mem_res 4}
+${top_mem name 5} $alignr ${top_mem mem_res 5}
+${font}
 ]];
