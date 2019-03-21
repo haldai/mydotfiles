@@ -7,7 +7,7 @@ update_interval=7207,
 double_buffer=true,
 no_buffers=true,
 imlib_cache_size=10,
-alignment='top_left',
+alignment='top_right',
 
 draw_shades=false,
 draw_outline=false,
@@ -20,7 +20,7 @@ show_graph_range=false,
 -------------------------------------
 --  Window Specifications
 -------------------------------------
-gap_x=50,
+gap_x=40,
 gap_y=50,
 minimum_height=800,
 minimum_width=450,

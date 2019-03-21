@@ -16,7 +16,7 @@ local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
 -- {{{ Main
 local theme = {}
-theme.wallpaper = "~/Pictures/DD.jpg"
+theme.wallpaper = os.getenv("HOME") .. "/.config/awesome/themes/zenburn/DD.jpg"
 -- }}}
 
 -- {{{ Styles
@@ -118,9 +118,12 @@ theme.mouse_finder_color = red1
 -- Variables set for theming the menu:
 -- menu_[bg|fg]_[normal|focus]
 -- menu_[border_color|border_width]
+theme.menu_submenu_icon = themes_path .. "default/submenu.png"
 theme.menu_height = dpi(28)
-theme.menu_width  = dpi(180)
+theme.menu_width  = dpi(98)
 theme.menu_border_color = white1
+theme.menu_border_width = 2
+theme.menu_font = "方正宋刻本秀楷 Bold 13"
 -- }}}
 
 -- {{{ Icons
@@ -128,12 +131,14 @@ theme.lain_icons = os.getenv("HOME") .. "/.config/awesome/lain/icons/layout/zenb
 -- {{{ Taglist
 theme.taglist_squares_sel   = themes_path .. "zenburn/taglist/squarefz.png"
 theme.taglist_squares_unsel = themes_path .. "zenburn/taglist/squarez.png"
+theme.taglist_font = "方正宋刻本秀楷 Bold 16"
+theme.taglist_bg_focus = black1
+theme.taglist_fg_focus = orange
 --theme.taglist_squares_resize = "false"
 -- }}}
 
 -- {{{ Misc
-theme.awesome_icon           = themes_path .. "zenburn/awesome-icon.png"
-theme.menu_submenu_icon      = themes_path .. "default/submenu.png"
+theme.awesome_icon = themes_path .. "zenburn/awesome-icon.png"
 theme.tasklist_font = "方正宋刻本秀楷 10"
 theme.tasklist_font_focus = "方正宋刻本秀楷 Bold 10"
 theme.tasklist_bg_focus = orange
@@ -194,15 +199,16 @@ theme.titlebar_maximized_button_normal_inactive = themes_path .. "zenburn/titleb
 -- }}}
 -- }}}
 
-awful.util.tagnames = { "", "", "", "", "", "", "", "", "" }
+-- awful.util.tagnames = { "", "", "", "", "", "", "", "", "" }
+awful.util.tagnames = { "壹", "貳", "叄", "肆", "伍", "陸", "柒", "捌", "玖" }
 
 local markup     = lain.util.markup
 local separators = lain.util.separators
 
 --- {{{ Widgets
 local mytextclock = wibox.widget.textclock(" %a/%b/%d %H:%M ")
-mytextclock.font = theme.font
-mytextclock.forced_width = 144
+mytextclock.font = "方正宋刻本秀楷 Bold 13"
+mytextclock.forced_width = 156
 
 -- {{{ CPU load
 theme.cpugraph = wibox.widget {
@@ -215,12 +221,11 @@ theme.cpugraph = wibox.widget {
   widget = wibox.widget.graph
 }
 cpuwidget_t = awful.tooltip({ objects = { theme.cpugraph },})
--- vicious.register(theme.cpugraph, vicious.widgets.cpu, "$1", 5)
 vicious.register(theme.cpugraph, vicious.widgets.cpu,
                  function (widget, args)
                    cpuwidget_t:set_text(string.format("CPU使用率：%s%%\n核心使用率：%s%%, %s%%, %s%%, %s%%, %s%%, %s%%, %s%%, %s%%", args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9]))
                    return args[1]
-                 end, 2)
+                 end, 5)
 local cpubg = wibox.container.background(theme.cpugraph, black2, gears.shape.rectangle)
 local cpuwidget = wibox.container.margin(cpubg, 5, 8, 5, 5)
 --- }}}
@@ -234,7 +239,7 @@ theme.volume = myalsabar {
   paddings = 1,
   border_width = 1,
   border_color = white2,
-  timeout = 5, -- time interval
+  timeout = 11, -- time interval
   colors = {
     background = black1,
     mute = red1,
@@ -402,7 +407,7 @@ vicious.register(theme.thermalbar, vicious.widgets.thermal,
                      widget.widget:set_color(blue1)
                    end
                    widget.widget:set_value(args[1])
-                 end, 11, "thermal_zone10")
+                 end, 7, "thermal_zone10")
 local thermalbg = wibox.container.background(theme.thermalbar, black2, gears.shape.rectangle)
 local thermalwidget = wibox.container.margin(thermalbg, 5, 8, 5, 5)
 --- }}}

@@ -70,6 +70,19 @@ local function notify_vol(n)
 end
 -- }}}
 
+-- Default modkey.
+-- Usually, Mod4 is the key with a logo between Control and Alt.
+-- If you do not like this or do not have such a key,
+-- I suggest you to remap Mod4 to another key using xmodmap or other tools.
+-- However, you can use another modifier like Mod1, but it may interact with others.
+local modkey = "Mod4"
+local altkey = "Mod1"
+local terminal = "st"
+local editor = "emacsclient -c -a emacs"
+local editor_cmd = terminal .. " -e " .. editor
+local browser = "chromium"
+local filemanager = "pcmanfm"
+
 -- {{{ taglist and tasklist buttons
 awful.util.taglist_buttons = my_table.join(
   awful.button({ }, 1, function(t) t:view_only() end),
@@ -127,22 +140,9 @@ lain.layout.cascade.tile.ncol          = 2
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(awful.util.getdir("config") .. "/themes/zenburn/theme.lua")
 
--- Default modkey.
--- Usually, Mod4 is the key with a logo between Control and Alt.
--- If you do not like this or do not have such a key,
--- I suggest you to remap Mod4 to another key using xmodmap or other tools.
--- However, you can use another modifier like Mod1, but it may interact with others.
-local modkey = "Mod4"
-local altkey = "Mod1"
-local terminal = "st"
-local editor = os.getenv("EDITOR") or "emacsclient -c -a emacs"
-local editor_cmd = terminal .. " -e " .. editor
-local browser = "chromium"
-local filemanager = "pcmanfm"
-
-
 -- Table of layouts to cover with awful.layout.inc, order matters.
-awful.util.tagnames = { "", "", "", "", "", "", "", "", "" }
+-- awful.util.tagnames = { "", "", "", "", "", "", "", "", "" }
+awful.util.tagnames = { "壹", "貳", "叄", "肆", "伍", "陸", "柒", "捌", "玖" }
 -- awful.util.tagnames = {"1", "2", "3", "4", "5", "6", "7", "8", "9"}
 awful.layout.layouts = {
     awful.layout.suit.tile,
@@ -185,24 +185,36 @@ local icon_path = "/usr/share/icons/Paper/24x24@2x/"
 
 -- {{{ Menu
 local myawesomemenu = {
-  { "hotkeys", function() return false, hotkeys_popup.show_help end },
-  { "manual", terminal .. " -e man awesome" },
-  { "edit config", string.format("%s -e %s %s", terminal, editor, awesome.conffile) },
-  { "restart", awesome.restart },
-  { "quit", function() awesome.quit() end }
+  { " 熱鍵", function() return false, hotkeys_popup.show_help end, icon_path .. "devices/keyboard.png" },
+  { " 設定", string.format("%s -e %s %s", terminal, editor, awesome.conffile), icon_path .. "categories/system-settings.png" },
+  { " 重載", awesome.restart, icon_path .. "actions/system-reboot.png" },
+  { " 退出", function() awesome.quit() end, icon_path .. "actions/system-log-out.png" }
 }
 
 local myexitmenu = {
-  { "Log out", function() awesome.quit() end, icon_path .. "actions/system-log-out.png" },
-  { "Suspend", "systemctl suspend", icon_path .. "actions/system-suspend.png" },
-  { "Hibernate", "systemctl hibernate", icon_path .. "actions/system-hibernate.png" },
-  { "Reboot", "systemctl reboot", icon_path .. "actions/system-reboot.png" },
-  { "Shutdown", "poweroff", icon_path .. "actions/system-shutdown.png" }
+  { " 登出", function() awesome.quit() end, icon_path .. "actions/system-log-out.png" },
+  { " 暫停", "systemctl suspend", icon_path .. "actions/system-suspend.png" },
+  { " 休眠", "systemctl hibernate", icon_path .. "actions/system-hibernate.png" },
+  { " 重啓", "systemctl reboot", icon_path .. "actions/system-reboot.png" },
+  { " 關機", "poweroff", icon_path .. "actions/system-shutdown.png" }
+}
+
+local myxrandrmenu = {
+  { " 複製", function () awful.util.spawn_with_shell("~/.scripts/presentation") end, icon_path .. "devices/system.png" },
+  { " 左擴展", function () awful.util.spawn_with_shell("~/.scripts/presentation-x -l") end, icon_path .. "actions/previous.png" },
+  { " 右擴展", function () awful.util.spawn_with_shell("~/.scripts/presentation-x -r") end, icon_path .. "actions/next.png" },
 }
 
 awful.util.mymainmenu = awful.menu({
-    items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-      { "Exit", myexitmenu } }
+    items = {
+      { " 終端", function () awful.spawn(terminal) end, icon_path .. "apps/utilities-terminal.png" },
+      { " 編輯", function () awful.spawn("emacsclient -c -a emacs") end, icon_path .. "apps/emacs.png" },
+      { " 衝浪", function () awful.spawn("chromium") end, icon_path .. "apps/chromium.png" },
+      { " 文件", function () awful.spawn("pcmanfm") end, icon_path .. "apps/file-manager.png" },
+      { " 監控", function () awful.spawn("st -e htop") end, icon_path .. "apps/utilities-system-monitor.png" },
+      { " 窗口", myawesomemenu, beautiful.awesome_icon },
+      { " 演示", myxrandrmenu, icon_path .. "devices/system.png" },
+      { " 退出", myexitmenu, icon_path .. "actions/system-shutdown.png" } }
 })
 
 -- hide menu when mouse leaves it
