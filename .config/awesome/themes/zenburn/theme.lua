@@ -207,7 +207,7 @@ local separators = lain.util.separators
 
 --- {{{ Widgets
 local mytextclock = wibox.widget.textclock(" %a/%b/%d %H:%M ")
-mytextclock.font = "方正宋刻本秀楷 Bold 13"
+mytextclock.font = "方正宋刻本秀楷 Bold 12"
 mytextclock.forced_width = 156
 
 -- {{{ CPU load
@@ -340,38 +340,40 @@ local batwidget = wibox.container.margin(batbg, 5, 8, 5, 5)
 --- }}}
 
 --- {{{ Brightness
-theme.backlightbar = wibox.widget {
-  max_value     = 1,
-  forced_width = 64,
-  forced_height = 16,
-  border_width  = 1,
-  border_color = white2,
+local mybrightnessbar = require("mybrightnessbar")
+theme.brightness = mybrightnessbar {
+  ticks = false,
+  width = 64,
+  height = 16,
   paddings = 1,
-  color = white1,
+  border_width = 1,
+  border_color = white2,
+  timeout = 31,
   background_color = black1,
-  widget = wibox.widget.progressbar,
+  color = white1,
+  notification_preset = { font = "方正宋刻本秀楷 10" }
 }
-backlightwidget_t = awful.tooltip({ objects = { theme.backlightbar },})
--- text widget (which also updates the progressbar)
-local backlight = awful.widget.watch("xbacklight -get", 31,
-                                     function(widget, stdout)
-                                       local perc = tonumber(stdout:match("(%d+).%d"))
-                                       widget:set_text("亮度："..perc.."%")
-                                       theme.backlightbar:set_value(perc/100)
-                                       backlightwidget_t:set_text(string.format("亮度：%s%%", perc))
-                                     end
-)
-theme.backlightbar:buttons(
+theme.brightness.bar:buttons(
   my_table.join (
     awful.button({}, 1, function()
         os.execute(string.format("xbacklight -set 100"))
+        theme.brightness.update()
     end),
     awful.button({}, 3, function()
         os.execute(string.format("xbacklight -set 5"))
+        theme.brightness.update()
+    end),
+    awful.button({}, 4, function()
+        os.execute(string.format("xbacklight -inc 1"))
+        theme.brightness.update()
+    end),
+    awful.button({}, 5, function()
+        os.execute(string.format("xbacklight -dec 1"))
+        theme.brightness.update()
     end)
 ))
-local backlightbg = wibox.container.background(theme.backlightbar, black2, gears.shape.rectangle)
-local backlightwidget = wibox.container.margin(backlightbg, 5, 8, 8, 8)
+local brightnessbg = wibox.container.background(theme.brightness.bar, black2, gears.shape.rectangle)
+local brightnesswidget = wibox.container.margin(brightnessbg, 5, 8, 7, 7)
 --- }}}
 
 -- {{{ Thermal
@@ -519,13 +521,13 @@ function theme.at_screen_connect(s)
       layout = wibox.layout.fixed.horizontal,
       -- mykeyboardlayout,
       wibox.widget.textbox("<b>亮</b>"),
-      backlightwidget,
+      brightnesswidget,
       wibox.widget.textbox("<b>聲</b>"),
       volumewidget,
-      wibox.widget.textbox("<b>電</b>"),
-      batwidget,
       wibox.widget.textbox("<b>溫</b>"),
       thermalwidget,
+      wibox.widget.textbox("<b>電</b>"),
+      batwidget,
       wibox.widget.textbox("<b>存</b>"),
       memwidget,
       wibox.widget.textbox("<b>核</b>"),
