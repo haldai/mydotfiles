@@ -17,6 +17,7 @@ For [awesomewm](https://awesomewm.org/)-zenburn:
 * awesome
 * [st](https://github.com/lukesmithxyz/st), or use my tweaks in `suckless/st.patches/` to use the zenburn theme and fix ime.
 * use `acpilight` instead of `xorg-xbacklight`
+* qutebrowser
 
 Fonts:
 * nerd-fonts-source-code-pro

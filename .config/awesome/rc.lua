@@ -226,6 +226,7 @@ awful.util.mymainmenu = awful.menu({
       { " 衝浪", function () awful.spawn("chromium") end, icon_path .. "apps/chromium.png" },
       { " 文件", function () awful.spawn("pcmanfm") end, icon_path .. "apps/file-manager.png" },
       { " 監控", function () awful.spawn("st -e htop") end, icon_path .. "apps/utilities-system-monitor.png" },
+      { " 聲音", function () awful.spawn("st -e alsamixer") end, icon_path .. "apps/sound.png" },
       { " 窗口", myawesomemenu, beautiful.awesome_icon },
       { " 演示", myxrandrmenu, icon_path .. "devices/system.png" },
       { " 退出", myexitmenu, icon_path .. "actions/system-shutdown.png" } }
@@ -363,6 +364,8 @@ globalkeys = gears.table.join(
     {description = "launch Emacs", group = "launcher"}),
   awful.key({ modkey }, "F3", function () awful.spawn("chromium") end,
     {description = "launch chrome", group = "launcher"}),
+  awful.key({ modkey, "Ctrl" }, "F3", function () awful.spawn("qutebrowser") end,
+    {description = "launch qutebrowser", group = "launcher"}),
   awful.key({ modkey, "Shift" }, "F3", function () awful.spawn("chromium --disable-web-security --user-data-dir") end,
     {description = "launch Chrome with user data dir", group = "launcher"}),
   awful.key({ modkey }, "F4", function () awful.spawn("thunderbird") end,
