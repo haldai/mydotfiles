@@ -19,10 +19,10 @@ run blueman-applet
 run libinput-gestures-setup start
 run ss-qt5
 run xautolock -time 10 -locker slock
-sleep 1; /home/daiwz/.conky/myconky-start.sh
+run /home/daiwz/.conky/myconky-start.sh
 
 # Settings
-xbacklight -set 30
-amixer set Master 20% on
+xbacklight -set 90
+amixer set Master 20% off
 amixer set Headphone 100% on
 amixer set Speaker 100% off

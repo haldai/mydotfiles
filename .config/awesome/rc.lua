@@ -155,9 +155,7 @@ lain.layout.cascade.tile.ncol          = 2
 beautiful.init(awful.util.getdir("config") .. "/themes/zenburn/theme.lua")
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
--- awful.util.tagnames = { "", "", "", "", "", "", "", "", "" }
 awful.util.tagnames = { "壹", "貳", "叄", "肆", "伍", "陸", "柒", "捌", "玖" }
--- awful.util.tagnames = {"1", "2", "3", "4", "5", "6", "7", "8", "9"}
 awful.layout.layouts = {
     awful.layout.suit.tile,
     -- awful.layout.suit.tile.left,

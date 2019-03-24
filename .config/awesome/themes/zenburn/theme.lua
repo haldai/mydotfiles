@@ -53,8 +53,6 @@ local white2 = "#FFFFEF"
 local orange = "#DFAF8F"
 
 theme.fg_normal  = white1
-theme.fg_focus   = orange
-theme.fg_urgent  = red1
 theme.bg_normal  = black2
 theme.bg_focus   = black1
 theme.bg_urgent  = black2
@@ -129,8 +127,6 @@ theme.menu_font = "方正宋刻本秀楷 Bold 13"
 -- {{{ Icons
 theme.lain_icons = os.getenv("HOME") .. "/.config/awesome/lain/icons/layout/zenburn/"
 -- {{{ Taglist
-theme.taglist_squares_sel   = themes_path .. "zenburn/taglist/squarefz.png"
-theme.taglist_squares_unsel = themes_path .. "zenburn/taglist/squarez.png"
 theme.taglist_font = "方正宋刻本秀楷 Bold 16"
 theme.taglist_bg_focus = black1
 theme.taglist_fg_focus = orange
@@ -199,7 +195,6 @@ theme.titlebar_maximized_button_normal_inactive = themes_path .. "zenburn/titleb
 -- }}}
 -- }}}
 
--- awful.util.tagnames = { "", "", "", "", "", "", "", "", "" }
 awful.util.tagnames = { "壹", "貳", "叄", "肆", "伍", "陸", "柒", "捌", "玖" }
 
 local markup     = lain.util.markup
@@ -455,10 +450,26 @@ function theme.at_screen_connect(s)
                           awful.button({ }, 4, function () awful.layout.inc( 1) end),
                           awful.button({ }, 5, function () awful.layout.inc(-1) end)))
   -- Create a taglist widget
-  s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, awful.util.taglist_buttons)
+  -- s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, awful.util.taglist_buttons)
+  s.mytaglist = awful.widget.taglist {
+    screen = s,
+    filter = awful.widget.taglist.filter.all,
+    buttons = awful.util.taglist_buttons,
+    style   = {
+      spacing = 3,
+      shape = gears.shape.octogon,
+      shape_border_width_focus = 1,
+      shape_border_color_focus = orange,
+      fg_occupied = orange,
+      bg_urgent = black1,
+      fg_urgent = red1,
+      bg_focus = black1,
+      fg_focus = orange,
+    },
+  }
 
   -- Create a tasklist widget
-  s.mytasklist = awful.widget.tasklist{
+  s.mytasklist = awful.widget.tasklist {
     screen = s,
     filter = awful.widget.tasklist.filter.currenttags,
     buttons = awful.util.tasklist_buttons,
@@ -496,7 +507,7 @@ function theme.at_screen_connect(s)
             id = 'text_role',
             widget = wibox.widget.textbox,
           },
-          margins = 5,
+          margins = 2,
           widget = wibox.container.margin
         },
         layout = wibox.layout.align.horizontal,
