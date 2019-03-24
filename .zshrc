@@ -62,6 +62,10 @@ DISABLE_AUTO_UPDATE="true"
 plugins=(
   git
   extract
+  colorize
+  emacs
+  sudo
+  thefuck
 )
 
 
@@ -101,9 +105,8 @@ alias np='nano -w PKGBUILD'
 alias more=less
 alias la='ls -a'
 alias ll='ls -l'
-alias e='emacsclient -c -a emacs'
 alias ek="emacsclient -e '(client-save-kill-emacs)'"
-alias et="emacsclient -nw"
+alias b='PAGER="less -FR" bat'
 
 # some aliases avoid make mistake
 alias mv='mv -i'
@@ -126,11 +129,10 @@ SCRIPTS_PATH="/home/daiwz/.scripts/"
 CUDAPATH="/opt/cuda/"
 
 # most
-export PAGER="most"
-export MOST_EDITOR="jed %s -g %d"
+export PAGER="less"
 
 # visual
-export VISUAL="most"
+export VISUAL="emacs -Q"
 
 PATH=$SCRIPTS_PATH:$CUDAPATH/bin:$HOME/.local/bin/:$PATH
 
@@ -153,6 +155,7 @@ alias jl='julia'
 alias sc='scheme'
 alias jlo='optirun julia'
 alias matlab='LANG=en_US.utf-8 matlab'
+alias f='fuck'
 
 # optimus
 PRIMUS_PREFIX="primusrun"
@@ -190,7 +193,7 @@ SPACESHIP_PROMPT_ORDER=(
     exec_time     # Execution time
     line_sep      # Line break
     battery       # Battery level and status
-    # vi_mode     # Vi-mode indicator (Disabled)
+    vi_mode     # Vi-mode indicator (Disabled)
     jobs          # Background jobs indicator
     exit_code     # Exit code section
     char          # Prompt character
@@ -207,5 +210,5 @@ SPACESHIP_HOST_PREFIX=@
 SPACESHIP_HOST_SUFFIX=
 SPACESHIP_DIR_PREFIX=:
 SPACESHIP_CHAR_SYMBOL=⊨\ 
-SPACESHIP_JULIA_SYMBOL=julia-
+SPACESHIP_JULIA_SYMBOL=ஃ 
 
