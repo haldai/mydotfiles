@@ -66,6 +66,7 @@ plugins=(
   emacs
   sudo
   thefuck
+  colored-man-pages
 )
 
 
@@ -132,7 +133,7 @@ CUDAPATH="/opt/cuda/"
 export PAGER="less"
 
 # visual
-export VISUAL="emacs -Q"
+export VISUAL="emacs -Q -nw"
 
 PATH=$SCRIPTS_PATH:$CUDAPATH/bin:$HOME/.local/bin/:$PATH
 
@@ -210,5 +211,5 @@ SPACESHIP_HOST_PREFIX=@
 SPACESHIP_HOST_SUFFIX=
 SPACESHIP_DIR_PREFIX=:
 SPACESHIP_CHAR_SYMBOL=⊨\ 
-SPACESHIP_JULIA_SYMBOL=ஃ 
+SPACESHIP_JULIA_SYMBOL=ஃ\ 
 
