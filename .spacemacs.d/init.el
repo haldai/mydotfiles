@@ -535,7 +535,14 @@ before packages are loaded."
   (setq org-latex-pdf-process '("xelatex -shell-escape %f"
                                 "xelatex -shell-escape %f"
                                 "xelatex -shell-escape %f"))
-   )
+  ;; c-c++ settings
+  ;; Bind clang-format-region to C-M-tab in all modes:
+  (global-set-key [C-M-tab] 'clang-format-region)
+  ;; Bind clang-format-buffer to tab on the c++-mode only:
+  (add-hook 'c++-mode-hook 'clang-format-bindings)
+  (defun clang-format-bindings ()
+    (define-key c++-mode-map [tab] 'clang-format-buffer))
+  )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
