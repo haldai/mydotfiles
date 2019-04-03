@@ -63,6 +63,7 @@ plugins=(
   git
   extract
   colorize
+  archlinux
   emacs
   sudo
   thefuck
@@ -99,7 +100,7 @@ plugins=(
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias cp="cp -i"                          # confirm before overwriting something
+alias cp='cp -i'                          # confirm before overwriting something
 alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
 alias np='nano -w PKGBUILD'
@@ -132,6 +133,7 @@ SWIPLPATH="/usr/local/lib/swipl"
 
 # most
 export PAGER="less"
+export TERM=xterm-256color
 
 # visual
 export VISUAL="emacs -Q -nw"
