@@ -126,8 +126,9 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 export YAOURT_COLORS="nb=1:pkg=1:ver=1;32:lver=1;45:installed=1;42:grp=1;34:od=1;41;5:votes=1;44:dsc=0:other=1;35"
 
 # user environment
-SCRIPTS_PATH="/home/daiwz/.scripts/"
-CUDAPATH="/opt/cuda/"
+SCRIPTS_PATH="/home/daiwz/.scripts"
+CUDAPATH="/opt/cuda"
+SWIPLPATH="/usr/local/lib/swipl"
 
 # most
 export PAGER="less"
@@ -137,11 +138,11 @@ export VISUAL="emacs -Q -nw"
 
 PATH=$SCRIPTS_PATH:$CUDAPATH/bin:$HOME/.local/bin/:$PATH
 
-LD_LIBRARY_PATH=/usr/local/lib/swipl/lib/x86_64-linux:$CUDAPATH/include/:${HOME}/.local/include/:${HOME}/.local/lib:${HOME}/APPs/MATLAB/R2018a/extern/include/:$LD_LIBRARY_PATH
+LD_LIBRARY_PATH=$SWIPLPATH/lib/x86_64-linux:$CUDAPATH/include/:${HOME}/.local/include/:${HOME}/.local/lib:$HOME/.local/lib64/:$LD_LIBRARY_PATH
 
 LD_RUN_PATH=$CUD_PATH/lib64/:$LD_RUN_PATH
 
-PKG_CONFIG_PATH=$HOME/.local/lib/pkgconfig/:$PKG_CONFIG_PATH
+PKG_CONFIG_PATH=$HOME/.local/lib/pkgconfig/:$HOME/.local/lib64/pkgconfig/:$PKG_CONFIG_PATH
 
 export PATH
 export LD_LIBRARY_PATH

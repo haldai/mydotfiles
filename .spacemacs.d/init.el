@@ -55,7 +55,8 @@ This function should only modify configuration layer settings."
                      ispell-program-name "aspell"
                      ispell-dictionary "american"
                      spell-checking-enable-by-default nil)
-     syntax-checking
+     (syntax-checking :variables
+                      syntax-checking-enable-by-default nil)
      ;; version-control
      (latex :variables
             latex-enable-auto-fill t
