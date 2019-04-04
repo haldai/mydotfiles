@@ -462,7 +462,7 @@ clientkeys = gears.table.join(
   awful.key({ modkey }, "m",
     function (c)
       local notify = naughty.notify({ title = "窗口位置調整模式",
-                                      text = "上/下/左/右：p/n/b/f\n退出：Esc/↵",
+                                      text = "上/下/左/右：p/n/b/f\n居中/設爲主窗口：c\n退出：Esc/↵",
                                       timeout = 0,
                                       position = "top_middle",
                                       fg = beautiful.fg_urgent,
@@ -485,6 +485,8 @@ clientkeys = gears.table.join(
               c:relative_move(-10, 0, 0, 0)
             elseif (key == "f" or key == "Right") and event == "press" then
               c:relative_move(10, 0, 0, 0)
+            elseif key == "c" and event == "press" then
+              awful.placement.centered(client.focus)
             end
           else
             if (key == "p" or key == "Up") and event == "press" then
@@ -495,6 +497,8 @@ clientkeys = gears.table.join(
               awful.client.swap.bydirection("left")
             elseif (key == "f" or key == "Right") and event == "press" then
               awful.client.swap.bydirection("right")
+            elseif key == "c" and event == "press" then
+              c:swap(awful.client.getmaster())
             end
           end
       end)
