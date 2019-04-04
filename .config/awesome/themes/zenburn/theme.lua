@@ -53,9 +53,10 @@ local white2 = "#FFFFEF"
 local orange = "#DFAF8F"
 
 theme.fg_normal  = white1
+theme.fg_urgent  = yellow1
 theme.bg_normal  = black2
 theme.bg_focus   = black1
-theme.bg_urgent  = black2
+theme.bg_urgent  = red1
 theme.bg_systray = theme.bg_normal
 -- }}}
 

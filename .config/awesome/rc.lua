@@ -73,6 +73,7 @@ local function notify_vol(n)
   end
 end
 
+-- Notify brightness
 local function notify_bright(n)
   local status = io.popen("xbacklight -get"):read("*all")
   local bri = tonumber(status)
@@ -82,6 +83,7 @@ local function notify_bright(n)
     naughty.notify({ text = "亮度增加：" .. bri .. "%", timeout = 0.5 })
   end
 end
+
 -- }}}
 
 -- Default modkey.
@@ -223,7 +225,7 @@ awful.util.mymainmenu = awful.menu({
       { " 編輯", function () awful.spawn("emacsclient -c -a emacs") end, icon_path .. "apps/emacs.png" },
       { " 衝浪", function () awful.spawn("chromium") end, icon_path .. "apps/chromium.png" },
       { " 文件", function () awful.spawn("pcmanfm") end, icon_path .. "apps/file-manager.png" },
-      { " 監控", function () awful.spawn("st -e htop") end, icon_path .. "apps/utilities-system-monitor.png" },
+      { " 監控", function () awful.spawn("st -e gotop -s") end, icon_path .. "apps/utilities-system-monitor.png" },
       { " 聲音", function () awful.spawn("st -e alsamixer") end, icon_path .. "apps/sound.png" },
       { " 窗口", myawesomemenu, beautiful.awesome_icon },
       { " 演示", myxrandrmenu, icon_path .. "devices/system.png" },
@@ -266,46 +268,56 @@ root.buttons(gears.table.join(
 -- }}}
 
 -- {{{ Key bindings
+prev_layout = nil -- store previous layout
+
 globalkeys = gears.table.join(
   --- Workspace Navigation
   awful.key({ modkey }, "s", hotkeys_popup.show_help,
     {description="show help", group="awesome"}),
-  awful.key({ modkey }, "Left", awful.tag.viewprev,
+  awful.key({ modkey }, ",", awful.tag.viewprev,
     {description = "view previous", group = "tag"}),
-  awful.key({ modkey }, "Right", awful.tag.viewnext,
+  awful.key({ modkey }, ".", awful.tag.viewnext,
     {description = "view next", group = "tag"}),
   awful.key({ modkey }, "k", awful.tag.history.restore,
     {description = "go back", group = "tag"}),
-  awful.key({ modkey }, "p", function () awful.client.focus.bydirection("up") end,
+  awful.key({ modkey }, "p",
+    function ()
+      awful.client.focus.bydirection("up")
+      client.focus:raise()
+    end,
     {description = "focus up", group = "client"}),
-  awful.key({ modkey }, "n", function () awful.client.focus.bydirection("down") end,
+  awful.key({ modkey }, "n",
+    function ()
+      awful.client.focus.bydirection("down")
+      client.focus:raise()
+    end,
     {description = "focus down", group = "client"}),
-  awful.key({ modkey }, "b", function () awful.client.focus.bydirection("left") end,
+  awful.key({ modkey }, "b",
+    function ()
+      awful.client.focus.bydirection("left")
+      client.focus:raise()
+    end,
     {description = "focus left", group = "client"}),
-  awful.key({ modkey }, "f", function () awful.client.focus.bydirection("right") end,
+  awful.key({ modkey }, "f",
+    function ()
+      awful.client.focus.bydirection("right")
+      client.focus:raise()
+    end,
     {description = "focus right", group = "client"}),
   awful.key({ modkey, "Ctrl" }, "p", function ()
       awful.screen.focus_bydirection("up", awful.screen.focused()) end,
-    {description = "focus screen up", group = "client"}),
+    {description = "focus screen up", group = "screen"}),
   awful.key({ modkey, "Ctrl" }, "n", function ()
       awful.screen.focus_bydirection("down", awful.screen.focused()) end,
-    {description = "focus screen down", group = "client"}),
+    {description = "focus screen down", group = "screen"}),
   awful.key({ modkey, "Ctrl" }, "b", function ()
       awful.screen.focus_bydirection("left", awful.screen.focused()) end,
-    {description = "focus screen left", group = "client"}),
+    {description = "focus screen left", group = "screen"}),
   awful.key({ modkey, "Ctrl" }, "f", function ()
       awful.screen.focus_bydirection("right", awful.screen.focused()) end,
-    {description = "focus screen right", group = "client"}),
+    {description = "focus screen right", group = "screen"}),
 
   -- Layout manipulation
-  awful.key({ modkey, "Shift" }, "p", function () awful.client.swap.bydirection("up") end,
-    {description = "swap with upward client", group = "client"}),
-  awful.key({ modkey, "Shift" }, "n", function () awful.client.swap.bydirection("down") end,
-    {description = "swap with downward client", group = "client"}),
-  awful.key({ modkey, "Shift" }, "b", function () awful.client.swap.bydirection("left") end,
-    {description = "swap with leftward client", group = "client"}),
-  awful.key({ modkey, "Shift" }, "f", function () awful.client.swap.bydirection("right") end,
-    {description = "swap with rightward client", group = "client"}),
   awful.key({ modkey }, "u", awful.client.urgent.jumpto,
     {description = "jump to urgent client", group = "client"}),
   awful.key({ modkey }, "Tab",
@@ -386,7 +398,7 @@ globalkeys = gears.table.join(
     {description = "clear clipboard", group = "launcher"}),
 
   -- Custom scripts
-  awful.key({ modkey }, "Escape", function ()
+  awful.key({ modkey }, "BackSpace", function ()
       awful.util.spawn_with_shell("~/.scripts/flash-win.sh") end,
     {description = "flash current screen", group = "launcher"}),
   awful.key({ modkey }, "F8", function ()
@@ -401,7 +413,94 @@ globalkeys = gears.table.join(
 )
 
 clientkeys = gears.table.join(
-  awful.key({ modkey, "Shift" }, "m", lain.util.magnify_client,
+  awful.key({ modkey }, "Escape",
+    function (c)
+      c.floating = not c.floating
+    end,
+    {description = "toggle floating", group = "layout"}),
+  awful.key({ modkey }, "r",
+    function (c)
+      local notify = naughty.notify({ title = "窗口大小調整模式",
+                                      text = "高度：p+/n-\n寬度：f+/b-\n退出：Esc/↵",
+                                      timeout = 0,
+                                      position = "top_middle",
+                                      fg = beautiful.fg_urgent,
+                                      bg = beautiful.bg_urgent,
+                                      border_width = beautiful.border_width,
+                                      border_color = beautiful.fg_urgent })
+      local grabber
+      grabber = awful.keygrabber.run(function(mod, key, event)
+          if key == "Escape" or key == "Return" then
+            awful.keygrabber.stop(grabber)
+            naughty.destroy(notify)
+            return
+          end
+          if c.floating then
+            if (key == "p" or key == "Up") and event == "press" then
+              c:relative_move(0, 0, 0, 10)
+            elseif (key == "n" or key == "Down") and event == "press" then
+              c:relative_move(0, 0, 0, -10)
+            elseif (key == "b" or key == "Left") and event == "press" then
+              c:relative_move(0, 0, -10, 0)
+            elseif (key == "f" or key == "Right") and event == "press" then
+              c:relative_move(0, 0, 10, 0)
+            end
+          else
+            if (key == "p" or key == "Up") and event == "press" then
+              awful.client.incwfact(0.01)
+            elseif (key == "n" or key == "Down") and event == "press" then
+              awful.client.incwfact(-0.01)
+            elseif (key == "b" or key == "Left") and event == "press" then
+              awful.tag.incmwfact(-0.01)
+            elseif (key == "f" or key == "Right") and event == "press" then
+              awful.tag.incmwfact(0.01)
+            end
+          end
+      end)
+    end,
+    {description = "Resize client", group = "client"}),
+  awful.key({ modkey }, "m",
+    function (c)
+      local notify = naughty.notify({ title = "窗口位置調整模式",
+                                      text = "上/下/左/右：p/n/b/f\n退出：Esc/↵",
+                                      timeout = 0,
+                                      position = "top_middle",
+                                      fg = beautiful.fg_urgent,
+                                      bg = beautiful.bg_urgent,
+                                      border_width = beautiful.border_width,
+                                      border_color = beautiful.fg_urgent })
+      local grabber
+      grabber = awful.keygrabber.run(function(mod, key, event)
+          if (key == "Escape" or key == "Return") and event == "press" then
+            awful.keygrabber.stop(grabber)
+            naughty.destroy(notify)
+            return
+          end
+          if c.floating then
+            if (key == "p" or key == "Up") and event == "press" then
+              c:relative_move(0, -10, 0, 0)
+            elseif (key == "n" or key == "Down") and event == "press" then
+              c:relative_move(0, 10, 0, 0)
+            elseif (key == "b" or key == "Left") and event == "press" then
+              c:relative_move(-10, 0, 0, 0)
+            elseif (key == "f" or key == "Right") and event == "press" then
+              c:relative_move(10, 0, 0, 0)
+            end
+          else
+            if (key == "p" or key == "Up") and event == "press" then
+              awful.client.swap.bydirection("up")
+            elseif (key == "n" or key == "Down") and event == "press" then
+              awful.client.swap.bydirection("down")
+            elseif (key == "b" or key == "Left") and event == "press" then
+              awful.client.swap.bydirection("left")
+            elseif (key == "f" or key == "Right") and event == "press" then
+              awful.client.swap.bydirection("right")
+            end
+          end
+      end)
+    end,
+    {description = "Move client", group = "client"}),
+  awful.key({ modkey, "Shift" }, "=", lain.util.magnify_client,
     {description = "magnify client", group = "client"}),
   awful.key({ modkey }, "j",
         function (c)
@@ -411,8 +510,6 @@ clientkeys = gears.table.join(
         {description = "toggle fullscreen", group = "client"}),
     awful.key({ modkey, "Shift" }, "q", function (c) c:kill() end,
       {description = "close", group = "client"}),
-    awful.key({ modkey, "Ctrl" }, "space",  awful.client.floating.toggle,
-      {description = "toggle floating", group = "client"}),
     awful.key({ modkey }, "o", function (c) c:move_to_screen() end,
       {description = "move to screen", group = "client"}),
     awful.key({ modkey }, "F1", function (c) c:swap(awful.client.getmaster()) end,
@@ -424,7 +521,7 @@ clientkeys = gears.table.join(
             c.minimized = true
         end ,
         {description = "minimize", group = "client"}),
-    awful.key({ modkey }, "m",
+    awful.key({ modkey }, "=",
       function (c)
         c.maximized = not c.maximized
         c:raise()
