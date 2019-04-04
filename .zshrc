@@ -67,6 +67,7 @@ plugins=(
   emacs
   sudo
   thefuck
+  dircycle
   colored-man-pages
 )
 

@@ -21,7 +21,7 @@ For [awesomewm](https://awesomewm.org/)-zenburn:
 
 Fonts:
 * nerd-fonts-source-code-pro
-* powerline-fonts-git
+* ttf-sarasa-gothic
 * ttf-font-awesome-4
 
 Misc:
