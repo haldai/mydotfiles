@@ -110,6 +110,10 @@ alias la='ls -a'
 alias ll='ls -l'
 alias ek="emacsclient -e '(client-save-kill-emacs)'"
 alias b='PAGER="less -FR" bat'
+alias as='amixer sset Speaker toggle'
+alias ah='amixer sset Headphone toggle'
+alias am='amixer sset Master toggle'
+alias ac='amixer sset Capture toggle'
 
 # some aliases avoid make mistake
 alias mv='mv -i'
