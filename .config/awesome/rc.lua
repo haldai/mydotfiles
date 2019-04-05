@@ -16,7 +16,7 @@ local lain = require("lain")
 local menubar = require("menubar")
 local scratch = require("scratch")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
-require("awful.hotkeys_popup.keys")
+-- require("awful.hotkeys_popup.keys")
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 -- }}}
 
@@ -272,7 +272,7 @@ prev_layout = nil -- store previous layout
 
 globalkeys = gears.table.join(
   --- Workspace Navigation
-  awful.key({ modkey }, "s", hotkeys_popup.show_help,
+  awful.key({ modkey }, "h", hotkeys_popup.show_help,
     {description="show help", group="awesome"}),
   awful.key({ modkey }, ",", awful.tag.viewprev,
     {description = "view previous", group = "tag"}),
@@ -283,25 +283,25 @@ globalkeys = gears.table.join(
   awful.key({ modkey }, "p",
     function ()
       awful.client.focus.bydirection("up")
-      client.focus:raise()
+      if client.focus then client.focus:raise()  end
     end,
     {description = "focus up", group = "client"}),
   awful.key({ modkey }, "n",
     function ()
       awful.client.focus.bydirection("down")
-      client.focus:raise()
+      if client.focus then client.focus:raise()  end
     end,
     {description = "focus down", group = "client"}),
   awful.key({ modkey }, "b",
     function ()
       awful.client.focus.bydirection("left")
-      client.focus:raise()
+      if client.focus then client.focus:raise()  end
     end,
     {description = "focus left", group = "client"}),
   awful.key({ modkey }, "f",
     function ()
       awful.client.focus.bydirection("right")
-      client.focus:raise()
+      if client.focus then client.focus:raise()  end
     end,
     {description = "focus right", group = "client"}),
   awful.key({ modkey, "Ctrl" }, "p", function ()
@@ -332,6 +332,10 @@ globalkeys = gears.table.join(
     {description = "select next", group = "layout"}),
   awful.key({ modkey, "Control" }, "l", function () awful.layout.inc(-1) end,
     {description = "select previous", group = "layout"}),
+  awful.key({ modkey }, "s", function () awful.screen.focus_relative(1) end,
+    {description = "select next", group = "screen"}),
+  awful.key({ modkey, "Control" }, "s", function () awful.screen.focus_relative(-1) end,
+    {description = "select previous", group = "screen"}),
 
    -- ALSA volume control
   awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer sset Master 1%+", false) notify_vol(1) end),
@@ -420,8 +424,8 @@ clientkeys = gears.table.join(
     {description = "toggle floating", group = "layout"}),
   awful.key({ modkey }, "r",
     function (c)
-      local notify = naughty.notify({ title = "窗口大小調整模式",
-                                      text = "高度：p+/n-\n寬度：f+/b-\n退出：Esc/↵",
+      local notify = naughty.notify({ title = "窗口大小調整模式",
+                                      text = "\tp+/n-\n\tf+/b-\n\tEsc/↵",
                                       timeout = 0,
                                       position = "top_middle",
                                       fg = beautiful.fg_urgent,
@@ -461,8 +465,8 @@ clientkeys = gears.table.join(
     {description = "Resize client", group = "client"}),
   awful.key({ modkey }, "m",
     function (c)
-      local notify = naughty.notify({ title = "窗口位置調整模式",
-                                      text = "上/下/左/右：p/n/b/f\n居中/設爲主窗口：c\n退出：Esc/↵",
+      local notify = naughty.notify({ title = "窗口位置調整模式",
+                                      text = "///\tp/n/b/f\n\t\tc\n\t\tEsc/↵",
                                       timeout = 0,
                                       position = "top_middle",
                                       fg = beautiful.fg_urgent,
