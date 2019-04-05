@@ -15,7 +15,7 @@ configuration {
     display-drun: "";
     // The display name of this browser
     display-window: "";
-    display-combi: "Go to: ";
+    display-combi: "請選擇：";
     show-icons: true;
 }
 
@@ -118,7 +118,7 @@ configuration {
     border: 0px 2px 2px 2px;
     background-color: #1c1c1ccc;
     dynamic: true;
-    lines: 20;
+    // lines: 20;
 }
 #element {
     padding: 3px;
