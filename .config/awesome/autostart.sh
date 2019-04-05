@@ -25,4 +25,4 @@ xbacklight -set 90
 amixer set Master 20% off
 amixer set Headphone 100% on
 amixer set Speaker 100% off
-amixer set Capture 100% cap
+amixer set Capture 100% nocap
