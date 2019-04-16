@@ -4,6 +4,8 @@
 -- Based on Adrian C. (anrxc)'s settings --
 -------------------------------------------
 local themes_path = require("gears.filesystem").get_themes_dir()
+local home_path = os.getenv("HOME")
+local script_path = home_path .. "/.scripts/"
 local dpi = require("beautiful.xresources").apply_dpi
 local gears = require("gears")
 local lain  = require("lain")
@@ -418,6 +420,35 @@ calendar({
     html = '<span font_desc="SauceCodePro Nerd Font Mono">\n%s</span>'
 }):attach(mytextclock)
 --- }}}
+--- {{{ Mail
+theme.emailnum = wibox.widget {
+  markup = "<b>未知</b>",
+  align  = 'center',
+  valign = 'center',
+  widget = wibox.widget.textbox
+}
+emailnum_t = awful.tooltip({ objects = { theme.emailnum },})
+awful.widget.watch(
+  "python " .. script_path .. "count_unread_emails.py", 300,
+  function(widget, stdout, stderr, exitreason, exitcode)
+    local unread_emails_num = tonumber(stdout) or 0
+    if (unread_emails_num > 0) then
+      theme.emailnum:set_markup_silently("<span color=\"" .. red1 .. "\"><b>" .. tostring(unread_emails_num) .. "</b></span>")
+      awful.spawn.easy_async_with_shell(
+        "python " .. script_path .. "read_unread_emails.py",
+        function(stdout, stderr, reason, exit_code)
+          emailnum_t:set_text(stdout)
+        end
+      )
+    elseif (unread_emails_num == 0) then
+      theme.emailnum:set_markup_silently("<span color=\"" .. blue1 .. "\"><b>無</b></span>")
+      emailnum_t:set_text("暫無新郵件")
+    end
+  end
+)
+local emailbg = wibox.container.background(theme.emailnum, black2, gears.shape.rectangle)
+local emailwidget = wibox.container.margin(emailbg, 5, 8, 5, 5)
+--- }}}
 
 --- }}}
 
@@ -532,6 +563,8 @@ function theme.at_screen_connect(s)
     { -- Right widgets
       layout = wibox.layout.fixed.horizontal,
       -- mykeyboardlayout,
+      wibox.widget.textbox("<b>郵</b>"),
+      emailwidget,
       wibox.widget.textbox("<b>亮</b>"),
       brightnesswidget,
       wibox.widget.textbox("<b>聲</b>"),
