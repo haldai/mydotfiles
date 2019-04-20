@@ -434,30 +434,32 @@ clientkeys = gears.table.join(
                                       border_color = beautiful.fg_urgent })
       local grabber
       grabber = awful.keygrabber.run(function(mod, key, event)
-          if key == "Escape" or key == "Return" then
-            awful.keygrabber.stop(grabber)
-            naughty.destroy(notify)
-            return
-          end
-          if c.floating then
-            if (key == "p" or key == "Up") and event == "press" then
-              c:relative_move(0, 0, 0, 10)
-            elseif (key == "n" or key == "Down") and event == "press" then
-              c:relative_move(0, 0, 0, -10)
-            elseif (key == "b" or key == "Left") and event == "press" then
-              c:relative_move(0, 0, -10, 0)
-            elseif (key == "f" or key == "Right") and event == "press" then
-              c:relative_move(0, 0, 10, 0)
+          if client.focus then
+            if key == "Escape" or key == "Return" then
+              awful.keygrabber.stop(grabber)
+              naughty.destroy(notify)
+              return
             end
-          else
-            if (key == "p" or key == "Up") and event == "press" then
-              awful.client.incwfact(0.01)
-            elseif (key == "n" or key == "Down") and event == "press" then
-              awful.client.incwfact(-0.01)
-            elseif (key == "b" or key == "Left") and event == "press" then
-              awful.tag.incmwfact(-0.01)
-            elseif (key == "f" or key == "Right") and event == "press" then
-              awful.tag.incmwfact(0.01)
+            if c.floating or awful.screen.focused().selected_tag.layout == awful.layout.suit.floating then
+              if (key == "p" or key == "Up") and event == "press" then
+                c:relative_move(0, 0, 0, 10)
+              elseif (key == "n" or key == "Down") and event == "press" then
+                c:relative_move(0, 0, 0, -10)
+              elseif (key == "b" or key == "Left") and event == "press" then
+                c:relative_move(0, 0, -10, 0)
+              elseif (key == "f" or key == "Right") and event == "press" then
+                c:relative_move(0, 0, 10, 0)
+              end
+            else
+              if (key == "p" or key == "Up") and event == "press" then
+                awful.client.incwfact(0.01)
+              elseif (key == "n" or key == "Down") and event == "press" then
+                awful.client.incwfact(-0.01)
+              elseif (key == "b" or key == "Left") and event == "press" then
+                awful.tag.incmwfact(-0.01)
+              elseif (key == "f" or key == "Right") and event == "press" then
+                awful.tag.incmwfact(0.01)
+              end
             end
           end
       end)
@@ -475,34 +477,36 @@ clientkeys = gears.table.join(
                                       border_color = beautiful.fg_urgent })
       local grabber
       grabber = awful.keygrabber.run(function(mod, key, event)
-          if (key == "Escape" or key == "Return") and event == "press" then
-            awful.keygrabber.stop(grabber)
-            naughty.destroy(notify)
-            return
-          end
-          if c.floating then
-            if (key == "p" or key == "Up") and event == "press" then
-              c:relative_move(0, -10, 0, 0)
-            elseif (key == "n" or key == "Down") and event == "press" then
-              c:relative_move(0, 10, 0, 0)
-            elseif (key == "b" or key == "Left") and event == "press" then
-              c:relative_move(-10, 0, 0, 0)
-            elseif (key == "f" or key == "Right") and event == "press" then
-              c:relative_move(10, 0, 0, 0)
-            elseif key == "c" and event == "press" then
-              awful.placement.centered(client.focus)
+          if client.focus then
+            if (key == "Escape" or key == "Return") and event == "press" then
+              awful.keygrabber.stop(grabber)
+              naughty.destroy(notify)
+              return
             end
-          else
-            if (key == "p" or key == "Up") and event == "press" then
-              awful.client.swap.bydirection("up")
-            elseif (key == "n" or key == "Down") and event == "press" then
-              awful.client.swap.bydirection("down")
-            elseif (key == "b" or key == "Left") and event == "press" then
-              awful.client.swap.bydirection("left")
-            elseif (key == "f" or key == "Right") and event == "press" then
-              awful.client.swap.bydirection("right")
-            elseif key == "c" and event == "press" then
-              c:swap(awful.client.getmaster())
+            if c.floating or awful.screen.focused().selected_tag.layout == awful.layout.suit.floating then
+              if (key == "p" or key == "Up") and event == "press" then
+                c:relative_move(0, -10, 0, 0)
+              elseif (key == "n" or key == "Down") and event == "press" then
+                c:relative_move(0, 10, 0, 0)
+              elseif (key == "b" or key == "Left") and event == "press" then
+                c:relative_move(-10, 0, 0, 0)
+              elseif (key == "f" or key == "Right") and event == "press" then
+                c:relative_move(10, 0, 0, 0)
+              elseif key == "c" and event == "press" then
+                awful.placement.centered(client.focus)
+              end
+            else
+              if (key == "p" or key == "Up") and event == "press" then
+                awful.client.swap.bydirection("up")
+              elseif (key == "n" or key == "Down") and event == "press" then
+                awful.client.swap.bydirection("down")
+              elseif (key == "b" or key == "Left") and event == "press" then
+                awful.client.swap.bydirection("left")
+              elseif (key == "f" or key == "Right") and event == "press" then
+                awful.client.swap.bydirection("right")
+              elseif key == "c" and event == "press" then
+                c:swap(awful.client.getmaster())
+              end
             end
           end
       end)
