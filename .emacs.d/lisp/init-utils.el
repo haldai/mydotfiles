@@ -141,5 +141,10 @@
   :ensure nil
   :hook (after-init . windmove-default-keybindings))
 
+(straight-use-package 'pinentry)
+;; EasyPG
+(setq epa-file-select-keys nil)
+(pinentry-start)
+
 (provide 'init-utils)
 ;;; init-utils.el ends here

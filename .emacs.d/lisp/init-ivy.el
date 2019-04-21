@@ -91,7 +91,8 @@
   ;; (setq ivy-format-function 'ivy-format-function-arrow)
   (setq ivy-initial-inputs-alist nil)
   (setq ivy-re-builders-alist
-        '((swiper . ivy--regex-plus)
+        '((read-file-name-internal . ivy--regex-fuzzy)
+          (swiper . ivy--regex-plus)
           (swiper-all . ivy--regex-plus)
           (swiper-isearch . ivy--regex-plus)
           (counsel-ag . ivy--regex-plus)

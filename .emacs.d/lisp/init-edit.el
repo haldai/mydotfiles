@@ -203,7 +203,8 @@
   :init
   (setq flyspell-issue-message-flag nil)
   (setq ispell-program-name "aspell")
-  (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_US" "--run-together")))
+  (setq ispell-list-command "--list")
+  (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_GB" " --dont-tex-check-comments" "--run-together")))
 
 ;; Hungry deletion
 (use-package hungry-delete

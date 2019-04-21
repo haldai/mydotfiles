@@ -35,15 +35,15 @@
   (setq dashboard-items '((recents  . 10)
                           (bookmarks . 5)
                           (projects . 5)))
-  
+
   (defun my-banner-path (&rest _)
     "Return the full path to banner."
     (expand-file-name "banner.txt" user-emacs-directory))
   (advice-add #'dashboard-get-banner-path :override #'my-banner-path)
-  
+
   (defvar dashboard-recover-layout-p nil
     "Wether recovers the layout.")
-  
+
   (defun open-dashboard ()
     "Open the *dashboard* buffer and jump to the first widget."
     (interactive)
@@ -55,19 +55,19 @@
                2
              1))
         (setq dashboard-recover-layout-p t))
-    
+
     (delete-other-windows)
-    
+
     ;; Refresh dashboard buffer
     (if (get-buffer dashboard-buffer-name)
         (kill-buffer dashboard-buffer-name))
     (dashboard-insert-startupify-lists)
     (switch-to-buffer dashboard-buffer-name)
-    
+
     ;; Jump to the first section
     (goto-char (point-min))
     (dashboard-goto-recent-files))
-  
+
   (defun restore-session ()
     "Restore last session."
     (interactive)
@@ -79,7 +79,7 @@
          (message "Error: Unable to restore last session -- %s" err)))
       (when (persp-get-buffer-or-null persp-special-last-buffer)
         (persp-switch-to-buffer persp-special-last-buffer))))
-  
+
   (defun quit-dashboard ()
     "Quit dashboard window."
     (interactive)
@@ -93,17 +93,17 @@
     "Go to recent files."
     (interactive)
     (funcall (local-key-binding "r")))
-  
+
   (defun dashboard-goto-projects ()
     "Go to projects."
     (interactive)
     (funcall (local-key-binding "p")))
-  
+
   (defun dashboard-goto-bookmarks ()
     "Go to bookmarks."
     (interactive)
     (funcall (local-key-binding "m")))
-  
+
   (defun dashboard-insert-buttons (_list-size)
     (insert "\n")
     (insert (make-string (max 0 (floor (/ (- dashboard-banner-length
@@ -149,12 +149,12 @@
                          'face 'font-lock-comment-face)
              (propertize "(h/? for help)"
                          'face 'font-lock-doc-face))))
-  
+
   (add-to-list 'dashboard-item-generators '(buttons . dashboard-insert-buttons))
   (add-to-list 'dashboard-items '(buttons))
-  
+
   (dashboard-insert-startupify-lists)
-  
+
   (defhydra dashboard-hydra (:color red :columns 3)
     "Help"
     ("<tab>" widget-forward "Next Widget")
