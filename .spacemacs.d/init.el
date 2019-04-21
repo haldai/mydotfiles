@@ -44,6 +44,12 @@ This function should only modify configuration layer settings."
      better-defaults
      emacs-lisp
      git
+     ;; emails
+     (mu4e :variables
+           mu4e-installation-path "/usr/share/emacs/site-lisp/"
+           mu4e-account-alist t
+           mu4e-enable-async-operations t
+           mu4e-use-maildirs-extension t)
      ;; markdown
      (org :variables
           org-enable-reveal-js-support t)
@@ -376,7 +382,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
-   dotspacemacs-folding-method 'evil
+   dotspacemacs-folding-method 'origami
 
    ;; If non-nil `smartparens-strict-mode' will be enabled in programming modes.
    ;; (default nil)
@@ -469,13 +475,17 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
   (server-start)
   ;; tuna sources
   (setq configuration-layer-elpa-archives
-        '(("melpa-tsinghua" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
-          ("org-tsinghua"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")
-          ("gnu-tsinghua"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
-          ("emacscn-gnu" . "https://elpa.emacs-china.org/gnu/")
-          ("emacscn-melpa" . "https://elpa.emacs-china.org/melpa/")
-          ("emacscn-marmalade" . "https://elpa.emacs-china.org/marmalade/")
-          ("emacscn-org" . "https://elpa.emacs-china.org/org/")))
+        '(("gnu" . "https://elpa.gnu.org/packages/")
+          ("melpa" . "https://melpa.org/packages/")
+          ("org" . "https://orgmode.org/elpa/")
+          ;;("melpa-tsinghua" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
+          ;;("org-tsinghua"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")
+          ;;("gnu-tsinghua"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+          ;;("emacscn-gnu" . "https://elpa.emacs-china.org/gnu/")
+          ;;("emacscn-melpa" . "https://elpa.emacs-china.org/melpa/")
+          ;;("emacscn-marmalade" . "https://elpa.emacs-china.org/marmalade/")
+          ;;("emacscn-org" . "https://elpa.emacs-china.org/org/")
+          ))
   ;; disable ctrl-z
   (global-unset-key (kbd "C-z"))
   ;; ivy markdown
@@ -543,6 +553,79 @@ before packages are loaded."
   (add-hook 'c++-mode-hook 'clang-format-bindings)
   (defun clang-format-bindings ()
     (define-key c++-mode-map [tab] 'clang-format-buffer))
+
+  ;; Email
+  ;; use mu4e for e-mail in emacs
+  (evil-set-initial-state 'mu4e-modes 'emacs)
+  (setq mu4e-maildir "~/Mail"
+        mu4e-get-mail-command "offlineimap"
+        mu4e-update-interval nil
+        mu4e-compose-signature-auto-include nil
+        mu4e-view-show-images t
+        mu4e-view-show-addresses t)
+
+  ;;; Mail directory shortcuts
+  (setq mu4e-maildir-shortcuts
+        '(("/work/INBOX" . ?w)
+          ("/personal/Inbox" . ?p)))
+
+;;; Bookmarks
+  (setq mu4e-bookmarks
+        `(("flag:unread AND NOT flag:trashed" "Unread messages" ?u)
+          ("date:today..now" "Today's messages" ?t)
+          (,(mapconcat 'identity
+                       (mapcar
+                        (lambda (maildir)
+                          (concat "maildir:" (car maildir)))
+                        mu4e-maildir-shortcuts) " OR ")
+           "All inboxes" ?i)))
+  ;; multiple accounts
+  (setq mu4e-contexts
+        `( ,(make-mu4e-context
+             :name "Work"
+             :enter-func (lambda () (mu4e-message "Switch to the Work context"))
+             :leave-func (lambda () (mu4e-message "Leaving Work context"))
+             ;; leave-fun not defined
+             :match-func (lambda (msg)
+                           (when msg
+                             (mu4e-message-contact-field-matches msg
+                                                                 :to "w.dai@imperial.ac.uk")))
+             :vars '( (user-mail-address . "w.dai@imperial.ac.uk")
+                      (user-full-name . "Wang-Zhou Dai")
+                      (mu4e-compose-signature . (concat
+                                                  "Kind regards,\n"
+                                                  "\tWang-Zhou\n"))
+                      (mu4e-sent-folder . "/work/&XfJT0ZABkK5O9g-")
+                      (mu4e-drafts-folder . "/work/&g0l6Pw-")
+                      (mu4e-trash-folder . "/work/&XfJSIJZkkK5O9g-")
+                      (mu4e-attachment-dir "/work/Files")))
+           ,(make-mu4e-context
+             :name "Private"
+             :enter-func (lambda () (mu4e-message "Switch to the Private context"))
+             :leave-func (lambda () (mu4e-message "Leaving Work context"))
+             ;; leave-func not defined
+             :match-func (lambda (msg)
+                           (when msg
+                             (mu4e-message-contact-field-matches msg
+                                                                 :to "dai.wzero@hotmail.com")))
+             :vars '( (user-mail-address . "dai.wzero@hotmail.com")
+                      (user-full-name . "Wang-Zhou Dai")
+                      (mu4e-compose-signature . (concat
+                                                  "Kind regards,\n"
+                                                  "\tWang-Zhou.\n"))
+                      (mu4e-sent-folder . "/personal/Sent")
+                      (mu4e-drafts-folder . "/personal/Drafts")
+                      (mu4e-trash-folder . "/personal/Trash")
+                      (mu4e-attachment-dir "/personal/Files")))))
+
+  ;; set `mu4e-context-policy` and `mu4e-compose-policy` to tweak when mu4e should
+  ;; guess or ask the correct context, e.g.
+  ;; start with the first (default) context;
+  ;; default is to ask-if-none (ask when there's no context yet, and none match)
+  (setq mu4e-context-policy 'pick-first)
+  ;; compose with the current context if no context matches;
+  ;; default is to ask
+  ;; '(setq mu4e-compose-context-policy nil)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -567,17 +650,4 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  )
 )
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (ox-reveal insert-shebang fish-mode company-shell zen-and-art-theme yapfify ws-butler winum white-sand-theme which-key wgrep web-mode web-beautify volatile-highlights use-package unfill underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme toxi-theme toc-org tao-theme tangotango-theme tango-plus-theme tango-2-theme tagedit sunny-day-theme sublime-themes subatomic256-theme subatomic-theme spaceline powerline spacegray-theme soothe-theme solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme smex smeargle smartparens slim-mode seti-theme scss-mode sass-mode reverse-theme restart-emacs rebecca-theme rainbow-delimiters railscasts-theme pyvenv pytest pyenv-mode py-isort purple-haze-theme pug-mode professional-theme popwin planet-theme pip-requirements pinentry phoenix-dark-pink-theme phoenix-dark-mono-theme persp-mode pcre2el paradox spinner orgit organic-green-theme org-ref pdf-tools key-chord helm-bibtex biblio parsebib biblio-core tablist org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-plus-contrib org-mime org-download org-bullets open-junk-file omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme ob-prolog noctilux-theme neotree naquadah-theme mwim mustang-theme move-text monokai-theme monochrome-theme molokai-theme moe-theme minimal-theme material-theme markdown-preview-mode uuidgen web-server markdown-mode majapahit-theme magit-gitflow magit magit-popup ghub treepy graphql madhat2r-theme macrostep lush-theme lorem-ipsum livid-mode live-py-mode linum-relative link-hint light-soap-theme json-mode json-snatcher json-reformat js2-refactor multiple-cursors js-doc jbeans-theme jazz-theme ivy-hydra ir-black-theme inkpot-theme indent-guide hydra hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation heroku-theme hemisu-theme helm-make helm helm-core hc-zenburn-theme haml-mode gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme google-translate golden-ratio gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-commit with-editor geiser gandalf-theme fuzzy flyspell-correct-ivy flyspell-correct flycheck-pos-tip pos-tip flycheck flx-ido flx flatui-theme flatland-theme fill-column-indicator farmhouse-theme fancy-battery eyebrowse expand-region exotica-theme exec-path-from-shell evil-search-highlight-persist evil-ediff evil goto-chg undo-tree eval-sexp-fu highlight ess julia-mode espresso-theme emmet-mode elisp-slime-nav ein skewer-mode request-deferred websocket request deferred js2-mode simple-httpd ediprolog dumb-jump dracula-theme django-theme disaster diminish define-word darktooth-theme autothemer darkokai-theme darkmine-theme darkburn-theme dakrone-theme cython-mode cyberpunk-theme csv-mode counsel-projectile projectile pkg-info epl counsel swiper ivy company-web web-completion-data company-tern dash-functional tern company-statistics company-c-headers company-auctex company-anaconda company column-enforce-mode color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized coffee-mode cmake-mode clues-theme clean-aindent-mode clang-format cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme bind-map bind-key badwolf-theme auto-yasnippet yasnippet auto-highlight-symbol auto-dictionary auto-compile packed auctex-latexmk auctex async apropospriate-theme anti-zenburn-theme anaconda-mode pythonic f dash s ample-zen-theme ample-theme alect-themes aggressive-indent afternoon-theme adaptive-wrap ace-window ace-link avy ac-ispell auto-complete popup zenburn-theme))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+
