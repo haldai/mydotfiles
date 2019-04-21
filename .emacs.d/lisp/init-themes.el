@@ -1,0 +1,207 @@
+;;; init-themes.el --- Defaults for themes -*- lexical-binding: t -*-
+;;; Commentary:
+;;; Code:
+
+;; color theme
+(straight-use-package 'zenburn-theme)
+(load-theme 'zenburn t)
+
+;; font settings
+(defvar emacs-english-font "Source Code Pro"
+  "The font name of English.")
+
+(defvar emacs-cjk-font "方正宋刻本秀楷"
+  "The font name for CJK.")
+
+(defvar emacs-font-size-pair '(13 . 16)
+  "Default font size pair for (english . chinese)")
+
+(defvar emacs-font-size-pair-list
+  '(( 5 .  6) (10 . 12)
+    (13 . 16) (15 . 18) (17 . 20)
+    (19 . 22) (20 . 24) (21 . 26)
+    (24 . 28) (26 . 32) (28 . 34)
+    (30 . 36) (34 . 40) (36 . 44))
+  "This list is used to store matching (englis . chinese) font-size.")
+
+(defun font-exist-p (fontname)
+  "Test if this font is exist or not."
+  (if (or (not fontname) (string= fontname ""))
+      nil
+    (if (not (x-list-fonts fontname)) nil t)))
+
+(defun set-font (english chinese size-pair)
+  "Setup emacs English and Chinese font on x window-system."
+
+  (if (font-exist-p english)
+      (set-frame-font (format "%s:pixelsize=%d" english (car size-pair)) t))
+
+  (if (font-exist-p chinese)
+      (dolist (charset '(kana han symbol cjk-misc bopomofo))
+        (set-fontset-font (frame-parameter nil 'font) charset
+                          (font-spec :family chinese :size (cdr size-pair))))))
+
+;; Setup font size based on emacs-font-size-pair
+(when (display-graphic-p)
+  (set-font emacs-english-font emacs-cjk-font emacs-font-size-pair))
+
+(defun emacs-step-font-size (step)
+  "Increase/Decrease emacs's font size."
+  (let ((scale-steps emacs-font-size-pair-list))
+    (if (< step 0) (setq scale-steps (reverse scale-steps)))
+    (setq emacs-font-size-pair
+          (or (cadr (member emacs-font-size-pair scale-steps))
+              emacs-font-size-pair))
+    (when emacs-font-size-pair
+      (message "emacs font size set to %.1f" (car emacs-font-size-pair))
+      (set-font emacs-english-font emacs-cjk-font emacs-font-size-pair))))
+
+(defun restore-emacs-font-size ()
+  "Restore emacs's font-size acording emacs-font-size-pair-list."
+  (interactive)
+  (setq emacs-font-size-pair '(15 . 18))
+  (when emacs-font-size-pair
+    (message "emacs font size set to %.1f" (car emacs-font-size-pair))
+    (set-font emacs-english-font emacs-cjk-font emacs-font-size-pair)))
+
+(defun increase-emacs-font-size ()
+  "Decrease emacs's font-size acording emacs-font-size-pair-list."
+  (interactive) (emacs-step-font-size 1))
+
+(defun decrease-emacs-font-size ()
+  "Increase emacs's font-size acording emacs-font-size-pair-list."
+  (interactive) (emacs-step-font-size -1))
+
+(when (display-graphic-p)
+  (global-set-key (kbd "C-x C-=") 'increase-emacs-font-size)
+  (global-set-key (kbd "C-x C--") 'decrease-emacs-font-size)
+  (global-set-key (kbd "C-x C-0") 'restore-emacs-font-size))
+
+
+;; mode-line
+(use-package doom-modeline
+  :straight t
+  :hook (after-init . doom-modeline-mode)
+  :init
+  (setq doom-modeline-major-mode-color-icon t)
+  (setq doom-modeline-github t))
+
+(defun mode-line-height ()
+  "Get current height of mode-line."
+  (- (elt (window-pixel-edges) 3)
+     (elt (window-inside-pixel-edges) 3)))
+
+(use-package hide-mode-line
+  :straight t
+  :hook (((completion-list-mode
+           completion-in-region-mode
+           neotree-mode
+           treemacs-mode)
+          . hide-mode-line-mode)))
+
+;; Icons
+;; NOTE: Must run `M-x all-the-icons-install-fonts' manually on Windows
+(use-package all-the-icons
+  :straight t
+  :if (display-graphic-p)
+  :custom-face
+  ;; Reset colors since they are too dark in `doom-themes'
+  (all-the-icons-silver ((((background dark)) :foreground "#716E68")
+                         (((background light)) :foreground "#716E68")))
+  (all-the-icons-lsilver ((((background dark)) :foreground "#B9B6AA")
+                          (((background light)) :foreground "#7F7869")))
+  (all-the-icons-dsilver ((((background dark)) :foreground "#838484")
+                          (((background light)) :foreground "#838484")))
+  :init
+  (unless (member "all-the-icons" (font-family-list))
+    (all-the-icons-install-fonts t))
+  :config
+  (add-to-list 'all-the-icons-mode-icon-alist
+               '(help-mode all-the-icons-faicon "info-circle" :height 1.1 :v-adjust -0.1 :face all-the-icons-purple))
+  (add-to-list 'all-the-icons-mode-icon-alist
+               '(Info-mode all-the-icons-faicon "info-circle" :height 1.1 :v-adjust -0.1))
+  (add-to-list 'all-the-icons-icon-alist
+               '("NEWS$" all-the-icons-faicon "newspaper-o" :height 0.9 :v-adjust -0.2))
+  (add-to-list 'all-the-icons-icon-alist
+               '("Cask\\'" all-the-icons-fileicon "elisp" :height 1.0 :face all-the-icons-blue))
+  (add-to-list 'all-the-icons-mode-icon-alist
+               '(cask-mode all-the-icons-fileicon "elisp" :height 1.0 :face all-the-icons-blue))
+  (add-to-list 'all-the-icons-icon-alist
+               '(".*\\.ipynb\\'" all-the-icons-fileicon "jupyter" :height 1.2 :face all-the-icons-orange))
+  (add-to-list 'all-the-icons-mode-icon-alist
+               '(ein:notebooklist-mode all-the-icons-faicon "book" :face all-the-icons-orange))
+  (add-to-list 'all-the-icons-mode-icon-alist
+               '(ein:notebook-mode all-the-icons-fileicon "jupyter" :height 1.2 :face all-the-icons-orange))
+  (add-to-list 'all-the-icons-mode-icon-alist
+               '(ein:notebook-multilang-mode all-the-icons-fileicon "jupyter" :height 1.2 :face all-the-icons-orange))
+  (add-to-list 'all-the-icons-icon-alist
+               '("\\.epub\\'" all-the-icons-faicon "book" :height 1.0 :v-adjust -0.1 :face all-the-icons-green))
+  (add-to-list 'all-the-icons-mode-icon-alist
+               '(nov-mode all-the-icons-faicon "book" :height 1.0 :v-adjust -0.1 :face all-the-icons-green))
+  (add-to-list 'all-the-icons-mode-icon-alist
+               '(gfm-mode  all-the-icons-octicon "markdown" :face all-the-icons-blue)))
+
+;; Line and Column
+(setq-default fill-column 80)
+(setq column-number-mode t)
+(setq line-number-mode t)
+
+;; Show native line numbers if possible, otherwise use linum
+(if (fboundp 'display-line-numbers-mode)
+    (use-package display-line-numbers
+      :straight t
+      :hook (prog-mode . display-line-numbers-mode))
+  (use-package linum-off
+    :straight t
+    :demand
+    :defines linum-format
+    :hook (after-init . global-linum-mode)
+    :config
+    (setq linum-format "%4d ")
+
+    ;; Highlight current line number
+    (use-package hlinum
+      :defines linum-highlight-in-all-buffersp
+      :hook (global-linum-mode . hlinum-activate)
+      :custom-face (linum-highlight-face
+                    ((t `(
+                          :inherit default
+                          :background nil
+                          :foreground nil
+                          ))))
+      :init
+      (setq linum-highlight-in-all-buffersp t))))
+
+;; Mouse & Smooth Scroll
+;; Scroll one line at a time (less "jumpy" than defaults)
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
+(setq mouse-wheel-progressive-speed nil)
+(setq scroll-step 1
+      scroll-margin 0
+      scroll-conservatively 100000)
+
+;; Suppress GUI features
+(setq use-file-dialog nil)
+(setq use-dialog-box nil)
+(setq inhibit-startup-screen t)
+(setq inhibit-startup-echo-area-message t)
+
+;; Misc
+(fset 'yes-or-no-p 'y-or-n-p)
+(setq visible-bell t)
+(size-indication-mode 1)
+;; (blink-cursor-mode -1)
+(setq track-eol t)                      ; Keep cursor at end of lines. Require line-move-visual is nil.
+(setq line-move-visual nil)
+(setq inhibit-compacting-font-caches t) ; Don’t compact font caches during GC.
+
+;; Don't open a file in a new frame
+(when (boundp 'ns-pop-up-frames)
+  (setq ns-pop-up-frames nil))
+
+;; Don't use GTK+ tooltip
+(when (boundp 'x-gtk-use-system-tooltips)
+  (setq x-gtk-use-system-tooltips nil))
+
+(provide 'init-themes)
+;;; init-themes.el ends here

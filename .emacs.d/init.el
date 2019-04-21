@@ -10,9 +10,24 @@
 (setq debug-on-error t)
 
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
-(require 'init-benchmarking) ;; Measure startup time
 
 (defconst *spell-check-support-enabled* nil) ;; Enable with t if you prefer
+
+;; Defer garbage collection further back in the startup process
+(setq gc-cons-threshold 80000000)
+
+;; Prevent Emacs package auto startup
+(setq package-enable-at-startup nil)
+
+;; cleaner ui
+(unless (eq window-system 'ns)
+  (menu-bar-mode -1))
+(when (fboundp 'tool-bar-mode)
+  (tool-bar-mode -1))
+(when (fboundp 'scroll-bar-mode)
+  (scroll-bar-mode -1))
+(when (fboundp 'horizontal-scroll-bar-mode)
+  (horizontal-scroll-bar-mode -1))
 
 ;;----------------------------------------------------------------------------
 ;; Bootstrap straight.el
@@ -34,10 +49,11 @@
 ;; Bootstrap config
 ;;----------------------------------------------------------------------------
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(straight-use-package 'benchmark-init)
+(require 'benchmark-init)
+;; To disable collection of benchmark data after init is done.
+(add-hook 'after-init-hook 'benchmark-init/deactivate)
 (require 'init-utils)
-(require 'init-site-lisp) ;; Must come before elpa, as it may provide package.el
-;; Calls (package-initialize)
-(require 'init-exec-path) ;; Set up $PATH
 
 ;;----------------------------------------------------------------------------
 ;; Load configs for specific features and modes
@@ -45,3 +61,23 @@
 (straight-use-package 'scratch)
 
 (require 'init-themes)
+(require 'init-ivy)
+(require 'init-edit)
+(require 'init-highlight)
+(require 'init-company)
+(require 'init-yasnippet)
+(require 'init-ibuffer)
+(require 'init-kill-ring)
+(require 'init-dired)
+(require 'init-treemacs)
+(require 'init-dashboard)
+
+(require 'init-eshell)
+(require 'init-shell)
+
+(require 'init-markdown)
+(require 'init-org)
+
+;; Programming
+(require 'init-prog)
+(require 'init-projectile)
