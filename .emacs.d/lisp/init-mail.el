@@ -13,7 +13,13 @@
     :straight t
     :init (with-eval-after-load 'mu4e (mu4e-maildirs-extension-load)))
 
+  ;; Try to display images in mu4e
+  (setq
+   mu4e-view-show-images t
+   mu4e-view-image-max-width 800)
+
   (setq mu4e-maildir "~/Mail"
+        mu4e-attachment-dir "/Files"
         mu4e-get-mail-command "offlineimap"
         mu4e-update-interval nil
         mu4e-compose-signature-auto-include nil
@@ -60,10 +66,9 @@
                       (mu4e-compose-signature . (concat
                                                  "Kind regards,\n"
                                                  "\tWang-Zhou\n"))
-                      (mu4e-sent-folder . "/work/&XfJT0ZABkK5O9g-")
-                      (mu4e-drafts-folder . "/work/&g0l6Pw-")
-                      (mu4e-trash-folder . "/work/&XfJSIJZkkK5O9g-")
-                      (mu4e-attachment-dir "/work/Files")))
+                      (mu4e-sent-folder . "/work/Sent")
+                      (mu4e-drafts-folder . "/work/Drafts")
+                      (mu4e-trash-folder . "/work/Trash")))
            ,(make-mu4e-context
              :name "Private"
              :enter-func (lambda () (mu4e-message "Switch to the Private context"))
@@ -80,8 +85,7 @@
                                                  "\tWang-Zhou.\n"))
                       (mu4e-sent-folder . "/personal/Sent")
                       (mu4e-drafts-folder . "/personal/Drafts")
-                      (mu4e-trash-folder . "/personal/Trash")
-                      (mu4e-attachment-dir "/personal/Files")))))
+                      (mu4e-trash-folder . "/personal/Trash")))))
 
   ;; set `mu4e-context-policy` and `mu4e-compose-policy` to tweak when mu4e should
   ;; guess or ask the correct context, e.g.
@@ -91,6 +95,63 @@
   ;; compose with the current context if no context matches;
   ;; default is to ask
   ;; '(setq mu4e-compose-context-policy nil)
+
+  ;; sending mail
+  (setq message-send-mail-function 'message-send-mail-with-sendmail
+        sendmail-program "/usr/bin/msmtp")
+
+  ;; Borrowed from http://ionrock.org/emacs-email-and-mu.html
+  ;; Choose account label to feed msmtp -a option based on From header
+  ;; in Message buffer; This function must be added to
+  ;; message-send-mail-hook for on-the-fly change of From address before
+  ;; sending message since message-send-mail-hook is processed right
+  ;; before sending message.
+  (defun choose-msmtp-account ()
+    (if (message-mail-p)
+        (save-excursion
+          (let*
+              ((from (save-restriction
+                       (message-narrow-to-headers)
+                       (message-fetch-field "from")))
+               (account
+                (cond
+                 ((string-match "dai.wzero@hotmail.com" from) "personal")
+                 ((string-match "w.dai@imperial.ac.uk" from) "work"))))
+            (setq message-sendmail-extra-arguments (list '"-a" account))))))
+  (setq message-sendmail-envelope-from 'header)
+  (add-hook 'message-send-mail-hook 'choose-msmtp-account)
+
+  ;; use the address received the message to as the sender of the reply
+  (add-hook 'mu4e-compose-pre-hook
+            (defun my-set-from-address ()
+              "Set the From address based on the To address of the original."
+              (let ((msg mu4e-compose-parent-message)) ;; msg is shorter...
+                (if msg
+                    (setq user-mail-address
+                          (cond
+                           ((mu4e-message-contact-field-matches msg :to "dai.wzero@hotmail.com")
+                            "dai.wzero@hotmail.com")
+                           ((mu4e-message-contact-field-matches msg :to "w.dai@imperial.ac.uk")
+                            "w.dai@imperial.ac.uk")
+                           (t "dai.wzero@hotmail.com")))))))
+
+  ;; send attachment directly from dired
+  (require 'gnus-dired)
+  ;; make the `gnus-dired-mail-buffers' function also work on
+  ;; message-mode derived modes, such as mu4e-compose-mode
+  (defun gnus-dired-mail-buffers ()
+    "Return a list of active message buffers."
+    (let (buffers)
+      (save-current-buffer
+        (dolist (buffer (buffer-list t))
+          (set-buffer buffer)
+          (when (and (derived-mode-p 'message-mode)
+                     (null message-sent-message-via))
+            (push (buffer-name buffer) buffers))))
+      (nreverse buffers)))
+
+  (setq gnus-dired-mail-mode 'mu4e-user-agent)
+  (add-hook 'dired-mode-hook 'turn-on-gnus-dired-mode)
   )
 
 (provide 'init-mail)

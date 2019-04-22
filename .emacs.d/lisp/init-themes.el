@@ -45,6 +45,9 @@
 (when (display-graphic-p)
   (set-font emacs-english-font emacs-cjk-font emacs-font-size-pair))
 
+;; apply for every frame when using server daemon
+(add-hook 'after-make-window-system-frame-hooks (lambda () (set-font emacs-english-font emacs-cjk-font emacs-font-size-pair)))
+
 (defun emacs-step-font-size (step)
   "Increase/Decrease emacs's font size."
   (let ((scale-steps emacs-font-size-pair-list))

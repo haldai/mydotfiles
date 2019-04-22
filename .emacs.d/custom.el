@@ -113,7 +113,6 @@
  '(ido-enable-flex-matching t)
  '(ido-save-directory-list-file "/home/daiwz/.emacs.d/.cache/ido.last")
  '(ido-vertical-mode t)
- '(initial-buffer-choice (lambda nil (get-buffer spacemacs-buffer-name)))
  '(ivy-use-virtual-buffers t)
  '(markdown-coding-system (quote utf-8))
  '(markdown-command "pandoc -f markdown -t html" t))

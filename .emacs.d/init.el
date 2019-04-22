@@ -7,7 +7,7 @@
 ;;; Code:
 
 ;; Produce backtraces when errors occur
-(setq debug-on-error nil)
+(setq debug-on-error t)
 
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
@@ -65,6 +65,7 @@
 (require 'init-dired)
 (require 'init-treemacs)
 (require 'init-dashboard)
+(require 'init-frame-hooks)
 
 ;; Shell
 (require 'init-eshell)
