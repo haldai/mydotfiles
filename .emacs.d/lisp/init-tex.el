@@ -17,13 +17,15 @@
           TeX-source-correlate-start-server nil
           ;; Don't insert line-break at inline math
           LaTeX-fill-break-at-separators nil)
-    (add-hook 'LaTeX-mode-hook 'latex/auto-fill-mode)
+    (add-hook 'LaTeX-mode-hook 'auto-fill-mode)
     (add-hook 'LaTeX-mode-hook 'TeX-fold-mode)
     (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
     (add-hook 'LaTeX-mode-hook 'TeX-source-correlate-mode)
-    (add-hook 'LaTeX-mode-hook 'TeX-PDF-mode))
+    (add-hook 'LaTeX-mode-hook 'TeX-PDF-mode)
+    (add-hook 'LaTeX-mode-hook 'flyspell-mode)
+    (add-hook 'LaTex-mode-hook 'company-mode)
+    (add-hook 'LaTex-mode-hook 'prog-mode))
   :config
-
   (use-package auctex-latexmk
     :straight t
     :config
@@ -42,16 +44,7 @@
   (add-hook 'LaTeX-mode-hook 'turn-on-reftex)   ; with AUCTeX LaTeX mode
   (add-hook 'latex-mode-hook 'turn-on-reftex)   ; with Emacs latex mode
 
-  ;; text viewer
-  (setq TeX-view-program-list
-        '(("Acrobat" "Acrobat.exe %o")
-          ("Gsview" "gsview32.exe %o")
-          ("gv" "gv %o")
-          ("qpdfview" "qpdfview --unique %o")
-          ("MasterPDF" "masterpdfeditor4 %o")
-          ("Evince" "evince %o")
-          ("Firefox" "firefox %o")
-          ("Yap" "yap.exe %o")))
+  ;; Viewer
   (cond
    ((eq system-type 'windows-nt)
     (add-hook 'LaTeX-mode-hook

@@ -9,37 +9,27 @@
   :straight t
   :after all-the-icons projectile
   :diminish (dashboard-mode page-break-lines-mode)
-  :defines (persp-save-dir persp-special-last-buffer)
   :functions (all-the-icons-faicon
               all-the-icons-material
               open-custom-file
-              persp-get-buffer-or-null
-              persp-load-state-from-file
-              persp-switch-to-buffer
               winner-undo
               widget-forward)
   :bind (("<f2>" . open-dashboard)
          :map dashboard-mode-map
          ("H" . browse-homepage)
          ("R" . restore-session)
-         ("L" . persp-load-state-from-file)
          ("S" . open-custom-file)
          ("q" . quit-dashboard))
   :hook (dashboard-mode . (lambda () (setq-local frame-title-format "")))
   :init (dashboard-setup-startup-hook)
   :config
   (setq initial-buffer-choice (lambda () (get-buffer dashboard-buffer-name)))
-  (setq dashboard-banner-logo-title "HAL9001 - Enjoy Programming & Writing")
-  (setq dashboard-startup-banner 'official)
+  (setq dashboard-banner-logo-title "HAL9001 - 知行合一")
+  (setq dashboard-startup-banner 'logo)
   (setq dashboard-show-shortcuts nil)
   (setq dashboard-items '((recents  . 10)
                           (bookmarks . 5)
                           (projects . 5)))
-
-  (defun my-banner-path (&rest _)
-    "Return the full path to banner."
-    (expand-file-name "banner.txt" user-emacs-directory))
-  (advice-add #'dashboard-get-banner-path :override #'my-banner-path)
 
   (defvar dashboard-recover-layout-p nil
     "Wether recovers the layout.")
@@ -67,18 +57,6 @@
     ;; Jump to the first section
     (goto-char (point-min))
     (dashboard-goto-recent-files))
-
-  (defun restore-session ()
-    "Restore last session."
-    (interactive)
-    (when (bound-and-true-p persp-mode)
-      (message "Restoring session...")
-      (condition-case-unless-debug err
-          (persp-load-state-from-file)
-        (error
-         (message "Error: Unable to restore last session -- %s" err)))
-      (when (persp-get-buffer-or-null persp-special-last-buffer)
-        (persp-switch-to-buffer persp-special-last-buffer))))
 
   (defun quit-dashboard ()
     "Quit dashboard window."
@@ -138,6 +116,31 @@
                    :mouse-face 'highlight
                    custom-file)
     (insert " ")
+    (widget-create 'push-button
+                   :help-echo "Update Emacs"
+                   :action (lambda (&rest _) (straight-normalize-all))
+                   :mouse-face 'highlight
+                   :tag (concat
+                         (if (display-graphic-p)
+                             (concat
+                              (all-the-icons-material "update"
+                                                      :height 1.35
+                                                      :v-adjust -0.24
+                                                      :face 'font-lock-keyword-face)
+                              (propertize " " 'face 'variable-pitch)))
+                         (propertize "Update" 'face 'font-lock-keyword-face)))
+    (insert " ")
+    (widget-create 'push-button
+                   :help-echo "Help (?/h)"
+                   :action (lambda (&rest _) (dashboard-hydra/body))
+                   :mouse-face 'highlight
+                   :tag (concat
+                         (if (display-graphic-p)
+                             (all-the-icons-faicon "question"
+                                                   :height 1.2
+                                                   :v-adjust -0.1
+                                                   :face 'font-lock-string-face)
+                           (propertize "?" 'face 'font-lock-string-face))))
     (insert "\n")
     (insert "\n")
     (insert (make-string (max 0 (floor (/ (- dashboard-banner-length
@@ -169,7 +172,6 @@
     ("m" dashboard-goto-bookmarks "Bookmarks")
     ("H" browse-homepage "Browse Homepage" :exit t)
     ("R" restore-session "Restore Previous Session" :exit t)
-    ("L" persp-load-state-from-file "List Saved Sessions" :exit t)
     ("S" open-custom-file "Settings" :exit t)
     ("<f2>" open-dashboard "Open Dashboard" :exit t)
     ("q" quit-dashboard "Quit Dashboard" :exit t)

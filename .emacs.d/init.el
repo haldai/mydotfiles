@@ -7,7 +7,7 @@
 ;;; Code:
 
 ;; Produce backtraces when errors occur
-(setq debug-on-error t)
+(setq debug-on-error nil)
 
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
@@ -49,17 +49,11 @@
 ;; Bootstrap config
 ;;----------------------------------------------------------------------------
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-(straight-use-package 'benchmark-init)
-(require 'benchmark-init)
-;; To disable collection of benchmark data after init is done.
-(add-hook 'after-init-hook 'benchmark-init/deactivate)
 (require 'init-utils)
 
 ;;----------------------------------------------------------------------------
 ;; Load configs for specific features and modes
 ;;----------------------------------------------------------------------------
-(straight-use-package 'scratch)
-
 (require 'init-themes)
 (require 'init-ivy)
 (require 'init-edit)
@@ -72,12 +66,37 @@
 (require 'init-treemacs)
 (require 'init-dashboard)
 
+;; Shell
 (require 'init-eshell)
 (require 'init-shell)
 
-(require 'init-markdown)
+;; Text
 (require 'init-org)
+(require 'init-tex)
+(require 'init-markdown)
+(require 'init-mail)
+(require 'init-csv)
 
 ;; Programming
-(require 'init-prog)
+(require 'init-git)
+(require 'init-flycheck)
+(require 'init-lsp)
 (require 'init-projectile)
+
+(require 'init-emacs-lisp)
+(require 'init-c)
+(require 'init-prolog)
+(require 'init-julia)
+(require 'init-python)
+(require 'init-web)
+(require 'init-lua)
+(require 'init-prog)
+
+;; Load custom files at last
+(when (file-exists-p custom-file)
+  (load custom-file))
+(require 'init-keybind)
+
+(provide 'init)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; init.el ends here

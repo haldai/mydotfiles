@@ -77,7 +77,6 @@
   (global-set-key (kbd "C-x C--") 'decrease-emacs-font-size)
   (global-set-key (kbd "C-x C-0") 'restore-emacs-font-size))
 
-
 ;; mode-line
 (use-package doom-modeline
   :straight t

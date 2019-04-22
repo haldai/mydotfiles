@@ -6,10 +6,7 @@
 (require 'cl-lib)
 (require 'map)
 
-
-;;----------------------------------------------------------------------------
 ;; Setup use-package
-;;----------------------------------------------------------------------------
 (eval-when-compile
   (straight-use-package 'use-package))
 
@@ -26,32 +23,7 @@
        '(progn ,@body))))
 
 
-;;----------------------------------------------------------------------------
-;; Handier way to add modes to auto-mode-alist
-;;----------------------------------------------------------------------------
-(defun add-auto-mode (mode &rest patterns)
-  "Add entries to `auto-mode-alist' to use `MODE' for all given file `PATTERNS'."
-  (dolist (pattern patterns)
-    (add-to-list 'auto-mode-alist (cons pattern mode))))
-
-
-;;----------------------------------------------------------------------------
-;; String utilities missing from core emacs
-;;----------------------------------------------------------------------------
-(defun sanityinc/string-all-matches (regex str &optional group)
-  "Find all matches for `REGEX' within `STR', returning the full match string or group `GROUP'."
-  (let ((result nil)
-        (pos 0)
-        (group (or group 0)))
-    (while (string-match regex str pos)
-      (push (match-string group str) result)
-      (setq pos (match-end group)))
-    result))
-
-
-;;----------------------------------------------------------------------------
 ;; Delete the current file
-;;----------------------------------------------------------------------------
 (defun delete-this-file ()
   "Delete the current file, and kill the buffer."
   (interactive)
@@ -63,9 +35,7 @@
     (kill-this-buffer)))
 
 
-;;----------------------------------------------------------------------------
 ;; Rename the current file
-;;----------------------------------------------------------------------------
 (defun rename-this-file-and-buffer (new-name)
   "Renames both current buffer and file it's visiting to NEW-NAME."
   (interactive "sNew name: ")
@@ -79,21 +49,6 @@
       (set-visited-file-name new-name)
       (rename-buffer new-name))))
 
-;;----------------------------------------------------------------------------
-;; Browse current HTML file
-;;----------------------------------------------------------------------------
-(defun browse-current-file ()
-  "Open the current file as a URL using `browse-url'."
-  (interactive)
-  (let ((file-name (buffer-file-name)))
-    (if (and (fboundp 'tramp-tramp-file-p)
-             (tramp-tramp-file-p file-name))
-        (error "Cannot open tramp file")
-      (browse-url (concat "file://" file-name)))))
-
-;;----------------------------------------------------------------------------
-;; Useful utility functions
-;;----------------------------------------------------------------------------
 ;; Start server
 (use-package server
   :straight t
@@ -141,10 +96,14 @@
   :ensure nil
   :hook (after-init . windmove-default-keybindings))
 
-(straight-use-package 'pinentry)
 ;; EasyPG
+(straight-use-package 'pinentry)
 (setq epa-file-select-keys nil)
 (pinentry-start)
+
+;; new scratch
+(use-package scratch
+  :straight t)
 
 (provide 'init-utils)
 ;;; init-utils.el ends here

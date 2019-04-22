@@ -9,12 +9,25 @@
   :straight t
   :commands (mu4e mu4e-compose-new)
   :config
+  (use-package mu4e-maildirs-extension
+    :straight t
+    :init (with-eval-after-load 'mu4e (mu4e-maildirs-extension-load)))
+
   (setq mu4e-maildir "~/Mail"
         mu4e-get-mail-command "offlineimap"
         mu4e-update-interval nil
         mu4e-compose-signature-auto-include nil
         mu4e-view-show-images t
         mu4e-view-show-addresses t)
+
+  (setq mu4e-headers-date-format "%y-%m-%d %H:%M")
+  (setq mu4e-headers-fields
+        '( (:human-date    .   20)
+           (:flags         .    6)
+           (:mailing-list  .   10)
+           (:from          .   22)
+           (:subject       .   nil)))
+  (setq mu4e-html2text-command "w3m -dump -T text/html")
 
   ;;; Mail directory shortcuts
   (setq mu4e-maildir-shortcuts
