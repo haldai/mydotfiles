@@ -91,6 +91,7 @@
 (require 'init-python)
 (require 'init-web)
 (require 'init-lua)
+(require 'init-scheme)
 (require 'init-prog)
 
 ;; Load custom files at last
