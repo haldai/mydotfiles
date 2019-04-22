@@ -663,8 +663,8 @@ awful.rules.rules = {
   -- Set Firefox to always map on the tag named "2" on screen 1.
   -- { rule = { class = "Firefox" },
   --   properties = { screen = 1, tag = "2" } },
-  { rule = {class = "Emacs"},
-    properties = { tag = awful.util.tagnames[2] } },
+  -- { rule = {class = "Emacs"},
+  -- properties = { tag = awful.util.tagnames[2] } },
   { rule_any = {class = {"Chromium", "qutebrowser" } },
     properties = { tag = awful.util.tagnames[3], maximized = true } },
   { rule = {class = "Thunderbird"},

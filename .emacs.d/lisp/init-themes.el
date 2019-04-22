@@ -86,7 +86,9 @@
   :hook (after-init . doom-modeline-mode)
   :init
   (setq doom-modeline-major-mode-color-icon t)
-  (setq doom-modeline-github t))
+  (setq doom-modeline-github t)
+  :config
+  (use-package ghub :straight t))
 
 (defun mode-line-height ()
   "Get current height of mode-line."

@@ -210,19 +210,19 @@ mytextclock.forced_width = 156
 
 -- {{{ CPU load
 theme.cpugraph = wibox.widget {
-  forced_width = 32,
-  paddings = 1,
-  border_width = 1,
-  border_color = white2,
-  color = white1,
-  background_color = black1,
-  widget = wibox.widget.graph
+   forced_width = 32,
+   paddings = 1,
+   border_width = 1,
+   border_color = white2,
+   color = white1,
+   background_color = black1,
+   widget = wibox.widget.graph
 }
 cpuwidget_t = awful.tooltip({ objects = { theme.cpugraph },})
 vicious.register(theme.cpugraph, vicious.widgets.cpu,
                  function (widget, args)
-                   cpuwidget_t:set_text(string.format("CPU使用率：%s%%\n核心使用率：%s%%, %s%%, %s%%, %s%%, %s%%, %s%%, %s%%, %s%%", args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9]))
-                   return args[1]
+                    cpuwidget_t:set_text(string.format("CPU使用率：%s%%\n核心使用率：%s%%, %s%%, %s%%, %s%%, %s%%, %s%%, %s%%, %s%%", args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9]))
+                    return args[1]
                  end, 5)
 local cpubg = wibox.container.background(theme.cpugraph, black2, gears.shape.rectangle)
 local cpuwidget = wibox.container.margin(cpubg, 5, 8, 5, 5)
@@ -231,34 +231,34 @@ local cpuwidget = wibox.container.margin(cpubg, 5, 8, 5, 5)
 --- {{{ Volume bar, add borders to lain.widget.alsabar
 local myalsabar = require("myalsabar")
 theme.volume = myalsabar {
-  ticks = false,
-  width = 64,
-  height = 16,
-  paddings = 1,
-  border_width = 1,
-  border_color = white2,
-  timeout = 11, -- time interval
-  colors = {
-    background = black1,
-    mute = red1,
-    unmute = white1
-  },
-  notification_preset = { font = "方正宋刻本秀楷 10" }
+   ticks = false,
+   width = 64,
+   height = 16,
+   paddings = 1,
+   border_width = 1,
+   border_color = white2,
+   timeout = 11, -- time interval
+   colors = {
+      background = black1,
+      mute = red1,
+      unmute = white1
+   },
+   notification_preset = { font = "方正宋刻本秀楷 10" }
 }
 theme.volume.bar:buttons(
-  my_table.join (
-    awful.button({}, 3, function()
-        os.execute(string.format("%s set %s toggle", theme.volume.cmd, theme.volume.togglechannel or theme.volume.channel))
-        theme.volume.update()
-    end),
-    awful.button({}, 4, function()
-        os.execute(string.format("%s set %s 2%%+", theme.volume.cmd, theme.volume.channel))
-        theme.volume.update()
-    end),
-    awful.button({}, 5, function()
-        os.execute(string.format("%s set %s 2%%-", theme.volume.cmd, theme.volume.channel))
-        theme.volume.update()
-    end)
+   my_table.join (
+      awful.button({}, 3, function()
+            os.execute(string.format("%s set %s toggle", theme.volume.cmd, theme.volume.togglechannel or theme.volume.channel))
+            theme.volume.update()
+      end),
+      awful.button({}, 4, function()
+            os.execute(string.format("%s set %s 2%%+", theme.volume.cmd, theme.volume.channel))
+            theme.volume.update()
+      end),
+      awful.button({}, 5, function()
+            os.execute(string.format("%s set %s 2%%-", theme.volume.cmd, theme.volume.channel))
+            theme.volume.update()
+      end)
 ))
 local volumebg = wibox.container.background(theme.volume.bar, black2, gears.shape.rectangle)
 local volumewidget = wibox.container.margin(volumebg, 5, 8, 7, 7)
@@ -266,28 +266,28 @@ local volumewidget = wibox.container.margin(volumebg, 5, 8, 7, 7)
 
 --- {{{ RAM
 theme.membar = wibox.widget {
-  {
-    max_value = 100,
-    color = white1,
-    background_color = black1,
-    paddings = 1,
-    border_width = 1,
-    border_color = white1,
-    ticks = false,
-    widget = wibox.widget.progressbar,
-  },
-  forced_height = 5,
-  forced_width = 10,
-  direction = 'east',
-  layout = wibox.container.rotate,
+   {
+      max_value = 100,
+      color = white1,
+      background_color = black1,
+      paddings = 1,
+      border_width = 1,
+      border_color = white1,
+      ticks = false,
+      widget = wibox.widget.progressbar,
+   },
+   forced_height = 5,
+   forced_width = 10,
+   direction = 'east',
+   layout = wibox.container.rotate,
 }
 memwidget_t = awful.tooltip({ objects = { theme.membar },})
 vicious.cache(vicious.widgets.mem)
 vicious.register(theme.membar, vicious.widgets.mem,
                  function (widget, args)
-                   memwidget_t:set_text(string.format("內存消耗：%sMiB / %sMiB", args[2], args[3]))
-                   widget.widget:set_value(args[1])
-                   return args[1]
+                    memwidget_t:set_text(string.format("內存消耗：%sMiB / %sMiB", args[2], args[3]))
+                    widget.widget:set_value(args[1])
+                    return args[1]
                  end, 13)
 local membg = wibox.container.background(theme.membar, black2, gears.shape.rectangle)
 local memwidget = wibox.container.margin(membg, 5, 8, 5, 5)
@@ -295,43 +295,43 @@ local memwidget = wibox.container.margin(membg, 5, 8, 5, 5)
 
 -- {{{ Battery
 theme.batbar = wibox.widget {
-  {
-    max_value = 100,
-    -- color = white1,
-    background_color = black1,
-    paddings = 1,
-    border_width = 1,
-    border_color = white1,
-    ticks = false,
-    widget = wibox.widget.progressbar,
-  },
-  forced_height = 5,
-  forced_width = 10,
-  direction = 'east',
-  layout = wibox.container.rotate,
+   {
+      max_value = 100,
+      -- color = white1,
+      background_color = black1,
+      paddings = 1,
+      border_width = 1,
+      border_color = white1,
+      ticks = false,
+      widget = wibox.widget.progressbar,
+   },
+   forced_height = 5,
+   forced_width = 10,
+   direction = 'east',
+   layout = wibox.container.rotate,
 }
 batwidget_t = awful.tooltip({ objects = { theme.batbar },})
 vicious.cache(vicious.widgets.bat)
 vicious.register(theme.batbar, vicious.widgets.bat,
                  function (widget, args)
-                   widget.widget:set_value(args[2])
-                   if args[1] == "+" then
-                     widget.widget:set_color(green1)
-                     batwidget_t:set_text(string.format("充電：%s%%，剩餘 %s ", args[2], args[3]))
-                   elseif args[1] == "-" then
-                     local bat_val = tonumber(args[2])
-                     batwidget_t:set_text(string.format("放電： %s%%，剩餘 %s", args[2], args[3]))
-                     if bat_val >= 20 then
+                    widget.widget:set_value(args[2])
+                    if args[1] == "+" then
+                       widget.widget:set_color(green1)
+                       batwidget_t:set_text(string.format("充電：%s%%，剩餘 %s ", args[2], args[3]))
+                    elseif args[1] == "-" then
+                       local bat_val = tonumber(args[2])
+                       batwidget_t:set_text(string.format("放電： %s%%，剩餘 %s", args[2], args[3]))
+                       if bat_val >= 20 then
+                          widget.widget:set_color(white1)
+                       elseif bat_val < 20 and bat_val >= 10 then
+                          widget.widget:set_color(orange)
+                       else
+                          widget.widget:set_color(red1)
+                       end
+                    else
                        widget.widget:set_color(white1)
-                     elseif bat_val < 20 and bat_val >= 10 then
-                       widget.widget:set_color(orange)
-                     else
-                       widget.widget:set_color(red1)
-                     end
-                   else
-                     widget.widget:set_color(white1)
-                     batwidget_t:set_text(string.format("電源已連接：%s%%", args[2]))
-                   end
+                       batwidget_t:set_text(string.format("電源已連接：%s%%", args[2]))
+                    end
                  end, 61, "BAT0")
 local batbg = wibox.container.background(theme.batbar, black2, gears.shape.rectangle)
 local batwidget = wibox.container.margin(batbg, 5, 8, 5, 5)
@@ -340,35 +340,35 @@ local batwidget = wibox.container.margin(batbg, 5, 8, 5, 5)
 --- {{{ Brightness
 local mybrightnessbar = require("mybrightnessbar")
 theme.brightness = mybrightnessbar {
-  ticks = false,
-  width = 64,
-  height = 16,
-  paddings = 1,
-  border_width = 1,
-  border_color = white2,
-  timeout = 31,
-  background_color = black1,
-  color = white1,
-  notification_preset = { font = "方正宋刻本秀楷 10" }
+   ticks = false,
+   width = 64,
+   height = 16,
+   paddings = 1,
+   border_width = 1,
+   border_color = white2,
+   timeout = 31,
+   background_color = black1,
+   color = white1,
+   notification_preset = { font = "方正宋刻本秀楷 10" }
 }
 theme.brightness.bar:buttons(
-  my_table.join (
-    awful.button({}, 1, function()
-        os.execute(string.format("xbacklight -set 100"))
-        theme.brightness.update()
-    end),
-    awful.button({}, 3, function()
-        os.execute(string.format("xbacklight -set 5"))
-        theme.brightness.update()
-    end),
-    awful.button({}, 4, function()
-        os.execute(string.format("xbacklight -inc 1"))
-        theme.brightness.update()
-    end),
-    awful.button({}, 5, function()
-        os.execute(string.format("xbacklight -dec 1"))
-        theme.brightness.update()
-    end)
+   my_table.join (
+      awful.button({}, 1, function()
+            os.execute(string.format("xbacklight -set 100"))
+            theme.brightness.update()
+      end),
+      awful.button({}, 3, function()
+            os.execute(string.format("xbacklight -set 5"))
+            theme.brightness.update()
+      end),
+      awful.button({}, 4, function()
+            os.execute(string.format("xbacklight -inc 1"))
+            theme.brightness.update()
+      end),
+      awful.button({}, 5, function()
+            os.execute(string.format("xbacklight -dec 1"))
+            theme.brightness.update()
+      end)
 ))
 local brightnessbg = wibox.container.background(theme.brightness.bar, black2, gears.shape.rectangle)
 local brightnesswidget = wibox.container.margin(brightnessbg, 5, 8, 7, 7)
@@ -376,37 +376,37 @@ local brightnesswidget = wibox.container.margin(brightnessbg, 5, 8, 7, 7)
 
 -- {{{ Thermal
 theme.thermalbar = wibox.widget {
-  {
-    max_value = 100,
-    -- color = white1,
-    background_color = black1,
-    paddings = 1,
-    border_width = 1,
-    border_color = white1,
-    ticks = false,
-    widget = wibox.widget.progressbar,
-  },
-  forced_height = 5,
-  forced_width = 10,
-  direction = 'east',
-  layout = wibox.container.rotate,
+   {
+      max_value = 100,
+      -- color = white1,
+      background_color = black1,
+      paddings = 1,
+      border_width = 1,
+      border_color = white1,
+      ticks = false,
+      widget = wibox.widget.progressbar,
+   },
+   forced_height = 5,
+   forced_width = 10,
+   direction = 'east',
+   layout = wibox.container.rotate,
 }
 thermalwidget_t = awful.tooltip({ objects = { theme.thermalbar },})
 vicious.cache(vicious.widgets.thermal)
 vicious.register(theme.thermalbar, vicious.widgets.thermal,
                  function (widget, args)
-                   local temp = tonumber(args[1])
-                   thermalwidget_t:set_text(string.format("核心溫度：%s ℃", args[1]))
-                   if temp >= 80 then
-                     widget.widget:set_color(red1)
-                   elseif temp < 80 and temp >= 70 then
-                     widget.widget:set_color(orange)
-                   elseif temp < 70 and temp >= 40 then
-                     widget.widget:set_color(white1)
-                   else
-                     widget.widget:set_color(blue1)
-                   end
-                   widget.widget:set_value(args[1])
+                    local temp = tonumber(args[1])
+                    thermalwidget_t:set_text(string.format("核心溫度：%s ℃", args[1]))
+                    if temp >= 80 then
+                       widget.widget:set_color(red1)
+                    elseif temp < 80 and temp >= 70 then
+                       widget.widget:set_color(orange)
+                    elseif temp < 70 and temp >= 40 then
+                       widget.widget:set_color(white1)
+                    else
+                       widget.widget:set_color(blue1)
+                    end
+                    widget.widget:set_value(args[1])
                  end, 7, "thermal_zone10")
 local thermalbg = wibox.container.background(theme.thermalbar, black2, gears.shape.rectangle)
 local thermalwidget = wibox.container.margin(thermalbg, 5, 8, 5, 5)
@@ -416,37 +416,51 @@ local thermalwidget = wibox.container.margin(thermalbg, 5, 8, 5, 5)
 local calendar = require("calendar")
 -- attach it as popup to your text clock widget:
 calendar({
-    today_color = red1,
-    html = '<span font_desc="SauceCodePro Nerd Font Mono">\n%s</span>'
+      today_color = red1,
+      html = '<span font_desc="SauceCodePro Nerd Font Mono">\n%s</span>'
 }):attach(mytextclock)
 --- }}}
 --- {{{ Mail
 theme.emailnum = wibox.widget {
-  markup = "<b>未知</b>",
-  align  = 'center',
-  valign = 'center',
-  widget = wibox.widget.textbox
+   markup = "<b>未知</b>",
+   align  = 'center',
+   valign = 'center',
+   widget = wibox.widget.textbox
 }
 emailnum_t = awful.tooltip({ objects = { theme.emailnum },})
+local emailbg = wibox.widget {
+   theme.emailnum,
+   bg = black1,
+   shape = gears.shape.rectangle,
+   shape_border_width = 1,
+   shape_border_color = white1,
+   forced_width = 20,
+   widget = wibox.container.background
+}
 awful.widget.watch(
-  "python " .. script_path .. "count_unread_emails.py", 300,
-  function(widget, stdout, stderr, exitreason, exitcode)
-    local unread_emails_num = tonumber(stdout) or 0
-    if (unread_emails_num > 0) then
-      theme.emailnum:set_markup_silently("<span color=\"" .. red1 .. "\"><b>" .. tostring(unread_emails_num) .. "</b></span>")
-      awful.spawn.easy_async_with_shell(
-        "python " .. script_path .. "read_unread_emails.py",
-        function(stdout, stderr, reason, exit_code)
-          emailnum_t:set_text(stdout)
-        end
-      )
-    elseif (unread_emails_num == 0) then
-      theme.emailnum:set_markup_silently("<span color=\"" .. blue1 .. "\"><b>無</b></span>")
-      emailnum_t:set_text("暫無新郵件")
-    end
-  end
+   script_path .. "offlineimap-count.sh", 600,
+   function(widget, stdout, stderr, exitreason, exitcode)
+      local unread_emails_num = tonumber(stdout) or 0
+      if (unread_emails_num > 0) then
+         theme.emailnum:set_markup_silently("<span color=\"" .. white2 .. "\" font_desc=\"SauceCodePro Nerd Font Mono\"><b>" .. tostring(unread_emails_num) .. "</b></span>")
+         emailbg:set_bg(red1)
+         emailnum_t:set_text("郵件！右鍵！")
+      elseif (unread_emails_num == 0) then
+         theme.emailnum:set_markup_silently("<span color=\"" .. white1 .. "\" font_desc=\"SauceCodePro Nerd Font Mono 9\">無</span>")
+         emailbg:set_bg(black1)
+         emailnum_t:set_text("暫無新郵件")
+      end
+   end
 )
-local emailbg = wibox.container.background(theme.emailnum, black2, gears.shape.rectangle)
+theme.emailnum:buttons(
+   my_table.join(
+      awful.button({}, 3, function()
+            awful.spawn("emacsclient -c -a emacs --eval \"(mu4e)\"")
+            theme.emailnum:set_markup_silently("<span color=\"" .. white1 .. "\" font_desc=\"SauceCodePro Nerd Font Mono 9\">無</span>")
+            emailbg:set_bg(black1)
+            emailnum_t:set_text("暫無新郵件")
+      end)
+))
 local emailwidget = wibox.container.margin(emailbg, 5, 8, 5, 5)
 --- }}}
 
@@ -458,130 +472,130 @@ local layoutlist = { lain.layout.centerwork, awful.layout.suit.tile, awful.layou
                      awful.layout.suit.tile, awful.layout.suit.tile, awful.layout.suit.tile }
 
 function theme.at_screen_connect(s)
-  -- Quake application
-  s.quake = lain.util.quake({ app = awful.util.terminal })
+   -- Quake application
+   s.quake = lain.util.quake({ app = awful.util.terminal })
 
-  -- Wallpaper
-  local wallpaper = theme.wallpaper
-  if type(wallpaper) == "function" then
-    wallpaper = wallpaper(s)
-  end
-  gears.wallpaper.maximized(wallpaper, s, true)
+   -- Wallpaper
+   local wallpaper = theme.wallpaper
+   if type(wallpaper) == "function" then
+      wallpaper = wallpaper(s)
+   end
+   gears.wallpaper.maximized(wallpaper, s, true)
 
-  -- Each screen has its own tag table.
-  awful.tag(awful.util.tagnames, s, layoutlist)
+   -- Each screen has its own tag table.
+   awful.tag(awful.util.tagnames, s, layoutlist)
 
-  -- Create a promptbox for each screen
-  s.mypromptbox = awful.widget.prompt()
-  -- Create an imagebox widget which will contain an icon indicating which layout we're using.
-  -- We need one layoutbox per screen.
-  s.mylayoutbox = awful.widget.layoutbox(s)
-  s.mylayoutbox:buttons(gears.table.join(
-                          awful.button({ }, 1, function () awful.layout.inc( 1) end),
-                          awful.button({ }, 3, function () awful.layout.inc(-1) end),
-                          awful.button({ }, 4, function () awful.layout.inc( 1) end),
-                          awful.button({ }, 5, function () awful.layout.inc(-1) end)))
-  -- Create a taglist widget
-  -- s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, awful.util.taglist_buttons)
-  s.mytaglist = awful.widget.taglist {
-    screen = s,
-    filter = awful.widget.taglist.filter.all,
-    buttons = awful.util.taglist_buttons,
-    style   = {
-      spacing = 3,
-      shape = gears.shape.octogon,
-      shape_border_width_focus = 1,
-      shape_border_color_focus = orange,
-      fg_occupied = orange,
-      bg_urgent = black1,
-      fg_urgent = red1,
-      bg_focus = black1,
-      fg_focus = orange,
-    },
-  }
-
-  -- Create a tasklist widget
-  s.mytasklist = awful.widget.tasklist {
-    screen = s,
-    filter = awful.widget.tasklist.filter.currenttags,
-    buttons = awful.util.tasklist_buttons,
-    style = {
-      spacing_widget = {
-        {
-          thickness = 1,
-          color = white1,
-        },
-        valign = 'center',
-        halign = 'center',
-        widget = wibox.container.place,
+   -- Create a promptbox for each screen
+   s.mypromptbox = awful.widget.prompt()
+   -- Create an imagebox widget which will contain an icon indicating which layout we're using.
+   -- We need one layoutbox per screen.
+   s.mylayoutbox = awful.widget.layoutbox(s)
+   s.mylayoutbox:buttons(my_table.join(
+                            awful.button({ }, 1, function () awful.layout.inc( 1) end),
+                            awful.button({ }, 3, function () awful.layout.inc(-1) end),
+                            awful.button({ }, 4, function () awful.layout.inc( 1) end),
+                            awful.button({ }, 5, function () awful.layout.inc(-1) end)))
+   -- Create a taglist widget
+   -- s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, awful.util.taglist_buttons)
+   s.mytaglist = awful.widget.taglist {
+      screen = s,
+      filter = awful.widget.taglist.filter.all,
+      buttons = awful.util.taglist_buttons,
+      style   = {
+         spacing = 3,
+         shape = gears.shape.octogon,
+         shape_border_width_focus = 1,
+         shape_border_color_focus = orange,
+         fg_occupied = orange,
+         bg_urgent = black1,
+         fg_urgent = red1,
+         bg_focus = black1,
+         fg_focus = orange,
       },
-      spacing = 1,
-      layout  = wibox.layout.fixed.horizontal
-    },
-    widget_template = {
-      {
-        wibox.widget.base.make_widget(),
-        forced_height = 3,
-        id = 'background_role',
-        widget = wibox.container.background,
-      },
-      {
-        {
-          {
-            id = 'icon_role',
-            widget = wibox.widget.imagebox,
-          },
-          margins = 5,
-          widget = wibox.container.margin
-        },
-        {
-          {
-            id = 'text_role',
-            widget = wibox.widget.textbox,
-          },
-          margins = 2,
-          widget = wibox.container.margin
-        },
-        layout = wibox.layout.align.horizontal,
-      },
-      layout = wibox.layout.align.vertical,
-    },
-  }
-  -- Create the wibox
-  s.mywibox = awful.wibar({ position = "top", height = 28, screen = s, bg = theme.bg_normal, fg = theme.fg_normal })
+   }
 
-  -- Add widgets to the wibox
-  s.mywibox:setup {
-    layout = wibox.layout.align.horizontal,
-    { -- Left widgets
-      layout = wibox.layout.fixed.horizontal,
-      -- mylauncher,
-      s.mytaglist,
-      -- s.mypromptbox,
-    },
-    s.mytasklist, -- Middle widget
-    { -- Right widgets
-      layout = wibox.layout.fixed.horizontal,
-      -- mykeyboardlayout,
-      wibox.widget.textbox("<b>郵</b>"),
-      emailwidget,
-      wibox.widget.textbox("<b>亮</b>"),
-      brightnesswidget,
-      wibox.widget.textbox("<b>聲</b>"),
-      volumewidget,
-      wibox.widget.textbox("<b>溫</b>"),
-      thermalwidget,
-      wibox.widget.textbox("<b>電</b>"),
-      batwidget,
-      wibox.widget.textbox("<b>存</b>"),
-      memwidget,
-      wibox.widget.textbox("<b>核</b>"),
-      cpuwidget,
-      wibox.widget.systray(),
-      mytextclock,
-      s.mylayoutbox,
-    },
-  }
+   -- Create a tasklist widget
+   s.mytasklist = awful.widget.tasklist {
+      screen = s,
+      filter = awful.widget.tasklist.filter.currenttags,
+      buttons = awful.util.tasklist_buttons,
+      style = {
+         spacing_widget = {
+            {
+               thickness = 1,
+               color = white1,
+            },
+            valign = 'center',
+            halign = 'center',
+            widget = wibox.container.place,
+         },
+         spacing = 1,
+         layout  = wibox.layout.fixed.horizontal
+      },
+      widget_template = {
+         {
+            wibox.widget.base.make_widget(),
+            forced_height = 3,
+            id = 'background_role',
+            widget = wibox.container.background,
+         },
+         {
+            {
+               {
+                  id = 'icon_role',
+                  widget = wibox.widget.imagebox,
+               },
+               margins = 5,
+               widget = wibox.container.margin
+            },
+            {
+               {
+                  id = 'text_role',
+                  widget = wibox.widget.textbox,
+               },
+               margins = 2,
+               widget = wibox.container.margin
+            },
+            layout = wibox.layout.align.horizontal,
+         },
+         layout = wibox.layout.align.vertical,
+      },
+   }
+   -- Create the wibox
+   s.mywibox = awful.wibar({ position = "top", height = 28, screen = s, bg = theme.bg_normal, fg = theme.fg_normal })
+
+   -- Add widgets to the wibox
+   s.mywibox:setup {
+      layout = wibox.layout.align.horizontal,
+      { -- Left widgets
+         layout = wibox.layout.fixed.horizontal,
+         -- mylauncher,
+         s.mytaglist,
+         -- s.mypromptbox,
+      },
+      s.mytasklist, -- Middle widget
+      { -- Right widgets
+         layout = wibox.layout.fixed.horizontal,
+         -- mykeyboardlayout,
+         wibox.widget.textbox("<b>郵</b>"),
+         emailwidget,
+         wibox.widget.textbox("<b>亮</b>"),
+         brightnesswidget,
+         wibox.widget.textbox("<b>聲</b>"),
+         volumewidget,
+         wibox.widget.textbox("<b>溫</b>"),
+         thermalwidget,
+         wibox.widget.textbox("<b>電</b>"),
+         batwidget,
+         wibox.widget.textbox("<b>存</b>"),
+         memwidget,
+         wibox.widget.textbox("<b>核</b>"),
+         cpuwidget,
+         wibox.widget.systray(),
+         mytextclock,
+         s.mylayoutbox,
+      },
+   }
 end
 -- }}}
 

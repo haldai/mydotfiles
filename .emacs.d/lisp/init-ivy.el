@@ -11,7 +11,7 @@
   :defines (projectile-completion-system magit-completing-read-function)
   :commands swiper-isearch
   :bind (("C-s" . swiper)
-         ("s-f" . swiper-isearch)
+         ("C-c C-s" . swiper-isearch)
          ("C-S-s" . swiper-all)
 
          ("C-c C-r" . ivy-resume)
@@ -91,8 +91,7 @@
   ;; (setq ivy-format-function 'ivy-format-function-arrow)
   (setq ivy-initial-inputs-alist nil)
   (setq ivy-re-builders-alist
-        '((read-file-name-internal . ivy--regex-fuzzy)
-          (swiper . ivy--regex-plus)
+        '((swiper . ivy--regex-plus)
           (swiper-all . ivy--regex-plus)
           (swiper-isearch . ivy--regex-plus)
           (counsel-ag . ivy--regex-plus)
@@ -102,7 +101,12 @@
           (counsel-grep . ivy--regex-plus)
           (t . ivy--regex-fuzzy)))
 
-  ;; For alignment `tab-width' must be 1 in minibuffer
+  ;; sorting
+  (setq ivy-sort-matches-functions-alist '((t . nil)
+					   (ivy-switch-buffer . ivy-sort-function-buffer)
+					   (counsel-find-file . ivy-sort-function-buffer)))
+
+        ;; For alignment `tab-width' must be 1 in minibuffer
   (defun my-ivy-format-function-arrow (cands)
     "Transform CANDS into a string for minibuffer."
     (ivy--format-function-generic
