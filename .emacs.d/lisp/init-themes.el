@@ -207,5 +207,10 @@
 (when (boundp 'x-gtk-use-system-tooltips)
   (setq x-gtk-use-system-tooltips nil))
 
+;; transparent
+(set-frame-parameter (selected-frame) 'alpha '(95 . 70))
+(add-to-list 'default-frame-alist '(alpha . (95 . 70)))
+
 (provide 'init-themes)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-themes.el ends here
