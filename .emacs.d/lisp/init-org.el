@@ -85,6 +85,8 @@
   (org-babel-do-load-languages 'org-babel-load-languages
                                load-language-list)
 
+  (use-package htmlize :straight t)
+
   ;; Rich text clipboard
   (use-package org-rich-yank
     :straight t
@@ -131,8 +133,8 @@
     :straight t)
 
   ;; reveal
-  (use-package org-re-reveal
-    :straight t)
+  (use-package ox-reveal
+    :straight (ox-reveal :type git :host github :repo "yjwen/org-reveal"))
 
   (eval-and-compile
     (defun hot-expand (str &optional mod)
