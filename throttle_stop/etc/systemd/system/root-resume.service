@@ -1,0 +1,10 @@
+[Unit]
+Description=Local system resume actions
+After=suspend.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/systemctl restart i8kmon.service
+
+[Install]
+WantedBy=suspend.target
