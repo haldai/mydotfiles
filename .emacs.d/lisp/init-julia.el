@@ -10,11 +10,10 @@
   :straight (julia-emacs :type git :host github :repo "JuliaEditorSupport/julia-emacs")
   :mode ("\\.jl$" . julia-mode))
 
+
+;; jupyter mode
 (use-package jupyter :straight t)
 
-(setq org-babel-default-header-args:jupyter-julia '((:async . "yes")
-                                                    (:session . "jl")
-                                                    (:kernel . "julia-1.1")))
 
 (provide 'init-julia)
 
