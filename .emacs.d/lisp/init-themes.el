@@ -46,7 +46,11 @@
   (set-font emacs-english-font emacs-cjk-font emacs-font-size-pair))
 
 ;; apply for every frame when using server daemon
-(add-hook 'after-make-window-system-frame-hooks (lambda () (set-font emacs-english-font emacs-cjk-font emacs-font-size-pair)))
+(add-hook 'after-make-window-system-frame-hooks
+          (lambda () (set-font emacs-english-font emacs-cjk-font emacs-font-size-pair)))
+(add-hook 'after-make-window-system-frame-hooks
+          (lambda () (reset-font-scale-keybind)))
+
 
 (defun emacs-step-font-size (step)
   "Increase/Decrease emacs's font size."
@@ -75,10 +79,11 @@
   "Increase emacs's font-size acording emacs-font-size-pair-list."
   (interactive) (emacs-step-font-size -1))
 
-(when (display-graphic-p)
-  (global-set-key (kbd "C-x C-=") 'increase-emacs-font-size)
-  (global-set-key (kbd "C-x C--") 'decrease-emacs-font-size)
-  (global-set-key (kbd "C-x C-0") 'restore-emacs-font-size))
+(defun reset-font-scale-keybind ()
+  (when (display-graphic-p)
+    (global-set-key (kbd "C-x C-=") 'increase-emacs-font-size)
+    (global-set-key (kbd "C-x C--") 'decrease-emacs-font-size)
+    (global-set-key (kbd "C-x C-0") 'restore-emacs-font-size)))
 
 ;; mode-line
 (use-package doom-modeline

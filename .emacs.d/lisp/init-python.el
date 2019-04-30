@@ -37,14 +37,7 @@
     :diminish yapf-mode
     :hook (python-mode . yapf-mode)))
 
-;; Emacs IPython Notebook
-(use-package ein
-  :straight t
-  :diminish ein:notebook-mode
-  :defines ein:completion-backend
-  :init (setq ein:completion-backend 'ein:use-company-backend))
-
-(provide 'init-python)
+  (provide 'init-python)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-python.el ends here

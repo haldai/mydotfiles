@@ -58,6 +58,7 @@
 
   (defvar load-language-list '((emacs-lisp . t)
                                (perl . t)
+                               (julia . t)
                                (python . t)
                                (ruby . t)
                                (js . t)
@@ -68,22 +69,18 @@
                                (ditaa . t)
                                (dot . t)
                                (gnuplot . t)
-                               (plantuml . t)))
+                               (plantuml . t)
+                               (jupyter . t)))
+
+  (setq inferior-julia-program-name "julia")
 
   ;; ob-sh renamed to ob-shell since 26.1.
   (cl-pushnew '(shell . t) load-language-list)
 
-  (use-package ob-go
-    :straight t
-    :init (cl-pushnew '(go . t) load-language-list))
-
-  (use-package ob-ipython
-    :straight t
-    :if (executable-find "jupyter")     ; DO NOT remove
-    :init (cl-pushnew '(ipython . t) load-language-list))
-
   (org-babel-do-load-languages 'org-babel-load-languages
                                load-language-list)
+
+  (org-babel-jupyter-override-src-block "python")
 
   (use-package htmlize :straight t)
 
