@@ -152,7 +152,39 @@
 
   (setq gnus-dired-mail-mode 'mu4e-user-agent)
   (add-hook 'dired-mode-hook 'turn-on-gnus-dired-mode)
-  )
+
+  ;; use C-1 c for add cc if already in composition mode
+  (define-key mu4e-compose-mode-map (kbd "C-1 c") 'message-goto-cc)
+
+  ;; signature
+  (defun my-mu4e-choose-signature ()
+    "Insert one of a number of sigs"
+    (interactive)
+    (let ((message-signature
+           (mu4e-read-option "Signature:"
+                             '(("formal" .
+                                (concat
+                                 "-----\n"
+                                 "Wang-Zhou DAI, PhD\n"
+                                 "Research Associate\n"
+                                 "Department of Computing, Imperial College London.\n"
+                                 "W: http://www.example.com\n"))
+                               ("informal" .
+                                "Wang-Zhou.\n")))))
+      (message-insert-signature)))
+
+  (add-hook 'mu4e-compose-mode-hook
+            (lambda () (local-set-key (kbd "C-c C-w") #'my-mu4e-choose-signature)))
+
+  ;; insert signature here
+  (defun insert-mu4e-sig-here ()
+    "Insert the mu4e signature here, assuming it is a string."
+    (interactive)
+    (save-excursion
+      (when (stringp mu4e-compose-signature)
+        (insert mu4e-compose-signature))))
+
+  (add-hook 'mu4e-compose-mode-hook 'insert-mu4e-sig-here))
 
 (provide 'init-mail)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
