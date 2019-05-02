@@ -2,7 +2,7 @@ __build_info:
   rime_version: 1.4.0
   timestamps:
     default: 1526362370
-    default.custom: 1552675565
+    default.custom: 1552722821
     luna_pinyin.custom: 1552675708
     luna_pinyin.schema: 1526362370
     symbols: 1526362370
@@ -74,7 +74,7 @@ key_binder:
     - {accept: "Control+period", toggle: ascii_punct, when: always}
   import_preset: default
 menu:
-  page_size: 9
+  page_size: 5
 punctuator:
   full_shape:
     " ": {commit: "　"}

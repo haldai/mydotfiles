@@ -1,11 +1,11 @@
 patch:
-  "menu/page_size": 9
+  "menu/page_size": 5
   ascii_composer/good_old_caps_lock: true
   ascii_composer/switch_key:
     Caps_Lock: commit_code
-    Shift_L: noop
+    Shift_L: commit_code
     Shift_R: noop
-    Control_L: commit_code
-    Control_R: commit_code
+    Control_L: noop
+    Control_R: noop
   schema_list:
-    - schema: luna_pinyin
+    - schema: luna_pinyin_simp

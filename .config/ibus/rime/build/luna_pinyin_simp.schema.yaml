@@ -2,8 +2,8 @@ __build_info:
   rime_version: 1.4.0
   timestamps:
     default: 1526362370
-    default.custom: 1552674355
-    luna_pinyin_simp.custom: 0
+    default.custom: 1552723460
+    luna_pinyin_simp.custom: 1552723492
     luna_pinyin_simp.schema: 1526362370
 custom_phrase:
   db_class: stabledb
@@ -73,7 +73,7 @@ key_binder:
     - {accept: "Control+Shift+dollar", toggle: zh_simp, when: always}
   import_preset: default
 menu:
-  page_size: 9
+  page_size: 5
 punctuator:
   full_shape:
     " ": {commit: "　"}
@@ -162,7 +162,10 @@ simplifier:
   option_name: zh_simp
 speller:
   algebra:
+    - "xform/^([b-df-np-z])$/$1_/"
     - "erase/^xx$/"
+    - "derive/([eio])n$/$1ng/"
+    - "derive/([eio])ng$/$1n/"
     - "abbrev/^([a-z]).+$/$1/"
     - "abbrev/^([zcs]h).+$/$1/"
     - "derive/^([nl])ve$/$1ue/"
@@ -179,7 +182,7 @@ speller:
   delimiter: " '"
 switches:
   - name: ascii_mode
-    reset: 0
+    reset: 1
     states: ["中文", "西文"]
   - name: full_shape
     states: ["半角", "全角"]
@@ -189,9 +192,7 @@ switches:
   - name: ascii_punct
     states: ["。，", "．，"]
 translator:
-  dictionary: luna_pinyin
+  dictionary: luna_pinyin.extended
   preedit_format:
-    - "xform/([nl])v/$1ü/"
-    - "xform/([nl])ue/$1üe/"
-    - "xform/([jqxy])v/$1u/"
+    - "xform/([nljqxyzcs])v/$1ü/"
   prism: luna_pinyin_simp
