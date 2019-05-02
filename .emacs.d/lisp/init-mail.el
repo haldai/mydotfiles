@@ -51,6 +51,18 @@
                         mu4e-maildir-shortcuts) " OR ")
            "All inboxes" ?i)))
   ;; multiple accounts
+  (defvar my-mu4e-account-alist
+    '(("work"
+       (mu4e-sent-folder "/work/Sent")
+       (mu4e-drafts-folder "/work/Drafts")
+       (mu4e-trash-folder "/work/Trash")
+       (user-mail-address "w.dai@imperial.ac.uk"))
+      ("personal"
+       (mu4e-sent-folder "/personal/Sent")
+       (mu4e-drafts-folder "/personal/Drafts")
+       (mu4e-trash-folder "/personal/Trash")
+       (user-mail-address "dai.wzero@hotmail.com"))))
+
   (setq mu4e-contexts
         `( ,(make-mu4e-context
              :name "Work"
@@ -63,9 +75,6 @@
                                                                  :to "w.dai@imperial.ac.uk")))
              :vars '( (user-mail-address . "w.dai@imperial.ac.uk")
                       (user-full-name . "Wang-Zhou Dai")
-                      (mu4e-compose-signature . (concat
-                                                 "Kind regards,\n"
-                                                 "\tWang-Zhou\n"))
                       (mu4e-sent-folder . "/work/Sent")
                       (mu4e-drafts-folder . "/work/Drafts")
                       (mu4e-trash-folder . "/work/Trash")))
@@ -80,9 +89,6 @@
                                                                  :to "dai.wzero@hotmail.com")))
              :vars '( (user-mail-address . "dai.wzero@hotmail.com")
                       (user-full-name . "Wang-Zhou Dai")
-                      (mu4e-compose-signature . (concat
-                                                 "Kind regards,\n"
-                                                 "\tWang-Zhou.\n"))
                       (mu4e-sent-folder . "/personal/Sent")
                       (mu4e-drafts-folder . "/personal/Drafts")
                       (mu4e-trash-folder . "/personal/Trash")))))
@@ -121,19 +127,26 @@
   (setq message-sendmail-envelope-from 'header)
   (add-hook 'message-send-mail-hook 'choose-msmtp-account)
 
-  ;; use the address received the message to as the sender of the reply
-  (add-hook 'mu4e-compose-pre-hook
-            (defun my-set-from-address ()
-              "Set the From address based on the To address of the original."
-              (let ((msg mu4e-compose-parent-message)) ;; msg is shorter...
-                (if msg
-                    (setq user-mail-address
-                          (cond
-                           ((mu4e-message-contact-field-matches msg :to "dai.wzero@hotmail.com")
-                            "dai.wzero@hotmail.com")
-                           ((mu4e-message-contact-field-matches msg :to "w.dai@imperial.ac.uk")
-                            "w.dai@imperial.ac.uk")
-                           (t "dai.wzero@hotmail.com")))))))
+  ;; set account automatically
+  (defun my-mu4e-set-account ()
+    "Set the account for composing a message."
+    (let* ((account
+            (if mu4e-compose-parent-message
+                (let ((maildir (mu4e-message-field mu4e-compose-parent-message :maildir)))
+                  (string-match "/\\(.*?\\)/" maildir)
+                  (match-string 1 maildir))
+              (completing-read (format "Compose with account: (%s) "
+                                       (mapconcat #'(lambda (var) (car var))
+                                                  my-mu4e-account-alist "/"))
+                               (mapcar #'(lambda (var) (car var)) my-mu4e-account-alist)
+                               nil t nil nil (caar my-mu4e-account-alist))))
+           (account-vars (cdr (assoc account my-mu4e-account-alist))))
+      (if account-vars
+          (mapc #'(lambda (var)
+                    (set (car var) (cadr var)))
+                account-vars)
+        (error "No email account found"))))
+  (add-hook 'mu4e-compose-pre-hook 'my-mu4e-set-account)
 
   ;; send attachment directly from dired
   (require 'gnus-dired)

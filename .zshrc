@@ -137,7 +137,7 @@ CUDAPATH="/opt/cuda"
 SWIPLPATH="/usr/local/lib/swipl"
 
 # most
-export PAGER="less"
+export PAGER="bat"
 export TERM=xterm-256color
 
 # visual
