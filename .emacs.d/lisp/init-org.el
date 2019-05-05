@@ -21,7 +21,8 @@
         org-startup-indented t
         org-ellipsis (if (char-displayable-p ?) "  " nil)
         org-pretty-entities t
-        org-hide-emphasis-markers t)
+        org-hide-emphasis-markers t
+        org-image-actual-width 500)
 
   (add-to-list 'org-export-backends 'md)
 
