@@ -18,7 +18,9 @@
 (setq make-backup-files nil)               ; Forbide to make backup files
 (setq auto-save-default nil)               ; Disable auto save
 (setq set-mark-command-repeat-pop t)       ; Repeating C-SPC after popping mark pops it again
+(setq auto-window-vscroll nil)
 ;; (setq-default kill-whole-line t)           ; Kill line including '\n'
+(setq global-visual-line-mode t)
 
 (setq-default major-mode 'text-mode)
 
