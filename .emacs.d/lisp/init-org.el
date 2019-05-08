@@ -85,7 +85,8 @@
   ;; juypter-julia settings
   (setq org-babel-default-header-args:jupyter-julia '((:async . "yes")
                                                       (:session . "jl")
-                                                      (:kernel . "julia-1.1")))
+                                                      (:kernel . "julia-1.1")
+                                                      (:exports . "both")))
 
   (use-package htmlize :straight t)
 
