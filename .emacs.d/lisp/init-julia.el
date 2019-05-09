@@ -12,7 +12,10 @@
 
 
 ;; jupyter mode
-(use-package jupyter :straight t)
+(use-package jupyter
+  :straight t
+  :bind (("C-c C-x r" . jupyter-repl-restart-kernel)
+         ("C-c C-x h" . jupyter-org-restart-and-execute-to-point)))
 
 
 (provide 'init-julia)

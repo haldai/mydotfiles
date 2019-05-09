@@ -12,6 +12,9 @@
          ("C-c b" . org-switchb))
   :hook (org-indent-mode . (lambda() (diminish 'org-indent-mode)))
   :config
+  ;; indent in source code block
+  (setq org-src-tab-acts-natively t)
+
   (setq org-agenda-files '("~/org")
         org-todo-keywords '((sequence "TODO(T)" "DOING(I)" "HANGUP(H)" "|" "DONE(D)" "CANCEL(C)")
                             (sequence "⚑(t)" "🏴(i)" "❓(h)" "|" "✔(d)" "✘(c)"))
@@ -81,6 +84,13 @@
                                load-language-list)
 
   (org-babel-jupyter-override-src-block "python")
+
+  (add-to-list 'org-structure-template-alist '("jj" . "src jupyter-julia"))
+  (add-to-list 'org-structure-template-alist '("jl" . "src julia"))
+  (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
+  (add-to-list 'org-structure-template-alist '("pl" . "src prolog"))
+  (add-to-list 'org-structure-template-alist '("py" . "src python"))
+  (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
 
   ;; juypter-julia settings
   (setq org-babel-default-header-args:jupyter-julia '((:async . "yes")
