@@ -1,10 +1,13 @@
 [Unit]
-Description=Local system resume actions
+Description=i8kmon
 After=suspend.target
 
 [Service]
-Type=simple
+User=root
+Type=oneshot
 ExecStart=/usr/bin/systemctl restart i8kmon.service
+TimeoutSec=0
+StandardOutput=syslog
 
 [Install]
-WantedBy=suspend.target
+WantedBy=multi-user.target sleep.target
