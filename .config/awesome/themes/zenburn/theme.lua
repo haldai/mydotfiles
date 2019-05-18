@@ -206,7 +206,7 @@ local separators = lain.util.separators
 --- {{{ Widgets
 local mytextclock = wibox.widget.textclock(" %a %m/%d %H:%M ")
 mytextclock.font = "方正宋刻本秀楷 Bold 12"
-mytextclock.forced_width = 136
+mytextclock.forced_width = 140
 
 -- {{{ CPU load
 theme.cpugraph = wibox.widget {
@@ -375,6 +375,7 @@ local brightnesswidget = wibox.container.margin(brightnessbg, 5, 8, 7, 7)
 --- }}}
 
 -- {{{ Thermal
+-- tonumber(string.match('+45.0°C', '%d+.%d+'))
 theme.thermalbar = wibox.widget {
    {
       max_value = 100,
@@ -392,87 +393,87 @@ theme.thermalbar = wibox.widget {
    layout = wibox.container.rotate,
 }
 thermalwidget_t = awful.tooltip({ objects = { theme.thermalbar },})
-vicious.cache(vicious.widgets.thermal)
-vicious.register(theme.thermalbar, vicious.widgets.thermal,
-                 function (widget, args)
-                    local temp = tonumber(args[1])
-                    thermalwidget_t:set_text(string.format("核心溫度：%s ℃", args[1]))
-                    if temp >= 80 then
-                       widget.widget:set_color(red1)
-                    elseif temp < 80 and temp >= 70 then
-                       widget.widget:set_color(orange)
-                    elseif temp < 70 and temp >= 40 then
-                       widget.widget:set_color(white1)
-                    else
-                       widget.widget:set_color(blue1)
-                    end
-                    widget.widget:set_value(args[1])
-                 end, 7, "thermal_zone10")
-local thermalbg = wibox.container.background(theme.thermalbar, black2, gears.shape.rectangle)
-local thermalwidget = wibox.container.margin(thermalbg, 5, 8, 5, 5)
---- }}}
---- {{{ Calendar
--- load the widget code
-local calendar = require("calendar")
--- attach it as popup to your text clock widget:
-calendar({
-      today_color = red1,
-      html = '<span font_desc="SauceCodePro Nerd Font Mono">\n%s</span>'
-}):attach(mytextclock)
---- }}}
---- {{{ Mail
-theme.emailnum = wibox.widget {
-   markup = "<b>未知</b>",
-   align  = 'center',
-   valign = 'center',
-   widget = wibox.widget.textbox
-}
-emailnum_t = awful.tooltip({ objects = { theme.emailnum },})
-local emailbg = wibox.widget {
-   theme.emailnum,
-   bg = black1,
-   shape = gears.shape.rectangle,
-   shape_border_width = 1,
-   shape_border_color = white1,
-   forced_width = 20,
-   widget = wibox.container.background
-}
-awful.widget.watch(
-   script_path .. "offlineimap-count.sh", 600,
-   function(widget, stdout, stderr, exitreason, exitcode)
-      local unread_emails_num = tonumber(stdout) or 0
-      if (unread_emails_num > 0) then
-         theme.emailnum:set_markup_silently("<span color=\"" .. white2 .. "\" font_desc=\"SauceCodePro Nerd Font Mono\"><b>" .. tostring(unread_emails_num) .. "</b></span>")
-         emailbg:set_bg(red1)
-         emailnum_t:set_text("郵件！右鍵！")
-      elseif (unread_emails_num == 0) then
-         theme.emailnum:set_markup_silently("<span color=\"" .. white1 .. "\" font_desc=\"SauceCodePro Nerd Font Mono 9\">無</span>")
-         emailbg:set_bg(black1)
-         emailnum_t:set_text("暫無新郵件")
-      end
-   end
-)
-theme.emailnum:buttons(
-   my_table.join(
-      awful.button({}, 3, function()
-            awful.spawn("emacsclient -c -a emacs --eval \"(mu4e)\"")
+   vicious.cache(vicious.widgets.thermal)
+   vicious.register(theme.thermalbar, vicious.widgets.thermal,
+                    function (widget, args)
+                       local temp = tonumber(args[1])
+                       thermalwidget_t:set_text(string.format("核心溫度：%s ℃", args[1]))
+                       if temp >= 80 then
+                          widget.widget:set_color(red1)
+                       elseif temp < 80 and temp >= 70 then
+                          widget.widget:set_color(orange)
+                       elseif temp < 70 and temp >= 40 then
+                          widget.widget:set_color(white1)
+                       else
+                          widget.widget:set_color(blue1)
+                       end
+                       widget.widget:set_value(args[1])
+                    end, 7, { "hwmon1", "hwmon" })
+   local thermalbg = wibox.container.background(theme.thermalbar, black2, gears.shape.rectangle)
+   local thermalwidget = wibox.container.margin(thermalbg, 5, 8, 5, 5)
+   --- }}}
+   --- {{{ Calendar
+   -- load the widget code
+   local calendar = require("calendar")
+   -- attach it as popup to your text clock widget:
+   calendar({
+         today_color = red1,
+         html = '<span font_desc="SauceCodePro Nerd Font Mono">\n%s</span>'
+   }):attach(mytextclock)
+   --- }}}
+   --- {{{ Mail
+   theme.emailnum = wibox.widget {
+      markup = "<b>未知</b>",
+      align  = 'center',
+      valign = 'center',
+      widget = wibox.widget.textbox
+   }
+   emailnum_t = awful.tooltip({ objects = { theme.emailnum },})
+   local emailbg = wibox.widget {
+      theme.emailnum,
+      bg = black1,
+      shape = gears.shape.rectangle,
+      shape_border_width = 1,
+      shape_border_color = white1,
+      forced_width = 20,
+      widget = wibox.container.background
+   }
+   awful.widget.watch(
+      script_path .. "offlineimap-count.sh", 600,
+      function(widget, stdout, stderr, exitreason, exitcode)
+         local unread_emails_num = tonumber(stdout) or 0
+         if (unread_emails_num > 0) then
+            theme.emailnum:set_markup_silently("<span color=\"" .. white2 .. "\" font_desc=\"SauceCodePro Nerd Font Mono\"><b>" .. tostring(unread_emails_num) .. "</b></span>")
+            emailbg:set_bg(red1)
+            emailnum_t:set_text("郵件！右鍵！")
+         elseif (unread_emails_num == 0) then
             theme.emailnum:set_markup_silently("<span color=\"" .. white1 .. "\" font_desc=\"SauceCodePro Nerd Font Mono 9\">無</span>")
             emailbg:set_bg(black1)
             emailnum_t:set_text("暫無新郵件")
-      end)
-))
-local emailwidget = wibox.container.margin(emailbg, 5, 8, 5, 5)
---- }}}
+         end
+      end
+   )
+   theme.emailnum:buttons(
+      my_table.join(
+         awful.button({}, 3, function()
+               awful.spawn("emacsclient -c -a emacs --eval \"(mu4e)\"")
+               theme.emailnum:set_markup_silently("<span color=\"" .. white1 .. "\" font_desc=\"SauceCodePro Nerd Font Mono 9\">無</span>")
+               emailbg:set_bg(black1)
+               emailnum_t:set_text("暫無新郵件")
+         end)
+   ))
+   local emailwidget = wibox.container.margin(emailbg, 5, 8, 5, 5)
+   --- }}}
 
---- }}}
+   --- }}}
 
--- {{{ Wibar
-local layoutlist = { lain.layout.centerwork, awful.layout.suit.tile, awful.layout.suit.tile,
-                     awful.layout.suit.tile, awful.layout.suit.tile, awful.layout.suit.floating,
-                     awful.layout.suit.tile, awful.layout.suit.tile, awful.layout.suit.tile }
+   -- {{{ Wibar
+   local layoutlist = { lain.layout.centerwork, awful.layout.suit.tile, awful.layout.suit.tile,
+                        awful.layout.suit.tile, awful.layout.suit.tile, awful.layout.suit.floating,
+                        awful.layout.suit.tile, awful.layout.suit.tile, awful.layout.suit.tile }
 
-function theme.at_screen_connect(s)
-   -- Quake application
+   function theme.at_screen_connect(s)
+      -- Quake application
    s.quake = lain.util.quake({ app = awful.util.terminal })
 
    -- Wallpaper
