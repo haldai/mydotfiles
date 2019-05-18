@@ -149,8 +149,7 @@
 
   ;; reveal
   (use-package ox-reveal
-    :straight (ox-reveal :type git :host github :repo "yjwen/org-reveal"
-                         :fork (:host github :repo "haldai/org-reveal"))))
+    :straight (ox-reveal :type git :host github :repo "haldai/org-reveal")))
 
 (provide 'init-org)
 
