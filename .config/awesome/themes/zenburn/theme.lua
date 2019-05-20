@@ -206,7 +206,7 @@ local separators = lain.util.separators
 --- {{{ Widgets
 local mytextclock = wibox.widget.textclock(" %a %m/%d %H:%M ")
 mytextclock.font = "方正宋刻本秀楷 Bold 12"
-mytextclock.forced_width = 140
+mytextclock.forced_width = 150
 
 -- {{{ CPU load
 theme.cpugraph = wibox.widget {
