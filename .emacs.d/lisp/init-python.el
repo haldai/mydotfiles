@@ -28,14 +28,7 @@
               (process-query-on-exit-flag (get-process "Python"))))
 
   ;; Live Coding in Python
-  (use-package live-py-mode :straight t)
-
-  ;; Format using YAPF
-  ;; Install: pip install yapf
-  (use-package yapfify
-    :straight t
-    :diminish yapf-mode
-    :hook (python-mode . yapf-mode)))
+  (use-package live-py-mode :straight t))
 
   (provide 'init-python)
 
