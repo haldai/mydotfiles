@@ -164,9 +164,11 @@
   (setq doom-modeline-env-version t)
   ;; Or for individual languages
   (setq doom-modeline-env-enable-python t)
-  (setq doom-modeline-env-enable-ruby t)
-  (setq doom-modeline-env-enable-perl t)
+  (setq doom-modeline-env-enable-ruby nil)
+  (setq doom-modeline-env-enable-perl nil)
   (setq doom-modeline-env-enable-go t)
+  (setq doom-modeline-env-enable-elixir nil)
+  (setq doom-modeline-env-enable-rust nil)
 
   ;; Change the executables to use for the language version string
   (setq doom-modeline-env-python-executable "python")

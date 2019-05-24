@@ -6,9 +6,33 @@
 ;;; Code:
 
 ;; Prolog Mode
-(use-package prolog-mode
+(use-package prolog
+  :diminish prolog-mode
   :mode (("\\.pl$" . prolog-mode)
-         ("\\.m$" . mercury-mode)))
+         ("\\.m$" . mercury-mode))
+  :bind (("C-c %" . prolog-insert-comment-block)
+         ("C-c C-c l" . prolog-insert-library))
+  :config
+  (setq prolog-system 'swi
+        prolog-program-switches '((swi ("-G128M" "-T128M" "-L128M" "-O"))
+                                  (t nil))
+        prolog-electric-if-then-else-flag t)
+
+  (defun prolog-insert-comment-block ()
+    "Insert a PceEmacs-style comment block like /* - - ... - - */ "
+    (interactive)
+    (let ((dashes "-"))
+      (dotimes (_ 36) (setq dashes (concat "- " dashes)))
+      (insert (format "/* %s\n\n%s */" dashes dashes))
+      (forward-line -1)
+      (indent-for-tab-command))
+    )
+
+  (defun prolog-insert-library ()
+    "Insert a module"
+    (interactive)
+    (insert ":- use_module(library()).")
+    (forward-char -3)))
 
 (use-package ediprolog
   :straight t
