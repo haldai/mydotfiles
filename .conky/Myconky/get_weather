@@ -12,8 +12,8 @@ mkdir -p ~/".cache/harmattan-conky"
 
 api_prefix="api.openweathermap.org/data/2.5/"
 
-appid="APPID=4e68bd12fdabd3a64051ea35812465f3"
-id="&q=Nanjing,CN"
+appid="APPID=***********************"
+id="&q=London,GB"
 units="&units=metric"
 lang="&lang=zh_cn"
 
