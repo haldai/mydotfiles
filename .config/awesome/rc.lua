@@ -425,7 +425,7 @@ clientkeys = gears.table.join(
   awful.key({ modkey }, "r",
     function (c)
       local notify = naughty.notify({ title = "窗口大小調整模式",
-                                      text = "\tp+/n-\n\tf+/b-\n\tEsc/↵",
+                                      text = "\tn+/p-\n\tf+/b-\n\tEsc/↵",
                                       timeout = 0,
                                       position = "top_middle",
                                       fg = beautiful.fg_urgent,
@@ -441,20 +441,20 @@ clientkeys = gears.table.join(
               return
             end
             if c.floating or awful.screen.focused().selected_tag.layout == awful.layout.suit.floating then
-              if (key == "p" or key == "Up") and event == "press" then
-                c:relative_move(0, 0, 0, 10)
-              elseif (key == "n" or key == "Down") and event == "press" then
-                c:relative_move(0, 0, 0, -10)
+               if (key == "n" or key == "Down") and event == "press" then
+                  c:relative_move(0, 0, 0, 10)
+               elseif (key == "p" or key == "up") and event == "press" then
+                  c:relative_move(0, 0, 0, -10)
               elseif (key == "b" or key == "Left") and event == "press" then
                 c:relative_move(0, 0, -10, 0)
               elseif (key == "f" or key == "Right") and event == "press" then
                 c:relative_move(0, 0, 10, 0)
               end
             else
-              if (key == "p" or key == "Up") and event == "press" then
-                awful.client.incwfact(0.01)
-              elseif (key == "n" or key == "Down") and event == "press" then
-                awful.client.incwfact(-0.01)
+               if (key == "n" or key == "Down") and event == "press" then
+                  awful.client.incwfact(0.01)
+               elseif (key == "p" or key == "Up") and event == "press" then
+                  awful.client.incwfact(-0.01)
               elseif (key == "b" or key == "Left") and event == "press" then
                 awful.tag.incmwfact(-0.01)
               elseif (key == "f" or key == "Right") and event == "press" then
