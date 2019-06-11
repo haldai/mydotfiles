@@ -12,6 +12,9 @@
          ("C-c b" . org-switchb))
   :hook (org-indent-mode . (lambda() (diminish 'org-indent-mode)))
   :config
+  ;; visual-line-mode
+  (add-hook 'org-mode-hook 'visual-line-mode-hook)
+
   ;; indent in source code block
   (setq org-src-tab-acts-natively t)
 
