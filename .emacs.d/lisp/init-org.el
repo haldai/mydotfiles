@@ -13,7 +13,7 @@
   :hook (org-indent-mode . (lambda() (diminish 'org-indent-mode)))
   :config
   ;; visual-line-mode
-  (add-hook 'org-mode-hook 'visual-line-mode-hook)
+  (add-hook 'org-mode-hook 'visual-line-mode)
 
   ;; indent in source code block
   (setq org-src-tab-acts-natively t)
@@ -45,8 +45,8 @@
   ;; More fancy UI
   (use-package org-bullets
     :straight t
-    :if (char-displayable-p ?◉)
-    :hook (org-mode . org-bullets-mode))
+    :hook
+    (org-mode . org-bullets-mode))
 
   (use-package org-fancy-priorities
     :straight t
