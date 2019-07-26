@@ -15,7 +15,8 @@ run caffeine
 run udiskie -ans
 run blueman-applet
 run libinput-gestures-setup start
-run ss-qt5
+# run ss-qt5
+run emacs --daemon
 run xautolock -time 10 -locker slock
 run /home/daiwz/.conky/myconky-start.sh
 
