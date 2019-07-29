@@ -207,7 +207,6 @@ local separators = lain.util.separators
 --- {{{ Widgets
 local mytextclock = wibox.widget.textclock(" %a %m/%d %H:%M ")
 mytextclock.font = "方正宋刻本秀楷 Bold 12"
-mytextclock.forced_width = 150
 
 -- {{{ CPU load
 theme.cpugraph = wibox.widget {
@@ -222,7 +221,7 @@ theme.cpugraph = wibox.widget {
 cpuwidget_t = awful.tooltip({ objects = { theme.cpugraph },})
 vicious.register(theme.cpugraph, vicious.widgets.cpu,
                  function (widget, args)
-                    cpuwidget_t:set_text(string.format("CPU使用率：%s%%\n核心使用率：%s%%, %s%%, %s%%, %s%%, %s%%, %s%%, %s%%, %s%%", args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9]))
+                    cpuwidget_t:set_text(string.format("CPU使用率：\n%s%%\n核心使用率：\n%s%%, %s%%, %s%%, %s%%,\n%s%%, %s%%, %s%%, %s%%,\n%s%%, %s%%, %s%%, %s%%,\n%s%%, %s%%, %s%%, %s%%,\n%s%%, %s%%, %s%%, %s%%", args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9], args[10], args[11], args[12], args[13], args[14], args[15], args[16], args[17], args[18], args[19], args[20], args[21]))
                     return args[1]
                  end, 5)
 local cpubg = wibox.container.background(theme.cpugraph, black2, gears.shape.rectangle)
@@ -414,13 +413,21 @@ local thermalbg = wibox.container.background(theme.thermalbar, black2, gears.sha
 local thermalwidget = wibox.container.margin(thermalbg, 5, 8, 5, 5)
 --- }}}
 --- {{{ Calendar
--- load the widget code
-local calendar = require("calendar")
--- attach it as popup to your text clock widget:
-calendar({
-      today_color = red1,
-      html = '<span font_desc="SauceCodePro Nerd Font Mono">\n%s</span>'
-}):attach(mytextclock)
+local calendar = awful.widget.calendar_popup.year({
+      font          = 'SauceCodePro Nerd Font Mono',
+      spacing       = 2,
+      week_numbers  = false,
+      start_sunday  = false,
+      long_weekdays = true,
+      opacity       = 0.9,
+      bg            = black3,
+      margin        = 10,
+      style_focus   = {
+         fg_color   = yellow1,
+         bg_color   = black0
+      }
+})
+calendar:attach( mytextclock, "tr" )
 --- }}}
 --- {{{ Mail
 theme.emailnum = wibox.widget {
@@ -569,6 +576,7 @@ function theme.at_screen_connect(s)
    -- Add widgets to the wibox
    s.mywibox:setup {
       layout = wibox.layout.align.horizontal,
+      expand = outside,
       { -- Left widgets
          layout = wibox.layout.fixed.horizontal,
          -- mylauncher,
@@ -581,14 +589,14 @@ function theme.at_screen_connect(s)
          -- mykeyboardlayout,
          wibox.widget.textbox("<b>郵</b>"),
          emailwidget,
-         wibox.widget.textbox("<b>亮</b>"),
-         brightnesswidget,
+--        wibox.widget.textbox("<b>亮</b>"),
+--         brightnesswidget,
          wibox.widget.textbox("<b>聲</b>"),
          volumewidget,
          wibox.widget.textbox("<b>溫</b>"),
          thermalwidget,
-         wibox.widget.textbox("<b>電</b>"),
-         batwidget,
+--         wibox.widget.textbox("<b>電</b>"),
+--         batwidget,
          wibox.widget.textbox("<b>存</b>"),
          memwidget,
          wibox.widget.textbox("<b>核</b>"),
