@@ -221,7 +221,7 @@ theme.cpugraph = wibox.widget {
 cpuwidget_t = awful.tooltip({ objects = { theme.cpugraph },})
 vicious.register(theme.cpugraph, vicious.widgets.cpu,
                  function (widget, args)
-                    cpuwidget_t:set_text(string.format("CPU使用率：\n%s%%\n核心使用率：\n%s%%, %s%%, %s%%, %s%%,\n%s%%, %s%%, %s%%, %s%%.\n nothing", args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9]))
+                    cpuwidget_t:set_text(string.format("CPU使用率：\n%s%%\n核心使用率：\n%s%%, %s%%, %s%%, %s%%,\n%s%%, %s%%, %s%%, %s%%.", args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9]))
                     return args[1]
                  end, 5)
 local cpubg = wibox.container.background(theme.cpugraph, black2, gears.shape.rectangle)
