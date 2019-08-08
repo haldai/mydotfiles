@@ -279,65 +279,65 @@ globalkeys = gears.table.join(
   awful.key({ modkey }, ".", awful.tag.viewnext,
     {description = "view next", group = "tag"}),
   awful.key({ modkey }, "k", awful.tag.history.restore,
-    {description = "go back", group = "tag"}),
+     {description = "go back", group = "tag"}),
   awful.key({ modkey }, "p",
-    function ()
-      awful.client.focus.bydirection("up")
-      if client.focus then client.focus:raise()  end
-    end,
-    {description = "focus up", group = "client"}),
+     function ()
+        awful.client.focus.bydirection("up")
+        if client.focus then client.focus:raise()  end
+     end,
+     {description = "focus up", group = "client"}),
   awful.key({ modkey }, "n",
-    function ()
-      awful.client.focus.bydirection("down")
-      if client.focus then client.focus:raise()  end
-    end,
-    {description = "focus down", group = "client"}),
+     function ()
+        awful.client.focus.bydirection("down")
+        if client.focus then client.focus:raise()  end
+     end,
+     {description = "focus down", group = "client"}),
   awful.key({ modkey }, "b",
-    function ()
-      awful.client.focus.bydirection("left")
-      if client.focus then client.focus:raise()  end
-    end,
-    {description = "focus left", group = "client"}),
+     function ()
+        awful.client.focus.bydirection("left")
+        if client.focus then client.focus:raise()  end
+     end,
+     {description = "focus left", group = "client"}),
   awful.key({ modkey }, "f",
-    function ()
-      awful.client.focus.bydirection("right")
-      if client.focus then client.focus:raise()  end
-    end,
-    {description = "focus right", group = "client"}),
+     function ()
+        awful.client.focus.bydirection("right")
+        if client.focus then client.focus:raise()  end
+     end,
+     {description = "focus right", group = "client"}),
   awful.key({ modkey, "Ctrl" }, "p", function ()
-      awful.screen.focus_bydirection("up", awful.screen.focused()) end,
-    {description = "focus screen up", group = "screen"}),
+        awful.screen.focus_bydirection("up", awful.screen.focused()) end,
+     {description = "focus screen up", group = "screen"}),
   awful.key({ modkey, "Ctrl" }, "n", function ()
-      awful.screen.focus_bydirection("down", awful.screen.focused()) end,
-    {description = "focus screen down", group = "screen"}),
+        awful.screen.focus_bydirection("down", awful.screen.focused()) end,
+     {description = "focus screen down", group = "screen"}),
   awful.key({ modkey, "Ctrl" }, "b", function ()
-      awful.screen.focus_bydirection("left", awful.screen.focused()) end,
-    {description = "focus screen left", group = "screen"}),
+        awful.screen.focus_bydirection("left", awful.screen.focused()) end,
+     {description = "focus screen left", group = "screen"}),
   awful.key({ modkey, "Ctrl" }, "f", function ()
-      awful.screen.focus_bydirection("right", awful.screen.focused()) end,
-    {description = "focus screen right", group = "screen"}),
+        awful.screen.focus_bydirection("right", awful.screen.focused()) end,
+     {description = "focus screen right", group = "screen"}),
 
   -- Layout manipulation
   awful.key({ modkey }, "u", awful.client.urgent.jumpto,
-    {description = "jump to urgent client", group = "client"}),
+     {description = "jump to urgent client", group = "client"}),
   awful.key({ modkey }, "Tab",
-    function ()
-      awful.client.focus.history.previous()
-      if client.focus then
-        client.focus:raise()
-      end
-    end,
-    {description = "go back", group = "client"}),
+     function ()
+        awful.client.focus.byidx(1)
+        if client.focus then
+           client.focus:raise()
+        end
+     end,
+     {description = "switch window", group = "client"}),
   awful.key({ modkey }, "l", function () awful.layout.inc(1) end,
-    {description = "select next", group = "layout"}),
+     {description = "select next", group = "layout"}),
   awful.key({ modkey, "Control" }, "l", function () awful.layout.inc(-1) end,
-    {description = "select previous", group = "layout"}),
+     {description = "select previous", group = "layout"}),
   awful.key({ modkey }, "s", function () awful.screen.focus_relative(1) end,
-    {description = "select next", group = "screen"}),
+     {description = "select next", group = "screen"}),
   awful.key({ modkey, "Control" }, "s", function () awful.screen.focus_relative(-1) end,
-    {description = "select previous", group = "screen"}),
+     {description = "select previous", group = "screen"}),
 
-   -- ALSA volume control
+  -- ALSA volume control
   awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer sset Master 1%+", false) notify_vol(1) end),
   awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer sset Master 1%-", false) notify_vol(-1) end),
   awful.key({ }, "XF86AudioMute", function () awful.util.spawn("amixer sset Master toggle", false) notify_vol(0) end),
