@@ -483,9 +483,9 @@ local mylayouts = {
    { lain.layout.centerwork, awful.layout.suit.tile, awful.layout.suit.tile,
      awful.layout.suit.tile, awful.layout.suit.tile, awful.layout.suit.floating,
      awful.layout.suit.tile, awful.layout.suit.tile, awful.layout.suit.tile },
-   { awful.layout.suit.tile, awful.layout.suit.tile, awful.layout.suit.tile,
-     awful.layout.suit.tile, awful.layout.suit.tile, awful.layout.suit.tile,
-     awful.layout.suit.tile, awful.layout.suit.tile, awful.layout.suit.tile }
+   { awful.layout.suit.fair.horizontal, awful.layout.suit.fair.horizontal, awful.layout.suit.fair.horizontal,
+     awful.layout.suit.fair.horizontal, awful.layout.suit.fair.horizontal, awful.layout.suit.fair.horizontal,
+     awful.layout.suit.fair.horizontal, awful.layout.suit.fair.horizontal, awful.layout.suit.fair.horizontal}
 }
 
 function theme.at_screen_connect(s)
