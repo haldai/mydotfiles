@@ -18,8 +18,11 @@ local os = os
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
 -- {{{ Main
-local theme = {}
-theme.wallpaper = os.getenv("HOME") .. "/.config/awesome/themes/zenburn/DD.jpg"
+local theme = {
+   wallpapers = { os.getenv("HOME") .. "/.config/awesome/themes/zenburn/DD.jpg",
+                  os.getenv("HOME") .. "/.config/awesome/themes/zenburn/pw.jpg" },
+   wallpaper_scales = {0.75, 0.25}
+}
 -- }}}
 
 -- {{{ Styles
@@ -476,23 +479,29 @@ local emailwidget = wibox.container.margin(emailbg, 5, 8, 5, 5)
 --- }}}
 
 -- {{{ Wibar
-local layoutlist = { lain.layout.centerwork, awful.layout.suit.tile, awful.layout.suit.tile,
-                     awful.layout.suit.tile, awful.layout.suit.tile, awful.layout.suit.floating,
-                     awful.layout.suit.tile, awful.layout.suit.tile, awful.layout.suit.tile }
+local mylayouts = {
+   { lain.layout.centerwork, awful.layout.suit.tile, awful.layout.suit.tile,
+     awful.layout.suit.tile, awful.layout.suit.tile, awful.layout.suit.floating,
+     awful.layout.suit.tile, awful.layout.suit.tile, awful.layout.suit.tile },
+   { awful.layout.suit.tile, awful.layout.suit.tile, awful.layout.suit.tile,
+     awful.layout.suit.tile, awful.layout.suit.tile, awful.layout.suit.tile,
+     awful.layout.suit.tile, awful.layout.suit.tile, awful.layout.suit.tile }
+}
 
 function theme.at_screen_connect(s)
    -- Quake application
    s.quake = lain.util.quake({ app = awful.util.terminal })
+   screen_index = s.index
 
    -- Wallpaper
-   local wallpaper = theme.wallpaper
+   local wallpaper = theme.wallpapers[screen_index]
    if type(wallpaper) == "function" then
       wallpaper = wallpaper(s)
    end
-   gears.wallpaper.maximized(wallpaper, s, true)
+   gears.wallpaper.centered(wallpaper, s, theme.bg_normal, theme.wallpaper_scales[screen_index])
 
    -- Each screen has its own tag table.
-   awful.tag(awful.util.tagnames, s, layoutlist)
+   awful.tag(awful.util.tagnames, s, mylayouts[screen_index])
 
    -- Create a promptbox for each screen
    s.mypromptbox = awful.widget.prompt()
