@@ -8,7 +8,7 @@ function run {
 
 # Startups
 run /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-run compton --conf ~/.config/compton.conf
+run compton --config ~/.config/compton.conf
 run ibus-daemon --xim -d
 run nm-applet
 run caffeine
