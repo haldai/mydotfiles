@@ -80,6 +80,11 @@
   :diminish editorconfig-mode
   :hook (after-init . editorconfig-mode))
 
+;; R language
+(use-package ess
+  :straight t
+  :mode ("\\.r$" . ess-r-mode))
+
 (provide 'init-prog)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
