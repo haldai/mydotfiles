@@ -48,7 +48,7 @@
          ("C-c <f10>" . ediprolog-consult)
          ("C-c q" . insert-prolog-query-mark))
   :config
-  (setq ediprolog-prefix "%%@"))
+  (setq ediprolog-prefix "%%@ "))
 
 ;; ob-prolog
 (use-package ob-prolog :straight t)
