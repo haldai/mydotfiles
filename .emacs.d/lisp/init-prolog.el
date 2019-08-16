@@ -7,12 +7,15 @@
 
 ;; Prolog Mode
 (use-package prolog
-  :diminish prolog-mode
+  :load-path "~/.emacs.d/lisp/"
   :mode (("\\.pl$" . prolog-mode)
          ("\\.m$" . mercury-mode))
   :bind (("C-c %" . prolog-insert-comment-block)
          ("C-c C-c l" . prolog-insert-library))
   :config
+  ;; no auto-indentation for comments
+  (setq prolog-align-comments-flag nil)
+  (setq prolog-indent-mline-comments-flag nil)
   (setq prolog-system 'swi
         prolog-program-switches '((swi ("-G128M" "-T128M" "-L128M" "-O"))
                                   (t nil))
@@ -40,10 +43,12 @@
   (defun insert-prolog-query-mark ()
     "Insert an epiprolog query mark in prolog mode."
     (interactive)
-    (insert "%?- "))
+    (insert "%%?- "))
   :bind (("<f10>" . ediprolog-dwim)
          ("C-c <f10>" . ediprolog-consult)
-         ("C-c q" . insert-prolog-query-mark)))
+         ("C-c q" . insert-prolog-query-mark))
+  :config
+  (setq ediprolog-prefix "%%@"))
 
 ;; ob-prolog
 (use-package ob-prolog :straight t)
