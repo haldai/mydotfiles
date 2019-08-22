@@ -37,6 +37,8 @@
     (insert ":- use_module(library()).")
     (forward-char -3)))
 
+(use-package etrace :load-path "~/.emacs.d/lisp/")
+
 (use-package ediprolog
   :straight t
   :init
@@ -48,7 +50,7 @@
          ("C-c <f10>" . ediprolog-consult)
          ("C-c q" . insert-prolog-query-mark))
   :config
-  (setq ediprolog-prefix "%%@ "))
+  (setq ediprolog-prefix "%%@"))
 
 ;; ob-prolog
 (use-package ob-prolog :straight t)

@@ -28,7 +28,11 @@
                                 ("&&" . ?∧)
                                 ("||" . ?∨)
                                 ("not" . ?¬))))))
-  :init (setq prettify-symbols-unprettify-at-point 'right-edge))
+  :init (setq prettify-symbols-unprettify-at-point 'right-edge)
+  :config
+  ;; for debug
+  (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+  (add-to-list 'comint-output-filter-functions 'ansi-color-process-output))
 
 ;; Compilation Mode
 (use-package compile
