@@ -55,6 +55,11 @@
 ;; ob-prolog
 (use-package ob-prolog :straight t)
 
+;; Potassco Answer Set Program
+(use-package pasp-mode
+  :straight t
+  :mode ("\\.lp$" . pasp-mode))
+
 (provide 'init-prolog)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
