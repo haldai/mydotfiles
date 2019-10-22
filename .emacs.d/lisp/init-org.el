@@ -10,7 +10,8 @@
   :functions hydra-org-template/body
   :bind (("C-c a" . org-agenda)
          ("C-c b" . org-switchb))
-  :hook (org-indent-mode . (lambda() (diminish 'org-indent-mode)))
+  :hook ((org-indent-mode . (lambda() (diminish 'org-indent-mode)))
+         (org-mode . display-line-numbers-mode))
   :config
   ;; visual-line-mode
   (add-hook 'org-mode-hook 'visual-line-mode)
@@ -98,7 +99,7 @@
   ;; juypter-julia settings
   (setq org-babel-default-header-args:jupyter-julia '((:async . "yes")
                                                       (:session . "jl")
-                                                      (:kernel . "julia-1.1")
+                                                      (:kernel . "julia-1.2")
                                                       (:exports . "both")))
 
   (use-package htmlize :straight t)

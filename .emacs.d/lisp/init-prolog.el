@@ -12,6 +12,7 @@
          ("\\.m$" . mercury-mode))
   :bind (("C-c %" . prolog-insert-comment-block)
          ("C-c C-c l" . prolog-insert-library))
+  :hook (prolog-mode . display-line-numbers-mode)
   :config
   ;; no auto-indentation for comments
   (setq prolog-align-comments-flag nil)
