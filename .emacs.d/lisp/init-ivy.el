@@ -18,6 +18,7 @@
          ("C-c v p" . ivy-push-view)
          ("C-c v o" . ivy-pop-view)
          ("C-c v ." . ivy-switch-view)
+         ("C-<return>" . ivy-immediate-done)
 
          :map counsel-mode-map
          ([remap swiper] . counsel-grep-or-swiper)
@@ -103,10 +104,10 @@
 
   ;; sorting
   (setq ivy-sort-matches-functions-alist '((t . nil)
-					   (ivy-switch-buffer . ivy-sort-function-buffer)
-					   (counsel-find-file . ivy-sort-function-buffer)))
+                                           (ivy-switch-buffer . ivy-sort-function-buffer)
+                                           (counsel-find-file . ivy-sort-function-buffer)))
 
-        ;; For alignment `tab-width' must be 1 in minibuffer
+  ;; For alignment `tab-width' must be 1 in minibuffer
   (defun my-ivy-format-function-arrow (cands)
     "Transform CANDS into a string for minibuffer."
     (ivy--format-function-generic
