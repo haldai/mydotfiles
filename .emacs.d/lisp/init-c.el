@@ -10,10 +10,13 @@
   :straight t
   :bind (:map c-mode-base-map
               ("C-c c" . compile))
-  :hook (c-mode-common . (lambda ()
-                           (c-set-style "bsd")
-                           (setq tab-width 2)
-                           (setq c-basic-offset 2)))
+  :hook ((c-mode-common . (lambda ()
+                            (c-set-style "bsd")
+                            (setq tab-width 2)
+                            (setq c-basic-offset 2)))
+         (c-mode-common . display-line-numbers-mode)
+         (c-mode-common . hl-todo-mode))
+
   :config
   (use-package modern-cpp-font-lock
     :straight t
