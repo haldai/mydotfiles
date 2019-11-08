@@ -54,9 +54,9 @@
 ;;keep cursor at same position when scrolling
 (setq scroll-preserve-screen-position 1)
 
-;;scroll window up/down by one line
-(global-set-key (kbd "M-n") (kbd "C-u 1 C-v"))
-(global-set-key (kbd "M-p") (kbd "C-u 1 M-v"))
+;;scroll window up/down by three lines
+(global-set-key (kbd "M-]") (kbd "C-u 3 C-v"))
+(global-set-key (kbd "M-[") (kbd "C-u 3 M-v"))
 
 ;;----------------------------------------------------------------------------
 ;; Load configs for specific features and modes
