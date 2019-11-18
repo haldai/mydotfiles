@@ -49,6 +49,9 @@
     :hook
     (org-mode . org-bullets-mode))
 
+  (use-package org-ref
+    :straight t)
+
   (use-package org-fancy-priorities
     :straight t
     :diminish
@@ -64,6 +67,7 @@
         org-src-tab-acts-natively t)
 
   (defvar load-language-list '((emacs-lisp . t)
+                               (latex . t)
                                (perl . t)
                                (julia . t)
                                (python . t)
@@ -99,7 +103,7 @@
   ;; juypter-julia settings
   (setq org-babel-default-header-args:jupyter-julia '((:async . "yes")
                                                       (:session . "jl")
-                                                      (:kernel . "julia-1.2")
+                                                      (:kernel . "julia-1.1")
                                                       (:exports . "both")))
 
   (use-package htmlize :straight t)
