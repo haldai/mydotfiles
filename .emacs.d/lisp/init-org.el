@@ -36,9 +36,10 @@
   (setq org-ditaa-jar-path "/usr/share/java/ditaa/ditaa-0.11.jar") ;; ditaa
 
   ;; use xelatex for latex export
-  (setq org-latex-pdf-process '("xelatex -shell-escape %f"
-                                "xelatex -shell-escape %f"
-                                "xelatex -shell-escape %f"))
+  (add-to-list 'org-latex-packages-alist
+               '("AUTO" "babel" t ("pdflatex")))
+  (add-to-list 'org-latex-packages-alist
+               '("AUTO" "polyglossia" t ("xelatex" "lualatex")))
 
   ;; mime support
   (use-package org-mime :straight t)
@@ -50,7 +51,9 @@
     (org-mode . org-bullets-mode))
 
   (use-package org-ref
-    :straight t)
+    :straight t
+    :init
+    (setq org-ref-completion-library 'org-ref-ivy-cite))
 
   (use-package org-fancy-priorities
     :straight t
