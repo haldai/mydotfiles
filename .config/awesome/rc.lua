@@ -425,7 +425,7 @@ clientkeys = gears.table.join(
   awful.key({ modkey }, "r",
     function (c)
       local notify = naughty.notify({ title = "窗口大小調整模式",
-                                      text = "\tn+/p-\n\tf+/b-\n\tEsc/↵",
+                                      text = "🡙\tn+/p-\n🡘\tf+/b-\n\tEsc/↵",
                                       timeout = 0,
                                       position = "top_middle",
                                       fg = beautiful.fg_urgent,
@@ -468,7 +468,7 @@ clientkeys = gears.table.join(
   awful.key({ modkey }, "m",
     function (c)
       local notify = naughty.notify({ title = "窗口位置調整模式",
-                                      text = "///\tp/n/b/f\n\t\tc\n\t\tEsc/↵",
+                                      text = "↑/↓/←/→\tp/n/b/f\n\t\tc\n\t\tEsc/↵",
                                       timeout = 0,
                                       position = "top_middle",
                                       fg = beautiful.fg_urgent,
