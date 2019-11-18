@@ -424,8 +424,8 @@ clientkeys = gears.table.join(
       {description = "toggle floating", group = "layout"}),
    awful.key({ modkey }, "r",
       function (c)
-         local notify = naughty.notify({ title = "窗口大小調整模式",
-                                         text = "🡙\tn+/p-\n🡘\tf+/b-\n\tEsc/↵",
+         local notify = naughty.notify({ title = "🡘窗口大小調整模式🡘",
+                                         text = "🡙\t\tn+/p-\n🡘\t\tf+/b-\nClose\tEsc\n",
                                          timeout = 0,
                                          position = "top_middle",
                                          fg = beautiful.fg_urgent,
@@ -468,7 +468,7 @@ clientkeys = gears.table.join(
    awful.key({ modkey }, "m",
       function (c)
          local notify = naughty.notify({ title = "窗口位置調整模式",
-                                         text = "↑/↓/←/→\tp/n/b/f\n\t\tc\n\t\tEsc/↵",
+                                         text = "↑/↓/←/→\tp/n/b/f\nCentering\t\tc\nClose\t\tEsc",
                                          timeout = 0,
                                          position = "top_middle",
                                          fg = beautiful.fg_urgent,
@@ -688,8 +688,10 @@ client.connect_signal(
 
       if awesome.startup and not c.size_hints.user_position and not c.size_hints.program_position then
          -- Prevent clients from being unreachable after screen count changes.
-         gears.shape.rounded_rect(cr,w,h,5)
          awful.placement.no_offscreen(c)
+      end
+      c.shape = function(cr, w, h)
+         gears.shape.rounded_rect(cr,w,h,10)
       end
 end)
 
