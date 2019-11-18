@@ -47,7 +47,10 @@
 
 (use-package company-lsp
   :straight t
-  :init (setq company-lsp-cache-candidates 'auto))
+  :init (setq company-lsp-cache-candidates 'auto)
+  :config
+  ;; lua
+  (add-to-list 'company-lsp-filter-candidates '(lsp-emmy-lua . t)))
 
 (provide 'init-lsp)
 
