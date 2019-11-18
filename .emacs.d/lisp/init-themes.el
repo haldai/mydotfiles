@@ -66,7 +66,7 @@
 (defun restore-emacs-font-size ()
   "Restore emacs's font-size acording emacs-font-size-pair-list."
   (interactive)
-  (setq emacs-font-size-pair '(15 . 18))
+  (setq emacs-font-size-pair '(13 . 16))
   (when emacs-font-size-pair
     (message "emacs font size set to %.1f" (car emacs-font-size-pair))
     (set-font emacs-english-font emacs-cjk-font emacs-font-size-pair)))
