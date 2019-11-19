@@ -44,6 +44,35 @@
   ;; mime support
   (use-package org-mime :straight t)
 
+  ;; fonts
+  (custom-theme-set-faces
+   'user
+   '(variable-pitch ((t (:family "EB Garamond" :height 1.3))))
+   '(fixed-pitch ((t (:family "SauceCodePro Nerd Font Mono" :slant normal :weight normal :height 0.8))))
+   '(org-level-1 ((t (:family "EB Garamond SC" :height 1.2))))
+   '(org-level-2 ((t (:family "EB Garamond SC" :height 1.1))))
+   '(org-level-3 ((t (:family "EB Garamond SC" :height 1.0))))
+   '(org-level-4 ((t (:family "EB Garamond SC" :height 1.0))))
+   '(org-level-5 ((t (:family "EB Garamond SC" :height 1.0))))
+   '(org-level-6 ((t (:family "EB Garamond SC" :height 1.0))))
+   '(org-level-7 ((t (:family "EB Garamond SC" :height 1.0))))
+   '(org-level-8 ((t (:family "EB Garamond SC" :height 1.0))))
+   '(org-document-title ((t (:inherit variable-pitch :height 1.0 :weight bold))))
+   '(org-block ((t (:inherit fixed-pitch))))
+   '(org-todo ((t (:inherit fixed-pitch))))
+   '(org-formula ((t (:inherit fixed-pitch :height 0.8))))
+   '(org-code ((t (:inherit (shadow fixed-pitch)))))
+   '(org-document-info ((t (:inherit variable-pitch :slant italic :height 0.7))))
+   '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
+   '(org-indent ((t (:inherit (org-hide fixed-pitch)))))
+   '(org-link ((t (:inherid fixed-pitch :underline t))))
+   '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+   '(org-property-value ((t (:inherit fixed-pitch))) t)
+   '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+   '(org-table ((t (:inherit fixed-pitch))))
+   '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
+   '(org-verbatim ((t (:inherit (shadow fixed-pitch))))))
+
   ;; More fancy UI
   (use-package org-bullets
     :straight t
