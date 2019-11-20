@@ -11,7 +11,7 @@
   :bind (("C-c a" . org-agenda)
          ("C-c b" . org-switchb))
   :hook ((org-indent-mode . (lambda() (diminish 'org-indent-mode)))
-         (org-mode . display-line-numbers-mode)
+         (org-src-mode . display-line-numbers-mode)
          (org-mode . visual-line-mode)
          (org-mode . variable-pitch-mode))
   :config
