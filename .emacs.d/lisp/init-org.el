@@ -13,7 +13,7 @@
   :hook ((org-indent-mode . (lambda() (diminish 'org-indent-mode)))
          (org-mode . display-line-numbers-mode)
          (org-mode . visual-line-mode)
-         (text-mode . variable-pitch-mode))
+         (org-mode . variable-pitch-mode))
   :config
 
   ;; indent in source code block
