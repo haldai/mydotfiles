@@ -7,7 +7,7 @@
 
 ;; Prolog Mode
 (use-package prolog
-  :load-path "~/.emacs.d/lisp/"
+  :load-path "~/.emacs.d/lisp/prolog.el"
   :mode (("\\.pl$" . prolog-mode)
          ("\\.m$" . mercury-mode))
   :bind (("C-c %" . prolog-insert-comment-block)
