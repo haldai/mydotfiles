@@ -11,10 +11,10 @@
   :bind (("C-c a" . org-agenda)
          ("C-c b" . org-switchb))
   :hook ((org-indent-mode . (lambda() (diminish 'org-indent-mode)))
-         (org-mode . display-line-numbers-mode))
+         (org-mode . display-line-numbers-mode)
+         (org-mode . visual-line-mode)
+         (text-mode . variable-pitch-mode))
   :config
-  ;; visual-line-mode
-  (add-hook 'org-mode-hook 'visual-line-mode)
 
   ;; indent in source code block
   (setq org-src-tab-acts-natively t)
@@ -26,7 +26,7 @@
                                  ("❓" . warning))
         org-log-done 'time
         org-startup-indented t
-        org-ellipsis (if (char-displayable-p ?) "  " nil)
+        org-ellipsis (if (char-displayable-p ?) "  " nil)
         org-pretty-entities t
         org-hide-emphasis-markers t
         org-image-actual-width 500)
