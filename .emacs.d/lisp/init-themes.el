@@ -2,6 +2,12 @@
 ;;; Commentary:
 ;;; Code:
 
+;; fonts
+(custom-theme-set-faces
+ 'user
+ '(variable-pitch ((t (:family "Vollkorn" :height 1.2))))
+ '(fixed-pitch ((t (:family "SauceCodePro Nerd Font Mono" :slant normal :weight normal :height 0.8)))))
+
 ;; color theme
 (straight-use-package 'zenburn-theme)
 (load-theme 'zenburn t)
