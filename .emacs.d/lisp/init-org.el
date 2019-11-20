@@ -47,6 +47,8 @@
   ;; fonts
   (custom-theme-set-faces
    'user
+   '(variable-pitch ((t (:family "Vollkorn" :height 1.2))))
+   '(fixed-pitch ((t (:family "SauceCodePro Nerd Font Mono" :slant normal :weight normal :height 0.9))))
    '(org-level-1 ((t (:family "EB Garamond SC" :height 1.2))))
    '(org-level-2 ((t (:family "EB Garamond SC" :height 1.1))))
    '(org-level-3 ((t (:family "EB Garamond SC" :height 1.0))))
