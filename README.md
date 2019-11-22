@@ -23,6 +23,8 @@ Fonts:
 * nerd-fonts-source-code-pro
 * ttf-sarasa-gothic
 * ttf-font-awesome-4
+* otf-eb-garamond
+* otf-vollkorn
 
 Misc:
 
@@ -35,11 +37,12 @@ Misc:
 * udiskie
 * rofi-greenclip
 * most
+* xidlehook
 * slock
 * jed
-* [spacemacs](http://spacemacs.org/)
+* [~~spacemacs~~](http://spacemacs.org/)
 * [spaceship-prompt](https://github.com/denysdovhan/spaceship-prompt)
-* [dunst](https://dunst-project.org/)
+* [~~dunst~~](https://dunst-project.org/)
 * [ranger](https://github.com/ranger/ranger)
 
 
