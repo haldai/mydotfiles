@@ -11,13 +11,12 @@ run /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 run compton --config ~/.config/compton.conf
 run ibus-daemon --xim -d
 run nm-applet
-run caffeine
 run udiskie -ans
 run blueman-applet
 run libinput-gestures-setup start
 # run ss-qt5
 run emacs --daemon
-run xautolock -time 10 -locker slock
+run ~/scripts/lock.sh
 run /home/daiwz/.conky/myconky-start.sh
 
 # Settings
