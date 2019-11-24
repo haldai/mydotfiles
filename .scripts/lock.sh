@@ -14,10 +14,13 @@ xidlehook \
     'xrandr --output "$PRIMARY_DISPLAY" --brightness .1' \
     'xrandr --output "$PRIMARY_DISPLAY" --brightness 1' \
     `# Undim & lock after 10 more seconds` \
-    --timer primary 10 \
+    --timer primary 1 \
     'xrandr --output "$PRIMARY_DISPLAY" --brightness 1; slock' \
     '' \
     `# Finally, suspend an hour after it locks` \
     --timer normal 3600 \
     'systemctl suspend' \
+    '' \
+    --timer normal 1800 \
+    'systemctl hibernate' \
     ''
