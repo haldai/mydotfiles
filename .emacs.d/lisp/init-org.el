@@ -57,7 +57,7 @@
    '(org-level-6 ((t (:family "EB Garamond SC" :height 1.0))))
    '(org-level-7 ((t (:family "EB Garamond SC" :height 1.0))))
    '(org-level-8 ((t (:family "EB Garamond SC" :height 1.0))))
-   '(org-document-title ((t (:inherit variable-pitch :height 1.0 :weight bold))))
+   '(org-document-title ((t (:family "EB Garamond" :height 1.3 :weight bold))))
    '(org-block ((t (:inherit fixed-pitch))))
    '(org-todo ((t (:inherit fixed-pitch))))
    '(org-formula ((t (:inherit fixed-pitch :height 0.8))))
