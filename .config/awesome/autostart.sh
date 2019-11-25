@@ -16,7 +16,7 @@ run blueman-applet
 run libinput-gestures-setup start
 # run ss-qt5
 run emacs --daemon
-run ~/scripts/lock.sh
+run lock.sh
 run /home/daiwz/.conky/myconky-start.sh
 
 # Settings
