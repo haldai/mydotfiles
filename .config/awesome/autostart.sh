@@ -12,11 +12,11 @@ run compton --config ~/.config/compton.conf
 run ibus-daemon --xim -d
 run nm-applet
 run udiskie -ans
+run /home/daiwz/.scripts/lock.sh
 run blueman-applet
 run libinput-gestures-setup start
 # run ss-qt5
 run emacs --daemon
-run lock.sh
 run /home/daiwz/.conky/myconky-start.sh
 
 # Settings
