@@ -29,7 +29,7 @@ Fonts:
 Misc:
 
 * conky
-* compton-git
+* ~~compton-git~~picom
 * lm_sensors
 * zsh
 * oh-my-zsh-git
@@ -42,7 +42,7 @@ Misc:
 * jed
 * [~~spacemacs~~](http://spacemacs.org/)
 * [spaceship-prompt](https://github.com/denysdovhan/spaceship-prompt)
-* [~~dunst~~](https://dunst-project.org/)
+* [dunst](https://dunst-project.org/)
 * [ranger](https://github.com/ranger/ranger)
 
 
