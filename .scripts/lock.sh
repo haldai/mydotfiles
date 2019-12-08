@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Only exported variables can be used within the timer's command.
 export PRIMARY_DISPLAY="$(xrandr | awk '/ primary/{print $1}')"
@@ -10,17 +10,17 @@ xidlehook \
     `# Don't lock when there's audio playing` \
     --not-when-audio \
     `# Dim the screen after 60 seconds, undim if user becomes active` \
-    --timer normal 60 \
+    --timer 120 \
     'xrandr --output "$PRIMARY_DISPLAY" --brightness .1' \
     'xrandr --output "$PRIMARY_DISPLAY" --brightness 1' \
-    `# Undim & lock after 10 more seconds` \
-    --timer primary 1 \
+    `# Undim & lock after 1 more second` \
+    --timer 300 \
     'xrandr --output "$PRIMARY_DISPLAY" --brightness 1; slock' \
     '' \
     `# Finally, suspend an hour after it locks` \
-    --timer normal 3600 \
+    --timer 3600 \
     'systemctl suspend' \
     '' \
-    --timer normal 1800 \
+    --timer 1800 \
     'systemctl hibernate' \
     ''
