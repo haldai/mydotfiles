@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+sudo systemd-inhibit --what=handle-lid-switch sleep 1d
