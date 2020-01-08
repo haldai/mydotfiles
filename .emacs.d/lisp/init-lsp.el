@@ -17,6 +17,10 @@
   (setq flymake-fringe-indicator-position 'right-fringe)
   :config
   ;; Configure LSP clients
+  (setq lsp-eslint-server-command
+        '("node"
+          "/home/daiwz/.vscode-oss/extensions/dbaeumer.vscode-eslint-2.0.11/server/out/eslintServer.js"
+          "--stdio"))
   (use-package lsp-clients
     :init
     (setq lsp-clients-python-library-directories '("/usr/local/" "/usr/"))))
