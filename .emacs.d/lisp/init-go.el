@@ -1,7 +1,7 @@
 ;;; Commentary:
 ;;
-;;Go configuration.
-;;
+;; Go configuration.
+;; install 'go-tools' before using it
 
 ;;; Code:
 
