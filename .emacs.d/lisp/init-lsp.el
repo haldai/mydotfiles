@@ -33,7 +33,7 @@
 
 (use-package lsp-ui
   :straight t
-  :command lsp-ui-mode
+  :commands lsp-ui-mode
   :custom-face
   (lsp-ui-doc-background ((t (:background nil))))
   (lsp-ui-doc-header ((t (:inherit (font-lock-string-face italic)))))
