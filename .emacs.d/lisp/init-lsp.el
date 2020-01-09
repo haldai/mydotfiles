@@ -8,7 +8,9 @@
 (use-package lsp-mode
   :straight t
   :diminish lsp-mode
-  :hook (prog-mode . lsp)
+  :commands (lsp lsp-deferred)
+  :hook ((prog-mode . lsp)
+         (go-mode . lsp-deferred))
   :bind (:map lsp-mode-map
               ("C-c C-d" . lsp-describe-thing-at-point))
   :init
@@ -31,6 +33,7 @@
 
 (use-package lsp-ui
   :straight t
+  :command lsp-ui-mode
   :custom-face
   (lsp-ui-doc-background ((t (:background nil))))
   (lsp-ui-doc-header ((t (:inherit (font-lock-string-face italic)))))

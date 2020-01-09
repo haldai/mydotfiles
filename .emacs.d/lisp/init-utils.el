@@ -5,6 +5,7 @@
 ;; some built in utility libs
 (require 'cl-lib)
 (require 'map)
+(package-initialize)
 
 ;; Setup use-package
 (eval-when-compile

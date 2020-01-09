@@ -13,6 +13,7 @@
   :straight t
   :ensure nil
   :defines gud-pdb-command-name pdb-path
+  :hook (python-mode . lsp-mode)
   :config
   ;; no tab
   (add-hook 'python-mode-hook (lambda () (set indent-tabs-mode nil)))

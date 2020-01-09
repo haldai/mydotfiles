@@ -95,6 +95,7 @@
 (require 'init-c)
 (require 'init-prolog)
 (require 'init-julia)
+(require 'init-go)
 (require 'init-python)
 (require 'init-web)
 (require 'init-lua)
