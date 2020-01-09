@@ -25,6 +25,10 @@
     :init
     (setq lsp-clients-python-library-directories '("/usr/local/" "/usr/"))))
 
+(use-package lsp-julia
+  :straight (lsp-julia :type git :host github :repo "non-Jedi/lsp-julia")
+  :init (setq lsp-julia-default-environment "/home/daiwz/.julia/environments/v1.3/"))
+
 (use-package lsp-ui
   :straight t
   :custom-face

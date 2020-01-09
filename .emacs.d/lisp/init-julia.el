@@ -8,7 +8,11 @@
 ;; Julia Mode
 (use-package julia-mode
   :straight (julia-emacs :type git :host github :repo "JuliaEditorSupport/julia-emacs")
-  :mode ("\\.jl$" . julia-mode))
+  :requires lsp-julia
+  :mode "\\.jl\\'"
+  :interpreter "julia"
+  :hook ((ess-julia-mode . lsp-mode)
+         (julia-mode . lsp-mode)))
 
 
 ;; jupyter mode
