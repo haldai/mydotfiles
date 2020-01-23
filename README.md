@@ -15,7 +15,8 @@ For [i3-wm](https://i3wm.org/):
 For [awesomewm](https://awesomewm.org/)-zenburn:
 
 * awesome
-* [st](https://github.com/lukesmithxyz/st), or use my tweaks in `suckless/st.patches/` to use the zenburn theme and fix ime.
+* [st-0.8.2](https://st.suckless.org/), my tweaks are in
+  `suckless/st-haldai.diff`, or directly compile the shipped tarball.
 * use `acpilight` instead of `xorg-xbacklight`
 * qutebrowser
 
@@ -59,4 +60,3 @@ For network traffic monitor
 ## Screenshot ##
 
 ![Screenshot](./screenshot.jpg "screenshot")
-
