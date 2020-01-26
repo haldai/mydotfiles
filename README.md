@@ -16,7 +16,7 @@ For [awesomewm](https://awesomewm.org/)-zenburn:
 
 * awesome
 * [st-0.8.2](https://st.suckless.org/), my tweaks are in
-  `suckless/st-haldai.diff`, or directly compile the shipped tarball.
+  `suckless/st-0.8.2-haldai`.
 * use `acpilight` instead of `xorg-xbacklight`
 * qutebrowser
 
