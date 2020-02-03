@@ -14,22 +14,15 @@
   :ensure nil
   :defines gud-pdb-command-name pdb-path
   :hook (python-mode . lsp-mode)
+  :init
+  (setq python-indent-guess-indent-offset t)
+  (setq python-indent-guess-indent-offset-verbose nil)
   :config
-  ;; no tab
-  (add-hook 'python-mode-hook (lambda () (set indent-tabs-mode nil)))
-
-  ;; Disable readline based native completion
-  (setq python-shell-completion-native-enable nil)
-
-  (add-hook 'inferior-python-mode-hook
-            (lambda ()
-              ;; (bind-key "C-c C-z" #'kill-buffer-and-window inferior-python-mode-map)
-              (process-query-on-exit-flag (get-process "Python"))))
 
   ;; Live Coding in Python
   (use-package live-py-mode :straight t))
 
-  (provide 'init-python)
+(provide 'init-python)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-python.el ends here

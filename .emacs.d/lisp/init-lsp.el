@@ -28,7 +28,7 @@
     (setq lsp-clients-python-library-directories '("/usr/local/" "/usr/"))))
 
 (use-package lsp-julia
-  ;; Make sure to use LanguageServer v1.0.0+ and SymbolServer v1.0.0+
+  ;; Make sure to install "pkg> dev LanguageServer"
   :straight (lsp-julia :type git :host github :repo "non-Jedi/lsp-julia")
   :init (setq lsp-julia-default-environment "/home/daiwz/.julia/environments/v1.3/"))
 

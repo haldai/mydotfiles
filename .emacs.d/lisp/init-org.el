@@ -128,6 +128,7 @@
   (org-babel-jupyter-override-src-block "python")
 
   (add-to-list 'org-structure-template-alist '("jj" . "src jupyter-julia"))
+  (add-to-list 'org-structure-template-alist '("jp" . "src jupyter-python"))
   (add-to-list 'org-structure-template-alist '("jl" . "src julia"))
   (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
   (add-to-list 'org-structure-template-alist '("pl" . "src prolog"))
@@ -139,6 +140,12 @@
                                                       (:session . "jl")
                                                       (:kernel . "julia-1.3")
                                                       (:exports . "both")))
+
+  ;; juypter-python settings
+  (setq org-babel-default-header-args:jupyter-python '((:async . "yes")
+                                                       (:session . "py")
+                                                       (:kernel . "python3")
+                                                       (:exports . "both")))
 
   (use-package htmlize :straight t)
 

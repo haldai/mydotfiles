@@ -11,8 +11,10 @@
   :requires lsp-julia
   :mode "\\.jl\\'"
   :interpreter "julia"
-  :hook ((ess-julia-mode . lsp-mode)
-         (julia-mode . lsp-mode)))
+  ;; lsp-julia is incompatible with julia-v1.3
+  ;; :hook ((ess-julia-mode . lsp-mode)
+  ;; (julia-mode . lsp-mode))
+  )
 
 
 ;; jupyter mode
