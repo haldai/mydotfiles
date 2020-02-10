@@ -177,6 +177,7 @@
 ;; Multiple cursors
 (use-package multiple-cursors
   :straight t
+  :init (setq mc/always-run-for-all t)
   :bind (("C-S-c C-S-c"   . mc/edit-lines)
          ("C->"           . mc/mark-next-like-this)
          ("C-<"           . mc/mark-previous-like-this)
