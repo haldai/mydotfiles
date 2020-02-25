@@ -41,12 +41,11 @@ default_place_to_search_in = "database"
 
 # Visualizer ..
 visualizer_in_stereo = "yes"
-visualizer_sync_interval = "30"
+visualizer_sync_interval = "10"
 visualizer_output_name = "Pipe"
 visualizer_fifo_path = "/tmp/mpd.fifo"
-visualizer_type = "wave" (spectrum/wave)
-visualizer_color = "green"
-visualizer_look = "∙▋"
+visualizer_type = "spectrum" (spectrum/wave)
+visualizer_look = "▋▋"
 
 ## Navigation ##
 cyclic_scrolling = "yes"
