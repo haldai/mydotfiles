@@ -219,14 +219,21 @@ local myxrandrmenu = {
    { " 右擴展", function () awful.util.spawn_with_shell("~/.scripts/presentation-x -r") end, icon_path .. "actions/next.png" },
 }
 
+local myinputmenu = {
+   { " 英文", function () awful.util.spawn_with_shell("fcitx5-remote -s keyboard-us") end, icon_path .. "devices/gnome-dev-keyboard.png" },
+   { " 中文", function () awful.util.spawn_with_shell("fcitx5-remote -s pinyin") end, icon_path .. "devices/gnome-dev-keyboard.png" },
+   { " 日文", function () awful.util.spawn_with_shell("fcitx5-remote -s mozc") end, icon_path .. "devices/gnome-dev-keyboard.png" },
+}
+
 awful.util.mymainmenu = awful.menu({
       items = {
          { " 終端", function () awful.spawn(terminal) end, icon_path .. "apps/utilities-terminal.png" },
          { " 編輯", function () awful.spawn("emacsclient -c -a emacs") end, icon_path .. "apps/emacs.png" },
-         { " 衝浪", function () awful.spawn("chromium") end, icon_path .. "apps/chromium.png" },
+         { " 衝浪", function () awful.spawn("chromium --disable-gpu") end, icon_path .. "apps/chromium.png" },
          { " 文件", function () awful.spawn("pcmanfm") end, icon_path .. "apps/file-manager.png" },
          { " 監控", function () awful.spawn("st -e gotop -s") end, icon_path .. "apps/utilities-system-monitor.png" },
          { " 聲音", function () awful.spawn("st -e alsamixer") end, icon_path .. "apps/sound.png" },
+         { " 輸入", myinputmenu, icon_path .. "categories/cs-region.png"},
          { " 窗口", myawesomemenu, beautiful.awesome_icon },
          { " 演示", myxrandrmenu, icon_path .. "devices/system.png" },
          { " 退出", myexitmenu, icon_path .. "actions/system-shutdown.png" } }

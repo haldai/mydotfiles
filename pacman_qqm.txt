@@ -1,0 +1,16 @@
+dropbox
+exfat-dkms-git
+exfat-utils-nofuse
+i8kutils
+libdmx
+micro-bin
+mu
+nerd-fonts-git
+otf-eb-garamond
+otf-vollkorn
+paper-icon-theme-git
+spaceship-prompt-git
+teams
+thermald
+ttf-font-awesome-4
+uuid

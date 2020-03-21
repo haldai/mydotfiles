@@ -21,7 +21,7 @@ local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 local theme = {
    wallpapers = { os.getenv("HOME") .. "/.config/awesome/themes/zenburn/DD.jpg",
                   os.getenv("HOME") .. "/.config/awesome/themes/zenburn/pw.jpg" },
-   wallpaper_scales = {0.75, 0.25}
+   wallpaper_scales = {0.80, 0.25}
 }
 -- }}}
 
@@ -580,7 +580,10 @@ function theme.at_screen_connect(s)
       },
    }
    -- Create the wibox
-   s.mywibox = awful.wibar({ position = "top", height = 28, screen = s, bg = theme.bg_normal, fg = theme.fg_normal })
+   s.mywibox = awful.wibar({ position = "top", height = 28, screen = s,
+                             bg = "00000000",
+                             border_width = 1,
+                             fg = theme.fg_normal })
 
    -- Add widgets to the wibox
    s.mywibox:setup {
@@ -610,7 +613,7 @@ function theme.at_screen_connect(s)
          memwidget,
          wibox.widget.textbox("<b>核</b>"),
          cpuwidget,
-         wibox.widget.systray(),
+         -- wibox.widget.systray(),
          mytextclock,
          s.mylayoutbox,
       },
