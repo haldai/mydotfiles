@@ -96,7 +96,7 @@ local altkey = "Mod1"
 local terminal = "st"
 local editor = "emacsclient -c -a emacs"
 local editor_cmd = terminal .. " -e " .. editor
-local browser = "chromium"
+local browser = "chromium --disable-gpu --disable-software-rasterizer"
 local filemanager = "pcmanfm"
 
 -- {{{ taglist and tasklist buttons
@@ -229,7 +229,7 @@ awful.util.mymainmenu = awful.menu({
       items = {
          { " 終端", function () awful.spawn(terminal) end, icon_path .. "apps/utilities-terminal.png" },
          { " 編輯", function () awful.spawn("emacsclient -c -a emacs") end, icon_path .. "apps/emacs.png" },
-         { " 衝浪", function () awful.spawn("chromium --disable-gpu") end, icon_path .. "apps/chromium.png" },
+         { " 衝浪", function () awful.spawn("--disable-software-rasterizer") end, icon_path .. "apps/chromium.png" },
          { " 文件", function () awful.spawn("pcmanfm") end, icon_path .. "apps/file-manager.png" },
          { " 監控", function () awful.spawn("st -e gotop -s") end, icon_path .. "apps/utilities-system-monitor.png" },
          { " 聲音", function () awful.spawn("st -e alsamixer") end, icon_path .. "apps/sound.png" },
@@ -389,8 +389,8 @@ globalkeys = gears.table.join(
       {description = "launch qutebrowser", group = "launcher"}),
    awful.key({ modkey, "Shift" }, "F3", function () awful.spawn("chromium --disable-web-security --user-data-dir") end,
       {description = "launch Chrome with user data dir", group = "launcher"}),
-   awful.key({ modkey }, "F4", function () awful.spawn("thunderbird") end,
-      {description = "launch thunderbird", group = "launcher"}),
+   awful.key({ modkey }, "F4", function () awful.util.spawn_with_shell("~/.scripts/toggle_systray") end,
+      {description = "launch system tray", group = "launcher"}),
    awful.key({ modkey }, "F5", function () awful.spawn("st -e ranger") end,
       {description = "launch ranger", group = "launcher"}),
    awful.key({ modkey }, "F6", function () awful.spawn("electronic-wechat") end,

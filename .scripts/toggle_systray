@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+TOGGLE=$HOME/.cache/.toggle_tray
+
+if [ ! -e $TOGGLE ]; then
+    touch $TOGGLE
+    stalonetray &
+else
+    rm $TOGGLE
+    pkill stalonetray
+fi

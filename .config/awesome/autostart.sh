@@ -8,15 +8,15 @@ function run {
 
 # Startups
 run /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-run compton --config ~/.config/compton.conf
-run ibus-daemon --xim -d
-run nm-applet
+# run picom --experimental-backends --config ~/.config/compton.conf
+run picom --config ~/.config/compton.conf
 run udiskie -ans
 run /home/daiwz/.scripts/lock.sh
 run blueman-applet
 run libinput-gestures-setup start
 # run ss-qt5
 run emacs --daemon
+run fcitx5
 run /home/daiwz/.conky/myconky-start.sh
 
 # Settings
