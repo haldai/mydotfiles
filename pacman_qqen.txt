@@ -20,9 +20,9 @@ awesome
 axel
 baidunetdisk-bin
 base
+bash-completion
 bash-language-server
 bat
-bbswitch
 bc
 bison
 blueman
@@ -47,7 +47,6 @@ ditaa
 dosfstools
 dunst
 efibootmgr
-electronic-wechat
 elinks
 emacs
 epdfview
@@ -59,7 +58,6 @@ fcitx5-gtk-git
 fcitx5-mozc-git
 fcitx5-qt4-git
 fcitx5-qt5-git
-fcitx5-rime-git
 ffmpegthumbnailer
 filezilla
 flameshot
@@ -86,6 +84,7 @@ htop
 i7z
 imagemagick
 inkscape
+intel-compute-runtime
 intel-ucode
 iw
 jdk
@@ -97,9 +96,11 @@ jre
 jupyter-notebook
 kdiff3
 leafpad
+lib32-freetype2-infinality-ultimate
 lib32-giflib
 lib32-gst-plugins-base-libs
 lib32-gtk3
+lib32-libjpeg6-turbo
 lib32-libva
 lib32-libxslt
 lib32-mpg123
@@ -108,9 +109,13 @@ lib32-ocl-icd
 lib32-openal
 lib32-v4l-utils
 lib32-vulkan-icd-loader
+lib32-vulkan-intel
 libcaca
+libfprint
 libheif
 libinput-gestures
+libjpeg6-turbo
+libva-mesa-driver
 libvncserver
 libwmf
 lightdm
@@ -120,8 +125,10 @@ linux-firmware
 linux-headers
 linux-lts
 linux-lts-headers
-linux-zen
-linux-zen-headers
+linux-mainline
+linux-mainline-headers
+linux-zencjk
+linux-zencjk-headers
 logrotate
 lsof
 lutris
@@ -131,7 +138,9 @@ make
 man-db
 man-pages
 mendeleydesktop-bundled
+mesa
 mesa-demos
+mesa-vdpau
 mg
 minecraft-launcher
 mlocate
@@ -139,7 +148,6 @@ most
 mpc
 mpd
 mpg123
-mpv-git
 msmtp-mta
 msr-tools
 mtpfs
@@ -147,6 +155,7 @@ nano
 ncdu
 ncmpcpp
 neofetch
+nerd-fonts-complete
 netctl
 network-manager-applet
 networkmanager
@@ -264,6 +273,7 @@ slock
 smartmontools
 solaar
 sshfs
+stalonetray
 steam
 strace
 stress
@@ -282,7 +292,6 @@ texlive-latexextra
 texlive-pictures
 texlive-science
 thefuck
-thunderbird
 tk
 tlp
 tmux
@@ -309,11 +318,11 @@ wget
 whatsapp-nativefier
 which
 wine-staging
+wine-wechat
 wpa_supplicant
 wps-office
 xarchiver
 xdg-user-dirs
-xf86-video-intel
 xf86-video-vesa
 xorg-docs
 xorg-fonts-100dpi

@@ -1,11 +1,14 @@
+chromium-widevine
+dell-command-configure
 dropbox
 exfat-dkms-git
 exfat-utils-nofuse
+ffmpeg-git
 i8kutils
 libdmx
 micro-bin
+mpv-git
 mu
-nerd-fonts-git
 otf-eb-garamond
 otf-vollkorn
 paper-icon-theme-git
@@ -14,3 +17,4 @@ teams
 thermald
 ttf-font-awesome-4
 uuid
+xidlehook
