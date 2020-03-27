@@ -680,7 +680,7 @@ awful.rules.rules = {
      properties = { tag = awful.util.tagnames[4], minimized = true } },
    { rule = {class = "Pcmanfm"},
      properties = { tag = awful.util.tagnames[5] } },
-   { rule_any = {class = { "electronic-wechat", "qq.exe" } },
+   { rule_any = {class = { "electronic-wechat", "qq.exe", "wechat.exe" } },
      properties = { tag = awful.util.tagnames[6] } },
 }
 -- }}}
@@ -700,6 +700,16 @@ client.connect_signal(
       c.shape = function(cr, w, h)
          gears.shape.rounded_rect(cr,w,h,10)
       end
+end)
+
+-- restore minimised clients
+client.connect_signal("request::activate", function(c, context, hints)
+                         if not awesome.startup then
+                            if c.minimized then
+                               c.minimized = false
+                            end
+                            awful.ewmh.activate(c, context, hints)
+                         end
 end)
 
 -- Add a titlebar if titlebars_enabled is set to true in the rules.
