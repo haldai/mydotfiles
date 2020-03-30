@@ -476,6 +476,51 @@ theme.emailnum:buttons(
 local emailwidget = wibox.container.margin(emailbg, 5, 8, 5, 5)
 --- }}}
 
+--- {{{ Net
+theme.netgraph = wibox.widget {
+   forced_width = 32,
+   paddings = 1,
+   border_width = 1,
+   border_color = white2,
+   color = white1,
+   background_color = black1,
+   scale = true,
+   widget = wibox.widget.graph
+}
+local net_interfaces = {}
+for line in io.lines("/proc/net/dev") do
+   local name = string.match(line, "^[%s]?[%s]?[%s]?[%s]?([%w]+):")
+   if name ~= "lo" then
+      table.insert(net_interfaces, name)
+   end
+end
+netwidget_t = awful.tooltip({ objects = { theme.netgraph },})
+vicious.register(theme.netgraph, vicious.widgets.net,
+                 function (widget, args)
+                    local if_name = "none"
+                    for i = 1, #net_interfaces do
+                       if tonumber(args["{" .. net_interfaces[i] .. " carrier}"]) > 0 then
+                          if_name = net_interfaces[i]
+                          break
+                       end
+                    end
+                    local if_up = "{" .. if_name .. " up_kb}"
+                    local if_down = "{" .. if_name .. " down_kb}"
+                    if if_name == "none" then
+                       netwidget_t:set_text(string.format("網絡斷‎開！"))
+                    else
+                       if string.sub(if_name, 1, 1) == 'e' then
+                          netwidget_t:set_text(string.format("有線網絡[%s]：\n%skb/s ▲\n%skb/s ▼", if_name, args[if_up], args[if_down]))
+                       else
+                          netwidget_t:set_text(string.format("無線網絡[%s]：\n%skb/s ▲\n%skb/s ▼", if_name, args[if_up], args[if_down]))
+                       end
+                    end
+                    return tonumber(args[if_down]) + tonumber(args[if_up])
+                 end, 3)
+local netbg = wibox.container.background(theme.netgraph, black2, gears.shape.rectangle)
+local netwidget = wibox.container.margin(netbg, 5, 8, 5, 5)
+--- }}}
+
 --- }}}
 
 -- {{{ Wibar
@@ -490,12 +535,12 @@ local mylayouts = {
 
 function theme.at_screen_connect(s)
    -- Quake application
-   s.quake = lain.util.quake({ app = awful.util.terminal })
-   screen_index = s.index
+         s.quake = lain.util.quake({ app = awful.util.terminal })
+         screen_index = s.index
 
-   -- Wallpaper
-   local wallpaper = theme.wallpapers[screen_index]
-   if type(wallpaper) == "function" then
+         -- Wallpaper
+         local wallpaper = theme.wallpapers[screen_index]
+         if type(wallpaper) == "function" then
       wallpaper = wallpaper(s)
    end
    gears.wallpaper.centered(wallpaper, s, theme.bg_normal, theme.wallpaper_scales[screen_index])
@@ -583,6 +628,7 @@ function theme.at_screen_connect(s)
    s.mywibox = awful.wibar({ position = "top", height = 28, screen = s,
                              bg = "00000000",
                              border_width = 1,
+                             border_color = "00000000",
                              fg = theme.fg_normal })
 
    -- Add widgets to the wibox
@@ -599,6 +645,8 @@ function theme.at_screen_connect(s)
       { -- Right widgets
          layout = wibox.layout.fixed.horizontal,
          -- mykeyboardlayout,
+         wibox.widget.textbox("<b>網</b>"),
+         netwidget,
          wibox.widget.textbox("<b>郵</b>"),
          emailwidget,
          wibox.widget.textbox("<b>亮</b>"),
