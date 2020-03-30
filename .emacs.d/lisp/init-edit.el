@@ -315,6 +315,7 @@
 
 (straight-use-package 'vlf)
 (require 'vlf)
+(require 'tramp)
 
 (defun ffap-vlf ()
   "Find file at point with VLF."
