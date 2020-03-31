@@ -134,7 +134,7 @@ theme.menu_font = "方正宋刻本秀楷 Bold 13"
 -- {{{ Icons
 theme.lain_icons = os.getenv("HOME") .. "/.config/awesome/lain/icons/layout/zenburn/"
 -- {{{ Taglist
-theme.taglist_font = "方正宋刻本秀楷 Bold 16"
+theme.taglist_font = "方正宋刻本秀楷 16"
 theme.taglist_bg_focus = black1
 theme.taglist_fg_focus = orange
 --theme.taglist_squares_resize = "false"
@@ -202,7 +202,8 @@ theme.titlebar_maximized_button_normal_inactive = themes_path .. "zenburn/titleb
 -- }}}
 -- }}}
 
-awful.util.tagnames = { "壹", "貳", "叄", "肆", "伍", "陸", "柒", "捌", "玖" }
+-- awful.util.tagnames = { "壹", "貳", "叄", "肆", "伍", "陸", "柒", "捌", "玖" }
+awful.util.tagnames = { "☰", "☱", "☲", "☳", "☴", "☵", "☶", "☷", "☯" }
 
 local markup     = lain.util.markup
 local separators = lain.util.separators
@@ -467,28 +468,28 @@ awful.widget.watch(
 theme.emailnum:buttons(
    my_table.join(
       awful.button({}, 3, function()
-            awful.spawn("emacsclient -c -a emacs --eval \"(mu4e)\"")
-            theme.emailnum:set_markup_silently("<span color=\"" .. white1 .. "\" font_desc=\"SauceCodePro Nerd Font Mono 9\">無</span>")
-            emailbg:set_bg(black1)
-            emailnum_t:set_text("暫無新郵件")
-      end)
-))
-local emailwidget = wibox.container.margin(emailbg, 5, 8, 5, 5)
---- }}}
+             awful.spawn("emacsclient -c -a emacs --eval \"(mu4e)\"")
+             theme.emailnum:set_markup_silently("<span color=\"" .. white1 .. "\" font_desc=\"SauceCodePro Nerd Font Mono 9\">無</span>")
+             emailbg:set_bg(black1)
+             emailnum_t:set_text("暫無新郵件")
+       end)
+ ))
+ local emailwidget = wibox.container.margin(emailbg, 5, 8, 5, 5)
+ --- }}}
 
---- {{{ Net
-theme.netgraph = wibox.widget {
-   forced_width = 32,
-   paddings = 1,
-   border_width = 1,
-   border_color = white2,
-   color = white1,
-   background_color = black1,
-   scale = true,
-   widget = wibox.widget.graph
-}
-local net_interfaces = {}
-for line in io.lines("/proc/net/dev") do
+ --- {{{ Net
+ theme.netgraph = wibox.widget {
+    forced_width = 32,
+    paddings = 1,
+    border_width = 1,
+    border_color = white2,
+    color = white1,
+    background_color = black1,
+    scale = true,
+    widget = wibox.widget.graph
+ }
+ local net_interfaces = {}
+ for line in io.lines("/proc/net/dev") do
    local name = string.match(line, "^[%s]?[%s]?[%s]?[%s]?([%w]+):")
    if name ~= "lo" then
       table.insert(net_interfaces, name)
