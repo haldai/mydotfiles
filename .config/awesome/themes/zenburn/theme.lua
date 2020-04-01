@@ -511,9 +511,9 @@ vicious.register(theme.netgraph, vicious.widgets.net,
                        netwidget_t:set_text(string.format("網絡斷‎開！"))
                     else
                        if string.sub(if_name, 1, 1) == 'e' then
-                          netwidget_t:set_text(string.format("有線網絡[%s]：\n%skb/s ▲\n%skb/s ▼", if_name, args[if_up], args[if_down]))
+                          netwidget_t:set_text(string.format("有線網絡[%s]：\n%sKB/s ▲\n%sKB/s ▼", if_name, args[if_up], args[if_down]))
                        else
-                          netwidget_t:set_text(string.format("無線網絡[%s]：\n%skb/s ▲\n%skb/s ▼", if_name, args[if_up], args[if_down]))
+                          netwidget_t:set_text(string.format("無線網絡[%s]：\n%sKB/s ▲\n%sKB/s ▼", if_name, args[if_up], args[if_down]))
                        end
                     end
                     return tonumber(args[if_down]) + tonumber(args[if_up])
