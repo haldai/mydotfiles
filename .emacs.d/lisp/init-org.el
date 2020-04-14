@@ -138,7 +138,7 @@
   ;; juypter-julia settings
   (setq org-babel-default-header-args:jupyter-julia '((:async . "yes")
                                                       (:session . "jl")
-                                                      (:kernel . "julia-1.3")
+                                                      (:kernel . "julia-1.4")
                                                       (:exports . "both")))
 
   ;; juypter-python settings
@@ -146,6 +146,8 @@
                                                        (:session . "py")
                                                        (:kernel . "python3")
                                                        (:exports . "both")))
+  ;; do not evaluate code blocks while exporting
+  (setq org-export-babel-evaluate t)
 
   (use-package htmlize :straight t)
 
