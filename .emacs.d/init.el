@@ -8,6 +8,7 @@
 
 ;; Produce backtraces when errors occur
 (setq debug-on-error nil)
+(setq warning-minimum-level :emergency)
 
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 

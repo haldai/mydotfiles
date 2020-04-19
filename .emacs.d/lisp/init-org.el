@@ -83,8 +83,12 @@
 
   (use-package org-ref
     :straight t
-    :init
-    (setq org-ref-completion-library 'org-ref-ivy-cite))
+    :init (setq org-ref-completion-library 'org-ref-ivy-cite)
+    :config
+    ;; see org-ref for use of these variables
+    (setq org-ref-bibliography-notes "~/Documents/bibliography/notes.org"
+          org-ref-default-bibliography '("~/Documents/bibliography/references.bib")
+          org-ref-pdf-directory "~/Documents/bibliography/bibtex-pdfs/"))
 
   (use-package org-fancy-priorities
     :straight t
