@@ -20,13 +20,13 @@ localfolders = ~/Mail/work
 # Remote repos can be IMAP or Gmail, the latter being a preconfigured IMAP.
 type = IMAP
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
-remotehost = your_work_mail_host
-remoteuser = your_work_username
+remotehost = outlook.office365.com
+remoteuser = wdai2@ic.ac.uk
 # Decrypt and read the encrypted password
-remotepasseval = get_pass_work()
+remotepasseval = get_pass("work")
 readonly = true
 realdelete = no
-folderfilter = lambda foldername: foldername in ["INBOX"]
+folderfilter = lambda foldername: foldername in ["INBOX", "Family"]
 
 [Account personal]
 # Identifier for the local repository; e.g. the maildir to be synced via IMAP.
@@ -44,10 +44,10 @@ localfolders = ~/Mail/personal
 # Remote repos can be IMAP or Gmail, the latter being a preconfigured IMAP.
 type = IMAP
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
-remotehost = your_personal_mail_host
-remoteuser = your_personal_username
+remotehost = imap-mail.outlook.com
+remoteuser = dai.wzero@hotmail.com
 # Decrypt and read the encrypted password
-remotepasseval = get_pass_personal()
+remotepasseval = get_pass("personal")
 readonly = true
 realdelete = no
-folderfilter = lambda foldername: foldername in ["INBOX"]
+folderfilter = lambda foldername: foldername in ["Inbox", "Imperial", "Imperial/Stephen", "LAMDA", "Bank"]

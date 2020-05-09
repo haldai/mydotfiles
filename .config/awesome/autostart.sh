@@ -7,7 +7,9 @@ function run {
 }
 
 # Startups
-run /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+run nosleep on
+run no_lid_suspend
+# run /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 # run picom --experimental-backends --config ~/.config/compton.conf
 run picom --config ~/.config/compton.conf
 run udiskie -ans
@@ -20,7 +22,7 @@ run fcitx5
 run /home/daiwz/.conky/myconky-start.sh
 
 # Settings
-xbacklight -set 90
+xbacklight -set 50
 amixer set Master 20% off
 amixer set Headphone 100% on
 amixer set Speaker 100% off
