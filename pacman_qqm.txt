@@ -1,10 +1,10 @@
 awmtt
 chromium-widevine
 dell-command-configure
+dell-smm-hwmon-i8kutils
 dropbox
 emacs27-git
 equilux-theme
-haskell-base-noprelude
 howdy
 i8kutils
 intel-undervolt
@@ -12,7 +12,6 @@ libdmx
 lightdm-settings
 masterpdfeditor-free
 micro-bin
-minecraft-launcher
 mu
 otf-eb-garamond
 otf-vollkorn
