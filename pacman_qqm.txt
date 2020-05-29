@@ -8,6 +8,7 @@ equilux-theme
 howdy
 i8kutils
 intel-undervolt
+jdk8
 libdmx
 lightdm-settings
 masterpdfeditor-free

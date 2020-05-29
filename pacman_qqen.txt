@@ -11,6 +11,7 @@ arandr
 archlinuxcn-keyring
 aria2
 armadillo
+arrayfire
 aspell-en
 atool
 autoconf
@@ -179,10 +180,6 @@ ncmpcpp
 neofetch
 nerd-fonts-complete
 netctl
-network-manager-applet
-networkmanager
-networkmanager-openvpn
-networkmanager-pptp
 nodejs-nativefier
 nomacs
 noto-fonts-cjk
