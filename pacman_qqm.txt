@@ -1,13 +1,8 @@
 awmtt
 chromium-widevine
-dell-command-configure
-dell-smm-hwmon-i8kutils
 dropbox
 emacs27-git
 equilux-theme
-howdy
-i8kutils
-intel-undervolt
 jdk8
 libdmx
 lightdm-settings
@@ -22,9 +17,7 @@ paper-icon-theme-git
 pinta
 powerstat-git
 python-bitstring
-python-dlib
-python-face_recognition
-python-face_recognition_models
+python-dlib-cuda
 python-ffmpeg
 spaceship-prompt-git
 stress-ng

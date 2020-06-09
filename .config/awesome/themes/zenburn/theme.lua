@@ -225,7 +225,10 @@ theme.cpugraph = wibox.widget {
 cpuwidget_t = awful.tooltip({ objects = { theme.cpugraph },})
 vicious.register(theme.cpugraph, vicious.widgets.cpu,
                  function (widget, args)
-                    cpuwidget_t:set_text(string.format("CPU使用率：\n%s%%\n核心使用率：\n%s%%, %s%%, %s%%, %s%%,\n%s%%, %s%%, %s%%, %s%%.", args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9]))
+                    cpuwidget_t:set_text(string.format("CPU使用率：\n%s%%\n核心使用率：\n%s%%, %s%%, %s%%, %s%%,\n%s%%, %s%%, %s%%, %s%%,\n%s%%, %s%%, %s%%, %s%%,\n%s%%, %s%%, %s%%, %s%%,\n%s%%, %s%%, %s%%, %s%%,\n%s%%, %s%%, %s%%, %s%%.", 
+                                                        args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9],
+                                                        args[10], args[11], args[12], args[13], args[14], args[15], args[16], args[17],
+                                                        args[18], args[19], args[20], args[21], args[22], args[23], args[24], args[25]))
                     return args[1]
                  end, 5)
 local cpubg = wibox.container.background(theme.cpugraph, black2, gears.shape.rectangle)
@@ -412,7 +415,7 @@ vicious.register(theme.thermalbar, vicious_contrib.sensors,
                        widget.widget:set_color(blue1)
                     end
                     widget.widget:set_value(args[1])
-                 end, 7, "Package id 0")
+                 end, 7, "Tdie")
 local thermalbg = wibox.container.background(theme.thermalbar, black2, gears.shape.rectangle)
 local thermalwidget = wibox.container.margin(thermalbg, 5, 8, 5, 5)
 --- }}}
@@ -505,18 +508,20 @@ vicious.register(theme.netgraph, vicious.widgets.net,
                           break
                        end
                     end
+                    print(if_name)
                     local if_up = "{" .. if_name .. " up_kb}"
                     local if_down = "{" .. if_name .. " down_kb}"
                     if if_name == "none" then
-                       netwidget_t:set_text(string.format("網絡斷‎開！"))
+                       netwidget_t:set_text(string.format("網絡斷開！"))
+                       return 0
                     else
                        if string.sub(if_name, 1, 1) == 'e' then
                           netwidget_t:set_text(string.format("有線網絡[%s]：\n%sKB/s ▲\n%sKB/s ▼", if_name, args[if_up], args[if_down]))
                        else
                           netwidget_t:set_text(string.format("無線網絡[%s]：\n%sKB/s ▲\n%sKB/s ▼", if_name, args[if_up], args[if_down]))
                        end
+                       return tonumber(args[if_down]) + tonumber(args[if_up])
                     end
-                    return tonumber(args[if_down]) + tonumber(args[if_up])
                  end, 3)
 local netbg = wibox.container.background(theme.netgraph, black2, gears.shape.rectangle)
 local netwidget = wibox.container.margin(netbg, 5, 8, 5, 5)
@@ -650,14 +655,14 @@ function theme.at_screen_connect(s)
          netwidget,
          wibox.widget.textbox("<b>郵</b>"),
          emailwidget,
-         wibox.widget.textbox("<b>亮</b>"),
-         brightnesswidget,
+         -- wibox.widget.textbox("<b>亮</b>"),
+         -- brightnesswidget,
          wibox.widget.textbox("<b>聲</b>"),
          volumewidget,
          wibox.widget.textbox("<b>溫</b>"),
          thermalwidget,
-         wibox.widget.textbox("<b>電</b>"),
-         batwidget,
+         -- wibox.widget.textbox("<b>電</b>"),
+         -- batwidget,
          wibox.widget.textbox("<b>存</b>"),
          memwidget,
          wibox.widget.textbox("<b>核</b>"),

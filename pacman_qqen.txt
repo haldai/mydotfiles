@@ -1,11 +1,11 @@
 acpi
 acpi_call-dkms
-acpilight
 adobe-source-han-sans-cn-fonts
 adobe-source-han-serif-cn-fonts
 aircrack-ng
 alsa-tools
 alsa-utils
+amd-ucode
 android-tools
 arandr
 archlinuxcn-keyring
@@ -36,6 +36,7 @@ calibre
 ccls-git
 chromium
 clang
+clasp
 cmake
 code
 conky
@@ -101,7 +102,6 @@ imagemagick
 inkscape
 intel-compute-runtime
 intel-media-sdk
-intel-ucode
 iw
 jdk
 jdk-openjdk
@@ -143,7 +143,6 @@ libvncserver
 libwmf
 lightdm
 lightdm-slick-greeter
-linux
 linux-firmware
 linux-headers
 linux-lts
@@ -189,8 +188,8 @@ ntfs-3g
 ntp
 numix-circle-icon-theme-git
 numix-icon-theme-git
+nvidia
 nvidia-dkms
-nvidia-prime
 nvidia-settings
 ocl-icd
 offlineimap
@@ -361,7 +360,6 @@ xorg-fonts-75dpi
 xorg-fonts-encodings
 xorg-iceauth
 xorg-luit
-xorg-server
 xorg-server-devel
 xorg-server-xephyr
 xorg-server-xnest
