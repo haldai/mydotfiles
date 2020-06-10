@@ -1,9 +1,5 @@
-#!/usr/bin/python2
+#! /usr/bin/env python2
+from subprocess import check_output
 
-import keyring
-
-def get_pass_work():
-    return keyring.get_password("mail", "work")
-
-def get_pass_personal():
-    return keyring.get_password("mail", "personal")
+def get_pass(account):
+    return check_output("pass Mail/" + account, shell=True).splitlines()[0]
