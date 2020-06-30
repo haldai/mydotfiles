@@ -225,7 +225,7 @@ theme.cpugraph = wibox.widget {
 cpuwidget_t = awful.tooltip({ objects = { theme.cpugraph },})
 vicious.register(theme.cpugraph, vicious.widgets.cpu,
                  function (widget, args)
-                    cpuwidget_t:set_text(string.format("CPU使用率：\n%s%%\n核心使用率：\n%s%%, %s%%, %s%%, %s%%,\n%s%%, %s%%, %s%%, %s%%,\n%s%%, %s%%, %s%%, %s%%,\n%s%%, %s%%, %s%%, %s%%,\n%s%%, %s%%, %s%%, %s%%,\n%s%%, %s%%, %s%%, %s%%.", 
+                    cpuwidget_t:set_text(string.format("CPU使用率：\n%s%%\n核心使用率：\n%s%%, %s%%, %s%%, %s%%,\n%s%%, %s%%, %s%%, %s%%,\n%s%%, %s%%, %s%%, %s%%,\n%s%%, %s%%, %s%%, %s%%,\n%s%%, %s%%, %s%%, %s%%,\n%s%%, %s%%, %s%%, %s%%.",
                                                         args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9],
                                                         args[10], args[11], args[12], args[13], args[14], args[15], args[16], args[17],
                                                         args[18], args[19], args[20], args[21], args[22], args[23], args[24], args[25]))
@@ -269,6 +269,28 @@ theme.volume.bar:buttons(
 ))
 local volumebg = wibox.container.background(theme.volume.bar, black2, gears.shape.rectangle)
 local volumewidget = wibox.container.margin(volumebg, 5, 8, 7, 7)
+--- }}}
+
+--- {{{ GPU bar
+local mygpubar = require("mygpubar")
+theme.gputhermal = mygpubar {
+   ticks = false,
+   width = 10,
+   height = 5,
+   paddings = 1,
+   border_width = 1,
+   border_color = white1,
+   timeout = 7, -- time interval
+   colors = {
+      background = black1,
+      low = blue1,
+      mid = white1,
+      high = red1
+   }
+}
+
+local gputhermalbg = wibox.container.background(theme.gputhermal.bar, black2, gears.shape.rectangle)
+local gputhermalwidget = wibox.container.margin(gputhermalbg, -2, 8, 5, 5)
 --- }}}
 
 --- {{{ RAM
@@ -409,15 +431,16 @@ vicious.register(theme.thermalbar, vicious_contrib.sensors,
                        widget.widget:set_color(red1)
                     elseif temp < 80 and temp >= 70 then
                        widget.widget:set_color(orange)
-                    elseif temp < 70 and temp >= 40 then
+                    elseif temp < 70 and temp >= 45 then
                        widget.widget:set_color(white1)
                     else
                        widget.widget:set_color(blue1)
                     end
                     widget.widget:set_value(args[1])
-                 end, 7, "Tdie")
+                 end, 7, "CPUTIN")
 local thermalbg = wibox.container.background(theme.thermalbar, black2, gears.shape.rectangle)
 local thermalwidget = wibox.container.margin(thermalbg, 5, 8, 5, 5)
+
 --- }}}
 --- {{{ Calendar
 local calendar = awful.widget.calendar_popup.year({
@@ -508,7 +531,7 @@ vicious.register(theme.netgraph, vicious.widgets.net,
                           break
                        end
                     end
-                    print(if_name)
+
                     local if_up = "{" .. if_name .. " up_kb}"
                     local if_down = "{" .. if_name .. " down_kb}"
                     if if_name == "none" then
@@ -632,9 +655,9 @@ function theme.at_screen_connect(s)
    }
    -- Create the wibox
    s.mywibox = awful.wibar({ position = "top", height = 28, screen = s,
-                             bg = "00000000",
+                             bg = "#00000000",
                              border_width = 1,
-                             border_color = "00000000",
+                             border_color = "#00000000",
                              fg = theme.fg_normal })
 
    -- Add widgets to the wibox
@@ -661,6 +684,7 @@ function theme.at_screen_connect(s)
          volumewidget,
          wibox.widget.textbox("<b>溫</b>"),
          thermalwidget,
+         gputhermalwidget,
          -- wibox.widget.textbox("<b>電</b>"),
          -- batwidget,
          wibox.widget.textbox("<b>存</b>"),
