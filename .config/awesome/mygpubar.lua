@@ -93,7 +93,7 @@ local function factory(args)
                   gpubar.bar.widget.color = gpubar.colors.high
                end
 
-               gpubar.tooltip:set_text(string.format("顯卡：\n風扇：\t%s%%,\n溫度：\t%s℃,\n功率：\t%sW / %sW,\n顯存：\t%sMiB / %sMiB.", fan, temp, pow, pow_total, mem, mem_total))
+               gpubar.tooltip:set_text(string.format("顯卡: \n風扇: \t%s%%,\n溫度: \t%s℃,\n功率: \t%sW / %sW,\n顯存: \t%sMiB / %sMiB.", fan, temp, pow, pow_total, mem, mem_total))
 
                settings()
 
