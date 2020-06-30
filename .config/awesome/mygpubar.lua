@@ -1,8 +1,8 @@
 --[[
 
-     Licensed under GNU General Public License v2
-      * (c) 2013, Luca CPZ
-      * (c) 2013, Rman
+   Licensed under GNU General Public License v2
+   * (c) 2013, Luca CPZ
+   * (c) 2013, Rman
 
 --]]
 
@@ -73,17 +73,17 @@ local function factory(args)
                table.insert(result, x)
             end
 
-            local fan = tonumber(result[1])
-            local temp = tonumber(result[2])
-            local pow = tonumber(result[4])
-            local pow_total = tonumber(result[5])
-            local mem = tonumber(result[4])
-            local mem_total = tonumber(result[5])
+            local fan = result[1]
+            local temp = result[2]
+            local pow = result[4]
+            local pow_total = result[5]
+            local mem = result[6]
+            local mem_total = result[7]
 
             if not fan or not temp then return end
 
             if temp ~= gpubar._current_level then
-               gpubar._current_level = temp
+               gpubar._current_level = tonumber(temp)
                gpubar.bar.widget:set_value(gpubar._current_level / 100)
                if gpubar._current_level <= 45 then
                   gpubar.bar.widget.color = gpubar.colors.low
@@ -93,7 +93,7 @@ local function factory(args)
                   gpubar.bar.widget.color = gpubar.colors.high
                end
 
-               gpubar.tooltip:set_text(string.format("顯卡：\n風扇：\t%d%%,\n溫度：\t%dC,\n功率：\t%dW / %dW,\n顯存：\t%dMiB / %dMiB.", fan, temp, pow, pow_total, mem, mem_total))
+               gpubar.tooltip:set_text(string.format("顯卡：\n風扇：\t%s%%,\n溫度：\t%s℃,\n功率：\t%sW / %sW,\n顯存：\t%sMiB / %sMiB.", fan, temp, pow, pow_total, mem, mem_total))
 
                settings()
 
