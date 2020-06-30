@@ -16,6 +16,9 @@
          (org-mode . variable-pitch-mode))
   :config
 
+  ;; latex preview scale
+  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
+
   ;; indent in source code block
   (setq org-src-tab-acts-natively t)
 
