@@ -10,7 +10,6 @@ android-tools
 arandr
 archlinuxcn-keyring
 aria2
-armadillo
 arrayfire
 aspell-en
 atool
@@ -28,6 +27,7 @@ bc
 bdf-unifont
 binutils
 bison
+blender
 blueman
 bluez-utils
 bolt
@@ -36,7 +36,6 @@ calibre
 ccls-git
 chromium
 clang
-clasp
 cmake
 code
 conky
@@ -55,6 +54,7 @@ downgrade
 dunst
 efibootmgr
 elinks
+emacs27-git
 epdfview
 eslint
 exfat-utils
@@ -67,6 +67,7 @@ fcitx5-qt4-git
 fcitx5-qt5-git
 ffmpeg
 ffmpegthumbnailer
+ffsend-bin
 file
 filezilla
 findutils
@@ -87,6 +88,7 @@ glmark2
 gnome-keyring
 go-tools
 gotop-bin
+gparted
 grep
 groff
 grub
@@ -94,9 +96,9 @@ grub-customizer
 gvfs
 gvfs-mtp
 gzip
-hardinfo
 highlight
 htop
+i2c-tools
 i7z
 imagemagick
 inkscape
@@ -129,7 +131,6 @@ lib32-openal
 lib32-v4l-utils
 lib32-vkd3d
 lib32-vulkan-icd-loader
-lib32-vulkan-intel
 libcaca
 libfprint
 libheif
@@ -147,8 +148,6 @@ linux-firmware
 linux-headers
 linux-lts
 linux-lts-headers
-linux-zen
-linux-zen-headers
 linux-zencjk
 linux-zencjk-headers
 logrotate
@@ -191,6 +190,7 @@ numix-icon-theme-git
 nvidia
 nvidia-dkms
 nvidia-settings
+nvme-cli
 ocl-icd
 offlineimap
 oh-my-zsh-git
@@ -198,7 +198,6 @@ okular
 openmpi
 openvpn
 os-prober
-otf-fira-code
 p7zip
 package-query
 pacman
@@ -223,6 +222,7 @@ poppler-glib
 powertop
 ppp
 ppsspp
+pptpclient
 pptpd
 prettier
 proxychains-ng
@@ -303,13 +303,14 @@ shadowsocks-qt5
 skypeforlinux-preview-bin
 slock
 smartmontools
+snes9x-git
+snes9x-gtk
 solaar
 sshfs
 stalonetray
 steam
 strace
 sudo
-superlu
 swig
 tcl
 texinfo
@@ -323,6 +324,7 @@ texlive-latexextra
 texlive-pictures
 texlive-science
 thefuck
+thermald
 tk
 tmux
 transmission-gtk
@@ -342,7 +344,6 @@ vimix-gtk-themes-git
 vkd3d
 vlc-git
 vnstat
-vulkan-intel
 w3m
 wget
 whatsapp-nativefier
