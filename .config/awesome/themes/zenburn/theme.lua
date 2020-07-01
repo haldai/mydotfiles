@@ -226,9 +226,9 @@ cpuwidget_t = awful.tooltip({ objects = { theme.cpugraph },})
 vicious.register(theme.cpugraph, vicious.widgets.cpu,
                  function (widget, args)
                     cpuwidget_t:set_text(string.format("CPU使用率：\n%s%%\n核心使用率：\n%s%%, %s%%, %s%%, %s%%,\n%s%%, %s%%, %s%%, %s%%,\n%s%%, %s%%, %s%%, %s%%,\n%s%%, %s%%, %s%%, %s%%,\n%s%%, %s%%, %s%%, %s%%,\n%s%%, %s%%, %s%%, %s%%.",
-                                                        args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9],
-                                                        args[10], args[11], args[12], args[13], args[14], args[15], args[16], args[17],
-                                                        args[18], args[19], args[20], args[21], args[22], args[23], args[24], args[25]))
+                                                       args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9],
+                                                       args[10], args[11], args[12], args[13], args[14], args[15], args[16], args[17],
+                                                       args[18], args[19], args[20], args[21], args[22], args[23], args[24], args[25]))
                     return args[1]
                  end, 5)
 local cpubg = wibox.container.background(theme.cpugraph, black2, gears.shape.rectangle)
@@ -426,7 +426,7 @@ vicious.cache(vicious_contrib.sensors)
 vicious.register(theme.thermalbar, vicious_contrib.sensors,
                  function (widget, args)
                     local temp = tonumber(args[1])
-                    thermalwidget_t:set_text(string.format("核心溫度：%s ℃", args[1]))
+                    thermalwidget_t:set_text(string.format("核心溫度：%s℃", args[1]))
                     if temp >= 80 then
                        widget.widget:set_color(red1)
                     elseif temp < 80 and temp >= 70 then
@@ -437,11 +437,11 @@ vicious.register(theme.thermalbar, vicious_contrib.sensors,
                        widget.widget:set_color(blue1)
                     end
                     widget.widget:set_value(args[1])
-                 end, 7, "CPUTIN")
+                 end, 7, "Tccd1")
 local thermalbg = wibox.container.background(theme.thermalbar, black2, gears.shape.rectangle)
 local thermalwidget = wibox.container.margin(thermalbg, 5, 8, 5, 5)
-
 --- }}}
+
 --- {{{ Calendar
 local calendar = awful.widget.calendar_popup.year({
       font          = 'SauceCodePro Nerd Font Mono',
@@ -494,28 +494,28 @@ awful.widget.watch(
 theme.emailnum:buttons(
    my_table.join(
       awful.button({}, 3, function()
-             awful.spawn("emacsclient -c -a emacs --eval \"(mu4e)\"")
-             theme.emailnum:set_markup_silently("<span color=\"" .. white1 .. "\" font_desc=\"SauceCodePro Nerd Font Mono 9\">無</span>")
-             emailbg:set_bg(black1)
-             emailnum_t:set_text("暫無新郵件")
-       end)
- ))
- local emailwidget = wibox.container.margin(emailbg, 5, 8, 5, 5)
- --- }}}
+            awful.spawn("emacsclient -c -a emacs --eval \"(mu4e)\"")
+            theme.emailnum:set_markup_silently("<span color=\"" .. white1 .. "\" font_desc=\"SauceCodePro Nerd Font Mono 9\">無</span>")
+            emailbg:set_bg(black1)
+            emailnum_t:set_text("暫無新郵件")
+      end)
+))
+local emailwidget = wibox.container.margin(emailbg, 5, 8, 5, 5)
+--- }}}
 
- --- {{{ Net
- theme.netgraph = wibox.widget {
-    forced_width = 32,
-    paddings = 1,
-    border_width = 1,
-    border_color = white2,
-    color = white1,
-    background_color = black1,
-    scale = true,
-    widget = wibox.widget.graph
- }
- local net_interfaces = {}
- for line in io.lines("/proc/net/dev") do
+--- {{{ Net
+theme.netgraph = wibox.widget {
+   forced_width = 32,
+   paddings = 1,
+   border_width = 1,
+   border_color = white2,
+   color = white1,
+   background_color = black1,
+   scale = true,
+   widget = wibox.widget.graph
+}
+local net_interfaces = {}
+for line in io.lines("/proc/net/dev") do
    local name = string.match(line, "^[%s]?[%s]?[%s]?[%s]?([%w]+):")
    if name ~= "lo" then
       table.insert(net_interfaces, name)
@@ -564,12 +564,12 @@ local mylayouts = {
 
 function theme.at_screen_connect(s)
    -- Quake application
-         s.quake = lain.util.quake({ app = awful.util.terminal })
-         screen_index = s.index
+   s.quake = lain.util.quake({ app = awful.util.terminal })
+   screen_index = s.index
 
-         -- Wallpaper
-         local wallpaper = theme.wallpapers[screen_index]
-         if type(wallpaper) == "function" then
+   -- Wallpaper
+   local wallpaper = theme.wallpapers[screen_index]
+   if type(wallpaper) == "function" then
       wallpaper = wallpaper(s)
    end
    gears.wallpaper.centered(wallpaper, s, theme.bg_normal, theme.wallpaper_scales[screen_index])
