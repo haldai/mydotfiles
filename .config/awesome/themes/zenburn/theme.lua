@@ -11,8 +11,6 @@ local gears = require("gears")
 local lain  = require("lain")
 local awful = require("awful")
 local wibox = require("wibox")
-local vicious = require("vicious")
-local vicious_contrib = require("vicious.contrib")
 
 local os = os
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
@@ -223,14 +221,24 @@ theme.cpugraph = wibox.widget {
    widget = wibox.widget.graph
 }
 cpuwidget_t = awful.tooltip({ objects = { theme.cpugraph },})
-vicious.register(theme.cpugraph, vicious.widgets.cpu,
-                 function (widget, args)
-                    cpuwidget_t:set_text(string.format("CPU使用率：\n%s%%\n核心使用率：\n%s%%, %s%%, %s%%, %s%%,\n%s%%, %s%%, %s%%, %s%%,\n%s%%, %s%%, %s%%, %s%%,\n%s%%, %s%%, %s%%, %s%%,\n%s%%, %s%%, %s%%, %s%%,\n%s%%, %s%%, %s%%, %s%%.",
-                                                       args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9],
-                                                       args[10], args[11], args[12], args[13], args[14], args[15], args[16], args[17],
-                                                       args[18], args[19], args[20], args[21], args[22], args[23], args[24], args[25]))
-                    return args[1]
-                 end, 5)
+awful.widget.watch('bash -c "mpstat -P ALL 2 1 | awk \'$12 ~ /[0-9.]+/ { print 100 - $12 }\'"', 5,
+                   function(widget, stdout)
+                      if stdout ~= nil and stdout ~= "" then
+                         args = {}
+                         for val in stdout:gmatch("[^\r\n]+") do
+                            table.insert(args, tonumber(val))
+                         end
+                         theme.cpugraph:add_value(args[1] / 100, 1)
+                         cpuwidget_t:set_text(string.format("CPU使用率: \n%.2f%%\n核心使用率: \n%.2f%%, %.2f%%, %.2f%%, %.2f%%,\n%.2f%%, %.2f%%, %.2f%%, %.2f%%,\n%.2f%%, %.2f%%, %.2f%%, %.2f%%,\n%.2f%%, %.2f%%, %.2f%%, %.2f%%,\n%.2f%%, %.2f%%, %.2f%%, %.2f%%,\n%.2f%%, %.2f%%, %.2f%%, %.2f%%.",
+                                                            args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9],
+                                                            args[10], args[11], args[12], args[13], args[14], args[15], args[16], args[17],
+                                                            args[18], args[19], args[20], args[21], args[22], args[23], args[24], args[25]))
+                      else
+                         theme.cpugraph:add_value(0, 1)
+                         cpuwidget_t:set_text(string.format("CPU使用率: 不明"))
+                      end
+end)
+
 local cpubg = wibox.container.background(theme.cpugraph, black2, gears.shape.rectangle)
 local cpuwidget = wibox.container.margin(cpubg, 5, 8, 5, 5)
 --- }}}
@@ -311,100 +319,38 @@ theme.membar = wibox.widget {
    layout = wibox.container.rotate,
 }
 memwidget_t = awful.tooltip({ objects = { theme.membar },})
-vicious.cache(vicious.widgets.mem)
-vicious.register(theme.membar, vicious.widgets.mem,
-                 function (widget, args)
-                    memwidget_t:set_text(string.format("內存消耗：%sMiB / %sMiB", args[2], args[3]))
-                    widget.widget:set_value(args[1])
-                    return args[1]
-                 end, 13)
+
+awful.widget.watch('bash -c "free -h --si | sed -n 2p"', 13,
+                   function (widget, stdout)
+                      if stdout ~= nil and stdout ~= "" then
+                         mtab = {}
+                         for val, unit in string.gmatch(stdout, "([%d.]+)(%a)") do
+                            table.insert(mtab, {tonumber(val), unit})
+                         end
+                         mem_usage = mtab[2][1] / mtab[1][1] * 100
+                         memwidget_t:set_text(string.format("內存消耗:\n總計: %.1f%s\n已用: %.1f%s\n空閒: %.1f%s\n共享: %.1f%s\n緩衝 / 緩存: %.1f%s\n可用: %.1f%s", mtab[1][1], mtab[1][2], mtab[2][1], mtab[2][2], mtab[3][1], mtab[3][2], mtab[4][1], mtab[4][2], mtab[5][1], mtab[5][2], mtab[6][1], mtab[6][2]))
+                         if mem_usage >= 80 then
+                            theme.membar.widget:set_color(red1)
+                         elseif mem_usage < 80 and mem_usage >= 70 then
+                            theme.membar.widget:set_color(orange)
+                         elseif mem_usage < 70 and mem_usage >= 45 then
+                            theme.membar.widget:set_color(white1)
+                         else
+                            theme.membar.widget:set_color(blue1)
+                         end
+                         theme.membar.widget:set_value(mem_usage)
+                      else
+                         theme.membar.widget:set_color(white1)
+                         theme.membar.widget:set_value(0)
+                         memwidget_t:set_text(string.format("內存消耗: 不明"))
+                      end
+end)
+
 local membg = wibox.container.background(theme.membar, black2, gears.shape.rectangle)
 local memwidget = wibox.container.margin(membg, 5, 8, 5, 5)
 --- }}}
 
--- {{{ Battery
-theme.batbar = wibox.widget {
-   {
-      max_value = 100,
-      -- color = white1,
-      background_color = black1,
-      paddings = 1,
-      border_width = 1,
-      border_color = white1,
-      ticks = false,
-      widget = wibox.widget.progressbar,
-   },
-   forced_height = 5,
-   forced_width = 10,
-   direction = 'east',
-   layout = wibox.container.rotate,
-}
-batwidget_t = awful.tooltip({ objects = { theme.batbar },})
-vicious.cache(vicious.widgets.bat)
-vicious.register(theme.batbar, vicious.widgets.bat,
-                 function (widget, args)
-                    widget.widget:set_value(args[2])
-                    if args[1] == "+" then
-                       widget.widget:set_color(green1)
-                       batwidget_t:set_text(string.format("充電：%s%%，剩餘 %s ", args[2], args[3]))
-                    elseif args[1] == "-" then
-                       local bat_val = tonumber(args[2])
-                       batwidget_t:set_text(string.format("放電： %s%%，剩餘 %s", args[2], args[3]))
-                       if bat_val >= 20 then
-                          widget.widget:set_color(white1)
-                       elseif bat_val < 20 and bat_val >= 10 then
-                          widget.widget:set_color(orange)
-                       else
-                          widget.widget:set_color(red1)
-                       end
-                    else
-                       widget.widget:set_color(white1)
-                       batwidget_t:set_text(string.format("電源已連接：%s%%", args[2]))
-                    end
-                 end, 61, "BAT0")
-local batbg = wibox.container.background(theme.batbar, black2, gears.shape.rectangle)
-local batwidget = wibox.container.margin(batbg, 5, 8, 5, 5)
---- }}}
-
---- {{{ Brightness
-local mybrightnessbar = require("mybrightnessbar")
-theme.brightness = mybrightnessbar {
-   ticks = false,
-   width = 64,
-   height = 16,
-   paddings = 1,
-   border_width = 1,
-   border_color = white2,
-   timeout = 31,
-   background_color = black1,
-   color = white1,
-   notification_preset = { font = "方正宋刻本秀楷 10" }
-}
-theme.brightness.bar:buttons(
-   my_table.join (
-      awful.button({}, 1, function()
-            os.execute(string.format("xbacklight -set 100"))
-            theme.brightness.update()
-      end),
-      awful.button({}, 3, function()
-            os.execute(string.format("xbacklight -set 5"))
-            theme.brightness.update()
-      end),
-      awful.button({}, 4, function()
-            os.execute(string.format("xbacklight -inc 1"))
-            theme.brightness.update()
-      end),
-      awful.button({}, 5, function()
-            os.execute(string.format("xbacklight -dec 1"))
-            theme.brightness.update()
-      end)
-))
-local brightnessbg = wibox.container.background(theme.brightness.bar, black2, gears.shape.rectangle)
-local brightnesswidget = wibox.container.margin(brightnessbg, 5, 8, 7, 7)
---- }}}
-
 -- {{{ Thermal
--- tonumber(string.match('+45.0°C', '%d+.%d+'))
 theme.thermalbar = wibox.widget {
    {
       max_value = 100,
@@ -422,22 +368,28 @@ theme.thermalbar = wibox.widget {
    layout = wibox.container.rotate,
 }
 thermalwidget_t = awful.tooltip({ objects = { theme.thermalbar },})
-vicious.cache(vicious_contrib.sensors)
-vicious.register(theme.thermalbar, vicious_contrib.sensors,
-                 function (widget, args)
-                    local temp = tonumber(args[1])
-                    thermalwidget_t:set_text(string.format("核心溫度：%s℃", args[1]))
-                    if temp >= 80 then
-                       widget.widget:set_color(red1)
-                    elseif temp < 80 and temp >= 70 then
-                       widget.widget:set_color(orange)
-                    elseif temp < 70 and temp >= 45 then
-                       widget.widget:set_color(white1)
-                    else
-                       widget.widget:set_color(blue1)
-                    end
-                    widget.widget:set_value(args[1])
-                 end, 7, "Tccd1")
+awful.widget.watch('bash -c "sensors | grep Tctl"', 7,
+                   function (widget, stdout)
+                      if stdout ~= nil and stdout ~= "" then
+                         temp = tonumber(string.match(stdout, '[%d.]+'))
+                         thermalwidget_t:set_text(string.format("核心溫度: %.1f℃", temp))
+                         if temp >= 80 then
+                         theme.thermalbar.widget:set_color(red1)
+                         elseif temp < 80 and temp >= 70 then
+                            theme.thermalbar.widget:set_color(orange)
+                         elseif temp < 70 and temp >= 45 then
+                            theme.thermalbar.widget:set_color(white1)
+                         else
+                            theme.thermalbar.widget:set_color(blue1)
+                         end
+                         theme.thermalbar.widget:set_value(temp)
+                      else
+                         theme.thermalbar.widget:set_color(white1)
+                         theme.thermalbar.widget:set_value(0)
+                         thermalwidget_t:set_text(string.format("核心溫度: 不明"))
+                      end
+end)
+
 local thermalbg = wibox.container.background(theme.thermalbar, black2, gears.shape.rectangle)
 local thermalwidget = wibox.container.margin(thermalbg, 5, 8, 5, 5)
 --- }}}
@@ -509,43 +461,39 @@ theme.netgraph = wibox.widget {
    paddings = 1,
    border_width = 1,
    border_color = white2,
-   color = white1,
+   stack_colors = { blue1, red1 },
+   step_width = 2,
    background_color = black1,
    scale = true,
+   stack = true,
    widget = wibox.widget.graph
 }
-local net_interfaces = {}
-for line in io.lines("/proc/net/dev") do
-   local name = string.match(line, "^[%s]?[%s]?[%s]?[%s]?([%w]+):")
-   if name ~= "lo" then
-      table.insert(net_interfaces, name)
-   end
-end
-netwidget_t = awful.tooltip({ objects = { theme.netgraph },})
-vicious.register(theme.netgraph, vicious.widgets.net,
-                 function (widget, args)
-                    local if_name = "none"
-                    for i = 1, #net_interfaces do
-                       if tonumber(args["{" .. net_interfaces[i] .. " carrier}"]) > 0 then
-                          if_name = net_interfaces[i]
-                          break
-                       end
-                    end
 
-                    local if_up = "{" .. if_name .. " up_kb}"
-                    local if_down = "{" .. if_name .. " down_kb}"
-                    if if_name == "none" then
-                       netwidget_t:set_text(string.format("網絡斷開！"))
-                       return 0
-                    else
-                       if string.sub(if_name, 1, 1) == 'e' then
-                          netwidget_t:set_text(string.format("有線網絡[%s]：\n%sKB/s ▲\n%sKB/s ▼", if_name, args[if_up], args[if_down]))
-                       else
-                          netwidget_t:set_text(string.format("無線網絡[%s]：\n%sKB/s ▲\n%sKB/s ▼", if_name, args[if_up], args[if_down]))
-                       end
-                       return tonumber(args[if_down]) + tonumber(args[if_up])
-                    end
-                 end, 3)
+netwidget_t = awful.tooltip({ objects = { theme.netgraph },})
+
+awful.widget.watch('bash -c "mynetstat"', 3,
+                   function(widget, stdout)
+                      net_args = {}
+                      for line in stdout:gmatch("[^\r\n]+") do
+                         table.insert(net_args, line)
+                      end
+                      if_name = net_args[1]
+                      if_rx = tonumber(net_args[2])
+                      if_tx = tonumber(net_args[3])
+                      if if_name == "none" then
+                         netwidget_t:set_text(string.format("網絡斷開！"))
+                         return 0
+                      else
+                         if string.sub(if_name, 1, 1) == 'e' then
+                            netwidget_t:set_text(string.format("有線網絡[%s]: \n%.2fkB/s ▲\n%.2fkB/s ▼", if_name, if_tx, if_rx))
+                         else
+                            netwidget_t:set_text(string.format("無線網絡[%s]: \n%.2fkB/s ▲\n%.2fkB/s ▼", if_name, if_tx, if_rx))
+                         end
+                         theme.netgraph:add_value(if_rx / 100, 1)
+                         theme.netgraph:add_value(if_tx / 100, 2)
+                      end
+end)
+
 local netbg = wibox.container.background(theme.netgraph, black2, gears.shape.rectangle)
 local netwidget = wibox.container.margin(netbg, 5, 8, 5, 5)
 --- }}}
