@@ -60,9 +60,11 @@ eslint
 exfat-utils
 fakeroot
 fcitx5-chinese-addons-git
+fcitx5-config-qt-git
 fcitx5-git
 fcitx5-gtk-git
 fcitx5-mozc-git
+fcitx5-pinyin-zhwiki
 fcitx5-qt4-git
 fcitx5-qt5-git
 ffmpeg
@@ -85,6 +87,7 @@ gettext
 gimp
 git
 glmark2
+gnome-disk-utility
 gnome-keyring
 go-tools
 gotop-bin
@@ -96,6 +99,7 @@ grub-customizer
 gvfs
 gvfs-mtp
 gzip
+hdparm
 highlight
 htop
 i2c-tools
@@ -312,6 +316,7 @@ steam
 strace
 sudo
 swig
+sysstat
 tcl
 texinfo
 texlive-bibtexextra
