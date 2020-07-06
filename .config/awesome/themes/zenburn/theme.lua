@@ -398,6 +398,50 @@ local thermalbg = wibox.container.background(theme.thermalbar, black2, gears.sha
 local thermalwidget = wibox.container.margin(thermalbg, 5, 8, 5, 5)
 --- }}}
 
+--- {{{ Pump
+theme.pumpbar = wibox.widget {
+   {
+      -- color = white1,
+      background_color = black1,
+      paddings = 1,
+      border_width = 1,
+      border_color = white1,
+      ticks = false,
+      widget = wibox.widget.progressbar,
+   },
+   forced_height = 5,
+   forced_width = 10,
+   direction = 'east',
+   layout = wibox.container.rotate,
+}
+pumpwidget_t = awful.tooltip({ objects = { theme.pumpbar },})
+awful.widget.watch('bash -c "liquidctl status | tail -n 4 | grep -o \'[0-9.]\\+\'"', 61,
+                   function (widget, stdout)
+                      if stdout ~= nil and stdout ~= "" then
+                         pumpargs = {}
+                         for val in stdout:gmatch("[^\r\n]+") do
+                            table.insert(pumpargs, tonumber(val))
+                         end
+                         pumpwidget_t:set_text(string.format("水溫: %.1f℃\n泵速: %d rpm / %d%%", pumpargs[1], pumpargs[2], pumpargs[3]))
+                         if pumpargs[3] >= 90 then
+                            theme.pumpbar.widget:set_color(orange)
+                         elseif pumpargs[3] < 90 and pumpargs[3] >= 70 then
+                            theme.pumpbar.widget:set_color(white1)
+                         else
+                            theme.pumpbar.widget:set_color(blue1)
+                         end
+                         theme.pumpbar.widget:set_value(pumpargs[3] / 100)
+                      else
+                         theme.pumpbar.widget:set_color(red1)
+                         theme.pumpbar.widget:set_value(1.0)
+                         pumpwidget_t:set_text(string.format("泵速: 不明"))
+                      end
+end)
+
+local pumpbg = wibox.container.background(theme.pumpbar, black2, gears.shape.rectangle)
+local pumpwidget = wibox.container.margin(pumpbg, 5, 8, 5, 5)
+--- }}}
+
 --- {{{ Calendar
 local calendar = awful.widget.calendar_popup.year({
       font          = 'SauceCodePro Nerd Font Mono',
@@ -634,6 +678,8 @@ function theme.at_screen_connect(s)
          -- brightnesswidget,
          wibox.widget.textbox("<b>聲</b>"),
          volumewidget,
+         wibox.widget.textbox("<b>泵</b>"),
+         pumpwidget,
          wibox.widget.textbox("<b>溫</b>"),
          thermalwidget,
          gputhermalwidget,
