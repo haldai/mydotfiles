@@ -159,26 +159,25 @@ beautiful.init(awful.util.getdir("config") .. "/themes/zenburn/theme.lua")
 -- Table of layouts to cover with awful.layout.inc, order matters.
 -- awful.util.tagnames = { "壹", "貳", "叄", "肆", "伍", "陸", "柒", "捌", "玖" }
 awful.util.tagnames = { "☰", "☱", "☲", "☳", "☴", "☵", "☶", "☷", "☯" }
-awful.layout.layouts = {
-   awful.layout.suit.tile,
+awful.layout.append_default_layouts({
+      awful.layout.suit.tile,
    -- awful.layout.suit.tile.left,
    -- awful.layout.suit.tile.bottom,
    -- awful.layout.suit.tile.top,
    -- awful.layout.suit.fair,
    lain.layout.centerwork,
-   -- lain.layout.termfair,
-   -- awful.layout.suit.fair.horizontal,
+   lain.layout.termfair,
+   awful.layout.suit.fair.horizontal,
    -- awful.layout.suit.spiral,
    -- awful.layout.suit.spiral.dwindle,
    -- awful.layout.suit.max,
    -- awful.layout.suit.max.fullscreen,
    -- awful.layout.suit.magnifier,
    awful.layout.suit.corner.nw,
-   -- awful.layout.suit.corner.ne,
+   awful.layout.suit.corner.ne,
    -- awful.layout.suit.corner.sw,
    -- awful.layout.suit.corner.se,
-   awful.layout.suit.floating,
-}
+   awful.layout.suit.floating})
 -- }}}
 
 -- {{{ Menu
@@ -390,7 +389,7 @@ globalkeys = gears.table.join(
       {description = "launch qutebrowser", group = "launcher"}),
    awful.key({ modkey, "Shift" }, "F3", function () awful.spawn("chromium --disable-web-security --user-data-dir") end,
       {description = "launch Chrome with user data dir", group = "launcher"}),
-   awful.key({ modkey }, "F4", function () awful.spawn(terminal.." -e ~/.scripts/toggle_systray") end,
+   awful.key({ modkey }, "F4", function () awful.spawn.with_shell("~/.scripts/toggle_systray") end,
       {description = "launch system tray", group = "launcher"}),
    awful.key({ modkey }, "F5", function () awful.spawn("st -e ranger") end,
       {description = "launch ranger", group = "launcher"}),

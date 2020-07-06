@@ -31,14 +31,15 @@
     :config
     (auctex-latexmk-setup))
 
-  (use-package company-auctex :straight t)
-
   (use-package pdf-tools
     :straight t
-    :init
-    (pdf-tools-install)
+    :mode (("\\.pdf$" . pdf-view-mode))
+    :init (pdf-tools-install)
     :config
-    (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer))
+    (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
+    (add-hook 'pdf-view-mode-hook #'pdf-view-midnight-minor-mode))
+
+  (use-package company-auctex :straight t)
 
   ;; Reftex
   (add-hook 'LaTeX-mode-hook 'turn-on-reftex)   ; with AUCTeX LaTeX mode

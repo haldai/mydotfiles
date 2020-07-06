@@ -332,7 +332,6 @@ awful.widget.watch('bash -c "free -h --si | sed -n 2p"', 13,
                          elseif mtab[2][2] == "G" and mtab[1][2] == "G" then
                             mem_usage = mtab[2][1] / mtab[1][1] * 100
                          end
-                         print(mem_usage)
                          memwidget_t:set_text(string.format("內存消耗:\n總計: %.1f%s\n已用: %.1f%s\n空閒: %.1f%s\n共享: %.1f%s\n緩衝 / 緩存: %.1f%s\n可用: %.1f%s", mtab[1][1], mtab[1][2], mtab[2][1], mtab[2][2], mtab[3][1], mtab[3][2], mtab[4][1], mtab[4][2], mtab[5][1], mtab[5][2], mtab[6][1], mtab[6][2]))
                          if mem_usage >= 80 then
                             theme.membar.widget:set_color(red1)
