@@ -348,7 +348,6 @@ vi
 vimix-gtk-themes-git
 vkd3d
 vlc-git
-vnstat
 w3m
 wget
 whatsapp-nativefier
