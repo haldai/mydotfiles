@@ -428,13 +428,25 @@ awful.widget.watch('bash -c "liquidctl status | tail -n 4 | grep -o \'[0-9.]\\+\
                             theme.pumpbar.widget:set_color(orange)
                          elseif pumpargs[3] < 90 and pumpargs[3] >= 70 then
                             theme.pumpbar.widget:set_color(white1)
-                         else
+                         elseif pumpargs[3] < 70 and pumpargs[3] >= 30 then
                             theme.pumpbar.widget:set_color(blue1)
+                         else
+                            theme.pumpbar.widget:set_background_color(red1)
+                            theme.pumpbar.widget:set_color(black1)
+                            pumpwidget_t:set_text(string.format("泵速過低！！！"))
+                            naughty.notify({ title = "警告",
+                                             text = "泵速過低！！！",
+                                             timeout = 0,
+                                             position = "top_middle",
+                                             fg = theme.fg_urgent,
+                                             bg = theme.bg_urgent,
+                                             border_width = theme.border_width,
+                                             border_color = white1 })
                          end
                          theme.pumpbar.widget:set_value(pumpargs[3] / 100)
                       else
-                         theme.pumpbar.widget:set_color(red1)
-                         theme.pumpbar.widget:set_value(1.0)
+                         theme.pumpbar.widget:set_background_color(red1)
+                         theme.pumpbar.widget:set_value(0)
                          pumpwidget_t:set_text(string.format("泵速: 不明"))
                       end
 end)
@@ -666,7 +678,7 @@ function theme.at_screen_connect(s)
          layout = wibox.layout.fixed.horizontal,
          -- mylauncher,
          s.mytaglist,
-         forced_width = 248,
+         forced_width = 249,
          -- s.mypromptbox,
       },
       s.mytasklist, -- Middle widget
