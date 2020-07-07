@@ -603,7 +603,7 @@ function theme.at_screen_connect(s)
       filter = awful.widget.taglist.filter.all,
       buttons = awful.util.taglist_buttons,
       style   = {
-         spacing = nil,
+         spacing = 2,
          shape = gears.shape.square,
          shape_border_width_focus = 1,
          shape_border_color_focus = orange,
@@ -631,8 +631,8 @@ function theme.at_screen_connect(s)
             halign = 'center',
             widget = wibox.container.place,
          },
-         spacing = 1,
-         layout  = wibox.layout.fixed.horizontal
+         spacing = nil,
+         layout = wibox.layout.align.horizontal,
       },
       widget_template = {
          {
@@ -647,7 +647,7 @@ function theme.at_screen_connect(s)
                   id = 'icon_role',
                   widget = wibox.widget.imagebox,
                },
-               margins = 5,
+               margins = 2,
                widget = wibox.container.margin
             },
             {
@@ -676,10 +676,11 @@ function theme.at_screen_connect(s)
       expand = outside,
       { -- Left widgets
          layout = wibox.layout.fixed.horizontal,
+         expand = inside,
          -- mylauncher,
          s.mytaglist,
-         forced_width = 249,
          -- s.mypromptbox,
+         forced_width = 270,
       },
       s.mytasklist, -- Middle widget
       { -- Right widgets
@@ -706,7 +707,7 @@ function theme.at_screen_connect(s)
          -- wibox.widget.systray(),
          mytextclock,
          s.mylayoutbox,
-         layout = wibox.layout.fixed.horizontal
+         layout = wibox.layout.fixed.horizontal,
       },
    }
 end
