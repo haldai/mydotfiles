@@ -132,7 +132,7 @@ theme.menu_font = "方正宋刻本秀楷 Bold 13"
 -- {{{ Icons
 theme.lain_icons = os.getenv("HOME") .. "/.config/awesome/lain/icons/layout/zenburn/"
 -- {{{ Taglist
-theme.taglist_font = "方正宋刻本秀楷 Bold 13"
+theme.taglist_font = "方正宋刻本秀楷 Bold 14"
 theme.taglist_bg_focus = black1
 theme.taglist_fg_focus = orange
 --theme.taglist_squares_resize = "false"
@@ -591,8 +591,8 @@ function theme.at_screen_connect(s)
       filter = awful.widget.taglist.filter.all,
       buttons = awful.util.taglist_buttons,
       style   = {
-         spacing = 3,
-         shape = gears.shape.octogon,
+         spacing = nil,
+         shape = gears.shape.square,
          shape_border_width_focus = 1,
          shape_border_color_focus = orange,
          fg_occupied = orange,
@@ -600,6 +600,7 @@ function theme.at_screen_connect(s)
          fg_urgent = red1,
          bg_focus = black1,
          fg_focus = orange,
+         squares_resize = false
       },
    }
 
@@ -665,11 +666,11 @@ function theme.at_screen_connect(s)
          layout = wibox.layout.fixed.horizontal,
          -- mylauncher,
          s.mytaglist,
+         forced_width = 248,
          -- s.mypromptbox,
       },
       s.mytasklist, -- Middle widget
       { -- Right widgets
-         layout = wibox.layout.fixed.horizontal,
          -- mykeyboardlayout,
          wibox.widget.textbox("<b>網</b>"),
          netwidget,
@@ -693,6 +694,7 @@ function theme.at_screen_connect(s)
          -- wibox.widget.systray(),
          mytextclock,
          s.mylayoutbox,
+         layout = wibox.layout.fixed.horizontal
       },
    }
 end
