@@ -603,7 +603,7 @@ function theme.at_screen_connect(s)
       filter = awful.widget.taglist.filter.all,
       buttons = awful.util.taglist_buttons,
       style   = {
-         spacing = 2,
+         spacing = 3,
          shape = gears.shape.square,
          shape_border_width_focus = 1,
          shape_border_color_focus = orange,
@@ -675,12 +675,12 @@ function theme.at_screen_connect(s)
       layout = wibox.layout.align.horizontal,
       expand = outside,
       { -- Left widgets
-         layout = wibox.layout.fixed.horizontal,
+         layout = wibox.layout.align.horizontal,
          expand = inside,
          -- mylauncher,
          s.mytaglist,
          -- s.mypromptbox,
-         forced_width = 270,
+         forced_width = 280,
       },
       s.mytasklist, -- Middle widget
       { -- Right widgets
