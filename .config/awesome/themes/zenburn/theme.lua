@@ -378,9 +378,9 @@ awful.widget.watch('bash -c "sensors | grep Tctl"', 7,
                       if stdout ~= nil and stdout ~= "" then
                          temp = tonumber(string.match(stdout, '[%d.]+'))
                          thermalwidget_t:set_text(string.format("核心溫度: %.1f℃", temp))
-                         if temp >= 80 then
+                         if temp >= 90 then
                             theme.thermalbar.widget:set_color(red1)
-                         elseif temp < 80 and temp >= 70 then
+                         elseif temp < 90 and temp >= 70 then
                             theme.thermalbar.widget:set_color(orange)
                          elseif temp < 70 and temp >= 45 then
                             theme.thermalbar.widget:set_color(white1)
@@ -605,14 +605,18 @@ function theme.at_screen_connect(s)
       style   = {
          spacing = 3,
          shape = gears.shape.square,
-         shape_border_width_focus = 1,
+         shape_border_width_focus = 0.5,
          shape_border_color_focus = orange,
          fg_occupied = orange,
          bg_urgent = black1,
          fg_urgent = red1,
          bg_focus = black1,
          fg_focus = orange,
-         squares_resize = false
+         squares_resize = true
+      },
+      layout = {
+         spacing = 1,
+         layout  = wibox.layout.fixed.horizontal
       },
    }
 
