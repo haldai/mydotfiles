@@ -132,7 +132,7 @@ theme.menu_font = "方正宋刻本秀楷 Bold 13"
 -- {{{ Icons
 theme.lain_icons = os.getenv("HOME") .. "/.config/awesome/lain/icons/layout/zenburn/"
 -- {{{ Taglist
-theme.taglist_font = "方正宋刻本秀楷 Bold 14"
+theme.taglist_font = "方正宋刻本秀楷 Bold 16"
 theme.taglist_bg_focus = black1
 theme.taglist_fg_focus = orange
 --theme.taglist_squares_resize = "false"
@@ -245,95 +245,95 @@ local cpuwidget = wibox.container.margin(cpubg, 5, 8, 5, 5)
 --- }}}
 
 --- {{{ Volume bar, add borders to lain.widget.alsabar
- local myalsabar = require("myalsabar")
- theme.volume = myalsabar {
-    ticks = false,
-    width = 64,
-    height = 16,
-    paddings = 1,
-    border_width = 1,
-    border_color = white2,
-    timeout = 11, -- time interval
-    colors = {
-       background = black1,
-       mute = red1,
-       unmute = white1
-    },
-    notification_preset = { font = "方正宋刻本秀楷 10" }
- }
- theme.volume.bar:buttons(
-    my_table.join (
-       awful.button({}, 3, function()
-             os.execute(string.format("%s set %s toggle", theme.volume.cmd, theme.volume.togglechannel or theme.volume.channel))
-             theme.volume.update()
-       end),
-       awful.button({}, 4, function()
-             os.execute(string.format("%s set %s 2%%+", theme.volume.cmd, theme.volume.channel))
-             theme.volume.update()
-       end),
-       awful.button({}, 5, function()
-             os.execute(string.format("%s set %s 2%%-", theme.volume.cmd, theme.volume.channel))
-             theme.volume.update()
-       end)
- ))
- local volumebg = wibox.container.background(theme.volume.bar, black2, gears.shape.rectangle)
- local volumewidget = wibox.container.margin(volumebg, 5, 8, 7, 7)
- --- }}}
+local myalsabar = require("myalsabar")
+theme.volume = myalsabar {
+   ticks = false,
+   width = 64,
+   height = 16,
+   paddings = 1,
+   border_width = 1,
+   border_color = white2,
+   timeout = 11, -- time interval
+   colors = {
+      background = black1,
+      mute = red1,
+      unmute = white1
+   },
+   notification_preset = { font = "方正宋刻本秀楷 10" }
+}
+theme.volume.bar:buttons(
+   my_table.join (
+      awful.button({}, 3, function()
+            os.execute(string.format("%s set %s toggle", theme.volume.cmd, theme.volume.togglechannel or theme.volume.channel))
+            theme.volume.update()
+      end),
+      awful.button({}, 4, function()
+            os.execute(string.format("%s set %s 2%%+", theme.volume.cmd, theme.volume.channel))
+            theme.volume.update()
+      end),
+      awful.button({}, 5, function()
+            os.execute(string.format("%s set %s 2%%-", theme.volume.cmd, theme.volume.channel))
+            theme.volume.update()
+      end)
+))
+local volumebg = wibox.container.background(theme.volume.bar, black2, gears.shape.rectangle)
+local volumewidget = wibox.container.margin(volumebg, 5, 8, 7, 7)
+--- }}}
 
- --- {{{ GPU bar
- local mygpubar = require("mygpubar")
- theme.gputhermal = mygpubar {
-    ticks = false,
-    width = 10,
-    height = 5,
-    paddings = 1,
-    border_width = 1,
-    border_color = white1,
-    timeout = 7, -- time interval
-    colors = {
-       background = black1,
-       low = blue1,
-       mid = white1,
-       high = red1
-    }
- }
+--- {{{ GPU bar
+local mygpubar = require("mygpubar")
+theme.gputhermal = mygpubar {
+   ticks = false,
+   width = 10,
+   height = 5,
+   paddings = 1,
+   border_width = 1,
+   border_color = white1,
+   timeout = 7, -- time interval
+   colors = {
+      background = black1,
+      low = blue1,
+      mid = white1,
+      high = red1
+   }
+}
 
- local gputhermalbg = wibox.container.background(theme.gputhermal.bar, black2, gears.shape.rectangle)
- local gputhermalwidget = wibox.container.margin(gputhermalbg, -2, 8, 5, 5)
- --- }}}
+local gputhermalbg = wibox.container.background(theme.gputhermal.bar, black2, gears.shape.rectangle)
+local gputhermalwidget = wibox.container.margin(gputhermalbg, -2, 8, 5, 5)
+--- }}}
 
- --- {{{ RAM
- theme.membar = wibox.widget {
-    {
-       max_value = 100,
-       color = white1,
-       background_color = black1,
-       paddings = 1,
-       border_width = 1,
-       border_color = white1,
-       ticks = false,
-       widget = wibox.widget.progressbar,
-    },
-    forced_height = 5,
-    forced_width = 10,
-    direction = 'east',
-    layout = wibox.container.rotate,
- }
- memwidget_t = awful.tooltip({ objects = { theme.membar },})
+--- {{{ RAM
+theme.membar = wibox.widget {
+   {
+      max_value = 100,
+      color = white1,
+      background_color = black1,
+      paddings = 1,
+      border_width = 1,
+      border_color = white1,
+      ticks = false,
+      widget = wibox.widget.progressbar,
+   },
+   forced_height = 5,
+   forced_width = 10,
+   direction = 'east',
+   layout = wibox.container.rotate,
+}
+memwidget_t = awful.tooltip({ objects = { theme.membar },})
 
- awful.widget.watch('bash -c "free -h --si | sed -n 2p"', 13,
-                    function (widget, stdout)
-                       if stdout ~= nil and stdout ~= "" then
-                          mtab = {}
-                          for val, unit in string.gmatch(stdout, "([%d.]+)(%a)") do
-                             table.insert(mtab, {tonumber(val), unit})
-                          end
-                          if mtab[2][2] == "M" and mtab[1][2] == "G" then
-                             mem_usage = mtab[2][1] / 1024 / mtab[1][1] * 100
-                          elseif mtab[2][2] == "G" and mtab[1][2] == "G" then
-                             mem_usage = mtab[2][1] / mtab[1][1] * 100
-                          end
-                          memwidget_t:set_text(string.format("內存消耗:\n總計: %.1f%s\n已用: %.1f%s\n空閒: %.1f%s\n共享: %.1f%s\n緩衝 / 緩存: %.1f%s\n可用: %.1f%s", mtab[1][1], mtab[1][2], mtab[2][1], mtab[2][2], mtab[3][1], mtab[3][2], mtab[4][1], mtab[4][2], mtab[5][1], mtab[5][2], mtab[6][1], mtab[6][2]))
+awful.widget.watch('bash -c "free -h --si | sed -n 2p"', 13,
+                   function (widget, stdout)
+                      if stdout ~= nil and stdout ~= "" then
+                         mtab = {}
+                         for val, unit in string.gmatch(stdout, "([%d.]+)(%a)") do
+                            table.insert(mtab, {tonumber(val), unit})
+                         end
+                         if mtab[2][2] == "M" and mtab[1][2] == "G" then
+                            mem_usage = mtab[2][1] / 1024 / mtab[1][1] * 100
+                         elseif mtab[2][2] == "G" and mtab[1][2] == "G" then
+                            mem_usage = mtab[2][1] / mtab[1][1] * 100
+                         end
+                         memwidget_t:set_text(string.format("內存消耗:\n總計: %.1f%s\n已用: %.1f%s\n空閒: %.1f%s\n共享: %.1f%s\n緩衝 / 緩存: %.1f%s\n可用: %.1f%s", mtab[1][1], mtab[1][2], mtab[2][1], mtab[2][2], mtab[3][1], mtab[3][2], mtab[4][1], mtab[4][2], mtab[5][1], mtab[5][2], mtab[6][1], mtab[6][2]))
                          if mem_usage >= 80 then
                             theme.membar.widget:set_color(red1)
                          elseif mem_usage < 80 and mem_usage >= 70 then
@@ -603,7 +603,6 @@ function theme.at_screen_connect(s)
       filter = awful.widget.taglist.filter.all,
       buttons = awful.util.taglist_buttons,
       style   = {
-         spacing = 3,
          shape = gears.shape.square,
          shape_border_width_focus = 0.5,
          shape_border_color_focus = orange,
@@ -612,10 +611,10 @@ function theme.at_screen_connect(s)
          fg_urgent = red1,
          bg_focus = black1,
          fg_focus = orange,
-         squares_resize = true
       },
-      layout = {
-         spacing = 1,
+      layout   = {
+         spacing = 7,
+         spacing_widget = wibox.widget.textbox("<b>ꞏ</b>"),
          layout  = wibox.layout.fixed.horizontal
       },
    }
@@ -679,12 +678,11 @@ function theme.at_screen_connect(s)
       layout = wibox.layout.align.horizontal,
       expand = outside,
       { -- Left widgets
+         wibox.widget.textbox("<b>『</b>"),
          layout = wibox.layout.align.horizontal,
-         expand = inside,
-         -- mylauncher,
          s.mytaglist,
+         wibox.widget.textbox("<b>』</b>"),
          -- s.mypromptbox,
-         forced_width = 280,
       },
       s.mytasklist, -- Middle widget
       { -- Right widgets
