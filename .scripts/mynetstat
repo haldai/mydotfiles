@@ -1,0 +1,26 @@
+#!/bin/bash
+
+if_dir="/sys/class/net"
+t=${1:-1}
+
+if_name="none"
+rx="0"
+tx="0"
+
+for dir in $if_dir/*
+do
+    face=$(basename -- $dir)
+    if [ $face != "lo" ] && [ $(cat "$dir/operstate") == "up" ]; then
+        if [ $(cat "$dir/carrier") == "1" ]; then
+            if_name=$face
+            sar_re=$(LC_ALL=en_US.UTF-8 sar -n DEV $t 1 | grep 'Average' | grep $if_name)
+            rx=$(echo $sar_re | awk -F' ' '{print $5}')
+            tx=$(echo $sar_re | awk -F' ' '{print $6}')
+            break
+        fi
+    fi
+done
+
+echo $if_name
+echo $rx
+echo $tx
