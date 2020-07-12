@@ -10,14 +10,12 @@ android-tools
 arandr
 archlinuxcn-keyring
 aria2
-armadillo
 arrayfire
 aspell-en
 atool
 autoconf
 automake
 autopep8
-awesome
 axel
 baidunetdisk-bin
 base
@@ -41,8 +39,6 @@ code
 conky
 cpupower
 cryptominisat5
-cuda
-cudnn
 cups
 dhcpcd
 dialog
@@ -54,6 +50,7 @@ downgrade
 dunst
 efibootmgr
 elinks
+emacs27-git
 epdfview
 eslint
 exfat-utils
@@ -86,6 +83,7 @@ glmark2
 gnome-keyring
 go-tools
 gotop-bin
+gparted
 grep
 groff
 grub
@@ -123,7 +121,6 @@ lib32-libjpeg6-turbo
 lib32-libva
 lib32-libxslt
 lib32-mpg123
-lib32-nvidia-utils
 lib32-ocl-icd
 lib32-openal
 lib32-v4l-utils
@@ -148,8 +145,6 @@ linux-firmware
 linux-headers
 linux-lts
 linux-lts-headers
-linux-zen
-linux-zen-headers
 linux-zencjk
 linux-zencjk-headers
 logrotate
@@ -164,7 +159,6 @@ mendeleydesktop-bundled
 mesa-demos
 mesa-vdpau
 mg
-minecraft
 mlocate
 most
 mpc
@@ -189,9 +183,6 @@ ntfs-3g
 ntp
 numix-circle-icon-theme-git
 numix-icon-theme-git
-nvidia-dkms
-nvidia-prime
-nvidia-settings
 ocl-icd
 offlineimap
 oh-my-zsh-git
@@ -199,7 +190,6 @@ okular
 openmpi
 openvpn
 os-prober
-otf-fira-code
 p7zip
 package-query
 pacman
@@ -212,7 +202,6 @@ pass
 patch
 pavucontrol
 pcmanfm
-pcsx2
 pdf2svg
 pepper-flash
 picom-git
@@ -236,7 +225,6 @@ python-future
 python-h5py
 python-jedi
 python-keyring
-python-language-server
 python-matplotlib
 python-netcdf4
 python-networkx
@@ -248,16 +236,15 @@ python-pydocstyle
 python-pydot
 python-pyflakes
 python-pylint
-python-pytorch-opt-cuda
 python-pyxdg
 python-scikit-image
 python-scikit-learn
 python-seaborn
 python-spotipy
-python-torchvision-cuda
 python-unicode-slugify-git
 python-virtualenv
 python-xarray
+python-z3
 python2-configparser
 python2-distutils-extra
 python2-gobject
@@ -297,6 +284,8 @@ s-nail
 s-tui
 s3fs-fuse
 samba
+sbt
+scala
 sdl
 seahorse
 sed
@@ -310,8 +299,8 @@ stalonetray
 steam
 strace
 sudo
-superlu
 swig
+sysstat
 tcl
 texinfo
 texlive-bibtexextra
@@ -324,6 +313,7 @@ texlive-latexextra
 texlive-pictures
 texlive-science
 thefuck
+thermald
 tk
 tmux
 transmission-gtk

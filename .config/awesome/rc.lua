@@ -158,27 +158,26 @@ beautiful.init(awful.util.getdir("config") .. "/themes/zenburn/theme.lua")
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 -- awful.util.tagnames = { "壹", "貳", "叄", "肆", "伍", "陸", "柒", "捌", "玖" }
-awful.util.tagnames = { "☰", "☱", "☲", "☳", "☴", "☵", "☶", "☷", "☯" }
-awful.layout.layouts = {
-   awful.layout.suit.tile,
-   -- awful.layout.suit.tile.left,
-   -- awful.layout.suit.tile.bottom,
-   -- awful.layout.suit.tile.top,
-   -- awful.layout.suit.fair,
-   lain.layout.centerwork,
-   -- lain.layout.termfair,
-   -- awful.layout.suit.fair.horizontal,
-   -- awful.layout.suit.spiral,
-   -- awful.layout.suit.spiral.dwindle,
-   -- awful.layout.suit.max,
-   -- awful.layout.suit.max.fullscreen,
-   -- awful.layout.suit.magnifier,
-   awful.layout.suit.corner.nw,
-   -- awful.layout.suit.corner.ne,
-   -- awful.layout.suit.corner.sw,
-   -- awful.layout.suit.corner.se,
-   awful.layout.suit.floating,
-}
+-- awful.util.tagnames = { "☰", "☱", "☲", "☳", "☴", "☵", "☶", "☷", "☯" }
+awful.layout.append_default_layouts({
+      awful.layout.suit.tile,
+      -- awful.layout.suit.tile.left,
+      -- awful.layout.suit.tile.bottom,
+      -- awful.layout.suit.tile.top,
+      -- awful.layout.suit.fair,
+      lain.layout.centerwork,
+      lain.layout.termfair,
+      awful.layout.suit.fair.horizontal,
+      -- awful.layout.suit.spiral,
+      -- awful.layout.suit.spiral.dwindle,
+      -- awful.layout.suit.max,
+      -- awful.layout.suit.max.fullscreen,
+      -- awful.layout.suit.magnifier,
+      awful.layout.suit.corner.nw,
+      awful.layout.suit.corner.ne,
+      -- awful.layout.suit.corner.sw,
+      -- awful.layout.suit.corner.se,
+      awful.layout.suit.floating})
 -- }}}
 
 -- {{{ Menu
@@ -215,22 +214,22 @@ local myexitmenu = {
 }
 
 local myxrandrmenu = {
-   { " 複製", function () awful.util.spawn_with_shell("~/.scripts/presentation") end, icon_path .. "devices/system.png" },
-   { " 左擴展", function () awful.util.spawn_with_shell("~/.scripts/presentation-x -l") end, icon_path .. "actions/previous.png" },
-   { " 右擴展", function () awful.util.spawn_with_shell("~/.scripts/presentation-x -r") end, icon_path .. "actions/next.png" },
+   { " 複製", function () awful.spawn.with_shell("~/.scripts/presentation") end, icon_path .. "devices/system.png" },
+   { " 左擴展", function () awful.spawn.with_shell("~/.scripts/presentation-x -l") end, icon_path .. "actions/previous.png" },
+   { " 右擴展", function () awful.spawn.with_shell("~/.scripts/presentation-x -r") end, icon_path .. "actions/next.png" },
 }
 
 local myinputmenu = {
-   { " 英文", function () awful.util.spawn_with_shell("fcitx5-remote -s keyboard-us") end, icon_path .. "devices/gnome-dev-keyboard.png" },
-   { " 中文", function () awful.util.spawn_with_shell("fcitx5-remote -s pinyin") end, icon_path .. "devices/gnome-dev-keyboard.png" },
-   { " 日文", function () awful.util.spawn_with_shell("fcitx5-remote -s mozc") end, icon_path .. "devices/gnome-dev-keyboard.png" },
+   { " 英文", function () awful.spawn.with_shell("fcitx5-remote -s keyboard-us") end, icon_path .. "devices/gnome-dev-keyboard.png" },
+   { " 中文", function () awful.spawn.with_shell("fcitx5-remote -s pinyin") end, icon_path .. "devices/gnome-dev-keyboard.png" },
+   { " 日文", function () awful.spawn.with_shell("fcitx5-remote -s mozc") end, icon_path .. "devices/gnome-dev-keyboard.png" },
 }
 
 awful.util.mymainmenu = awful.menu({
       items = {
          { " 終端", function () awful.spawn(terminal) end, icon_path .. "apps/utilities-terminal.png" },
          { " 編輯", function () awful.spawn("emacsclient -c -a emacs") end, icon_path .. "apps/emacs.png" },
-         { " 衝浪", function () awful.spawn("--disable-software-rasterizer") end, icon_path .. "apps/chromium.png" },
+         { " 衝浪", function () awful.spawn("chromium --disable-software-rasterizer") end, icon_path .. "apps/chromium.png" },
          { " 文件", function () awful.spawn("pcmanfm") end, icon_path .. "apps/file-manager.png" },
          { " 監控", function () awful.spawn("st -e gotop -s") end, icon_path .. "apps/utilities-system-monitor.png" },
          { " 聲音", function () awful.spawn("st -e alsamixer") end, icon_path .. "apps/sound.png" },
@@ -367,13 +366,13 @@ globalkeys = gears.table.join(
       {description = "open a terminal", group = "launcher"}),
    awful.key({ modkey, "Shift" }, "r", awesome.restart,
       {description = "reload awesome", group = "awesome"}),
-   awful.key({ modkey, "Control" }, "Esc", awesome.quit,
+   awful.key({ modkey, "Control" }, "BackSpace", awesome.quit,
       {description = "quit awesome", group = "awesome"}),
 
    -- Rofi
    awful.key({ modkey }, "d",  function () awful.spawn("/usr/bin/rofi -show") end,
       {description = "launch rofi", group = "launcher"}),
-   awful.key({ modkey }, "0",  function () awful.util.spawn_with_shell("~/.scripts/myexit") end,
+   awful.key({ modkey }, "0",  function () awful.spawn.with_shell("~/.scripts/myexit") end,
       {description = "lauch exit menu", group = "launcher"}),
 
    -- Scratchpad
@@ -390,7 +389,7 @@ globalkeys = gears.table.join(
       {description = "launch qutebrowser", group = "launcher"}),
    awful.key({ modkey, "Shift" }, "F3", function () awful.spawn("chromium --disable-web-security --user-data-dir") end,
       {description = "launch Chrome with user data dir", group = "launcher"}),
-   awful.key({ modkey }, "F4", function () awful.util.spawn_with_shell("~/.scripts/toggle_systray") end,
+   awful.key({ modkey }, "F4", function () awful.spawn.with_shell("~/.scripts/toggle_systray") end,
       {description = "launch system tray", group = "launcher"}),
    awful.key({ modkey }, "F5", function () awful.spawn("st -e ranger") end,
       {description = "launch ranger", group = "launcher"}),
@@ -404,23 +403,23 @@ globalkeys = gears.table.join(
       {description = "print full screen", group = "launcher"}),
    awful.key({ modkey }, "Print", function () awful.spawn("flameshot gui") end,
       {description = "print screen", group = "launcher"}),
-   awful.key({ modkey }, "c", function () awful.util.spawn_with_shell("~/.scripts/myclip.sh") end,
+   awful.key({ modkey }, "c", function () awful.spawn.with_shell("~/.scripts/myclip.sh") end,
       {description = "show clipboard", group = "launcher"}),
-   awful.key({ modkey, "Ctrl" }, "c", function () awful.spawn('greenclip clear') end,
+   awful.key({ modkey, "Ctrl" }, "c", function () awful.spawn.with_shell("greenclip clear") end,
       {description = "clear clipboard", group = "launcher"}),
 
    -- Custom scripts
    awful.key({ modkey }, "BackSpace", function ()
-         awful.util.spawn_with_shell("~/.scripts/flash-win.sh") end,
+         awful.spawn.with_shell("~/.scripts/flash-win.sh") end,
       {description = "flash current screen", group = "launcher"}),
    awful.key({ modkey }, "F8", function ()
-         awful.util.spawn_with_shell("~/.scripts/presentation") end,
+         awful.spawn.with_shell("~/.scripts/presentation") end,
       {description = "External screen copy", group = "launcher"}),
    awful.key({ modkey, "Ctrl" }, "F8", function ()
-         awful.util.spawn_with_shell("~/.scripts/presentation-x -r") end,
+         awful.spawn.with_shell("~/.scripts/presentation-x -r") end,
       {description = "External screen on the right", group = "launcher"}),
    awful.key({ modkey, "Shift" }, "F8", function ()
-         awful.util.spawn_with_shell("~/.scripts/presentation-x -l") end,
+         awful.spawn.with_shell("~/.scripts/presentation-x -l") end,
       {description = "External screen on the left", group = "launcher"})
 )
 
@@ -775,4 +774,4 @@ client.connect_signal("focus", border_adjust)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
-awful.util.spawn_with_shell("~/.config/awesome/autostart.sh")
+awful.spawn.with_shell("~/.config/awesome/autostart.sh")
