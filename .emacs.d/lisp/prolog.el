@@ -8,7 +8,7 @@
 ;;          * See below for more details
 ;; Keywords: prolog major mode sicstus swi mercury
 
-(defvar prolog-mode-version "1.27"
+(defvar prolog-mode-version "1.28"
   "Prolog mode version number")
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -101,16 +101,18 @@
 ;; and Emacs 20+ you can also customize the variable
 ;; `prolog-program-name' (in the group `prolog-inferior') and provide
 ;; a full path for your Prolog system (swi, scitus, etc.).
-;;
-;; Note: I (Stefan, the current maintainer) work under XEmacs.  Future
-;;   developments will thus be biased towards XEmacs (OK, I admit it,
-;;   I am biased towards XEmacs in general), though I will do my best
-;;   to keep the GNU Emacs compatibility.  So if you work under Emacs
-;;   and see something that does not work do drop me a line, as I have
-;;   a smaller chance to notice this kind of bugs otherwise.
 
 ;; Changelog:
 
+;; Version 1.28:
+;;  o Fixed the handling of backquoted entities.
+;;  o Modified the default of `prolog-electric-if-then-else-flag' to
+;;    t, in line with other programming modes.
+;;  o Added a customization variable to control the way "small"
+;;    comments (the ones starting with a single '%') are handled.  If
+;;    `prolog-align-small-comments-flag' is non-nil then small
+;;    comments starting a line are indented to `comment-column',
+;;    otherwise they are treated like "large" comments.
 ;; Version 1.27:
 ;;  o Moved prolog-head-delimiter to a customizable variable (at the
 ;;    request of Peter Ludemann).
@@ -391,6 +393,13 @@ The version numbers are of the format (Major . Minor)."
   :group 'prolog-indentation
   :type 'boolean)
 
+(defcustom prolog-align-small-comments-flag t
+  "*Non-nil means align \"small\" comments (starting with a single %) to 
+`comment-column' when indenting.  Otherwise small comments are handled 
+like any other comment."
+  :group 'prolog-indentation
+  :type 'boolean)
+
 (defcustom prolog-indent-mline-comments-flag t
   "*Non-nil means indent contents of /* */ comments.
 Otherwise leave such lines as they are."
@@ -547,7 +556,7 @@ in ( If -> Then ; Else) and ( Disj1 ; Disj2 ) style expressions."
   :group 'prolog-keyboard
   :type 'boolean)
 
-(defcustom prolog-electric-if-then-else-flag nil
+(defcustom prolog-electric-if-then-else-flag t
   "*Non-nil makes `(', `>' and `;' electric 
 to automatically indent if-then-else constructs."
   :group 'prolog-keyboard
@@ -806,7 +815,7 @@ Set by prolog-build-case-strings.")
   "\\(^\\|[^0-9]\\)\\('\\([^\n']\\|\\\\'\\)*'\\)"
   "Regexp matching a quoted atom.")
 (defconst prolog-string-regexp
-  "\\(\"\\([^\n\"]\\|\\\\\"\\)*\"\\)"
+  "\\(\\(\"\\([^\n\"]\\|\\\\\"\\)*\"\\)\\|\\(`\\([^\n`]\\|\\\\`\\)*`\\)\\)"
   "Regexp matching a string.")
 
 ;; Moved to a customized variable (at the request of Peter Ludemann)
@@ -880,6 +889,7 @@ VERSION is of the format (Major . Minor)"
     (modify-syntax-entry ?> "." table)
     (modify-syntax-entry ?| "." table)
     (modify-syntax-entry ?\' "\"" table)
+    (modify-syntax-entry ?` "\"" table)
 
     ;; Any better way to handle the 0'<char> construct?!?
     (when prolog-char-quote-workaround
@@ -944,7 +954,7 @@ VERSION is of the format (Major . Minor)"
   ;; This complex regexp makes sure that comments cannot start
   ;; inside quoted atoms or strings
   (setq comment-start-skip 
-        (format "^\\(\\(%s\\|%s\\|[^\n\'\"%%]\\)*\\)\\(/\\*+ *\\|%%+ *\\)" 
+        (format "^\\(\\(%s\\|%s\\|[^\n\'\"`%%]\\)*\\)\\(/\\*+ *\\|%%+ *\\)" 
                 prolog-quoted-atom-regexp prolog-string-regexp))
   (make-local-variable 'comment-column)
   (make-local-variable 'comment-indent-function)
@@ -1193,10 +1203,10 @@ To find out what version of Prolog mode you are running, enter
          (run-hooks 'prolog-inferior-mode-hook))))
 
 (defun prolog-input-filter (str)
-  (cond ((string-match "\\`\\s *\\'" str) nil) ;whitespace
+  (cond ((string-match "\`\\s *\\'" str) nil) ;whitespace
         ((not (eq major-mode 'prolog-inferior-mode)) t)
         ((= (length str) 1) nil)        ;one character
-        ((string-match "\\`[rf] *[0-9]*\\'" str) nil) ;r(edo) or f(ail)
+        ((string-match "\`[rf] *[0-9]*\\'" str) nil) ;r(edo) or f(ail)
         (t t)))
 
 ;;;###autoload
@@ -1996,6 +2006,7 @@ rigidly along with this one (not yet)."
   "Compute prolog comment indentation."
   (cond ((looking-at "%%%") (prolog-indentation-level-of-line))
         ((looking-at "%%") (prolog-indent-level))
+        ((and (not prolog-align-small-comments-flag) (prolog-comment-begins-line-p)) (prolog-indent-level))
         (t
          (save-excursion
            (skip-chars-backward " \t")
@@ -2003,6 +2014,12 @@ rigidly along with this one (not yet)."
            (max (+ (current-column) (if (bolp) 0 1))
                 comment-column)))
         ))
+
+(defun prolog-comment-begins-line-p ()
+  "Non-nil whenever the current line is all commented out using the \"%\" style."
+  (save-excursion
+    (beginning-of-line)
+    (re-search-forward "^[[:space:]]*%" (save-excursion (end-of-line) (point)) t)))
 
 (defun prolog-indent-level ()
   "Compute prolog indentation level."
@@ -2015,8 +2032,9 @@ rigidly along with this one (not yet)."
       (cond
        ((looking-at "%%%") (prolog-indentation-level-of-line))
                                         ;Large comment starts
-       ((looking-at "%[^%]") comment-column) ;Small comment starts
-       ((bobp) 0)                        ;Beginning of buffer
+       ((and prolog-align-small-comments-flag (not (prolog-comment-begins-line-p)) (looking-at "%[^%]")) 
+        comment-column)                 ;Small comment starts
+       ((bobp) 0)                       ;Beginning of buffer
 
        ;; If we found '}' then we must check if it's the
        ;; end of an object declaration or something else.
@@ -2167,7 +2185,7 @@ rigidly along with this one (not yet)."
                          (= totbal 1)
                          (prolog-in-object))))
               (if (looking-at
-                   (format "\\(%s\\|%s\\|0'.\\|[0-9]+'[0-9a-zA-Z]+\\|[^\n\'\"%%]\\)*\\(,\\|%s\\|%s\\)\[ \t]*\\(%%.*\\|\\)$" 
+                   (format "\\(%s\\|%s\\|0'.\\|[0-9]+'[0-9a-zA-Z]+\\|[^\n\'\"`%%]\\)*\\(,\\|%s\\|%s\\)\[ \t]*\\(%%.*\\|\\)$" 
                            prolog-quoted-atom-regexp prolog-string-regexp
                            prolog-left-paren prolog-left-indent-regexp))
                   (progn
@@ -2361,6 +2379,7 @@ Return:
          ((looking-at "/\\*") 'cmt) ; Start of a comment
          ((looking-at "\'") 'txt) ; Start of an atom
          ((looking-at "\"") 'txt) ; Start of a string
+         ((looking-at "`") 'txt) ; Start of a string
          (t nil)
          ))))
     ))
@@ -2590,7 +2609,7 @@ Otherwise treat `\\' in NEWTEXT as special:
 (defconst prolog-tokenize-searchkey
   (concat "[0-9]+'"
           "\\|"
-          "['\"]"
+          "['\"`]"
           "\\|"
           prolog-left-paren
           "\\|"
@@ -2629,7 +2648,7 @@ The rest of the elements are undefined."
       (goto-char beg)
 
       (if (and (eq stopcond 'skipover)
-               (looking-at "[^[({'\"]"))
+               (looking-at "[^[({'`\"]"))
           (setq endpos (point))                ; Stay where we are
         (while (and
                 (re-search-forward prolog-tokenize-searchkey end2 t)
@@ -2654,6 +2673,18 @@ The rest of the elements are undefined."
              ((looking-at "\"")
               ;; Find end of string
               (if (re-search-forward "[^\\]\"" end2 'limit)
+                  ;; Found end of string
+                  (progn
+                    (setq oldp end2)
+                    (if (and (eq stopcond 'skipover)
+                             (not skiptype))
+                        (setq endpos (point))
+                      (setq oldp (point)))) ; Continue tokenizing
+                (setq quoted 'str)))
+
+             ((looking-at "`")
+              ;; Find end of string
+              (if (re-search-forward "[^\\]`" end2 'limit)
                   ;; Found end of string
                   (progn
                     (setq oldp end2)
@@ -3330,10 +3361,10 @@ objects (relevent only if 'prolog-system' is set to 'sicstus)."
                   (eq prolog-system 'sicstus)
                   (prolog-in-object))
              (format
-              "^\\(%s\\|%s\\|[^\n\'\"%%]\\)*&[ \t]*\\(\\|%%.*\\)$\\|[ \t]*}"
+              "^\\(%s\\|%s\\|[^\n\'\"`%%]\\)*&[ \t]*\\(\\|%%.*\\)$\\|[ \t]*}"
               prolog-quoted-atom-regexp prolog-string-regexp)
            (format
-            "^\\(%s\\|%s\\|[^\n\'\"%%]\\)*\\.[ \t]*\\(\\|%%.*\\)$"
+            "^\\(%s\\|%s\\|[^\n\'\"`%%]\\)*\\.[ \t]*\\(\\|%%.*\\)$"
             prolog-quoted-atom-regexp prolog-string-regexp))
          nil t)
         (if (and (prolog-in-string-or-comment)
@@ -3362,7 +3393,7 @@ objects (relevent only if 'prolog-system' is set to 'sicstus)."
               (setq arity 1)
               (forward-char 1)                ; Skip the opening paren
               (while (progn
-                       (skip-chars-forward "^[({,'\"")
+                       (skip-chars-forward "^[({,'\"`")
                        (< (point) endp))
                 (if (looking-at ",")
                     (progn
@@ -3559,7 +3590,7 @@ a new comment is created."
   (if (or (not nocreate)
           (and
            (re-search-forward 
-            (format "^\\(\\(%s\\|%s\\|[^\n\'\"%%]\\)*\\)%% *" 
+            (format "^\\(\\(%s\\|%s\\|[^\n\'\"`%%]\\)*\\)%% *" 
                     prolog-quoted-atom-regexp prolog-string-regexp)
             (save-excursion (end-of-line) (point)) 'limit)
            (progn

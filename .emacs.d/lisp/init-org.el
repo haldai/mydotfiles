@@ -17,7 +17,7 @@
   :config
 
   ;; latex preview scale
-  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
+  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.2))
 
   ;; indent in source code block
   (setq org-src-tab-acts-natively t)
