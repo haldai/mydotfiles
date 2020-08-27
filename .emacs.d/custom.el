@@ -104,6 +104,7 @@
      ("Yap" "yap.exe %o")))
  '(TeX-view-program-selection '((output-pdf "PDF Tools") (output-dvi "gv")))
  '(ediprolog-program "swipl")
+ '(ediprolog-system 'swi)
  '(enable-recursive-minibuffers t)
  '(epa-pinentry-mode 'loopback)
  '(global-auto-revert-non-file-buffers t)
