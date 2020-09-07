@@ -2,21 +2,21 @@
 /** ROFI Color theme */
 
 configuration {
-    modi: "combi";
-	  combi-modi:	"window,drun,run,ssh";
-	  me-select-entry: "MouseSecondary";
-	  me-accept-entry: "MousePrimary";
-	  scroll-method: 1;
-    // The display name of this browser
-    display-ssh: "ssh";
-    // The display name of this browser
-    display-run: "#! ";
-    // The display name of this browser
-    display-drun: "";
-    // The display name of this browser
-    display-window: "";
-    display-combi: "請選擇：";
-    show-icons: true;
+  modi: "combi";
+  combi-modi: "window,drun,run,ssh";
+  me-select-entry: "MouseSecondary";
+  me-accept-entry: "MousePrimary";
+  scroll-method: 1;
+  // The display name of this browser
+  display-ssh: "ssh";
+  // The display name of this browser
+  display-run: "#! ";
+  // The display name of this browser
+  display-drun: "";
+  // The display name of this browser
+  display-window: "";
+  display-combi: "請選擇：";
+  show-icons: true;
 }
 
 /**
@@ -103,23 +103,26 @@ configuration {
     padding: 11px;
     background-color: @dark;
     border: 2px 2px 2px 2px;
-    border-radius:  15px 15px 0px 0px;
+    border-radius:  0px 0px 0px 0px;
     border-color: @foreground;
     font: "SauceCodePro Nerd Font 10";
 }
+
 #entry,prompt,case-indicator {
     text-font: inherit;
     text-color:inherit;
 }
+
 #listview {
     padding: 8px;
-    border-radius: 0px 0px 15px 15px;
+    border-radius: 0px 0px 0px 0px;
     border-color: @foreground;
     border: 0px 2px 2px 2px;
     background-color: #1c1c1ccc;
     dynamic: true;
     // lines: 20;
 }
+
 #element {
     padding: 3px;
     vertical-align: 0.5;
@@ -129,39 +132,49 @@ configuration {
     color: @foreground;
     font:inherit;
 }
+
 #element selected.normal {
     background-color: @black;
 }
+
 #element normal active {
     foreground: @red-2;
 }
+
 #element normal urgent {
     foreground: @red;
 }
+
 #element alternate normal {
 }
+
 #element alternate active {
     foreground: @red;
 }
+
 #element alternate urgent {
     foreground: @red;
 }
+
 #element selected active {
     background-color: @black;
     foreground: @foreground;
 }
+
 #element selected urgent {
     background-color: @red-2;
     foreground: @foreground;
 }
+
 #element normal normal {
 
 }
 
 #vertb {
     expand: false;
-    children: [ dummy0, sidebar, dummy1  ];
+    // children: [ Dummy0, sidebar, dummy1  ];
 }
+
 #dummy0,  dummy1 {
     expand: true;
 }
@@ -172,6 +185,7 @@ configuration {
     spacing: 0px;
     border: 0px 0px 0px 0px;
 }
+
 #button {
     font: "FontAwesome 26";
     padding: 6px;
@@ -182,9 +196,14 @@ configuration {
     color: @foreground;
     horizontal-align: 0.5;
 }
+
 #button selected normal {
     color: @dark;
     border: 2px 0px 2px 2px;
     background-color: @backlight;
     border-color: @foreground;
+}
+
+#element-icon {
+  size: 22px;
 }
