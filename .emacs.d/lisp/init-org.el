@@ -145,7 +145,7 @@
   ;; juypter-julia settings
   (setq org-babel-default-header-args:jupyter-julia '((:async . "yes")
                                                       (:session . "jl")
-                                                      (:kernel . "julia-1.4")
+                                                      (:kernel . "julia-1.5")
                                                       (:exports . "both")))
 
   ;; juypter-python settings

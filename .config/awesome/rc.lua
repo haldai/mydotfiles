@@ -232,7 +232,7 @@ awful.util.mymainmenu = awful.menu({
          { " 衝浪", function () awful.spawn("chromium --disable-software-rasterizer") end, icon_path .. "apps/chromium.png" },
          { " 文件", function () awful.spawn("pcmanfm") end, icon_path .. "apps/file-manager.png" },
          { " 監控", function () awful.spawn("st -e gotop -s") end, icon_path .. "apps/utilities-system-monitor.png" },
-         { " 聲音", function () awful.spawn("st -e alsamixer") end, icon_path .. "apps/sound.png" },
+         { " 聲音", function () awful.spawn("pavucontrol") end, icon_path .. "apps/sound.png" },
          { " 輸入", myinputmenu, icon_path .. "categories/cs-region.png"},
          { " 窗口", myawesomemenu, beautiful.awesome_icon },
          { " 演示", myxrandrmenu, icon_path .. "devices/system.png" },
@@ -680,7 +680,7 @@ awful.rules.rules = {
      properties = { tag = awful.util.tagnames[4], minimized = true } },
    { rule = {class = "Pcmanfm"},
      properties = { tag = awful.util.tagnames[5] } },
-   { rule_any = {class = { "electronic-wechat", "qq.exe", "wechat.exe" } },
+   { rule_any = {class = { "electronic-wechat", "qq.exe", "wechat.exe", "ao", "Ao" } },
      properties = { tag = awful.util.tagnames[6] } },
 }
 -- }}}
