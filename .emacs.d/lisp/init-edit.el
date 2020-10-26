@@ -349,8 +349,11 @@
   ;; 智能切换
   (pyim-isearch-mode 1)
   (setq-default pyim-english-input-switch-functions
-                '(pyim-probe-isearch-mode
+                '(pyim-probe-auto-english
+                  pyim-probe-isearch-mode
+                  pyim-probe-program-mode
                   pyim-probe-org-structure-template))
+
   (setq-default pyim-punctuation-half-width-functions
                 '(pyim-probe-punctuation-line-beginning
                   pyim-probe-punctuation-after-punctuation))
