@@ -332,6 +332,7 @@
 (use-package pyim
   :straight t
   :after posframe
+  :hook (emacs-startup-hook . (lambda () (pyim-restart-1 t)))
   :init
   (use-package posframe :defer t)
   :custom
@@ -357,8 +358,14 @@
   (setq-default pyim-punctuation-half-width-functions
                 '(pyim-probe-punctuation-line-beginning
                   pyim-probe-punctuation-after-punctuation))
+
+  ;; 翻页设置
+  (define-key pyim-mode-map "." 'pyim-page-next-page)
+  (define-key pyim-mode-map "," 'pyim-page-previous-page)
+
   :bind
   ("M-j" . pyim-convert-string-at-point)) ; M-j 强制将光标前的拼音字符串转换为中文。
+
 
 (provide 'init-edit)
 
