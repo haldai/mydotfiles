@@ -230,8 +230,7 @@ awful.widget.watch('bash -c "mpstat -P ALL 2 1 | awk \'$12 ~ /[0-9.]+/ { print 1
                             table.insert(args, tonumber(val))
                          end
                          theme.cpugraph:add_value(args[1] / 100, 1)
-                         cpuwidget_t:set_text(string.format("CPU使用率: \n%.2f%%\n核心使用率: \n%.2f%%, %.2f%%, %.2f%%, %.2f%%,\n%.2f%%, %.2f%%, %.2f%%, %.2f%%.",
-                                                            args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9]))
+                         cpuwidget_t:set_text(string.format("CPU使用率: \n%.2f%%\n核心使用率: \n%.2f%%, %.2f%%, %.2f%%, %.2f%%,\n%.2f%%, %.2f%%, %.2f%%, %.2f%%\n%.2f%%, %.2f%%, %.2f%%, %.2f%%,\n%.2f%%, %.2f%%, %.2f%%, %.2f%%.", args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9], args[10], args[11], args[12], args[13], args[14], args[15], args[16], args[17]))
                       else
                          theme.cpugraph:add_value(0, 1)
                          cpuwidget_t:set_text(string.format("CPU使用率: 不明"))
