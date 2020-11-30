@@ -137,17 +137,17 @@ CUDAPATH="/opt/cuda"
 SWIPLPATH="/usr/local/lib/swipl"
 
 # most
-export PAGER="bat"
+export PAGER="less"
 export TERM=xterm-256color
 
 # visual
 export VISUAL="emacs -Q -nw"
 
-PATH=$SCRIPTS_PATH:$CUDAPATH/bin:$HOME/.local/bin/:$PATH
+PATH=$SCRIPTS_PATH:$CUDAPATH/bin:$HOME/.local/bin/:/home/daiwz/.gem/ruby/2.7.0/bin:$PATH
 
 LD_LIBRARY_PATH=$SWIPLPATH/lib/x86_64-linux:$CUDAPATH/include/:${HOME}/.local/include/:${HOME}/.local/lib:$HOME/.local/lib64/:$LD_LIBRARY_PATH
 
-LD_RUN_PATH=$CUD_PATH/lib64/:$LD_RUN_PATH
+LD_RUN_PATH=$CUDAPATH/lib64/:$LD_RUN_PATH
 
 PKG_CONFIG_PATH=$HOME/.local/lib/pkgconfig/:$HOME/.local/lib64/pkgconfig/:$PKG_CONFIG_PATH
 
@@ -156,6 +156,7 @@ export LD_LIBRARY_PATH
 export LD_RUN_PATH
 export PKG_CONFIG_PATH
 export PYTHON_EGG_CACHE=/tmp/python-eggs/
+export OPENCV_LOG_LEVEL=ERROR
 
 # My alias
 alias emacs='emacs -nw'
