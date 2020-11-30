@@ -371,14 +371,14 @@ theme.thermalbar = wibox.widget {
    layout = wibox.container.rotate,
 }
 thermalwidget_t = awful.tooltip({ objects = { theme.thermalbar },})
-awful.widget.watch('bash -c "sensors | grep \'Package id 0\'"', 7,
+awful.widget.watch('bash -c "sensors | grep \'Tctl:\'"', 7,
                    function (widget, stdout)
                       if stdout ~= nil and stdout ~= "" then
                          args = {}
                          for s in string.gmatch(stdout, '[%d.]+') do
                             table.insert(args, s)
                          end
-                         temp = tonumber(args[2])
+                         temp = tonumber(args[1])
                          thermalwidget_t:set_text(string.format("核心溫度: %.1f℃", temp))
                          if temp >= 90 then
                             theme.thermalbar.widget:set_color(red1)
