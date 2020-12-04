@@ -16,6 +16,9 @@
          (org-mode . variable-pitch-mode))
   :config
 
+  ;; latex preview scale
+  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.2))
+
   ;; indent in source code block
   (setq org-src-tab-acts-natively t)
 
@@ -123,6 +126,12 @@
 
   (setq inferior-julia-program-name "julia")
 
+  ;; jupyter mode
+  (use-package jupyter
+    :straight t
+    :bind (("C-c C-x r" . jupyter-repl-restart-kernel)
+           ("C-c C-x h" . jupyter-org-restart-and-execute-to-point)))
+
   ;; ob-sh renamed to ob-shell since 26.1.
   (cl-pushnew '(shell . t) load-language-list)
 
@@ -142,7 +151,7 @@
   ;; juypter-julia settings
   (setq org-babel-default-header-args:jupyter-julia '((:async . "yes")
                                                       (:session . "jl")
-                                                      (:kernel . "julia-1.4")
+                                                      (:kernel . "julia-1.5")
                                                       (:exports . "both")))
 
   ;; juypter-python settings
