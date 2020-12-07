@@ -6,10 +6,9 @@ electronic-wechat-bin
 equilux-theme
 expressvpn
 gotop-bin
-i8kutils
 jdk8
+js60
 libdmx
-libmicrodns-git
 lightdm-settings
 luajit-lgi
 masterpdfeditor-free
@@ -50,6 +49,7 @@ python2-sphinx
 python2-sphinx-alabaster-theme
 python2-sphinxcontrib-websupport
 python2-unrardll
+radeontop-git
 rofi-greenclip
 spaceship-prompt-git
 stress-ng

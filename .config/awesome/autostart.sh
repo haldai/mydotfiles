@@ -11,7 +11,7 @@ function run {
 # run no_lid_suspend
 run /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 # run picom --experimental-backends --config ~/.config/compton.conf
-run picom --config ~/.config/compton.conf
+run picom --config ~/.config/picom.conf
 run udiskie -ans
 run /home/daiwz/.scripts/lock.sh
 run blueman-applet
