@@ -38,6 +38,12 @@
 
   (setq org-ditaa-jar-path "/usr/share/java/ditaa/ditaa-0.11.jar") ;; ditaa
 
+  ;; jupyter mode
+  (use-package jupyter
+    :straight t
+    :bind (("C-c C-x r" . jupyter-repl-restart-kernel)
+           ("C-c C-x h" . jupyter-org-restart-and-execute-to-point)))
+
   ;; use xelatex for latex export
   (add-to-list 'org-latex-packages-alist
                '("AUTO" "babel" t ("pdflatex")))
@@ -125,12 +131,6 @@
                                (jupyter . t)))
 
   (setq inferior-julia-program-name "julia")
-
-  ;; jupyter mode
-  (use-package jupyter
-    :straight t
-    :bind (("C-c C-x r" . jupyter-repl-restart-kernel)
-           ("C-c C-x h" . jupyter-org-restart-and-execute-to-point)))
 
   ;; ob-sh renamed to ob-shell since 26.1.
   (cl-pushnew '(shell . t) load-language-list)

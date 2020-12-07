@@ -578,7 +578,7 @@ theme.batbar = wibox.widget {
    layout = wibox.container.rotate,
 }
 batwidget_t = awful.tooltip({ objects = { theme.batbar },})
-awful.widget.watch('bash -c "acpi"', 61,
+awful.widget.watch('bash -c "acpi -b | tail -1"', 61,
                    function(widget, stdout)
                       acpis = {}
                       for s in stdout:gmatch("[0-9:]+") do
