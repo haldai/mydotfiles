@@ -232,7 +232,7 @@ awful.util.mymainmenu = awful.menu({
          { " 衝浪", function () awful.spawn("chromium --disable-software-rasterizer") end, icon_path .. "apps/chromium.png" },
          { " 文件", function () awful.spawn("pcmanfm") end, icon_path .. "apps/file-manager.png" },
          { " 監控", function () awful.spawn("st -e gotop -s") end, icon_path .. "apps/utilities-system-monitor.png" },
-         { " 聲音", function () awful.spawn("st -e alsamixer") end, icon_path .. "apps/sound.png" },
+         { " 聲音", function () awful.spawn("pavucontrol") end, icon_path .. "apps/sound.png" },
          { " 輸入", myinputmenu, icon_path .. "categories/cs-region.png"},
          { " 窗口", myawesomemenu, beautiful.awesome_icon },
          { " 演示", myxrandrmenu, icon_path .. "devices/system.png" },
@@ -284,6 +284,10 @@ globalkeys = gears.table.join(
    awful.key({ modkey }, ",", awful.tag.viewprev,
       {description = "view previous", group = "tag"}),
    awful.key({ modkey }, ".", awful.tag.viewnext,
+      {description = "view next", group = "tag"}),
+   awful.key({ modkey }, "Right", awful.tag.viewprev,
+      {description = "view previous", group = "tag"}),
+   awful.key({ modkey }, "Left", awful.tag.viewnext,
       {description = "view next", group = "tag"}),
    awful.key({ modkey }, "k", awful.tag.history.restore,
       {description = "go back", group = "tag"}),
@@ -412,13 +416,13 @@ globalkeys = gears.table.join(
    awful.key({ modkey }, "BackSpace", function ()
          awful.spawn.with_shell("~/.scripts/flash-win.sh") end,
       {description = "flash current screen", group = "launcher"}),
-   awful.key({ modkey }, "F8", function ()
+   awful.key({ }, "XF86Display", function ()
          awful.spawn.with_shell("~/.scripts/presentation") end,
       {description = "External screen copy", group = "launcher"}),
-   awful.key({ modkey, "Ctrl" }, "F8", function ()
+   awful.key({ "Ctrl" }, "XF86Display", function ()
          awful.spawn.with_shell("~/.scripts/presentation-x -r") end,
       {description = "External screen on the right", group = "launcher"}),
-   awful.key({ modkey, "Shift" }, "F8", function ()
+   awful.key({ "Shift" }, "XF86Display", function ()
          awful.spawn.with_shell("~/.scripts/presentation-x -l") end,
       {description = "External screen on the left", group = "launcher"})
 )
@@ -711,6 +715,7 @@ client.connect_signal("request::activate", function(c, context, hints)
                             awful.ewmh.activate(c, context, hints)
                          end
 end)
+
 
 -- Add a titlebar if titlebars_enabled is set to true in the rules.
 client.connect_signal(
