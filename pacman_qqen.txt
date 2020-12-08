@@ -164,6 +164,7 @@ mesa-demos
 mesa-vdpau
 mg
 mlocate
+most
 mpc
 mpd
 mpg123
