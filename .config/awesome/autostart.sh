@@ -11,20 +11,18 @@ function run {
 # run no_lid_suspend
 run /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 # run picom --experimental-backends --config ~/.config/compton.conf
-run picom --config ~/.config/picom.conf
+run picom --experimental-backends --config ~/.config/picom.conf
 run udiskie -ans
 run /home/daiwz/.scripts/lock.sh
 run blueman-applet
 run libinput-gestures-setup start
 # run ss-qt5
 # run emacs --daemon
-run redshift-gtk
-run /home/daiwz/.scripts/nodimming.sh
 run fcitx5
 run /home/daiwz/.conky/myconky-start.sh
 
 # Settings
-xbacklight -set 70
+xbacklight -set 60
 amixer set Master 20% off
 amixer set Headphone 100% on
 amixer set Speaker 100% off
