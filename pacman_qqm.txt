@@ -54,6 +54,7 @@ rofi-greenclip
 spaceship-prompt-git
 stress-ng
 teams
+tp_smapi-dkms
 transset-df
 ttf-font-awesome-4
 unetbootin

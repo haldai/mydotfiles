@@ -206,7 +206,7 @@ pavucontrol
 pcmanfm
 pdf2svg
 pepper-flash
-picom
+picom-git
 pigz
 pinta
 pkgconf
@@ -260,7 +260,6 @@ quilt
 qutebrowser
 ranger
 rar
-redshift
 reflector
 reiserfsprogs
 remmina
@@ -327,7 +326,6 @@ thermald
 tk
 tlp
 tmux
-tp_smapi
 transmission-gtk
 trash-cli
 tree
