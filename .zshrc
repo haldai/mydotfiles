@@ -1,3 +1,6 @@
+# If accessed by tramp, use the basic prompt
+[[ $TERM == "dumb" ]] && unsetopt zle && PS1='$ ' && return
+ 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -159,7 +162,7 @@ export PYTHON_EGG_CACHE=/tmp/python-eggs/
 export OPENCV_LOG_LEVEL=ERROR
 
 # My alias
-alias emacs='emacs -nw'
+# alias emacs='emacs -nw'
 alias pl='swipl'
 alias jl='julia'
 alias sc='scheme'
