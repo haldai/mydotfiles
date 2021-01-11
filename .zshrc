@@ -1,11 +1,5 @@
-<<<<<<< HEAD
 [[ $TERM == "dumb" ]] && unsetopt zle && PS1='$ ' && return
 
-=======
-# If accessed by tramp, use the basic prompt
-[[ $TERM == "dumb" ]] && unsetopt zle && PS1='$ ' && return
- 
->>>>>>> 74977cd998288d283dace3b7085015c943be2577
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -167,7 +161,7 @@ export PYTHON_EGG_CACHE=/tmp/python-eggs/
 export OPENCV_LOG_LEVEL=ERROR
 
 # My alias
-# alias emacs='emacs -nw'
+alias emacs='emacs -nw'
 alias pl='swipl'
 alias jl='julia'
 alias sc='scheme'
@@ -229,3 +223,19 @@ SOPACESHIP_HOST_SUFFIX=
 SPACESHIP_DIR_PREFIX=":"
 SPACESHIP_CHAR_SYMBOL="⊨ "
 SPACESHIP_JULIA_SYMBOL="ஃ "
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/anaconda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/anaconda/etc/profile.d/conda.sh" ]; then
+        . "/opt/anaconda/etc/profile.d/conda.sh"
+    else
+        export PATH="/opt/anaconda/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
