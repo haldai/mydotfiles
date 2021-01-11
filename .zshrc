@@ -1,3 +1,5 @@
+[[ $TERM == "dumb" ]] && unsetopt zle && PS1='$ ' && return
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -135,7 +137,7 @@ export YAOURT_COLORS="nb=1:pkg=1:ver=1;32:lver=1;45:installed=1;42:grp=1;34:od=1
 SCRIPTS_PATH="/home/daiwz/.scripts"
 CUDAPATH="/opt/cuda"
 SWIPLPATH="/usr/local/lib/swipl"
-
+CONDAPATH="/opt/anaconda"
 # most
 export PAGER="most"
 export TERM=xterm-256color
@@ -143,7 +145,7 @@ export TERM=xterm-256color
 # visual
 export VISUAL="emacs -Q -nw"
 
-PATH=$SCRIPTS_PATH:$CUDAPATH/bin:$HOME/.local/bin/:/home/daiwz/.gem/ruby/2.7.0/bin:$PATH
+PATH=$SCRIPTS_PATH:$CONDAPATH/bin:$CUDAPATH/bin:$HOME/.local/bin/:/home/daiwz/.gem/ruby/2.7.0/bin:$PATH
 
 LD_LIBRARY_PATH=$SWIPLPATH/lib/x86_64-linux:$CUDAPATH/include/:${HOME}/.local/include/:${HOME}/.local/lib:$HOME/.local/lib64/:$LD_LIBRARY_PATH
 
@@ -214,10 +216,10 @@ SPACESHIP_RPROMPT_ORDER=(
 SPACESHIP_TIME_SHOW=true
 SPACESHIP_USER_SHOW=always
 SPACESHIP_HOST_SHOW=always
-SPACESHIP_DIR_TRUNC=0
+SPIACESHIP_DIR_TRUNC=0
 SPACESHIP_USER_SUFFIX=
-SPACESHIP_HOST_PREFIX=@
-SPACESHIP_HOST_SUFFIX=
-SPACESHIP_DIR_PREFIX=:
-SPACESHIP_CHAR_SYMBOL=⊨\ 
-SPACESHIP_JULIA_SYMBOL=ஃ\ 
+SPACESHIP_HOST_PREFIX="@"
+SOPACESHIP_HOST_SUFFIX=
+SPACESHIP_DIR_PREFIX=":"
+SPACESHIP_CHAR_SYMBOL="⊨ "
+SPACESHIP_JULIA_SYMBOL="ஃ "
