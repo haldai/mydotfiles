@@ -19,7 +19,7 @@ local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 local theme = {
    wallpapers = { os.getenv("HOME") .. "/.config/awesome/themes/zenburn/DD.jpg",
                   os.getenv("HOME") .. "/.config/awesome/themes/zenburn/pw.jpg" },
-   wallpaper_scales = {0.80, 0.25}
+   wallpaper_scales = {1.00, 0.25}
 }
 -- }}}
 
@@ -230,7 +230,11 @@ awful.widget.watch('bash -c "mpstat -P ALL 2 1 | awk \'$12 ~ /[0-9.]+/ { print 1
                             table.insert(args, tonumber(val))
                          end
                          theme.cpugraph:add_value(args[1] / 100, 1)
-                         cpuwidget_t:set_text(string.format("CPU使用率: \n%.2f%%\n核心使用率: \n%.2f%%, %.2f%%, %.2f%%, %.2f%%,\n%.2f%%, %.2f%%, %.2f%%, %.2f%%\n%.2f%%, %.2f%%, %.2f%%, %.2f%%,\n%.2f%%, %.2f%%, %.2f%%, %.2f%%.", args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9], args[10], args[11], args[12], args[13], args[14], args[15], args[16], args[17]))
+                         cpuwidget_t:set_text(string.format("CPU使用率: \n%.2f%%\n核心使用率: \n%.2f%%, %.2f%%, %.2f%%, %.2f%%,\n%.2f%%, %.2f%%, %.2f%%, %.2f%%,\n%.2f%%, %.2f%%, %.2f%%, %.2f%%,\n%.2f%%, %.2f%%, %.2f%%, %.2f%%,\n%.2f%%, %.2f%%, %.2f%%, %.2f%%,\n%.2f%%, %.2f%%, %.2f%%, %.2f%%,\n%.2f%%, %.2f%%, %.2f%%, %.2f%%,\n%.2f%%, %.2f%%, %.2f%%, %.2f%%.",
+                                                            args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9],
+                                                            args[10], args[11], args[12], args[13], args[14], args[15], args[16], args[17],
+                                                            args[18], args[19], args[20], args[21], args[22], args[23], args[24], args[25],
+                                                            args[26], args[27], args[28], args[29], args[30], args[31], args[32], args[33]))
                       else
                          theme.cpugraph:add_value(0, 1)
                          cpuwidget_t:set_text(string.format("CPU使用率: 不明"))
@@ -370,14 +374,10 @@ theme.thermalbar = wibox.widget {
    layout = wibox.container.rotate,
 }
 thermalwidget_t = awful.tooltip({ objects = { theme.thermalbar },})
-awful.widget.watch('bash -c "sensors | grep \'Tctl:\'"', 7,
+awful.widget.watch('bash -c "sensors | grep Tctl"', 7,
                    function (widget, stdout)
                       if stdout ~= nil and stdout ~= "" then
-                         args = {}
-                         for s in string.gmatch(stdout, '[%d.]+') do
-                            table.insert(args, s)
-                         end
-                         temp = tonumber(args[1])
+                         temp = tonumber(string.match(stdout, '[%d.]+'))
                          thermalwidget_t:set_text(string.format("核心溫度: %.1f℃", temp))
                          if temp >= 90 then
                             theme.thermalbar.widget:set_color(red1)
@@ -560,90 +560,6 @@ local netbg = wibox.container.background(theme.netgraph, black2, gears.shape.rec
 local netwidget = wibox.container.margin(netbg, 5, 8, 5, 5)
 --- }}}
 
--- {{{ Battery
-theme.batbar = wibox.widget {
-   {
-      max_value = 100,
-      -- color = white1,
-      background_color = black1,
-      paddings = 1,
-      border_width = 1,
-      border_color = white1,
-      ticks = false,
-      widget = wibox.widget.progressbar,
-   },
-   forced_height = 5,
-   forced_width = 10,
-   direction = 'east',
-   layout = wibox.container.rotate,
-}
-batwidget_t = awful.tooltip({ objects = { theme.batbar },})
-awful.widget.watch('bash -c "acpi -b | grep -v "unavailable" | tail -1"', 61,
-                   function(widget, stdout)
-                      acpis = {}
-                      for s in stdout:gmatch("[0-9:]+") do
-                         table.insert(acpis, s)
-                      end
-                      local bat_val = tonumber(acpis[2])
-                      theme.batbar.widget:set_value(bat_val)
-                      if stdout:match("Discharging") then
-                         batwidget_t:set_text(string.format("放電： %s%%，剩餘 %s", acpis[2], acpis[3]))
-                         if bat_val >= 20 then
-                            theme.batbar.widget:set_color(white1)
-                         elseif bat_val < 20 and bat_val >= 10 then
-                            theme.batbar.widget:set_color(orange)
-                         else
-                            theme.batbar.widget:set_color(red1)
-                         end
-                      elseif stdout:match("Charging") then
-                         theme.batbar.widget:set_color(green1)
-                         batwidget_t:set_text(string.format("充電：%s%%，剩餘 %s ", acpis[2], acpis[3]))
-                      else
-                         theme.batbar.widget:set_color(white1)
-                         batwidget_t:set_text(string.format("電源已連接：%s%%", acpis[2]))
-                      end
-end)
-local batbg = wibox.container.background(theme.batbar, black2, gears.shape.rectangle)
-local batwidget = wibox.container.margin(batbg, 5, 8, 5, 5)
---- }}}
-
---- {{{ Brightness
-local mybrightnessbar = require("mybrightnessbar")
-theme.brightness = mybrightnessbar {
-   ticks = false,
-   width = 64,
-   height = 16,
-   paddings = 1,
-   border_width = 1,
-   border_color = white2,
-   timeout = 31,
-   background_color = black1,
-   color = white1,
-   notification_preset = { font = "方正宋刻本秀楷 10" }
-}
-theme.brightness.bar:buttons(
-   my_table.join (
-      awful.button({}, 1, function()
-            os.execute(string.format("xbacklight -set 100"))
-            theme.brightness.update()
-      end),
-      awful.button({}, 3, function()
-            os.execute(string.format("xbacklight -set 5"))
-            theme.brightness.update()
-      end),
-      awful.button({}, 4, function()
-            os.execute(string.format("xbacklight -inc 1"))
-            theme.brightness.update()
-      end),
-      awful.button({}, 5, function()
-            os.execute(string.format("xbacklight -dec 1"))
-            theme.brightness.update()
-      end)
-))
-local brightnessbg = wibox.container.background(theme.brightness.bar, black2, gears.shape.rectangle)
-local brightnesswidget = wibox.container.margin(brightnessbg, 5, 8, 7, 7)
---- }}}
-
 --- }}}
 
 -- {{{ Wibar
@@ -776,17 +692,17 @@ function theme.at_screen_connect(s)
          netwidget,
          wibox.widget.textbox("<b>郵</b>"),
          emailwidget,
-         wibox.widget.textbox("<b>亮</b>"),
-         brightnesswidget,
+         -- wibox.widget.textbox("<b>亮</b>"),
+         -- brightnesswidget,
          wibox.widget.textbox("<b>聲</b>"),
          volumewidget,
-         -- wibox.widget.textbox("<b>泵</b>"),
-         -- pumpwidget,
+         wibox.widget.textbox("<b>泵</b>"),
+         pumpwidget,
          wibox.widget.textbox("<b>溫</b>"),
          thermalwidget,
-         -- gputhermalwidget,
-         wibox.widget.textbox("<b>電</b>"),
-         batwidget,
+         gputhermalwidget,
+         -- wibox.widget.textbox("<b>電</b>"),
+         -- batwidget,
          wibox.widget.textbox("<b>存</b>"),
          memwidget,
          wibox.widget.textbox("<b>核</b>"),
