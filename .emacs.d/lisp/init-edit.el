@@ -329,33 +329,15 @@
 (use-package posframe
   :straight t)
 
-(use-package pyim
-  :straight t
-  :after posframe
-  :init
-  (use-package posframe :defer t)
+(use-package rime
+  :straight (rime :type git
+                  :host github
+                  :repo "DogLooksGood/emacs-rime"
+                  :files ("*.el" "Makefile" "lib.c"))
   :custom
-  (default-input-method "pyim")
-  (pyim-default-scheme 'quanpin)
-  (pyim-page-tooltip 'posframe)
-  (pyim-page-length 9)
-  :config
-  ;; 词库
-  (use-package pyim-basedict
-    :straight t
-    :after pyim
-    :config (pyim-basedict-enable))
-
-  ;; 智能切换
-  (pyim-isearch-mode 1)
-  (setq-default pyim-english-input-switch-functions
-                '(pyim-probe-isearch-mode
-                  pyim-probe-org-structure-template))
-  (setq-default pyim-punctuation-half-width-functions
-                '(pyim-probe-punctuation-line-beginning
-                  pyim-probe-punctuation-after-punctuation))
-  :bind
-  ("M-j" . pyim-convert-string-at-point)) ; M-j 强制将光标前的拼音字符串转换为中文。
+  (default-input-method "rime")
+  (rime-show-candidate 'posframe)
+  (liberime-select-schema "luna_pinyin_simp"))
 
 (provide 'init-edit)
 
