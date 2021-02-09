@@ -9,7 +9,7 @@
 (use-package csv-mode
   :straight t
   :defer nil
-  :mode (("\\.csv$" . csv-mode)))
+  :mode (("\\.csv\\'" . csv-mode)))
 
 (provide 'init-csv)
 

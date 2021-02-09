@@ -6,6 +6,7 @@
 ;;; Code:
 (use-package tex
   :straight auctex
+  :mode ("\\.tex\\'" . latex-mode)
   :init
   (progn
     (setq TeX-auto-save t
@@ -33,7 +34,7 @@
 
   (use-package pdf-tools
     :straight t
-    :mode (("\\.pdf$" . pdf-view-mode))
+    :mode (("\\.pdf\\'" . pdf-view-mode))
     :init (pdf-tools-install)
     :config
     (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)

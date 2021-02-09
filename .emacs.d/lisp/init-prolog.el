@@ -8,8 +8,8 @@
 ;; Prolog Mode
 (use-package prolog
   :load-path "~/.emacs.d/lisp/prolog.el"
-  :mode (("\\.pl$" . prolog-mode)
-         ("\\.m$" . mercury-mode))
+  :mode (("\\.pl\\'" . prolog-mode)
+         ("\\.m\\'" . mercury-mode))
   :bind (("C-c %" . prolog-insert-comment-block)
          ("C-c C-c l" . prolog-insert-library))
   :hook ((prolog-mode . display-line-numbers-mode)
@@ -60,7 +60,7 @@
 ;; Potassco Answer Set Program
 (use-package pasp-mode
   :straight t
-  :mode ("\\.lp$" . pasp-mode))
+  :mode ("\\.lp\\'" . pasp-mode))
 
 (provide 'init-prolog)
 

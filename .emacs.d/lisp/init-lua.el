@@ -8,7 +8,7 @@
 ;; Lua Mode
 (use-package lua-mode
   :straight t
-  :mode ("\\.lua$" . lua-mode)
+  :mode ("\\.lua\\'" . lua-mode)
   :interpreter ("lua" . lua-mode))
 
 (provide 'init-lua)

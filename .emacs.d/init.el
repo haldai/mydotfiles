@@ -103,6 +103,7 @@
 (require 'init-python)
 (require 'init-web)
 (require 'init-lua)
+(require 'init-r)
 (require 'init-scheme)
 (require 'init-prog)
 

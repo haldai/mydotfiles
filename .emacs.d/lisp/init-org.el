@@ -32,7 +32,7 @@
         org-ellipsis (if (char-displayable-p ?) "  " nil)
         org-pretty-entities t
         org-hide-emphasis-markers t
-        org-image-actual-width 500)
+        org-image-actual-width nil)
 
   (add-to-list 'org-export-backends 'md)
 
@@ -42,7 +42,9 @@
   (use-package jupyter
     :straight t
     :bind (("C-c C-x r" . jupyter-repl-restart-kernel)
-           ("C-c C-x h" . jupyter-org-restart-and-execute-to-point)))
+           ("C-c C-x h" . jupyter-org-restart-and-execute-to-point))
+    :config
+    (setq jupyter--debug t))
 
   ;; use xelatex for latex export
   (add-to-list 'org-latex-packages-alist
@@ -202,8 +204,8 @@
                                     (org-remove-inline-images)
                                     (read-only-mode -1))))
     :config
-    (org-tree-slide-simple-profile)
-    (setq org-tree-slide-skip-outline-level 2))
+    (org-tree-slide-presentation-profile)
+    (setq org-tree-slide-skip-outline-level 5))
 
   ;; Visually summarize progress
   (use-package org-dashboard
