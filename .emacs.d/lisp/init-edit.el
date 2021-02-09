@@ -338,8 +338,7 @@
               ("<tab>" . 'rime-inline-ascii)
               :map rime-mode-map
               ("C-`"  . 'rime-send-keybinding)    ;; <----
-              ("M-L" . 'rime-select-schema)
-              ("M-K" . 'rime-force-enable))
+              ("M-j" . 'rime-force-enable))
   :custom
   (default-input-method "rime")
   (rime-show-candidate 'posframe)
