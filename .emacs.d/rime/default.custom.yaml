@@ -1,0 +1,17 @@
+patch:
+  menu:
+    page_size: 9
+  schema_list:
+    - schema: luna_pinyin_simp
+    - schema: luna_pinyin
+  translator/dictionary:
+    luna_pinyin.custom.yaml
+    luna_pinyin.sogou.chengyu.dict.yaml
+    luna_pinyin.sogou.computer.dict.yaml
+    luna_pinyin.sogou.extended.dict.yaml
+    luna_pinyin.sogou.mobile.dict.yaml
+    luna_pinyin.sogou.poetry.dict.yaml
+    luna_pinyin.sogou.popular.dict.yaml
+    luna_pinyin.sogou.social.dict.yaml
+  
+  

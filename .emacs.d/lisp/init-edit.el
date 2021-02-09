@@ -334,10 +334,23 @@
                   :host github
                   :repo "DogLooksGood/emacs-rime"
                   :files ("*.el" "Makefile" "lib.c"))
+  :bind (:map rime-mode-map
+              ("M-J" . 'rime-inline-ascii)
+              ("M-K" . 'rime-force-enable)
+              ("M-L" . 'rime-select-schema))
   :custom
   (default-input-method "rime")
   (rime-show-candidate 'posframe)
-  (liberime-select-schema "luna_pinyin_simp"))
+  (rime-posframe-style 'vertical)
+  (liberime-select-schema "luna_pinyin_simp")
+  (rime-disable-predicates
+   '(rime-predicate-after-ascii-char-p
+     rime-predicate-prog-in-code-p
+     rime-predicate-in-code-string-p
+     rime-predicate-space-after-cc-p
+     rime-predicate-current-uppercase-letter-p
+     rime-predicate-tex-math-or-command-p))
+  (mode-line-mule-info '((:eval (rime-lighter)))))
 
 (provide 'init-edit)
 

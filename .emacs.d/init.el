@@ -7,6 +7,9 @@
 ;;; Code:
 
 ;; Produce backtraces when errors occur
+;; (server-start)
+
+;; debug
 (setq debug-on-error nil)
 (setq warning-minimum-level :emergency)
 
