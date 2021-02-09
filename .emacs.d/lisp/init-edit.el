@@ -301,7 +301,7 @@
     ("R" origami-reset))
 
   :bind (:map origami-mode-map
-              ("C-`" . origami-hydra/body))
+              ("C-<tab>" . origami-hydra/body))
   :config
   (face-spec-reset-face 'origami-fold-header-face))
 
@@ -334,10 +334,12 @@
                   :host github
                   :repo "DogLooksGood/emacs-rime"
                   :files ("*.el" "Makefile" "lib.c"))
-  :bind (:map rime-mode-map
-              ("M-J" . 'rime-inline-ascii)
-              ("M-K" . 'rime-force-enable)
-              ("M-L" . 'rime-select-schema))
+  :bind (:map rime-active-mode-map
+              ("<tab>" . 'rime-inline-ascii)
+              :map rime-mode-map
+              ("C-`"  . 'rime-send-keybinding)    ;; <----
+              ("M-L" . 'rime-select-schema)
+              ("M-K" . 'rime-force-enable))
   :custom
   (default-input-method "rime")
   (rime-show-candidate 'posframe)
