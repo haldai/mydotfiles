@@ -32,14 +32,6 @@
     :config
     (auctex-latexmk-setup))
 
-  (use-package pdf-tools
-    :straight t
-    :mode (("\\.pdf\\'" . pdf-view-mode))
-    :init (pdf-tools-install)
-    :config
-    (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
-    (add-hook 'pdf-view-mode-hook #'pdf-view-midnight-minor-mode))
-
   (use-package company-auctex :straight t)
 
   ;; Reftex
@@ -58,6 +50,14 @@
               (lambda ()
                 (setq TeX-view-program-selection '((output-pdf "PDF Tools")
                                                    (output-dvi "gv"))))))))
+;; PDF-view mode
+(use-package pdf-tools
+  :straight t
+  :mode (("\\.pdf\\'" . pdf-view-mode))
+  :init (pdf-tools-install)
+  :config
+  (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
+  (add-hook 'pdf-view-mode-hook #'pdf-view-midnight-minor-mode))
 
 (provide 'init-tex)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
