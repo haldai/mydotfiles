@@ -502,11 +502,11 @@ awful.widget.watch(
    function(widget, stdout, stderr, exitreason, exitcode)
       local unread_emails_num = tonumber(stdout) or 0
       if (unread_emails_num > 0) then
-         theme.emailnum:set_markup_silently("<span color=\"" .. white2 .. "\" font_desc=\"SauceCodePro Nerd Font Mono\"><b>" .. tostring(unread_emails_num) .. "</b></span>")
+         theme.emailnum:set_markup_silently("<span color=\"" .. white2 .. "\" font_desc=\"DinkieBitmap 7px\" size=\"9000\"><b>" .. tostring(unread_emails_num) .. "</b></span>")
          emailbg:set_bg(red1)
          emailnum_t:set_text("郵件！右鍵！")
       elseif (unread_emails_num == 0) then
-         theme.emailnum:set_markup_silently("<span color=\"" .. white1 .. "\" font_desc=\"SauceCodePro Nerd Font Mono 9\">無</span>")
+         theme.emailnum:set_markup_silently("<span color=\"" .. white1 .. "\" font_desc=\"DinkieBitmap 7px\" size=\"9700\">無</span>")
          emailbg:set_bg(black1)
          emailnum_t:set_text("暫無新郵件")
       end
@@ -516,7 +516,7 @@ theme.emailnum:buttons(
    my_table.join(
       awful.button({}, 3, function()
             awful.spawn("emacsclient -c -a emacs --eval \"(mu4e)\"")
-            theme.emailnum:set_markup_silently("<span color=\"" .. white1 .. "\" font_desc=\"SauceCodePro Nerd Font Mono 9\">無</span>")
+            theme.emailnum:set_markup_silently("<span color=\"" .. white1 .. "\" font_desc=\"DinkieBitmap 7px\" size=\"9700\">無</span>")
             emailbg:set_bg(black1)
             emailnum_t:set_text("暫無新郵件")
       end)
