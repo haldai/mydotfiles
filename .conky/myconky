@@ -3,7 +3,7 @@ conky.config = {
 --  Generic Settings
 -------------------------------------
 background=true,
-update_interval=1801,
+update_interval=1,
 double_buffer=true,
 no_buffers=true,
 imlib_cache_size=10,
@@ -40,7 +40,7 @@ border_outer_margin=0,
 -------------------------------------
 use_xft=true,
 xftalpha=1,
-font="Droid Sans:size=12",
+font="DinkieBitmap 9px:size=12",
 text_buffer_size=256,
 override_utf8_locale=true,
 
@@ -71,20 +71,20 @@ ${image ~/.conky/Myconky/assets/bg_img/separator-h.png -p 10,135 -s 430x2}\
 ${image ~/.conky/Myconky/assets/bg_img/separator-h.png -p 10,270 -s 430x2}\
 \
 \
-${color2}${voffset 142}${alignc 160}${font 方正宋刻本秀楷:size=12}${execi 1800 date +%^A}${font}
-${color2}${voffset -24}${alignc}${font 方正宋刻本秀楷:size=12}${execi 1800 date -d +1day +%^A}${font}
-${color2}${voffset -24}${alignc -160}${font 方正宋刻本秀楷:size=12}${execi 1800 date -d +2day +%^A}${font}
+${color2}${voffset 142}${alignc 170}${font DinkieBitmap 9px:size=12}${execi 1800 date +%^A}${font}
+${color2}${voffset -17}${alignc}${font DinkieBitmap 9px:size=12}${execi 1800 date -d +1day +%^A}${font}
+${color2}${voffset -17}${alignc -160}${font DinkieBitmap 9px:size=12}${execi 1800 date -d +2day +%^A}${font}
 \
 \
-${color2}${voffset 70}${alignc 160}${execi 1800 ~/.conky/Myconky/parse_weather 'min' '.main.temp_min' '0'} °C/${execi 1800 ~/.conky/Myconky/parse_weather 'max' '.main.temp_max' '0'} °C
-${color2}${voffset -22}${alignc}${execi 1800 ~/.conky/Myconky/parse_weather 'min' '.main.temp_min' '1'} °C/${execi 1800 ~/.conky/Myconky/parse_weather 'max' '.main.temp_max' '1'} °C
-${color2}${voffset -22}${alignc -160}${execi 1800 ~/.conky/Myconky/parse_weather 'min' '.main.temp_min' '2'} °C/${execi 1800 ~/.conky/Myconky/parse_weather 'max' '.main.temp_max' '2'} °C
+${color2}${voffset 90}${alignc 160}${execi 1800 ~/.conky/Myconky/parse_weather 'min' '.main.temp_min' '0'} °C/${execi 1800 ~/.conky/Myconky/parse_weather 'max' '.main.temp_max' '0'} °C
+${color2}${voffset -17}${alignc}${execi 1800 ~/.conky/Myconky/parse_weather 'min' '.main.temp_min' '1'} °C/${execi 1800 ~/.conky/Myconky/parse_weather 'max' '.main.temp_max' '1'} °C
+${color2}${voffset -17}${alignc -160}${execi 1800 ~/.conky/Myconky/parse_weather 'min' '.main.temp_min' '2'} °C/${execi 1800 ~/.conky/Myconky/parse_weather 'max' '.main.temp_max' '2'} °C
 \
 \
-${color2}${font 方正宋刻本秀楷:size=40}${goto 0}${voffset -205}${execi 1800 jq -r '.main.temp' ~/.cache/weather.json | awk '{print int($1+0.5)}'} °C${font}${font 方正宋刻本秀楷:size=24}${voffset -15}${alignc 10}${execi 1800 jq -r .weather[0].description ~/.cache/weather.json | sed "s|\<.|\U&|g"}${color}${font}
-${font 方正宋刻本秀楷:size=12}${color0}${alignr 12}${voffset -86}${execi 1800 jq -r '.main.pressure' ~/.cache/weather.json | awk '{print int($1+0.5)}' # round num} hPa${font}
-${font 方正宋刻本秀楷:size=12}${color0}${alignr 12}${voffset 8}${execi 1800 jq -r '.main.humidity' ~/.cache/weather.json | awk '{print int($1+0.5)}' # round num} %${color}${font}
-${font 方正宋刻本秀楷:size=12}${color0}${alignr 12}${voffset 6}${execi 1800 jq -r '.wind.speed' ~/.cache/weather.json | awk '{print int($1+0.5)}' # round num} m/s${color}${font}
+${color2}${font DinkieBitmap 9px:size=40}${goto 0}${voffset -190}${execi 1800 jq -r '.main.temp' ~/.cache/weather.json | awk '{print int($1+0.5)}'} °C${font}${font DinkieBitmap 9px:size=24}${voffset -15}${alignc 10}${execi 1800 jq -r .weather[0].description ~/.cache/weather.json | sed "s|\<.|\U&|g"}${color}${font}
+${font DinkieBitmap 9px:size=12}${color0}${alignr 12}${voffset -74}${execi 1800 jq -r '.main.pressure' ~/.cache/weather.json | awk '{print int($1+0.5)}' # round num} hPa${font}
+${font DinkieBitmap 9px:size=12}${color0}${alignr 12}${voffset 17}${execi 1800 jq -r '.main.humidity' ~/.cache/weather.json | awk '{print int($1+0.5)}' # round num} %${color}${font}
+${font DinkieBitmap 9px:size=12}${color0}${alignr 12}${voffset 17}${execi 1800 jq -r '.wind.speed' ~/.cache/weather.json | awk '{print int($1+0.5)}' # round num} m/s${color}${font}
 \
 \
 ${image ~/.conky/Myconky/assets/bg_img/pressure.svg.png -p 340,45 -s 20x20}\
@@ -96,7 +96,7 @@ ${execi 1800 cp -f ~/.conky/Myconky/assets/icons/$(~/.conky/Myconky/parse_weathe
 ${execi 1800 cp -f ~/.conky/Myconky/assets/icons/$(~/.conky/Myconky/parse_weather 'first' '.weather[0].id' '2').png ~/.cache/weather-3.png}${image ~/.cache/weather-3.png -p 355,170 -s 64x64}${font}${voffset -24}\
 \
 \
-${voffset 190}${font 方正宋刻本秀楷:size=12}${color FFA300}HOME ${offset 5}$color${fs_used /home} / ${fs_size /home}${offset 100}${color FFA300}ROOT ${offset 5}$color${fs_used /} / ${fs_size /}
+${voffset 170}${font DinkieBitmap 9px:size=12}${color FFA300}HOME ${offset 5}$color${fs_used /home} / ${fs_size /home}${offset 10}${color FFA300}ROOT ${offset 5}$color${fs_used /} / ${fs_size /}
 \
-${voffset -320}
+${voffset -290}
 ]];

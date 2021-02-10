@@ -157,7 +157,7 @@ lain.layout.cascade.tile.ncol          = 2
 beautiful.init(awful.util.getdir("config") .. "/themes/zenburn/theme.lua")
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
--- awful.util.tagnames = { "壹", "貳", "叄", "肆", "伍", "陸", "柒", "捌", "玖" }
+-- awful.util.tagnames = { "壹", "贰", "叁", "肆", "伍", "陸", "柒", "捌", "玖" }
 -- awful.util.tagnames = { "☰", "☱", "☲", "☳", "☴", "☵", "☶", "☷", "☯" }
 awful.layout.append_default_layouts({
       awful.layout.suit.tile,
@@ -684,7 +684,7 @@ awful.rules.rules = {
      properties = { tag = awful.util.tagnames[4], minimized = true } },
    { rule = {class = "Pcmanfm"},
      properties = { tag = awful.util.tagnames[5] } },
-   { rule_any = {class = { "electronic-wechat", "qq.exe", "wechat.exe" } },
+   { rule_any = {class = { "electronic-wechat", "qq.exe", "wechat.exe", "微信" } },
      properties = { tag = awful.util.tagnames[6] } },
 }
 -- }}}
