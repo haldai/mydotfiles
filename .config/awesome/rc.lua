@@ -157,7 +157,7 @@ lain.layout.cascade.tile.ncol          = 2
 beautiful.init(awful.util.getdir("config") .. "/themes/zenburn/theme.lua")
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
--- awful.util.tagnames = { "壹", "貳", "叄", "肆", "伍", "陸", "柒", "捌", "玖" }
+-- awful.util.tagnames = { "壹", "贰", "叁", "肆", "伍", "陸", "柒", "捌", "玖" }
 -- awful.util.tagnames = { "☰", "☱", "☲", "☳", "☴", "☵", "☶", "☷", "☯" }
 awful.layout.append_default_layouts({
       awful.layout.suit.tile,
@@ -231,8 +231,9 @@ awful.util.mymainmenu = awful.menu({
          { " 編輯", function () awful.spawn("emacsclient -c -a emacs") end, icon_path .. "apps/emacs.png" },
          { " 衝浪", function () awful.spawn("chromium --disable-software-rasterizer") end, icon_path .. "apps/chromium.png" },
          { " 文件", function () awful.spawn("pcmanfm") end, icon_path .. "apps/file-manager.png" },
-         { " 監控", function () awful.spawn("st -e gotop -s") end, icon_path .. "apps/utilities-system-monitor.png" },
+         { " 監控", function () awful.spawn("st -e htop") end, icon_path .. "apps/utilities-system-monitor.png" },
          { " 聲音", function () awful.spawn("pavucontrol") end, icon_path .. "apps/sound.png" },
+         { " 托盤", function () awful.spawn.with_shell("~/.scripts/toggle_systray") end, icon_path .. "places/workspace-switcher-right-bottom.png" },
          { " 輸入", myinputmenu, icon_path .. "categories/cs-region.png"},
          { " 窗口", myawesomemenu, beautiful.awesome_icon },
          { " 演示", myxrandrmenu, icon_path .. "devices/system.png" },
@@ -684,7 +685,7 @@ awful.rules.rules = {
      properties = { tag = awful.util.tagnames[4], minimized = true } },
    { rule = {class = "Pcmanfm"},
      properties = { tag = awful.util.tagnames[5] } },
-   { rule_any = {class = { "electronic-wechat", "qq.exe", "wechat.exe" } },
+   { rule_any = {class = { "electronic-wechat", "qq.exe", "wechat.exe", "微信" } },
      properties = { tag = awful.util.tagnames[6] } },
 }
 -- }}}
