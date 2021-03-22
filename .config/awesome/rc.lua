@@ -96,7 +96,7 @@ local altkey = "Mod1"
 local terminal = "st"
 local editor = "emacsclient -c -a emacs"
 local editor_cmd = terminal .. " -e " .. editor
-local browser = "chromium --disable-gpu --disable-software-rasterizer"
+local browser = "google-chrome-stable --disable-gpu --disable-software-rasterizer"
 local filemanager = "pcmanfm"
 
 -- {{{ taglist and tasklist buttons
@@ -229,7 +229,7 @@ awful.util.mymainmenu = awful.menu({
       items = {
          { " 終端", function () awful.spawn(terminal) end, icon_path .. "apps/utilities-terminal.png" },
          { " 編輯", function () awful.spawn("emacsclient -c -a emacs") end, icon_path .. "apps/emacs.png" },
-         { " 衝浪", function () awful.spawn("chromium --disable-software-rasterizer") end, icon_path .. "apps/chromium.png" },
+         { " 衝浪", function () awful.spawn("google-chrome-stable --disable-software-rasterizer") end, icon_path .. "apps/chrome.png" },
          { " 文件", function () awful.spawn("pcmanfm") end, icon_path .. "apps/file-manager.png" },
          { " 監控", function () awful.spawn("st -e htop") end, icon_path .. "apps/utilities-system-monitor.png" },
          { " 聲音", function () awful.spawn("pavucontrol") end, icon_path .. "apps/sound.png" },
@@ -388,11 +388,11 @@ globalkeys = gears.table.join(
    -- Applications
    awful.key({ modkey }, "F2", function () awful.spawn("emacsclient -c -a emacs") end,
       {description = "launch Emacs", group = "launcher"}),
-   awful.key({ modkey }, "F3", function () awful.spawn("chromium") end,
+   awful.key({ modkey }, "F3", function () awful.spawn("google-chrome-stable") end,
       {description = "launch chrome", group = "launcher"}),
    awful.key({ modkey, "Ctrl" }, "F3", function () awful.spawn("qutebrowser") end,
       {description = "launch qutebrowser", group = "launcher"}),
-   awful.key({ modkey, "Shift" }, "F3", function () awful.spawn("chromium --disable-web-security --user-data-dir") end,
+   awful.key({ modkey, "Shift" }, "F3", function () awful.spawn("google-chrome-stable --disable-web-security --user-data-dir") end,
       {description = "launch Chrome with user data dir", group = "launcher"}),
    awful.key({ modkey }, "F4", function () awful.spawn.with_shell("~/.scripts/toggle_systray") end,
       {description = "launch system tray", group = "launcher"}),
@@ -677,7 +677,7 @@ awful.rules.rules = {
    --   properties = { screen = 1, tag = "2" } },
    -- { rule = {class = "Emacs"},
    -- properties = { tag = awful.util.tagnames[2] } },
-   { rule_any = {class = {"Chromium", "qutebrowser" } },
+   { rule_any = {class = {"chrome", "qutebrowser" } },
      properties = { tag = awful.util.tagnames[3], maximized = true } },
    { rule = {class = "Thunderbird"},
      properties = { tag = awful.util.tagnames[4] } },
