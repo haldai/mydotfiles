@@ -142,7 +142,7 @@
   (add-hook 'neotree-mode-hook (lambda ()
                                  (hl-line-mode +1)
                                  (setq-local line-spacing nil)))
-  (global-set-key (kbd "C-<f5>") #'neotree-project-toggle)
+  (global-set-key (kbd "M-<f5>") #'neotree-project-toggle)
   (global-set-key (kbd "<f5>") #'neotree-toggle)
   ;; (setq neo-autorefresh t)
   (setq neo-theme 'icons)
