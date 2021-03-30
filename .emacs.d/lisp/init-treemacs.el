@@ -120,7 +120,7 @@
   :straight t
   :after projectile
   :preface
-  (defun ian/neotree-project-toggle ()
+  (defun neotree-project-toggle ()
     "Open NeoTree using the projectile root."
     (interactive)
     (let ((project-dir (projectile-project-root))
@@ -142,8 +142,8 @@
   (add-hook 'neotree-mode-hook (lambda ()
                                  (hl-line-mode +1)
                                  (setq-local line-spacing nil)))
-  (global-set-key (kbd "C-S-e") #'ian/neotree-project-toggle)
-  (global-set-key (kbd "C-x e") #'ian/neotree-project-toggle)
+  (global-set-key (kbd "C-<f5>") #'neotree-project-toggle)
+  (global-set-key (kbd "<f5>") #'neotree-toggle)
   ;; (setq neo-autorefresh t)
   (setq neo-theme 'icons)
   (setq neo-show-hidden-files t)
