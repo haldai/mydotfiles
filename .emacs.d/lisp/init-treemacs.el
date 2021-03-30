@@ -115,6 +115,40 @@
           magit-post-unstage)
          . treemacs-magit--schedule-update))
 
+;; neotree
+(use-package neotree
+  :straight t
+  :after projectile
+  :preface
+  (defun ian/neotree-project-toggle ()
+    "Open NeoTree using the projectile root."
+    (interactive)
+    (let ((project-dir (projectile-project-root))
+          (file-name (buffer-file-name)))
+      (neotree-toggle)
+      (if project-dir
+          (if (neo-global--window-exists-p)
+              (progn
+                (neotree-dir project-dir)
+                (neotree-find file-name)))
+        (message "Could not find projectile project root."))))
+  :custom-face
+  (neo-dir-link-face  ((t (:inherit variable-pitch))))
+  (neo-header-face    ((t (:inherit variable-pitch))))
+  (neo-banner-face    ((t (:inherit variable-pitch))))
+  (neo-root-dir-face  ((t (:inherit variable-pitch))))
+  (neo-file-link-face ((t (:inherit variable-pitch))))
+  :config
+  (add-hook 'neotree-mode-hook (lambda ()
+                                 (hl-line-mode +1)
+                                 (setq-local line-spacing nil)))
+  (global-set-key (kbd "C-S-e") #'ian/neotree-project-toggle)
+  (global-set-key (kbd "C-x e") #'ian/neotree-project-toggle)
+  ;; (setq neo-autorefresh t)
+  (setq neo-theme 'icons)
+  (setq neo-show-hidden-files t)
+  (setq neo-window-width 30))
+
 (provide 'init-treemacs)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
