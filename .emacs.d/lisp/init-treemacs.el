@@ -6,7 +6,7 @@
 ;;; Code:
 
 ;; A tree layout file explorer
-(use-package treemacs
+(use-package treemacs-all-the-icons
   :straight t
   :defines winum-keymap
   :commands (treemacs-follow-mode
@@ -26,6 +26,9 @@
   :init
   (with-eval-after-load 'winum
     (bind-key (kbd "M-9") #'treemacs-select-window winum-keymap))
+  ;; use all-the-icons theme
+  (require 'treemacs-all-the-icons)
+  (treemacs-load-theme "all-the-icons")
   :config
   (setq treemacs-collapse-dirs                 (if (executable-find "python") 3 0)
         treemacs-deferred-git-apply-delay      0.5
@@ -114,40 +117,6 @@
           magit-post-stage
           magit-post-unstage)
          . treemacs-magit--schedule-update))
-
-;; neotree
-(use-package neotree
-  :straight t
-  :after projectile
-  :preface
-  (defun neotree-project-toggle ()
-    "Open NeoTree using the projectile root."
-    (interactive)
-    (let ((project-dir (projectile-project-root))
-          (file-name (buffer-file-name)))
-      (neotree-toggle)
-      (if project-dir
-          (if (neo-global--window-exists-p)
-              (progn
-                (neotree-dir project-dir)
-                (neotree-find file-name)))
-        (message "Could not find projectile project root."))))
-  :custom-face
-  (neo-dir-link-face  ((t (:inherit variable-pitch))))
-  (neo-header-face    ((t (:inherit variable-pitch))))
-  (neo-banner-face    ((t (:inherit variable-pitch))))
-  (neo-root-dir-face  ((t (:inherit variable-pitch))))
-  (neo-file-link-face ((t (:inherit variable-pitch))))
-  :config
-  (add-hook 'neotree-mode-hook (lambda ()
-                                 (hl-line-mode +1)
-                                 (setq-local line-spacing nil)))
-  (global-set-key (kbd "M-<f5>") #'neotree-project-toggle)
-  (global-set-key (kbd "<f5>") #'neotree-toggle)
-  ;; (setq neo-autorefresh t)
-  (setq neo-theme 'icons)
-  (setq neo-show-hidden-files t)
-  (setq neo-window-width 30))
 
 (provide 'init-treemacs)
 
