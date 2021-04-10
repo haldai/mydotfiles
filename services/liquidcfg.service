@@ -1,0 +1,11 @@
+[Unit]
+Description=AIO startup service
+
+[Service]
+Type=oneshot
+ExecStart=liquidctl --vendor 0x1e71 set pump speed 20 30 30 50 40 90 42 100
+ExecStart=liquidctl --vendor 0x1e71 set ring color fading 350017 ff2608
+ExecStart=liquidctl --vendor 0x1e71 set logo color spectrum-wave
+
+[Install]
+WantedBy=default.target
