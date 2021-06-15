@@ -30,7 +30,7 @@
                                  ("❓" . warning))
         org-log-done 'time
         org-startup-indented t
-        org-ellipsis (if (char-displayable-p ?) " " nil)
+        org-ellipsis (if (char-displayable-p ?) " " nil)
         org-cycle-separator-lines -1
         org-pretty-entities t
         org-hide-emphasis-markers t
