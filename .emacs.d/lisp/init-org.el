@@ -6,7 +6,8 @@
 ;;; Code:
 
 (use-package org
-  :straight org-plus-contrib
+  :straight t
+  :ensure org-plus-contrib
   :functions hydra-org-template/body
   :bind (("C-c a" . org-agenda)
          ("C-c b" . org-switchb))
@@ -29,10 +30,49 @@
                                  ("❓" . warning))
         org-log-done 'time
         org-startup-indented t
-        org-ellipsis (if (char-displayable-p ?) "  " nil)
+        org-ellipsis (if (char-displayable-p ?) " " nil)
+        org-cycle-separator-lines -1
         org-pretty-entities t
         org-hide-emphasis-markers t
         org-image-actual-width nil)
+
+  (defun my/org-mode/load-prettify-symbols ()
+    (interactive)
+    (setq prettify-symbols-alist
+          '(("#+begin_src" . ?)
+            ("#+BEGIN_SRC" . ?)
+            ("#+end_src" . ?)
+            ("#+END_SRC" . ?)
+            ("#+begin_example" . ?)
+            ("#+BEGIN_EXAMPLE" . ?)
+            ("#+begin_quote" . ?)
+            ("#+BEGIN_QUOTE" . ?)
+            ("#+end_example" . ?)
+            ("#+END_EXAMPLE" . ?)
+            ("#+end_quote" . ?)
+            ("#+END_QUOTE" . ?)
+            ("#+begin_center" . ?)
+            ("#+BEGIN_CENTER" . ?)
+            ("#+end_center" . ?)
+            ("#+END_CENTER" . ?)
+            ("#+caption" . ?)
+            ("#+CAPTION" . ?)
+            ("#+header:" . ?)
+            ("#+HEADER:" . ?)
+            ("#+name:" . ?)
+            ("#+NAME:" . ?)
+            ("#+results:" . ?)
+            ("#+RESULTS:" . ?)
+            ("#+call:" . ?)
+            ("#+CALL:" . ?)
+            (":PROPERTIES:" . ?)
+            (":properties:" . ?)
+            (":LOGBOOK:" . ?)
+            (":logbook:" . ?)))
+    (prettify-symbols-mode 1))
+  (if (char-displayable-p ?)
+      (add-hook 'org-mode-hook 'my/org-mode/load-prettify-symbols)
+    nil)
 
   (add-to-list 'org-export-backends 'md)
 
@@ -59,7 +99,7 @@
   (custom-theme-set-faces
    'user
    '(variable-pitch ((t (:family "Vollkorn" :height 1.2))))
-   '(fixed-pitch ((t (:family "SauceCodePro Nerd Font Mono" :slant normal :weight normal :height 0.9))))
+   '(fixed-pitch ((t (:family "SauceCodePro Nerd Font Mono" :slant normal :weight normal :height 0.95))))
    '(org-level-1 ((t (:family "EB Garamond SC" :height 1.2))))
    '(org-level-2 ((t (:family "EB Garamond SC" :height 1.1))))
    '(org-level-3 ((t (:family "EB Garamond SC" :height 1.0))))
@@ -217,6 +257,8 @@
   (use-package ox-reveal
     :requires ob-julia
     :straight (ox-reveal :type git :host github :repo "yjwen/org-reveal")))
+;; (use-package emacs-reveal
+;;   :straight (emacs-reveal :type git :host gitlab :repo "oer/emacs-reveal")))
 
 (provide 'init-org)
 
