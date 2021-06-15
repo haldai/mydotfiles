@@ -99,7 +99,7 @@
   (custom-theme-set-faces
    'user
    '(variable-pitch ((t (:family "Vollkorn" :height 1.2))))
-   '(fixed-pitch ((t (:family "SauceCodePro Nerd Font Mono" :slant normal :weight normal :height .95))))
+   '(fixed-pitch ((t (:family "SauceCodePro Nerd Font Mono" :slant normal :weight normal :height .9))))
    '(org-level-1 ((t (:family "EB Garamond SC" :height 1.5 :weight bold))))
    '(org-level-2 ((t (:family "EB Garamond SC" :height 1.2 :weight bold))))
    '(org-level-3 ((t (:family "EB Garamond SC" :height 1.2 :weight bold))))
@@ -116,10 +116,10 @@
    '(org-formula ((t (:inherit fixed-pitch :height 0.8))))
    '(org-code ((t (:inherit (shadow fixed-pitch)))))
    '(org-document-info ((t (:inherit variable-pitch :slant italic :height 0.9))))
-   '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
+   '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch) :weight bold))))
    '(org-indent ((t (:inherit (org-hide fixed-pitch)))))
    '(org-link ((t (:inherid fixed-pitch :underline t))))
-   '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+   '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch) :weight bold))))
    '(org-property-value ((t (:inherit fixed-pitch))) t)
    '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
    '(org-table ((t (:inherit fixed-pitch))))
