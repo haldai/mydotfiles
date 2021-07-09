@@ -59,7 +59,7 @@
 
 ;; Potassco Answer Set Program
 (use-package pasp-mode
-  :straight t
+  :straight (pasp-pmode :type git :host github :repo "llaisdy/pasp-mode")
   :mode ("\\.lp\\'" . pasp-mode))
 
 (provide 'init-prolog)
