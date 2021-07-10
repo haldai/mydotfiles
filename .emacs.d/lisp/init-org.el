@@ -6,7 +6,7 @@
 ;;; Code:
 
 (use-package org
-  :straight org-plus-contrib
+  :straight t
   :functions hydra-org-template/body
   :bind (("C-c a" . org-agenda)
          ("C-c b" . org-switchb))
@@ -15,6 +15,8 @@
          (org-mode . visual-line-mode)
          (org-mode . variable-pitch-mode))
   :config
+
+  (use-package org-contrib :straight t)
 
   ;; latex preview scale
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.2))
