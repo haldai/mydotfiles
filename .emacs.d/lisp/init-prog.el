@@ -84,6 +84,8 @@
   :diminish editorconfig-mode
   :hook (after-init . editorconfig-mode))
 
+(use-package yaml-mode :straight t)
+
 (provide 'init-prog)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
