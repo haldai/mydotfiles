@@ -71,7 +71,7 @@
     ("l" dumb-jump-quick-look "Quick look")
     ("b" dumb-jump-back "Back")
     ("q" nil "quit"))
-  (bind-key "C-M-j" #'dumb-jump-hydra/body dumb-jump-mode-map))
+  (bind-key "C-c C-j" #'dumb-jump-hydra/body dumb-jump-mode-map))
 
 ;; Run commands quickly
 (use-package quickrun
