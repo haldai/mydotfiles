@@ -320,7 +320,9 @@
     (if keycast-mode
         (add-hook 'pre-command-hook 'keycast--update t)
       (remove-hook 'pre-command-hook 'keycast--update)))
-  (add-to-list 'global-mode-string '("" mode-line-keycast)))
+  (add-to-list 'global-mode-string '("" mode-line-keycast))
+  (keycast-mode 1))
+
 (provide 'init-themes)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-themes.el ends here

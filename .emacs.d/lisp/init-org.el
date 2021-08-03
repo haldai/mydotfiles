@@ -19,7 +19,6 @@
 
   (use-package org-roam
     :straight t
-    :ensure t
     :custom
     (org-roam-directory (file-truename "~/Org"))
     :bind (("C-c n l" . org-roam-buffer-toggle)
@@ -41,7 +40,7 @@
     ;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
     ;;         a hookable mode anymore, you're advised to pick something yourself
     ;;         if you don't care about startup time, use
-    ;;  :hook (after-init . org-roam-ui-mode)
+    (after-init . org-roam-ui-mode)
     :config
     (setq org-roam-ui-sync-theme t
           org-roam-ui-follow t
