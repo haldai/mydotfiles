@@ -15,8 +15,38 @@
          (org-mode . visual-line-mode)
          (org-mode . variable-pitch-mode))
   :config
-
   (use-package org-contrib :straight t)
+
+  (use-package org-roam
+    :straight t
+    :ensure t
+    :custom
+    (org-roam-directory (file-truename "~/Org"))
+    :bind (("C-c n l" . org-roam-buffer-toggle)
+           ("C-c n f" . org-roam-node-find)
+           ("C-c n g" . org-roam-graph)
+           ("C-c n i" . org-roam-node-insert)
+           ("C-c n c" . org-roam-capture)
+           ;; Dailies
+           ("C-c n j" . org-roam-dailies-capture-today))
+    :config
+    (org-roam-setup)
+    ;; If using org-roam-protocol
+    (require 'org-roam-protocol))
+
+  (use-package org-roam-ui
+    :straight (:host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out"))
+    :after org-roam
+    :hook
+    ;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
+    ;;         a hookable mode anymore, you're advised to pick something yourself
+    ;;         if you don't care about startup time, use
+    ;;  :hook (after-init . org-roam-ui-mode)
+    :config
+    (setq org-roam-ui-sync-theme t
+          org-roam-ui-follow t
+          org-roam-ui-update-on-save t
+          org-roam-ui-open-on-start t))
 
   ;; latex preview scale
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.2))
@@ -31,10 +61,49 @@
                                  ("❓" . warning))
         org-log-done 'time
         org-startup-indented t
-        org-ellipsis (if (char-displayable-p ?) "  " nil)
+        org-ellipsis (if (char-displayable-p ?) " " nil)
+        org-cycle-separator-lines -1
         org-pretty-entities t
         org-hide-emphasis-markers t
         org-image-actual-width nil)
+
+  (defun my/org-mode/load-prettify-symbols ()
+    (interactive)
+    (setq prettify-symbols-alist
+          '(("#+begin_src" . ?)
+            ("#+BEGIN_SRC" . ?)
+            ("#+end_src" . ?)
+            ("#+END_SRC" . ?)
+            ("#+begin_example" . ?)
+            ("#+BEGIN_EXAMPLE" . ?)
+            ("#+begin_quote" . ?)
+            ("#+BEGIN_QUOTE" . ?)
+            ("#+end_example" . ?)
+            ("#+END_EXAMPLE" . ?)
+            ("#+end_quote" . ?)
+            ("#+END_QUOTE" . ?)
+            ("#+begin_center" . ?)
+            ("#+BEGIN_CENTER" . ?)
+            ("#+end_center" . ?)
+            ("#+END_CENTER" . ?)
+            ("#+caption" . ?)
+            ("#+CAPTION" . ?)
+            ("#+header:" . ?)
+            ("#+HEADER:" . ?)
+            ("#+name:" . ?)
+            ("#+NAME:" . ?)
+            ("#+results:" . ?)
+            ("#+RESULTS:" . ?)
+            ("#+call:" . ?)
+            ("#+CALL:" . ?)
+            (":PROPERTIES:" . ?)
+            (":properties:" . ?)
+            (":LOGBOOK:" . ?)
+            (":logbook:" . ?)))
+    (prettify-symbols-mode 1))
+  (if (char-displayable-p ?)
+      (add-hook 'org-mode-hook 'my/org-mode/load-prettify-symbols)
+    nil)
 
   (add-to-list 'org-export-backends 'md)
 
@@ -61,15 +130,15 @@
   (custom-theme-set-faces
    'user
    '(variable-pitch ((t (:family "Vollkorn" :height 1.2))))
-   '(fixed-pitch ((t (:family "SauceCodePro Nerd Font Mono" :slant normal :weight normal :height 0.9))))
-   '(org-level-1 ((t (:family "EB Garamond SC" :height 1.2))))
-   '(org-level-2 ((t (:family "EB Garamond SC" :height 1.1))))
-   '(org-level-3 ((t (:family "EB Garamond SC" :height 1.0))))
-   '(org-level-4 ((t (:family "EB Garamond SC" :height 1.0))))
-   '(org-level-5 ((t (:family "EB Garamond SC" :height 1.0))))
-   '(org-level-6 ((t (:family "EB Garamond SC" :height 1.0))))
-   '(org-level-7 ((t (:family "EB Garamond SC" :height 1.0))))
-   '(org-level-8 ((t (:family "EB Garamond SC" :height 1.0))))
+   '(fixed-pitch ((t (:family "SauceCodePro Nerd Font Mono" :slant normal :weight normal :height .9))))
+   '(org-level-1 ((t (:family "EB Garamond SC" :height 1.5 :weight bold))))
+   '(org-level-2 ((t (:family "EB Garamond SC" :height 1.2 :weight bold))))
+   '(org-level-3 ((t (:family "EB Garamond SC" :height 1.2 :weight bold))))
+   '(org-level-4 ((t (:family "EB Garamond SC" :height 1.2 :weight bold))))
+   '(org-level-5 ((t (:family "EB Garamond SC" :height 1.2 :weight bold))))
+   '(org-level-6 ((t (:family "EB Garamond SC" :height 1.2 :weight bold))))
+   '(org-level-7 ((t (:family "EB Garamond SC" :height 1.2 :weight bold))))
+   '(org-level-8 ((t (:family "EB Garamond SC" :height 1.2 :weight bold))))
    '(org-document-title ((t (:family "EB Garamond" :height 2.0 :weight bold))))
    '(org-block ((t (:inherit fixed-pitch))))
    '(org-todo ((t (:inherit fixed-pitch))))
@@ -78,10 +147,10 @@
    '(org-formula ((t (:inherit fixed-pitch :height 0.8))))
    '(org-code ((t (:inherit (shadow fixed-pitch)))))
    '(org-document-info ((t (:inherit variable-pitch :slant italic :height 0.9))))
-   '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
+   '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch) :weight bold))))
    '(org-indent ((t (:inherit (org-hide fixed-pitch)))))
    '(org-link ((t (:inherid fixed-pitch :underline t))))
-   '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+   '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch) :weight bold))))
    '(org-property-value ((t (:inherit fixed-pitch))) t)
    '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
    '(org-table ((t (:inherit fixed-pitch))))
@@ -219,6 +288,8 @@
   (use-package ox-reveal
     :requires ob-julia
     :straight (ox-reveal :type git :host github :repo "yjwen/org-reveal")))
+;; (use-package emacs-reveal
+;;   :straight (emacs-reveal :type git :host gitlab :repo "oer/emacs-reveal")))
 
 (provide 'init-org)
 

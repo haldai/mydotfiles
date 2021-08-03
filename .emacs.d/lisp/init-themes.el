@@ -310,6 +310,17 @@
 (set-frame-parameter (selected-frame) 'alpha '(95 . 70))
 (add-to-list 'default-frame-alist '(alpha . (95 . 70)))
 
+;; keycast
+(use-package keycast
+  :straight t
+  :config
+  (define-minor-mode keycast-mode
+    "Show current command and its key binding in the mode line (fix for use with doom-mode-line)."
+    :global t
+    (if keycast-mode
+        (add-hook 'pre-command-hook 'keycast--update t)
+      (remove-hook 'pre-command-hook 'keycast--update)))
+  (add-to-list 'global-mode-string '("" mode-line-keycast)))
 (provide 'init-themes)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-themes.el ends here
