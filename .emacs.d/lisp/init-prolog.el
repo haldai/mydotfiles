@@ -24,13 +24,13 @@
         prolog-electric-if-then-else-flag t)
 
   (defun prolog-insert-comment-block ()
-    "Insert a PceEmacs-style comment block like /* - - ... - - */ "
+    "Insert a comment block like %%%%%% "
     (interactive)
-    (let ((dashes "-"))
-      (dotimes (_ 36) (setq dashes (concat "- " dashes)))
-      (insert (format "/* %s\n\n%s */" dashes dashes))
+    (let ((percentages "%"))
+      (dotimes (_ 72) (setq percentages (concat "%" percentages)))
+      (insert (format "%s\n%% \n%s" percentages percentages))
       (forward-line -1)
-      (indent-for-tab-command))
+      (forward-char  2))
     )
 
   (defun prolog-insert-library ()
