@@ -7,14 +7,28 @@
 
 (use-package org
   :straight t
+  :mode ("\\.org" . org-mode)
   :functions hydra-org-template/body
-  :bind (("C-c a" . org-agenda)
-         ("C-c b" . org-switchb))
-  :hook ((org-indent-mode . (lambda() (diminish 'org-indent-mode)))
+  :bind (:map org-mode-map
+              ("C-c a" . org-agenda)
+              ("C-c b" . org-switchb)
+              ("C-c SPC" . insert-zero-width-space))
+  :hook ((org-indent-mode . (lambda () (diminish 'org-indent-mode)))
          (org-src-mode . display-line-numbers-mode)
-         (org-mode . visual-line-mode)
          (org-mode . variable-pitch-mode))
   :config
+
+  (setq org-directory "~/.org"                      ; let's put files here
+        org-use-property-inheritance t              ; it's convenient to have properties inherited
+        org-log-done 'time                          ; having the time a item is done sounds convenient
+        org-list-allow-alphabetical t               ; have a. A. a) A) list bullets
+        org-export-in-background t                  ; run export processes in external emacs process
+        org-catch-invisible-edits 'smart            ; try not to accidently do weird stuff in invisible regions
+        org-export-with-sub-superscripts '{})       ; don't treat lone _ / ^ as sub/superscripts, require _{} / ^{}
+
+
+  (remove-hook 'text-mode-hook #'visual-line-mode)
+  (add-hook 'text-mode-hook #'auto-fill-mode)
   (use-package org-contrib :straight t)
 
   (use-package org-roam
@@ -33,27 +47,14 @@
     ;; If using org-roam-protocol
     (require 'org-roam-protocol))
 
-  (use-package org-roam-ui
-    :straight (:host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out"))
-    :after org-roam
-    :hook
-    ;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
-    ;;         a hookable mode anymore, you're advised to pick something yourself
-    ;;         if you don't care about startup time, use
-    (after-init . org-roam-ui-mode)
-    :config
-    (setq org-roam-ui-sync-theme t
-          org-roam-ui-follow t
-          org-roam-ui-update-on-save t
-          org-roam-ui-open-on-start t))
-
   ;; latex preview scale
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.2))
 
   ;; indent in source code block
   (setq org-src-tab-acts-natively t)
 
-  (setq org-agenda-files '("~/org")
+  (setq org-agenda-files (list "~/.org/work.org"
+                               "~/.org/home.org")
         org-todo-keywords '((sequence "TODO(T)" "DOING(I)" "HANGUP(H)" "|" "DONE(D)" "CANCEL(C)")
                             (sequence "⚑(t)" "🏴(i)" "❓(h)" "|" "✔(d)" "✘(c)"))
         org-todo-keyword-faces '(("HANGUP" . warning)
@@ -156,6 +157,17 @@
    '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
    '(org-verbatim ((t (:inherit (shadow fixed-pitch))))))
 
+  ;; no export of zero-width spaces
+  (defun +org-export-remove-zero-width-space (text _backend _info)
+    "Remove zero width spaces from TEXT."
+    (unless (org-export-derived-backend-p 'org)
+      (replace-regexp-in-string "\u200B" "" text)))
+
+  (add-to-list 'org-export-filter-final-output-functions #'+org-export-remove-zero-width-space t)
+
+  ;; list bullet sequence
+  (setq org-list-demote-modify-bullet '(("+" . "-") ("-" . "+") ("*" . "+") ("1." . "a.")))
+
   ;; More fancy UI
   (use-package org-bullets
     :straight t
@@ -219,6 +231,17 @@
   (add-to-list 'org-structure-template-alist '("pl" . "src prolog"))
   (add-to-list 'org-structure-template-alist '("py" . "src python"))
   (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+
+  ;; default headers
+  (setq org-babel-default-header-args
+        '((:session . "none")
+          (:results . "replace")
+          (:exports . "code")
+          (:cache . "no")
+          (:noweb . "no")
+          (:hlines . "no")
+          (:tangle . "no")
+          (:comments . "link")))
 
   ;; juypter-julia settings
   (setq org-babel-default-header-args:jupyter-julia '((:async . "yes")
@@ -286,11 +309,98 @@
   ;; reveal
   (use-package ox-reveal
     :requires ob-julia
-    :straight (ox-reveal :type git :host github :repo "yjwen/org-reveal")))
-;; (use-package emacs-reveal
-;;   :straight (emacs-reveal :type git :host gitlab :repo "oer/emacs-reveal")))
+    :straight (ox-reveal :type git :host github :repo "yjwen/org-reveal"))
+  ;; (use-package emacs-reveal
+  ;;   :straight (emacs-reveal :type git :host gitlab :repo "oer/emacs-reveal")))
 
-(provide 'init-org)
+  ;; Translate capital keywords (old) to lower case (new)
+  (defun org-syntax-convert-keyword-case-to-lower ()
+    "Convert all #+KEYWORDS to #+keywords."
+    (interactive)
+    (save-excursion
+      (goto-char (point-min))
+      (let ((count 0)
+            (case-fold-search nil))
+        (while (re-search-forward "^[ \t]*#\\+[A-Z_]+" nil t)
+          (unless (s-matches-p "RESULTS" (match-string 0))
+            (replace-match (downcase (match-string 0)) t)
+            (setq count (1+ count))))
+        (message "Replaced %d occurances" count))))
+
+  ;; Super agenda
+  (use-package org-super-agenda
+    :straight t
+    :after org-agenda
+    :hook (org-agenda-mode . org-super-agenda-mode))
+
+  (setq org-agenda-skip-scheduled-if-done t
+        org-agenda-skip-deadline-if-done t
+        org-agenda-include-deadlines t
+        org-agenda-block-separator nil
+        org-agenda-tags-column 100 ;; from testing this seems to be a good value
+        org-agenda-compact-blocks t)
+
+  (setq org-agenda-custom-commands
+        '(("o" "Overview"
+           ((agenda "" ((org-agenda-span 'day)
+                        (org-super-agenda-groups
+                         '((:name "Today"
+                                  :time-grid t
+                                  :date today
+                                  :todo "TODAY"
+                                  :scheduled today
+                                  :order 1)))))
+            (alltodo "" ((org-agenda-overriding-header "")
+                         (org-super-agenda-groups
+                          '((:name "Next to do"
+                                   :todo "NEXT"
+                                   :order 1)
+                            (:name "Important"
+                                   :tag "Important"
+                                   :priority "A"
+                                   :order 6)
+                            (:name "Due Today"
+                                   :deadline today
+                                   :order 2)
+                            (:name "Due Soon"
+                                   :deadline future
+                                   :order 8)
+                            (:name "Overdue"
+                                   :deadline past
+                                   :face error
+                                   :order 7)
+                            (:name "Assignments"
+                                   :tag "Assignment"
+                                   :order 10)
+                            (:name "Issues"
+                                   :tag "Issue"
+                                   :order 12)
+                            (:name "Emacs"
+                                   :tag "Emacs"
+                                   :order 13)
+                            (:name "Projects"
+                                   :tag "Project"
+                                   :order 14)
+                            (:name "Research"
+                                   :tag "Research"
+                                   :order 15)
+                            (:name "To read"
+                                   :tag "Read"
+                                   :order 30)
+                            (:name "Waiting"
+                                   :todo "WAITING"
+                                   :order 20)
+                            (:name "University"
+                                   :tag "uni"
+                                   :order 32)
+                            (:name "Trivial"
+                                   :priority<= "E"
+                                   :tag ("Trivial" "Unimportant")
+                                   :todo ("SOMEDAY" )
+                                   :order 90)
+                            (:discard (:tag ("Chore" "Routine" "Daily"))))))))))))
+
+  (provide 'init-org)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-org.el ends here

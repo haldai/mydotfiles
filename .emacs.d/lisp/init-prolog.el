@@ -10,8 +10,9 @@
   :load-path "~/.emacs.d/lisp/prolog.el"
   :mode (("\\.pl\\'" . prolog-mode)
          ("\\.m\\'" . mercury-mode))
-  :bind (("C-c %" . prolog-insert-comment-block)
-         ("C-c C-c l" . prolog-insert-library))
+  :bind (:map prolog-mode-map
+              ("C-c %" . prolog-insert-comment-block)
+              ("C-c C-c l" . prolog-insert-library))
   :hook ((prolog-mode . display-line-numbers-mode)
          (prolog-mode . hl-todo-mode))
   :config
@@ -48,9 +49,10 @@
     "Insert an epiprolog query mark in prolog mode."
     (interactive)
     (insert "%%?- "))
-  :bind (("<f10>" . ediprolog-dwim)
-         ("C-c <f10>" . ediprolog-consult)
-         ("C-c q" . insert-prolog-query-mark))
+  :bind (:map prolog-mode-map
+              ("<f10>" . ediprolog-dwim)
+              ("C-c <f10>" . ediprolog-consult)
+              ("C-c q" . insert-prolog-query-mark))
   :config
   (setq ediprolog-prefix "%%@"))
 

@@ -312,8 +312,8 @@
   :hook (after-init . fancy-narrow-mode))
 
 ;; Huge files
-
-(straight-use-package 'vlf)
+(use-package vlf
+  :straight t)
 (require 'vlf)
 (require 'tramp)
 
@@ -352,6 +352,9 @@
      rime-predicate-current-uppercase-letter-p
      rime-predicate-tex-math-or-command-p))
   (mode-line-mule-info '((:eval (rime-lighter)))))
+
+(defun insert-zero-width-space ()
+  (interactive (insert "\u200B")))
 
 (provide 'init-edit)
 
