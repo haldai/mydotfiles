@@ -1,44 +1,39 @@
-sw_volume: 98
+sw_volume: 96
+audio_device_state:1:PHA3 - USB Audio
+audio_device_state:1:Hugo 2
 audio_device_state:1:pulse audio
 audio_device_state:1:my_fifo
 state: play
-current: 2
-time: 8.969000
+current: 4
+time: 120.155000
 random: 0
-repeat: 0
+repeat: 1
 single: 0
 consume: 0
-crossfade: 5
+crossfade: 0
 mixrampdb: 0.000000
 mixrampdelay: -1.000000
 playlist_begin
-0:P5ROST/disc1_01.mp3
-1:P5ROST/disc1_02.mp3
-2:P5ROST/disc1_03.mp3
-3:P5ROST/disc1_04.mp3
-4:P5ROST/disc1_05.mp3
-5:P5ROST/disc1_06.mp3
-6:P5ROST/disc1_07.mp3
-7:P5ROST/disc1_08.mp3
-8:P5ROST/disc1_09.mp3
-9:P5ROST/disc1_10.mp3
-10:P5ROST/disc1_11.mp3
-11:P5ROST/disc1_12.mp3
-12:P5ROST/disc1_13.mp3
-13:P5ROST/disc1_14.mp3
-14:P5ROST/disc1_15.mp3
-15:P5ROST/disc2_01.mp3
-16:P5ROST/disc2_02.mp3
-17:P5ROST/disc2_03.mp3
-18:P5ROST/disc2_04.mp3
-19:P5ROST/disc2_05.mp3
-20:P5ROST/disc2_06.mp3
-21:P5ROST/disc2_07.mp3
-22:P5ROST/disc2_08.mp3
-23:P5ROST/disc2_09.mp3
-24:P5ROST/disc2_10.mp3
-25:P5ROST/disc2_11.mp3
-26:P5ROST/disc2_12.mp3
-27:P5ROST/disc2_13.mp3
-28:P5ROST/disc2_14.mp3
+0:Norah Jones/Come Away With Me/flacs/01. Don't Know Why.flac
+1:Norah Jones/Come Away With Me/flacs/02. Seven Years.flac
+2:Norah Jones/Come Away With Me/flacs/03. Cold Cold Heart.flac
+3:Norah Jones/Come Away With Me/flacs/04. Feelin' The Same Way.flac
+4:Norah Jones/Come Away With Me/flacs/05. Come Away With Me.flac
+5:Norah Jones/Come Away With Me/flacs/06. Shoot The Moon.flac
+6:Norah Jones/Come Away With Me/flacs/07. Turn Me On.flac
+7:Norah Jones/Come Away With Me/flacs/08. Lonestar.flac
+8:Norah Jones/Come Away With Me/flacs/09. I've Got To See You Again.flac
+9:Norah Jones/Come Away With Me/flacs/10. Painter Song.flac
+10:Norah Jones/Come Away With Me/flacs/11. One Flight Down.flac
+11:Norah Jones/Come Away With Me/flacs/12. Nightingale.flac
+12:Norah Jones/Come Away With Me/flacs/13. The Long Day Is Over.flac
+13:Norah Jones/Come Away With Me/flacs/14. The Nearness Of You.flac
+14:Wiener Philharmoniker, Carlos Kleiber/Beethoven_ Symphonies Nos. 5 & 7/001-Beethoven_ Symphony No. 5 in C Minor, Op. 67 - I. Allegro con brio.flac
+15:Wiener Philharmoniker, Carlos Kleiber/Beethoven_ Symphonies Nos. 5 & 7/002-Beethoven_ Symphony No. 5 in C Minor, Op. 67 - 2. Andante con moto.flac
+16:Wiener Philharmoniker, Carlos Kleiber/Beethoven_ Symphonies Nos. 5 & 7/003-Beethoven_ Symphony No. 5 in C Minor, Op. 67 - 3. Allegro.flac
+17:Wiener Philharmoniker, Carlos Kleiber/Beethoven_ Symphonies Nos. 5 & 7/004-Beethoven_ Symphony No. 5 in C Minor, Op. 67 - 4. Allegro.flac
+18:Wiener Philharmoniker, Carlos Kleiber/Beethoven_ Symphonies Nos. 5 & 7/005-Beethoven_ Symphony No. 7 in A Major, Op. 92 - 1. Poco sostenuto - Vivace.flac
+19:Wiener Philharmoniker, Carlos Kleiber/Beethoven_ Symphonies Nos. 5 & 7/006-Beethoven_ Symphony No. 7 in A Major, Op. 92 - II. Allegretto.flac
+20:Wiener Philharmoniker, Carlos Kleiber/Beethoven_ Symphonies Nos. 5 & 7/007-Beethoven_ Symphony No. 7 in A Major, Op. 92 - 3. Presto - Assai meno presto.flac
+21:Wiener Philharmoniker, Carlos Kleiber/Beethoven_ Symphonies Nos. 5 & 7/008-Beethoven_ Symphony No. 7 in A Major, Op. 92 - 4. Allegro con brio.flac
 playlist_end
