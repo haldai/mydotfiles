@@ -1,0 +1,60 @@
+term: alacritty
+
+window:
+  padding:
+    x: 6
+    y: 6
+
+font:
+  size: 12
+  # Normal Font Face
+  normal:
+    family: Sarasa Term SC
+    style:  Regular
+  
+  # Bold Font Face
+  bold:
+    family: Sarasa Term SC
+    style: Bold
+
+  # Italic Font Face
+  italic:
+    family: Sarasa Term SC
+    style: Italic
+
+# Background Opacity
+
+background_opacity: .93
+
+# Colors Schemes
+schemes:
+  zenburn: &zenburn
+    primary:
+      background: '#3F3F3F'
+      foreground: '#DCDCCC'
+
+      bright_foreground: '#FFFFFD'
+      bright_background: '#5F5F5F'
+    cursor:
+      text: CellBackground
+      cursor: '#BFBFBF'
+    normal:
+      black:  '#3F3F3F'
+      red:    '#CC9393'
+      green:  '#7F9F7F'
+      yellow: '#F0DFAF'
+      blue:   '#8CD0D3'
+      magenta:  '#DC8CC3'
+      cyan:   '#93E0E3'
+      white:  '#DCDCCC'
+    bright:
+      black:  '#7F7F7F'
+      red:    '#9C6363'
+      green:  '#5F7F5F'
+      yellow: '#D0BF8F'
+      blue:   '#94BFF3'
+      magenta:  '#CB7BB2'
+      cyan:   '#82CFD2'
+      white:  '#FFFFEF'
+
+colors: *zenburn
