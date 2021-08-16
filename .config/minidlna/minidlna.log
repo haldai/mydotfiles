@@ -1,0 +1,22 @@
+[2021/08/16 14:47:11] minidlna.c:1124: warn: Starting MiniDLNA version 1.3.0.
+[2021/08/16 14:47:11] minidlna.c:395: warn: Creating new database at /home/daiwz/.cache/minidlna/files.db
+[2021/08/16 14:47:11] minidlna.c:1184: warn: HTTP listening on port 8200
+[2021/08/16 14:47:11] minissdp.c:816: error: sendto(udp_shutdown=9): 不允许的操作
+[2021/08/16 14:47:11] minissdp.c:816: error: sendto(udp_shutdown=9): 不允许的操作
+[2021/08/16 14:47:11] minissdp.c:324: error: sendto(udp_notify=9, 192.168.2.24): 不允许的操作
+[2021/08/16 14:47:11] minissdp.c:324: error: sendto(udp_notify=9, 192.168.2.24): 不允许的操作
+[2021/08/16 14:47:11] minissdp.c:324: error: sendto(udp_notify=9, 192.168.2.24): 不允许的操作
+[2021/08/16 14:47:11] minissdp.c:324: error: sendto(udp_notify=9, 192.168.2.24): 不允许的操作
+[2021/08/16 14:47:11] minissdp.c:324: error: sendto(udp_notify=9, 192.168.2.24): 不允许的操作
+[2021/08/16 14:47:11] minissdp.c:324: error: sendto(udp_notify=9, 192.168.2.24): 不允许的操作
+[2021/08/16 14:47:11] minissdp.c:324: error: sendto(udp_notify=9, 192.168.2.24): 不允许的操作
+[2021/08/16 14:47:11] minissdp.c:324: error: sendto(udp_notify=9, 192.168.2.24): 不允许的操作
+[2021/08/16 14:47:11] minissdp.c:324: error: sendto(udp_notify=9, 192.168.2.24): 不允许的操作
+[2021/08/16 14:47:11] minissdp.c:324: error: sendto(udp_notify=9, 192.168.2.24): 不允许的操作
+[2021/08/16 14:47:11] minissdp.c:324: error: sendto(udp_notify=9, 192.168.2.24): 不允许的操作
+[2021/08/16 14:47:11] minissdp.c:324: error: sendto(udp_notify=9, 192.168.2.24): 不允许的操作
+[2021/08/16 14:47:38] tagutils/tagutils-plist.c:126: error: Playlist looks bad (unprintable characters)
+[2021/08/16 14:47:38] playlist.c:65: warn: Bad playlist [/home/daiwz/Storage/Music/playlists/野孩子.m3u]
+[2021/08/16 14:47:38] scanner.c:490: warn: Unsuccessful getting details for /home/daiwz/Storage/Music/playlists/野孩子.m3u
+[2021/08/16 14:47:58] playlist.c:135: warn: Parsing playlists...
+[2021/08/16 14:47:58] playlist.c:269: warn: Finished parsing playlists.
