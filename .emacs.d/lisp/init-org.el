@@ -31,22 +31,6 @@
   (add-hook 'text-mode-hook #'auto-fill-mode)
   (use-package org-contrib :straight t)
 
-  (use-package org-roam
-    :straight t
-    :custom
-    (org-roam-directory (file-truename "~/Org"))
-    :bind (("C-c n l" . org-roam-buffer-toggle)
-           ("C-c n f" . org-roam-node-find)
-           ("C-c n g" . org-roam-graph)
-           ("C-c n i" . org-roam-node-insert)
-           ("C-c n c" . org-roam-capture)
-           ;; Dailies
-           ("C-c n j" . org-roam-dailies-capture-today))
-    :config
-    (org-roam-setup)
-    ;; If using org-roam-protocol
-    (require 'org-roam-protocol))
-
   ;; latex preview scale
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.2))
 
@@ -98,6 +82,8 @@
             ("#+CALL:" . ?)
             (":PROPERTIES:" . ?)
             (":properties:" . ?)
+            (":END:" . ?)
+            (":end:" . ?)
             (":LOGBOOK:" . ?)
             (":logbook:" . ?)))
     (prettify-symbols-mode 1))
@@ -400,7 +386,26 @@
                                    :order 90)
                             (:discard (:tag ("Chore" "Routine" "Daily"))))))))))))
 
-  (provide 'init-org)
+(use-package org-roam
+  :straight t
+  :ensure t
+  :init
+  (setq org-roam-v2-ack t)
+  :custom
+  (org-roam-directory (file-truename "~/Org"))
+  :bind (("C-c n l" . org-roam-buffer-toggle)
+         ("C-c n f" . org-roam-node-find)
+         ("C-c n g" . org-roam-graph)
+         ("C-c n i" . org-roam-node-insert)
+         ("C-c n c" . org-roam-capture)
+         ;; Dailies
+         ("C-c n j" . org-roam-dailies-capture-today))
+  :config
+  (org-roam-setup)
+  ;; If using org-roam-protocol
+  (require 'org-roam-protocol))
+
+(provide 'init-org)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-org.el ends here
