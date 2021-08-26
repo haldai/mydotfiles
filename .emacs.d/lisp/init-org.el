@@ -32,7 +32,7 @@
   (use-package org-contrib :straight t)
 
   ;; latex preview scale
-  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.2))
+  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.0))
 
   ;; indent in source code block
   (setq org-src-tab-acts-natively t)
@@ -404,6 +404,15 @@
   (org-roam-setup)
   ;; If using org-roam-protocol
   (require 'org-roam-protocol))
+
+;; Make invisible parts of Org elements appear visible.
+(use-package org-appear
+  :straight
+  (org-appear :type git :host github :repo "awth13/org-appear")
+  :custom
+  (org-appear-autolinks t)
+  (org-appear-submarkers t)
+  :hook (org-mode . org-appear-mode))
 
 (provide 'init-org)
 
