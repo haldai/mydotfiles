@@ -42,7 +42,7 @@ configuration {
   cyan-2: #82CFD2;
   white:      #DCDCCC;
   white-2: #FFFFEF;
-  highlight:  underline bold #ffffff;
+  highlight:  underline bold  #6CA0A3;
   transparent: rgba(0,0,0,0);
   font: "SauceCodePro Nerd Font 13";
 }
