@@ -3,9 +3,13 @@
 if [[ "$1" == "on" ]];
 then
     sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
+	xset -dpms
+	xset s off
     echo "Disable Sleep / Suspend / Hibernate."
 elif [[ "$1" == "off" ]];
 then
     sudo systemctl unmask sleep.target suspend.target hibernate.target hybrid-sleep.target
+	xset dpms
+	xset s on
     echo "Enable Sleep / Suspend / Hibernate."
 fi
