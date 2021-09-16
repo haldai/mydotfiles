@@ -56,8 +56,10 @@
   :mode (("\\.pdf\\'" . pdf-view-mode))
   :init (pdf-tools-install)
   :config
+  (setq pdf-view-midnight-colors '("#d4d4d4" . "#1e1e1e" ))
   (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
   (add-hook 'pdf-view-mode-hook #'pdf-view-midnight-minor-mode))
+
 
 (provide 'init-tex)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
