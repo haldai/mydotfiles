@@ -337,10 +337,12 @@
   :bind (:map rime-active-mode-map
               ("<tab>" . 'rime-inline-ascii)
               :map rime-mode-map
-              ("C-`"  . 'rime-send-keybinding)    ;; <----
+              ("C-`"  . 'rime-send-keybinding)
               ("M-j" . 'rime-force-enable))
   :custom
   (default-input-method "rime")
+  (mode-line-mule-info '((:eval (rime-lighter))))
+  ;; display in modeline
   (rime-show-candidate 'posframe)
   (rime-posframe-style 'vertical)
   (liberime-select-schema "luna_pinyin_simp")
@@ -348,10 +350,33 @@
    '(rime-predicate-after-ascii-char-p
      rime-predicate-prog-in-code-p
      rime-predicate-in-code-string-p
+     my/rime-predicate-zero-length-space-after-cc-p
      rime-predicate-space-after-cc-p
      rime-predicate-current-uppercase-letter-p
+     my/rime-predicate-punctuation-next-char-is-paired-p
      rime-predicate-tex-math-or-command-p))
-  (mode-line-mule-info '((:eval (rime-lighter)))))
+  :init
+  (defun my/rime-predicate-punctuation-next-char-is-paired-p ()
+    (if (not (eq (point) (point-max)))
+        (and (rime-predicate-current-input-punctuation-p)
+             (not (string-match-p
+                 (rx (any "\"\(\[\{"))
+                 (buffer-substring (point) (1- (point)))))
+             (string-match-p
+              (rx (any "\}\]\)\""))
+              (buffer-substring (point) (1+ (point)))))
+      nil))
+  (defun my/rime-predicate-zero-length-space-after-cc-p ()
+    "If cursor is after a whitespace which follow a non-ascii character."
+    (and (> (point) (save-excursion (back-to-indentation) (point)))
+         (let ((string (buffer-substring (point) (max (line-beginning-position) (- (point) 80)))))
+           (string-match-p "\\cc\u200B+$" string))))
+  :config
+  ;; Any single character that not trigger auto commit
+  (setq rime-inline-ascii-holder ?x)
+  ;;; support shift-l, shift-r, control-l, control-r
+  (setq rime-inline-ascii-trigger 'shift-l))
+
 
 (defun insert-zero-width-space ()
   (interactive (insert "\u200B")))

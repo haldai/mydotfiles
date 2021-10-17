@@ -122,8 +122,7 @@
 (use-package exec-path-from-shell
   :straight t
   :init
-  (when (daemonp)
-    (exec-path-from-shell-initialize)))
+  (exec-path-from-shell-initialize))
 
 (provide 'init-eshell)
 
