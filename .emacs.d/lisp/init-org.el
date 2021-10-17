@@ -16,8 +16,9 @@
   :hook ((org-indent-mode . (lambda () (diminish 'org-indent-mode)))
          (org-src-mode . display-line-numbers-mode)
          (org-mode . variable-pitch-mode))
+  :init
+  (use-package org-contrib :straight t)
   :config
-
   (setq org-directory "~/.org"                      ; let's put files here
         org-use-property-inheritance t              ; it's convenient to have properties inherited
         org-log-done 'time                          ; having the time a item is done sounds convenient
@@ -29,7 +30,6 @@
 
   (remove-hook 'text-mode-hook #'visual-line-mode)
   (add-hook 'text-mode-hook #'auto-fill-mode)
-  (use-package org-contrib :straight t)
 
   ;; latex preview scale
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.0))
@@ -217,6 +217,7 @@
   (add-to-list 'org-structure-template-alist '("pl" . "src prolog"))
   (add-to-list 'org-structure-template-alist '("py" . "src python"))
   (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+  (add-to-list 'org-structure-template-alist '("n"  . "src note"))
 
   ;; default headers
   (setq org-babel-default-header-args
@@ -244,6 +245,15 @@
   (setq org-export-babel-evaluate t)
 
   (use-package htmlize :straight t)
+
+  ;; Make invisible parts of Org elements appear visible.
+  (use-package org-appear
+    :straight
+    (org-appear :type git :host github :repo "awth13/org-appear")
+    :custom
+    (org-appear-autolinks t)
+    (org-appear-submarkers t)
+    :hook (org-mode . org-appear-mode))
 
   ;; Rich text clipboard
   (use-package org-rich-yank
@@ -312,6 +322,9 @@
             (replace-match (downcase (match-string 0)) t)
             (setq count (1+ count))))
         (message "Replaced %d occurances" count))))
+
+  (add-hook 'org-mode-hook
+            (lambda () (add-hook 'before-save-hook #'org-syntax-convert-keyword-case-to-lower nil 'local)))
 
   ;; Super agenda
   (use-package org-super-agenda
@@ -404,15 +417,6 @@
   (org-roam-setup)
   ;; If using org-roam-protocol
   (require 'org-roam-protocol))
-
-;; Make invisible parts of Org elements appear visible.
-(use-package org-appear
-  :straight
-  (org-appear :type git :host github :repo "awth13/org-appear")
-  :custom
-  (org-appear-autolinks t)
-  (org-appear-submarkers t)
-  :hook (org-mode . org-appear-mode))
 
 (provide 'init-org)
 
