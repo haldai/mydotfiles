@@ -123,9 +123,7 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
               ("B" . browse-at-remote)))
 
 ;; Git related modes
-(use-package gitattributes-mode :straight t)
-(use-package gitconfig-mode :straight t)
-(use-package gitignore-mode :straight t)
+(use-package git-modes :straight t)
 
 (provide 'init-git)
 
