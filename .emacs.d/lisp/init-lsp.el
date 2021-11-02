@@ -30,7 +30,7 @@
 (use-package lsp-julia
   ;; Make sure to install "pkg> dev LanguageServer"
   :straight (lsp-julia :type git :host github :repo "non-Jedi/lsp-julia")
-  :init (setq lsp-julia-default-environment "/home/daiwz/.julia/environments/v1.3/"))
+  :init (setq lsp-julia-default-environment "/home/daiwz/.julia/environments/v1.6/"))
 
 (use-package lsp-ui
   :straight t

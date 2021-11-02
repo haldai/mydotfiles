@@ -3,12 +3,12 @@
 ;;; Code:
 
 ;; color theme
-;; (straight-use-package 'zenburn-theme)
-;; (load-theme 'zenburn t)
-(use-package vscode-dark-plus-theme
-  :straight t
-  :config
-  (load-theme 'vscode-dark-plus t))
+(straight-use-package 'zenburn-theme)
+(load-theme 'zenburn t)
+;; (use-package vscode-dark-plus-theme
+;;   :straight t
+;;   :config
+;;   (load-theme 'vscode-dark-plus t))
 
 ;; font settings
 (defvar emacs-english-font "SauceCodePro Nerd Font Mono"
