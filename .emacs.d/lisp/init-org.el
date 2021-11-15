@@ -111,6 +111,15 @@
                '("AUTO" "polyglossia" t ("xelatex" "lualatex")))
   (setq org-latex-pdf-process '("latexmk -f -pdf -xelatex -interaction=nonstopmode -output-directory=%o %f"))
 
+  ;; custom babel latex source code preambles
+  (setq org-babel-latex-preamble '(lambda (_)
+                                    "\\documentclass[preview]{standalone}
+\\usepackage{tikz}
+\\usepackage{amsmath}
+\\usepackage{amssymb}
+\\usepackage{xeCJK}
+\\def\\pgfsysdriver{pgfsys-dvisvgm4ht.def}"))
+
   ;; mime support
   (use-package org-mime :straight t)
 
@@ -216,7 +225,9 @@
   (add-to-list 'org-structure-template-alist '("jj" . "src jupyter-julia"))
   (add-to-list 'org-structure-template-alist '("jp" . "src jupyter-python"))
   (add-to-list 'org-structure-template-alist '("jl" . "src julia"))
-  (add-to-list 'org-structure-template-alist '("lt" . "src latex :file TMP.svg :headers '(\"\\\\usepackage{tikz}\") :results file raw"))
+  (add-to-list 'org-structure-template-alist '("ls" . "src latex :file TMP.svg :headers '(\"\\\\usepackage{tikz}\\\\n\\\\usepackage{xeCJK}\\\\n\") :results file raw"))
+  (add-to-list 'org-structure-template-alist '("ln" . "src latex :file TMP.png :imagemagick yes :headers '(\"\\\\usepackage{tikz}\\\\n\\\\usepackage{xeCJK}\\\\n\") :iminoptions \"-density 600\" :results file raw"))
+  (add-to-list 'org-structure-template-alist '("lp" . "src latex :file TMP.pdf :headers '(\"\\\\usepackage{tikz}\\\\n\\\\usepackage{xeCJK}\\\\n\") :results file raw"))
   (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
   (add-to-list 'org-structure-template-alist '("pl" . "src prolog"))
   (add-to-list 'org-structure-template-alist '("py" . "src python"))
