@@ -16,9 +16,6 @@
   ;; (julia-mode . lsp-mode))
   )
 
-(use-package ob-julia
-  :straight (ob-julia :type git :host nil :repo "https://git.nixo.xyz/nixo/ob-julia"))
-
 (provide 'init-julia)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

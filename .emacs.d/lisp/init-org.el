@@ -45,6 +45,7 @@
                                  ("❓" . warning))
         org-log-done 'time
         org-startup-indented t
+        org-startup-with-inline-images t
         org-ellipsis (if (char-displayable-p ?) " " nil)
         org-cycle-separator-lines -1
         org-pretty-entities t
@@ -105,9 +106,10 @@
 
   ;; use xelatex for latex export
   (add-to-list 'org-latex-packages-alist
-               '("AUTO" "babel" t ("pdflatex")))
+               '("AUTO" "babel" t ("xelatex" "lualatex" "pdflatex")))
   (add-to-list 'org-latex-packages-alist
                '("AUTO" "polyglossia" t ("xelatex" "lualatex")))
+  (setq org-latex-pdf-process '("latexmk -f -pdf -xelatex -interaction=nonstopmode -output-directory=%o %f"))
 
   ;; mime support
   (use-package org-mime :straight t)
@@ -210,9 +212,11 @@
 
   (org-babel-jupyter-override-src-block "python")
 
+  (add-to-list 'org-structure-template-alist '("d" . "src dot :file TMP.svg"))
   (add-to-list 'org-structure-template-alist '("jj" . "src jupyter-julia"))
   (add-to-list 'org-structure-template-alist '("jp" . "src jupyter-python"))
   (add-to-list 'org-structure-template-alist '("jl" . "src julia"))
+  (add-to-list 'org-structure-template-alist '("lt" . "src latex :file TMP.svg :headers '(\"\\\\usepackage{tikz}\") :results file raw"))
   (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
   (add-to-list 'org-structure-template-alist '("pl" . "src prolog"))
   (add-to-list 'org-structure-template-alist '("py" . "src python"))
@@ -241,6 +245,15 @@
                                                        (:session . "py")
                                                        (:kernel . "python3")
                                                        (:exports . "both")))
+
+  ;; latex
+  (setq org-babel-default-header-args:latex '((:fit . "yes")
+                                              (:exports . "results")
+                                              ;; (:imagemagick . "yes")
+                                              (:iminoptions . "-density 300")
+                                              (:imoutoptions . "-flatten")
+                                              (:eval . "never-export")))
+
   ;; do not evaluate code blocks while exporting
   (setq org-export-babel-evaluate t)
 
@@ -270,6 +283,9 @@
   (use-package org-preview-html
     :straight t
     :diminish org-preview-html-mode)
+
+  ;; preview latex with svg
+  (setq org-preview-latex-default-process 'dvisvgm)
 
   ;; Presentation
   (use-package org-tree-slide
@@ -301,6 +317,9 @@
     :straight t)
 
   (require 'org-tempo)
+
+  (use-package ob-julia
+    :straight (ob-julia :type git :host nil :repo "https://git.nixo.xyz/nixo/ob-julia"))
 
   ;; reveal
   (use-package ox-reveal
