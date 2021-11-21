@@ -117,6 +117,8 @@ alias as='amixer sset Speaker toggle'
 alias ah='amixer sset Headphone toggle'
 alias am='amixer sset Master toggle'
 alias ac='amixer sset Capture toggle'
+alias pip-upgrade="pip freeze --user | cut -d'=' -f1 | xargs -n1 pip install -U"
+alias pip-upgrade-venv="pip freeze | cut -d'=' -f1 | xargs -n1 pip install -U"
 
 # some aliases avoid make mistake
 alias mv='mv -i'
@@ -137,7 +139,7 @@ export YAOURT_COLORS="nb=1:pkg=1:ver=1;32:lver=1;45:installed=1;42:grp=1;34:od=1
 # user environment
 SCRIPTS_PATH="/home/daiwz/.scripts"
 CUDAPATH="/opt/cuda"
-SWIPLPATH="/usr/local/lib/swipl"
+SWIPLPATH="/home/daiwz/.local/lib/swipl"
 CARGO_HOME="/home/daiwz/.cargo"
 GEM_HOME="/home/daiwz/.gem/ruby/2.7.0"
 
@@ -147,25 +149,16 @@ export TERM=xterm-256color
 
 # visual
 export VISUAL="emacs -Q -nw"
-
-PATH=$SCRIPTS_PATH:$CARGO_HOME/bin:$CUDAPATH/bin:$HOME/.local/bin/:$GEM_HOME/bin:$PATH
-
-LD_LIBRARY_PATH=$SWIPLPATH/lib/x86_64-linux:$CUDAPATH/include/:${HOME}/.local/include/:${HOME}/.local/lib:$HOME/.local/lib64/:$LD_LIBRARY_PATH
-
-LD_RUN_PATH=$CUDAPATH/lib64/:$LD_RUN_PATH
-
-PKG_CONFIG_PATH=$HOME/.local/lib/pkgconfig/:$HOME/.local/lib64/pkgconfig/:$PKG_CONFIG_PATH
-
-export PATH
-export LD_LIBRARY_PATH
-export LD_RUN_PATH
-export PKG_CONFIG_PATH
-export PYTHON_EGG_CACHE=/tmp/python-eggs/
-export OPENCV_LOG_LEVEL=ERROR
+export PATH="$SCRIPTS_PATH:$CARGO_HOME/bin:$CUDAPATH/bin:$HOME/.local/bin/:$GEM_HOME/bin:$PATH"
+export LD_LIBRARY_PATH="$SWIPLPATH/lib/x86_64-linux:$CUDAPATH/include/:${HOME}/.local/include/:${HOME}/.local/lib:$HOME/.local/lib64/:$LD_LIBRARY_PATH"
+export LD_RUN_PATH="$CUDAPATH/lib64/:$LD_RUN_PATH"
+export PKG_CONFIG_PATH="$HOME/.local/share/pkgconfig:$HOME/.local/lib/pkgconfig/:$HOME/.local/lib64/pkgconfig/:$PKG_CONFIG_PATH"
+export PYTHON_EGG_CACHE="/tmp/python-eggs/"
+export OPENCV_LOG_LEVEL="ERROR"
 
 # My alias
 # alias emacs='emacs -nw'
-alias pl='swipl'
+alias pl='LD_PRELOAD=/usr/lib/libc.so.6 swipl'
 alias jl='julia'
 alias sc='scheme'
 alias jlo='optirun julia'
@@ -175,6 +168,9 @@ alias f='fuck'
 # optimus
 PRIMUS_PREFIX="primusrun"
 OPTIMUS_PREFIX="optirun"
+
+# julia threading
+export JULIA_NUM_THREADS=32
 
 # spaceship promp
 autoload -U promptinit; promptinit
