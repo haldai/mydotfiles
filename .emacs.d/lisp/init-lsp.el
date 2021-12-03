@@ -23,6 +23,10 @@
         '("node"
           "/home/daiwz/.vscode-oss/extensions/dbaeumer.vscode-eslint-2.0.11/server/out/eslintServer.js"
           "--stdio"))
+  (setq gc-cons-threshold 100000000)
+  (setq read-process-output-max (* 1024 1024)) ;; 1mb
+  (setq lsp-idle-delay 0.500)
+
   (use-package lsp-clients
     :init
     (setq lsp-clients-python-library-directories '("/usr/local/" "/usr/"))))
