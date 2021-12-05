@@ -335,7 +335,8 @@
   ;; reveal
   (use-package ox-reveal
     :requires ob-julia
-    :straight (ox-reveal :type git :host github :repo "yjwen/org-reveal"))
+    :straight (ox-reveal :type git :host github :repo "yjwen/org-reveal")
+    :bind (("C-c \" R" . org-reveal-export-to-html-and-browse)))
   ;; (use-package emacs-reveal
   ;;   :straight (emacs-reveal :type git :host gitlab :repo "oer/emacs-reveal")))
 
