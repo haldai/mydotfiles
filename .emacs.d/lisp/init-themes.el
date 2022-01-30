@@ -307,8 +307,8 @@
   (setq x-gtk-use-system-tooltips nil))
 
 ;; transparent
-(set-frame-parameter (selected-frame) 'alpha '(95 . 70))
-(add-to-list 'default-frame-alist '(alpha . (95 . 70)))
+(set-frame-parameter (selected-frame) 'alpha '(100 . 95))
+(add-to-list 'default-frame-alist '(alpha . (100 . 95)))
 
 ;; keycast
 (use-package keycast
