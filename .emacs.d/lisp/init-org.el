@@ -77,6 +77,10 @@
             ("#+HEADER:" . ?)
             ("#+name:" . ?)
             ("#+NAME:" . ?)
+            ("#+begin_notes" . ?)
+            ("#+BEGIN_NOTES" . ?)
+            ("#+end_notes" . ?)
+            ("#+END_NOTES" . ?)
             ("#+results:" . ?)
             ("#+RESULTS:" . ?)
             ("#+call:" . ?)
@@ -223,8 +227,8 @@
 
   (add-to-list 'org-structure-template-alist '("d" . "src dot :file TMP.svg"))
   (add-to-list 'org-structure-template-alist '("jj" . "src jupyter-julia"))
+  (add-to-list 'org-structure-template-alist '("j" . "src julia :exports code :eval never"))
   (add-to-list 'org-structure-template-alist '("jp" . "src jupyter-python"))
-  (add-to-list 'org-structure-template-alist '("jl" . "src julia"))
   (add-to-list 'org-structure-template-alist '("ls" . "src latex :file TMP.svg :headers '(\"\\\\usepackage{tikz}\\\\n\\\\usepackage{xeCJK}\\\\n\") :results file raw"))
   (add-to-list 'org-structure-template-alist '("ln" . "src latex :file TMP.png :imagemagick yes :headers '(\"\\\\usepackage{tikz}\\\\n\\\\usepackage{xeCJK}\\\\n\") :iminoptions \"-density 600\" :results file raw"))
   (add-to-list 'org-structure-template-alist '("lp" . "src latex :file TMP.pdf :headers '(\"\\\\usepackage{tikz}\\\\n\\\\usepackage{xeCJK}\\\\n\") :results file raw"))
@@ -232,7 +236,7 @@
   (add-to-list 'org-structure-template-alist '("pl" . "src prolog"))
   (add-to-list 'org-structure-template-alist '("py" . "src python"))
   (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
-  (add-to-list 'org-structure-template-alist '("n"  . "src note"))
+  (add-to-list 'org-structure-template-alist '("n"  . "notes"))
 
   ;; default headers
   (setq org-babel-default-header-args
@@ -248,7 +252,7 @@
   ;; juypter-julia settings
   (setq org-babel-default-header-args:jupyter-julia '((:async . "yes")
                                                       (:session . "jl")
-                                                      (:kernel . "julia")
+                                                      (:kernel . "julia-1.7")
                                                       (:exports . "both")))
 
   ;; juypter-python settings
@@ -336,7 +340,8 @@
   (use-package ox-reveal
     :requires ob-julia
     :straight (ox-reveal :type git :host github :repo "yjwen/org-reveal")
-    :bind (("C-c \" R" . org-reveal-export-to-html-and-browse)))
+    :bind (("C-c \" B" . org-reveal-export-to-html-and-browse)
+           ("C-c \" R" . org-reveal-export-to-html)))
   ;; (use-package emacs-reveal
   ;;   :straight (emacs-reveal :type git :host gitlab :repo "oer/emacs-reveal")))
 
