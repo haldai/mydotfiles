@@ -77,6 +77,10 @@
             ("#+HEADER:" . ?)
             ("#+name:" . ?)
             ("#+NAME:" . ?)
+            ("#+begin_notes" . ?)
+            ("#+BEGIN_NOTES" . ?)
+            ("#+end_notes" . ?)
+            ("#+END_NOTES" . ?)
             ("#+results:" . ?)
             ("#+RESULTS:" . ?)
             ("#+call:" . ?)
@@ -232,7 +236,7 @@
   (add-to-list 'org-structure-template-alist '("pl" . "src prolog"))
   (add-to-list 'org-structure-template-alist '("py" . "src python"))
   (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
-  (add-to-list 'org-structure-template-alist '("n"  . "src note"))
+  (add-to-list 'org-structure-template-alist '("n"  . "notes"))
 
   ;; default headers
   (setq org-babel-default-header-args
