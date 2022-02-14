@@ -21,6 +21,7 @@
 (setq auto-window-vscroll nil)
 ;; (setq-default kill-whole-line t)           ; Kill line including '\n'
 (setq global-visual-line-mode t)
+(setq visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow))
 
 (setq-default major-mode 'text-mode)
 
