@@ -106,10 +106,10 @@
   :config
   ;; Disable in some modes
   (dolist (mode '(asm-mode web-mode html-mode css-mode robot-mode go-mode
-                           c-mode c++-mode csharp-mode))
+                           c-mode c++-mode csharp-mode julia-mode prolog-mode))
     (push mode aggressive-indent-excluded-modes))
 
-  ;; Be slightly less aggressive in C/C++/C#/Java/Go/Swift
+  ;; Be slightly less aggressive in C/C++/C#/Java/Go/Swift/Julia/Prolog
   (add-to-list
    'aggressive-indent-dont-indent-if
    '(and (or (derived-mode-p 'c-mode)
@@ -117,6 +117,8 @@
              (derived-mode-p 'csharp-mode)
              (derived-mode-p 'java-mode)
              (derived-mode-p 'go-mode)
+             (derived-mode-p 'prolog-mode)
+             (derived-mode-p 'julia-mode)
              (derived-mode-p 'swift-mode))
          (null (string-match "\\([;{}]\\|\\b\\(if\\|for\\|while\\)\\b\\)"
                              (thing-at-point 'line))))))
