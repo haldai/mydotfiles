@@ -28,8 +28,8 @@
         org-export-with-sub-superscripts '{})       ; don't treat lone _ / ^ as sub/superscripts, require _{} / ^{}
 
 
-  ;; (remove-hook 'text-mode-hook #'visual-line-mode)
-  ;; (add-hook 'text-mode-hook #'auto-fill-mode)
+  (add-hook 'text-mode-hook #'visual-line-mode)
+  (remove-hook 'text-mode-hook #'auto-fill-mode)
 
   ;; latex preview scale
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.0))
