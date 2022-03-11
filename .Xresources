@@ -1,10 +1,20 @@
-Xft.dpi: 96
-Xft.antialias: true
-Xft.hinting: true
+!Xft.dpi: 96
+!Xft.antialias: true
+!Xft.hinting: true
+!Xft.rgba: rgb
+!Xft.autohint: false
+!Xft.hintstyle: hintslight
+!Xft.lcdfilter: lcddefault
+
+Xft.dpi: 144
+
+! These might also be useful depending on your monitor and personal preference:
+Xft.autohint: 0
+Xft.lcdfilter:  lcddefault
+Xft.hintstyle:  hintfull
+Xft.hinting: 1
+Xft.antialias: 1
 Xft.rgba: rgb
-Xft.autohint: false
-Xft.hintstyle: hintslight
-Xft.lcdfilter: lcddefault
 
 *.foreground:   #DCDCCC
 *.background:   #3F3F3F
@@ -47,3 +57,4 @@ Xft.lcdfilter: lcddefault
 
 st.font: Sarasa Term SC:pixelsize=16:antialias=true:autohint=true,FontAwesome:pixelsize=16:antialias=true:autohint=true
 st.alpha: 240
+st.cursorColor: #FFFFEF
