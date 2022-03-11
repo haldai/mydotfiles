@@ -17,9 +17,9 @@ local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
 -- {{{ Main
 local theme = {
-   wallpapers = { os.getenv("HOME") .. "/.config/awesome/themes/zenburn/DD.jpg",
-                  os.getenv("HOME") .. "/.config/awesome/themes/zenburn/pw.jpg" },
-   wallpaper_scales = {1.00, 0.25}
+   wallpapers = { os.getenv("HOME") .. "/.config/awesome/themes/zenburn/pw.jpg",
+                  os.getenv("HOME") .. "/.config/awesome/themes/zenburn/DD.jpg"},
+   wallpaper_scales = {0.25, 1.5}
 }
 -- }}}
 
@@ -429,7 +429,7 @@ awful.widget.watch('bash -c "liquidctl status | tail -n 4 | grep -o \'[0-9.]\\+\
                             theme.pumpbar.widget:set_color(orange)
                          elseif pumpargs[3] < 90 and pumpargs[3] >= 70 then
                             theme.pumpbar.widget:set_color(white1)
-                         elseif pumpargs[3] < 70 and pumpargs[3] >= 30 then
+                         elseif pumpargs[3] < 70 and pumpargs[3] >= 10 then
                             theme.pumpbar.widget:set_color(blue1)
                          else
                             theme.pumpbar.widget:set_background_color(red1)
@@ -564,12 +564,12 @@ local netwidget = wibox.container.margin(netbg, 5, 8, 5, 5)
 
 -- {{{ Wibar
 local mylayouts = {
-   { lain.layout.centerwork, awful.layout.suit.tile, awful.layout.suit.tile,
-     awful.layout.suit.tile, awful.layout.suit.tile, awful.layout.suit.floating,
-     awful.layout.suit.tile, awful.layout.suit.tile, awful.layout.suit.tile },
    { awful.layout.suit.fair.horizontal, awful.layout.suit.fair.horizontal, awful.layout.suit.fair.horizontal,
      awful.layout.suit.fair.horizontal, awful.layout.suit.fair.horizontal, awful.layout.suit.fair.horizontal,
-     awful.layout.suit.fair.horizontal, awful.layout.suit.fair.horizontal, awful.layout.suit.fair.horizontal}
+     awful.layout.suit.fair.horizontal, awful.layout.suit.fair.horizontal, awful.layout.suit.fair.horizontal},
+   { lain.layout.centerwork, awful.layout.suit.tile, awful.layout.suit.tile,
+     awful.layout.suit.tile, awful.layout.suit.tile, awful.layout.suit.floating,
+     awful.layout.suit.tile, awful.layout.suit.tile, awful.layout.suit.tile }
 }
 
 function theme.at_screen_connect(s)
@@ -668,7 +668,7 @@ function theme.at_screen_connect(s)
       },
    }
    -- Create the wibox
-   s.mywibox = awful.wibar({ position = "top", height = 28, screen = s,
+   s.mywibox = awful.wibar({ position = "top", height = 36, screen = s,
                              bg = "#00000000",
                              border_width = 1,
                              border_color = "#00000000",
@@ -696,8 +696,8 @@ function theme.at_screen_connect(s)
          -- brightnesswidget,
          wibox.widget.textbox("<b>聲</b>"),
          volumewidget,
-         wibox.widget.textbox("<b>泵</b>"),
-         pumpwidget,
+         -- wibox.widget.textbox("<b>泵</b>"),
+         -- pumpwidget,
          wibox.widget.textbox("<b>溫</b>"),
          thermalwidget,
          gputhermalwidget,
