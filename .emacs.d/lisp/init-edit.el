@@ -384,6 +384,9 @@
 (defun insert-zero-width-space ()
   (interactive (insert "\u200B")))
 
+(defun insert-thin-space ()
+  (interactive (insert "\u2009")))
+
 (provide 'init-edit)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

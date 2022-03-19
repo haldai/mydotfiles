@@ -12,7 +12,8 @@
   :bind (:map org-mode-map
               ("C-c a" . org-agenda)
               ("C-c b" . org-switchb)
-              ("C-c SPC" . insert-zero-width-space))
+              ("C-c SPC" . insert-zero-width-space)
+              ("ESC SPC" . insert-thin-space))
   :hook ((org-indent-mode . (lambda () (diminish 'org-indent-mode)))
          (org-src-mode . display-line-numbers-mode)
          (org-mode . variable-pitch-mode))
@@ -32,7 +33,7 @@
   (remove-hook 'text-mode-hook #'auto-fill-mode)
 
   ;; latex preview scale
-  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.0))
+  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.8))
 
   ;; indent in source code block
   (setq org-src-tab-acts-natively t)
