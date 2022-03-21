@@ -60,10 +60,10 @@
   (use-package ob-prolog :straight t))
 
 ;; Potassco Answer Set Program
-(use-package pasp-mode
-  :straight (pasp-pmode :type git :host github :repo "llaisdy/pasp-mode")
-  :mode ("\\.lp\\'" . pasp-mode)
-  :hook (pasp-mode . (lambda () (aggressive-indent-mode -1))))
+(use-package clingo-mode
+  :straight (clingo-mode :type git :host github :repo "llaisdy/clingo-mode")
+  :mode ("\\.lp\\'" . clingo-mode)
+  :hook (clingo-mode . (lambda () (aggressive-indent-mode -1))))
 
 (provide 'init-prolog)
 
