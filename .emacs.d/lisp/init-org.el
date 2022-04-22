@@ -101,13 +101,23 @@
 
   (setq org-ditaa-jar-path "/usr/share/java/ditaa/ditaa-0.11.jar") ;; ditaa
 
+  (use-package websocket :straight t)
+  (use-package zmq :straight t)
+
   ;; jupyter mode
   (use-package jupyter
-    :straight t
+    :straight (emacs-jupyter :type git :host github :repo "nnicandro/emacs-jupyter")
     :bind (("C-c C-x r" . jupyter-repl-restart-kernel)
            ("C-c C-x h" . jupyter-org-restart-and-execute-to-point))
     :config
     (setq jupyter--debug t))
+
+  ;; ansi colors
+  (defun display-ansi-colors ()
+    (ansi-color-apply-on-region (point-min) (point-max)))
+
+  (add-hook 'org-babel-after-execute-hook #'display-ansi-colors)
+
 
   ;; use xelatex for latex export
   (add-to-list 'org-latex-packages-alist
@@ -223,8 +233,6 @@
 
   (org-babel-do-load-languages 'org-babel-load-languages
                                load-language-list)
-
-  (org-babel-jupyter-override-src-block "python")
 
   (add-to-list 'org-structure-template-alist '("d" . "src dot :file TMP.svg"))
   (add-to-list 'org-structure-template-alist '("jj" . "src jupyter-julia"))
