@@ -31,6 +31,11 @@
     :init
     (setq lsp-clients-python-library-directories '("/usr/local/" "/usr/"))))
 
+;; if you are ivy user
+(use-package lsp-ivy
+  :straight t
+  :commands lsp-ivy-workspace-symbol)
+
 (use-package lsp-julia
   ;; Make sure to install "pkg> dev LanguageServer"
   :straight (lsp-julia :type git :host github :repo "non-Jedi/lsp-julia")
