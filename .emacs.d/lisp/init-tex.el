@@ -29,6 +29,8 @@
   :config
   (use-package auctex-latexmk
     :straight t
+    :init
+    (require 'tex-buf nil t)
     :config
     (auctex-latexmk-setup))
 

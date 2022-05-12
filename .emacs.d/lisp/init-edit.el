@@ -328,6 +328,13 @@
       (error "File does not exist: %s" file))
     (vlf file)))
 
+;; meow
+;; (use-package meow
+;;   :straight t
+;;   :config
+;;   (meow-setup)
+;;   (meow-global-mode 1))
+
 ;; Input Method
 (use-package posframe
   :straight t)

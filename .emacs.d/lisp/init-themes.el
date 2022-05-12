@@ -17,7 +17,7 @@
 (defvar emacs-cjk-font "方正宋刻本秀楷"
   "The font name for CJK.")
 
-(defvar emacs-font-size-pair '(24 . 28)
+(defvar emacs-font-size-pair '(21 . 26)
   "Default font size pair for (english . chinese)")
 
 (defvar emacs-font-size-pair-list
@@ -72,7 +72,7 @@
 (defun restore-emacs-font-size ()
   "Restore emacs's font-size acording emacs-font-size-pair-list."
   (interactive)
-  (setq emacs-font-size-pair '(24 . 28))
+  (setq emacs-font-size-pair '(21 . 26))
   (when emacs-font-size-pair
     (message "emacs font size set to %.1f" (car emacs-font-size-pair))
     (set-font emacs-english-font emacs-cjk-font emacs-font-size-pair)))

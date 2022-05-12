@@ -19,6 +19,7 @@
          (org-mode . variable-pitch-mode))
   :init
   (use-package org-contrib :straight t)
+  (use-package simple-httpd :straight t)
   :config
   (setq org-directory "~/.org"                      ; let's put files here
         org-use-property-inheritance t              ; it's convenient to have properties inherited
