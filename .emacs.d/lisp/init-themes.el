@@ -14,7 +14,7 @@
 (defvar emacs-english-font "SauceCodePro Nerd Font Mono"
   "The font name of English.")
 
-(defvar emacs-cjk-font "方正宋刻本秀楷"
+(defvar emacs-cjk-font "方正屏显雅宋_GBK"
   "The font name for CJK.")
 
 (defvar emacs-font-size-pair '(15 . 20)

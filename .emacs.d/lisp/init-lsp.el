@@ -27,7 +27,7 @@
   (setq read-process-output-max (* 1024 1024)) ;; 1mb
   (setq lsp-idle-delay 0.500)
 
-  (add-to-list 'lsp-disabled-clients '((eslint . t)
+  (add-to-list 'lsp-disabled-clients '((emmet-ls . t)
                                        (html-ls . t)))
 
   (use-package lsp-clients

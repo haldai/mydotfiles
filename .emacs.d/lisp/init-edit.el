@@ -211,7 +211,8 @@
   (setq flyspell-issue-message-flag nil)
   (setq ispell-program-name "aspell")
   (setq ispell-list-command "--list")
-  (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_GB" " --dont-tex-check-comments" "--run-together")))
+  (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_GB" " --dont-tex-check-comments" "--run-together"))
+  (setq flyspell-issue-message-flag nil))
 
 ;; Hungry deletion
 (use-package hungry-delete
