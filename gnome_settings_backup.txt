@@ -1,0 +1,548 @@
+[Chess]
+height=672
+last-played-as='white'
+maximized=false
+width=822
+
+[Geary]
+migrated-config=true
+window-height=1048
+window-width=1920
+
+[boxes]
+first-run=false
+shared-folders="[<{'uuid': <'b62296d6-af31-4e37-b010-7102f02579e8'>, 'path': <'/home/daiwz/Downloads'>, 'name': <'Downloads'>}>]"
+view='icon-view'
+window-maximized=false
+window-position=[0, 0]
+window-size=[1920, 1048]
+
+[control-center]
+last-panel='wacom'
+window-state=(954, 1072, false)
+
+[desktop/a11y/applications]
+screen-reader-enabled=false
+
+[desktop/app-folders]
+folder-children=['Utilities', 'YaST']
+
+[desktop/app-folders/folders/Utilities]
+apps=['gnome-abrt.desktop', 'gnome-system-log.desktop', 'nm-connection-editor.desktop', 'org.gnome.baobab.desktop', 'org.gnome.Connections.desktop', 'org.gnome.DejaDup.desktop', 'org.gnome.Dictionary.desktop', 'org.gnome.DiskUtility.desktop', 'org.gnome.eog.desktop', 'org.gnome.Evince.desktop', 'org.gnome.FileRoller.desktop', 'org.gnome.fonts.desktop', 'org.gnome.seahorse.Application.desktop', 'org.gnome.tweaks.desktop', 'org.gnome.Usage.desktop', 'vinagre.desktop']
+categories=['X-GNOME-Utilities']
+name='X-GNOME-Utilities.directory'
+translate=true
+
+[desktop/app-folders/folders/YaST]
+categories=['X-SuSE-YaST']
+name='suse-yast.directory'
+translate=true
+
+[desktop/background]
+color-shading-type='solid'
+picture-options='zoom'
+picture-uri='file:///home/daiwz/.local/share/backgrounds/2022-05-17-00-19-14-DD.jpg'
+picture-uri-dark='file:///home/daiwz/.local/share/backgrounds/2022-05-17-00-19-14-DD.jpg'
+primary-color='#000000000000'
+secondary-color='#000000000000'
+
+[desktop/calendar]
+show-weekdate=false
+
+[desktop/input-sources]
+mru-sources=[('ibus', 'libpinyin'), ('xkb', 'us')]
+per-window=false
+sources=[('xkb', 'us')]
+xkb-options=@as []
+
+[desktop/interface]
+clock-show-weekday=true
+cursor-size=24
+cursor-theme='Paper'
+document-font-name='方正屏显雅宋_GBK 12'
+enable-animations=true
+enable-hot-corners=false
+font-antialiasing='rgba'
+font-hinting='medium'
+font-name='方正屏显雅宋_GBK 12'
+gtk-key-theme='Default'
+gtk-theme='Equilux'
+icon-theme='Numix-Circle'
+locate-pointer=false
+monospace-font-name='Noto Sans Mono 12'
+text-scaling-factor=1.0
+toolbar-style='text'
+
+[desktop/media-handling]
+autorun-never=true
+autorun-x-content-ignore=['x-content/audio-cdda', 'x-content/video-dvd', 'x-content/audio-player', 'x-content/image-dcf']
+autorun-x-content-open-folder=@as []
+autorun-x-content-start-app=['x-content/unix-software', 'x-content/ostree-repository']
+
+[desktop/notifications]
+application-children=['org-manjaro-pamac-manager', 'caffeine', 'google-chrome', 'baidunetdisk', 'xdg-desktop-portal-gtk', 'org-gnome-boxes', 'de-haeckerfelix-fragments', 'alacritty', 'teams', 'org-gnome-geary', 'com-qq-weixin-deepin', 'emacs', 'org-gnome-nautilus', 'org-gnome-chromegnomeshell']
+show-banners=false
+
+[desktop/notifications/application/alacritty]
+application-id='Alacritty.desktop'
+
+[desktop/notifications/application/baidunetdisk]
+application-id='baidunetdisk.desktop'
+
+[desktop/notifications/application/caffeine]
+application-id='caffeine.desktop'
+
+[desktop/notifications/application/com-qq-weixin-deepin]
+application-id='com.qq.weixin.deepin.desktop'
+
+[desktop/notifications/application/de-haeckerfelix-fragments]
+application-id='de.haeckerfelix.Fragments.desktop'
+
+[desktop/notifications/application/emacs]
+application-id='emacs.desktop'
+
+[desktop/notifications/application/google-chrome]
+application-id='google-chrome.desktop'
+
+[desktop/notifications/application/org-gnome-boxes]
+application-id='org.gnome.Boxes.desktop'
+
+[desktop/notifications/application/org-gnome-chromegnomeshell]
+application-id='org.gnome.ChromeGnomeShell.desktop'
+
+[desktop/notifications/application/org-gnome-geary]
+application-id='org.gnome.Geary.desktop'
+
+[desktop/notifications/application/org-gnome-nautilus]
+application-id='org.gnome.Nautilus.desktop'
+
+[desktop/notifications/application/org-manjaro-pamac-manager]
+application-id='org.manjaro.pamac.manager.desktop'
+
+[desktop/notifications/application/teams]
+application-id='teams.desktop'
+
+[desktop/notifications/application/xdg-desktop-portal-gtk]
+application-id='xdg-desktop-portal-gtk.desktop'
+
+[desktop/peripherals/mouse]
+accel-profile='default'
+
+[desktop/peripherals/tablets/056a:037a]
+output=['SGT', 'C FORCE', 'demoset-1']
+
+[desktop/peripherals/touchpad]
+two-finger-scrolling-enabled=true
+
+[desktop/privacy]
+disable-microphone=false
+
+[desktop/screensaver]
+color-shading-type='solid'
+picture-options='zoom'
+picture-uri='file:///home/daiwz/.local/share/backgrounds/2022-05-17-00-19-14-DD.jpg'
+primary-color='#000000000000'
+secondary-color='#000000000000'
+
+[desktop/search-providers]
+sort-order=['org.gnome.Contacts.desktop', 'org.gnome.Documents.desktop', 'org.gnome.Nautilus.desktop']
+
+[desktop/session]
+idle-delay=uint32 0
+
+[desktop/wm/keybindings]
+close=['<Shift><Super>q']
+cycle-windows=['<Super>w']
+cycle-windows-backward=['<Shift><Super>w']
+minimize=@as []
+move-to-monitor-down=@as []
+move-to-monitor-left=@as []
+move-to-workspace-1=['<Primary><Super>1']
+move-to-workspace-10=['<Shift><Super>0']
+move-to-workspace-2=['<Primary><Super>2']
+move-to-workspace-3=['<Primary><Super>3']
+move-to-workspace-4=['<Primary><Super>4']
+move-to-workspace-5=['<Shift><Super>5']
+move-to-workspace-6=['<Shift><Super>6']
+move-to-workspace-7=['<Shift><Super>7']
+move-to-workspace-8=['<Shift><Super>8']
+move-to-workspace-9=['<Shift><Super>9']
+move-to-workspace-left=['<Primary><Super>comma']
+move-to-workspace-right=['<Primary><Super>period']
+show-desktop=['<Super>z']
+switch-applications=['<Alt>Tab']
+switch-applications-backward=['<Shift><Alt>Tab']
+switch-input-source=@as []
+switch-input-source-backward=@as []
+switch-panels=@as []
+switch-panels-backward=@as []
+switch-to-workspace-1=['<Super>1']
+switch-to-workspace-10=['<Super>0']
+switch-to-workspace-2=['<Super>2']
+switch-to-workspace-3=['<Super>3']
+switch-to-workspace-4=['<Super>4']
+switch-to-workspace-5=['<Super>5']
+switch-to-workspace-6=['<Super>6']
+switch-to-workspace-7=['<Super>7']
+switch-to-workspace-8=['<Super>8']
+switch-to-workspace-9=['<Super>9']
+switch-to-workspace-left=['<Super>comma']
+switch-to-workspace-right=['<Super>period']
+switch-windows=['<Super>Tab']
+switch-windows-backward=['<Shift><Super>Tab']
+toggle-fullscreen=['<Super>equal']
+toggle-maximized=['<Super>j']
+
+[desktop/wm/preferences]
+button-layout='icon:minimize,maximize,close'
+num-workspaces=9
+titlebar-font='方正屏显雅宋_GBK 12'
+
+[evince/default]
+window-ratio=(2.9871645274212368, 0.10942312712085617)
+
+[evolution-data-server]
+migrated=true
+network-monitor-gio-name=''
+
+[file-roller/listing]
+list-mode='as-folder'
+name-column-width=456
+show-path=false
+sort-method='name'
+sort-type='ascending'
+
+[file-roller/ui]
+sidebar-width=200
+window-height=480
+window-width=600
+
+[gedit/plugins]
+active-plugins=['sort', 'spell', 'filebrowser', 'openlinks', 'docinfo', 'modelines']
+
+[gedit/plugins/filebrowser]
+root='file:///'
+tree-view=true
+virtual-root='file:///home/daiwz/.minecraft/mods'
+
+[gedit/preferences/ui]
+show-tabs-mode='auto'
+
+[gedit/state/window]
+bottom-panel-size=140
+side-panel-active-page='GeditWindowDocumentsPanel'
+side-panel-size=200
+size=(900, 700)
+state=87168
+
+[gnome-system-monitor]
+current-tab='resources'
+maximized=false
+network-total-in-bits=false
+show-dependencies=false
+show-whose-processes='user'
+window-state=(954, 518, 962, 526)
+
+[gnome-system-monitor/disktreenew]
+col-6-visible=true
+col-6-width=0
+
+[mutter]
+dynamic-workspaces=false
+overlay-key='Super_R'
+workspaces-only-on-primary=false
+
+[mutter/keybindings]
+toggle-tiled-left=['<Super>Left']
+toggle-tiled-right=['<Super>Right']
+
+[mutter/wayland/keybindings]
+restore-shortcuts=@as []
+
+[nautilus/preferences]
+default-folder-viewer='list-view'
+search-filter-time-type='last_modified'
+search-view='list-view'
+
+[nautilus/window-state]
+initial-size=(1920, 1080)
+maximized=false
+
+[settings-daemon/plugins/color]
+night-light-enabled=false
+
+[settings-daemon/plugins/media-keys]
+area-screenshot=@as []
+area-screenshot-clip=@as []
+custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom6/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom7/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom8/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom9/']
+help=@as []
+magnifier=@as []
+magnifier-zoom-in=@as []
+magnifier-zoom-out=@as []
+mic-mute=['Eject']
+screenreader=@as []
+screensaver=@as []
+screenshot=@as []
+screenshot-clip=@as []
+volume-down=['AudioLowerVolume']
+volume-mute=['AudioMute']
+volume-up=['AudioRaiseVolume']
+window-screenshot=@as []
+window-screenshot-clip=@as []
+
+[settings-daemon/plugins/media-keys/custom-keybindings/custom0]
+binding='<Super>Return'
+command='alacritty'
+name='Alacritty'
+
+[settings-daemon/plugins/media-keys/custom-keybindings/custom1]
+binding='<Super>F2'
+command='emacsclient -c -a emacs'
+name='Emacs client'
+
+[settings-daemon/plugins/media-keys/custom-keybindings/custom2]
+binding='<Super>F3'
+command='google-chrome-stable'
+name='Chrome'
+
+[settings-daemon/plugins/media-keys/custom-keybindings/custom3]
+binding='<Super>F5'
+command='nautilus'
+name='Nautilus'
+
+[settings-daemon/plugins/media-keys/custom-keybindings/custom4]
+binding='<Super>c'
+command='/home/daiwz/.scripts/myclip.sh'
+name='Greenclip'
+
+[settings-daemon/plugins/media-keys/custom-keybindings/custom5]
+binding='Print'
+command='flameshot full -c -p /home/daiwz/Pictures/Flameshot'
+name='Print full screen'
+
+[settings-daemon/plugins/media-keys/custom-keybindings/custom6]
+binding='<Super>Print'
+command='flameshot gui'
+name='Print screen'
+
+[settings-daemon/plugins/media-keys/custom-keybindings/custom7]
+binding='<Primary><Super>c'
+command='greenclip clear'
+name='Clear clip board'
+
+[settings-daemon/plugins/media-keys/custom-keybindings/custom8]
+binding='<Super>d'
+command='rofi -show'
+name='Rofi'
+
+[settings-daemon/plugins/media-keys/custom-keybindings/custom9]
+binding='<Super>e'
+command='/home/daiwz/.scripts/myexit'
+name='Exit menu'
+
+[settings-daemon/plugins/power]
+power-button-action='interactive'
+sleep-inactive-ac-type='nothing'
+
+[settings-daemon/plugins/sharing/gnome-user-share-webdav]
+enabled-connections=['44d2d415-4df8-4304-9db5-0199b9c1a6e8']
+
+[settings-daemon/plugins/sharing/rygel]
+enabled-connections=['44d2d415-4df8-4304-9db5-0199b9c1a6e8']
+
+[shell]
+command-history=['gnome-session-properties']
+disable-user-extensions=false
+disabled-extensions=['workspace-indicator@gnome-shell-extensions.gcampax.github.com', 'arcmenu@arcmenu.com', 'tiling-assistant@leleat-on-github', 'material-shell@papyelgringo', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'x11gestures@joseexposito.github.io', 'dash-to-dock@micxgx.gmail.com']
+enabled-extensions=['pamac-updates@manjaro.org', 'appindicatorsupport@rgcjonas.gmail.com', 'gnome-ui-tune@itstime.tech', 'drive-menu@gnome-shell-extensions.gcampax.github.com', 'pop-shell@system76.com', 'Additional_Workspace_Shortcuts@denis.voskvitsov.gmail.com', 'gnome-shell-go-to-last-workspace@github.com', 'dash-to-panel@jderose9.github.com']
+favorite-apps=['google-chrome.desktop', 'emacs.desktop', 'Alacritty.desktop', 'org.gnome.Nautilus.desktop']
+had-bluetooth-devices-setup=true
+welcome-dialog-last-shown-version='41.4'
+
+[shell/extensions/arcmenu]
+available-placement=[false, true, false]
+pinned-app-list=['Google Chrome', '', 'google-chrome.desktop', 'Files', '', 'org.gnome.Nautilus.desktop', 'Terminal', '', 'org.gnome.Terminal.desktop', 'ArcMenu Settings', 'ArcMenu_ArcMenuIcon', 'gnome-extensions prefs arcmenu@arcmenu.com']
+
+[shell/extensions/dash-to-dock]
+background-opacity=1.0
+dash-max-icon-size=48
+dock-position='BOTTOM'
+height-fraction=1.0
+preferred-monitor=-2
+preferred-monitor-by-connector='HDMI-0'
+
+[shell/extensions/dash-to-panel]
+animate-appicon-hover=true
+animate-appicon-hover-animation-extent={'RIPPLE': 4, 'PLANK': 4, 'SIMPLE': 1}
+app-ctrl-hotkey-1=['<Control><Alt><Super>1']
+app-ctrl-hotkey-10=['<Control><Alt><Super>0']
+app-ctrl-hotkey-2=['<Control><Alt><Super>2']
+app-ctrl-hotkey-3=['<Control><Alt><Super>3']
+app-ctrl-hotkey-4=['<Control><Alt><Super>4']
+app-ctrl-hotkey-5=['<Control><Alt><Super>5']
+app-ctrl-hotkey-6=['<Control><Alt><Super>6']
+app-ctrl-hotkey-7=['<Control><Alt><Super>7']
+app-ctrl-hotkey-8=['<Control><Alt><Super>8']
+app-ctrl-hotkey-9=['<Control><Alt><Super>9']
+app-ctrl-hotkey-kp-1=['<Control><Alt><Super>KP_1']
+app-ctrl-hotkey-kp-10=['<Control><Alt><Super>KP_0']
+app-ctrl-hotkey-kp-2=['<Control><Alt><Super>KP_2']
+app-ctrl-hotkey-kp-3=['<Control><Alt><Super>KP_3']
+app-ctrl-hotkey-kp-4=['<Control><Alt><Super>KP_4']
+app-ctrl-hotkey-kp-5=['<Control><Alt><Super>KP_5']
+app-ctrl-hotkey-kp-6=['<Control><Alt><Super>KP_6']
+app-ctrl-hotkey-kp-7=['<Control><Alt><Super>KP_7']
+app-ctrl-hotkey-kp-8=['<Control><Alt><Super>KP_8']
+app-ctrl-hotkey-kp-9=['<Control><Alt><Super>KP_9']
+app-hotkey-1=['<Alt><Super>1']
+app-hotkey-10=['<Alt><Super>0']
+app-hotkey-2=['<Alt><Super>2']
+app-hotkey-3=['<Alt><Super>3']
+app-hotkey-4=['<Alt><Super>4']
+app-hotkey-5=['<Alt><Super>5']
+app-hotkey-6=['<Alt><Super>6']
+app-hotkey-7=['<Alt><Super>7']
+app-hotkey-8=['<Alt><Super>8']
+app-hotkey-9=['<Alt><Super>9']
+app-hotkey-kp-1=['<Alt><Super>KP_1']
+app-hotkey-kp-10=['<Alt><Super>KP_0']
+app-hotkey-kp-2=['<Alt><Super>KP_2']
+app-hotkey-kp-3=['<Alt><Super>KP_3']
+app-hotkey-kp-4=['<Alt><Super>KP_4']
+app-hotkey-kp-5=['<Alt><Super>KP_5']
+app-hotkey-kp-6=['<Alt><Super>KP_6']
+app-hotkey-kp-7=['<Alt><Super>KP_7']
+app-hotkey-kp-8=['<Alt><Super>KP_8']
+app-hotkey-kp-9=['<Alt><Super>KP_9']
+app-shift-hotkey-1=['<Shift><Alt><Super>1']
+app-shift-hotkey-10=['<Shift><Alt><Super>0']
+app-shift-hotkey-2=['<Shift><Alt><Super>2']
+app-shift-hotkey-3=['<Shift><Alt><Super>3']
+app-shift-hotkey-4=['<Shift><Alt><Super>4']
+app-shift-hotkey-5=['<Shift><Alt><Super>5']
+app-shift-hotkey-6=['<Shift><Alt><Super>6']
+app-shift-hotkey-7=['<Shift><Alt><Super>7']
+app-shift-hotkey-8=['<Shift><Alt><Super>8']
+app-shift-hotkey-9=['<Shift><Alt><Super>9']
+app-shift-hotkey-kp-1=['<Shift><Alt><Super>KP_1']
+app-shift-hotkey-kp-10=['<Shift><Alt><Super>KP_0']
+app-shift-hotkey-kp-2=['<Shift><Alt><Super>KP_2']
+app-shift-hotkey-kp-3=['<Shift><Alt><Super>KP_3']
+app-shift-hotkey-kp-4=['<Shift><Alt><Super>KP_4']
+app-shift-hotkey-kp-5=['<Shift><Alt><Super>KP_5']
+app-shift-hotkey-kp-6=['<Shift><Alt><Super>KP_6']
+app-shift-hotkey-kp-7=['<Shift><Alt><Super>KP_7']
+app-shift-hotkey-kp-8=['<Shift><Alt><Super>KP_8']
+app-shift-hotkey-kp-9=['<Shift><Alt><Super>KP_9']
+appicon-margin=4
+appicon-padding=4
+available-monitors=[0]
+dot-style-focused='SQUARES'
+dot-style-unfocused='DOTS'
+hot-keys=true
+hotkey-prefix-text='SuperAlt'
+hotkeys-overlay-combo='TEMPORARILY'
+intellihide=true
+leftbox-padding=-1
+panel-anchors='{"0":"MIDDLE"}'
+panel-element-positions='{"0":[{"element":"showAppsButton","visible":false,"position":"stackedTL"},{"element":"activitiesButton","visible":false,"position":"stackedTL"},{"element":"leftBox","visible":false,"position":"stackedTL"},{"element":"taskbar","visible":true,"position":"stackedTL"},{"element":"centerBox","visible":false,"position":"stackedBR"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"dateMenu","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":false,"position":"stackedBR"}]}'
+panel-element-positions-monitors-sync=true
+panel-lengths='{"0":60}'
+panel-positions='{"0":"BOTTOM"}'
+panel-sizes='{"0":48}'
+primary-monitor=0
+progress-show-count=false
+show-appmenu=false
+show-favorites=true
+show-favorites-all-monitors=true
+show-running-apps=true
+status-icon-padding=-1
+taskbar-locked=false
+trans-bg-color='#000000'
+trans-panel-opacity=0.5
+trans-use-custom-bg=true
+trans-use-custom-gradient=false
+trans-use-custom-opacity=true
+trans-use-dynamic-opacity=false
+tray-padding=-1
+window-preview-title-position='TOP'
+
+[shell/extensions/go-to-last-workspace]
+shortcut-key=['<Super>k']
+
+[shell/extensions/materialshell/bindings]
+app-launcher=['<Super>d']
+focus-monitor-down=['']
+focus-monitor-left=['']
+focus-monitor-right=['']
+focus-monitor-up=['']
+last-workspace=['<Super>b']
+next-window=['<Super>n']
+next-workspace=['<Super>f']
+resize-window-down=['']
+resize-window-left=['']
+resize-window-right=['']
+resize-window-up=['']
+toggle-material-shell-ui=['']
+
+[shell/extensions/materialshell/layouts]
+default-layout='half'
+half-horizontal=true
+
+[shell/extensions/materialshell/theme]
+blur-background=false
+focus-effect='border'
+horizontal-panel-position='bottom'
+panel-size=50
+
+[shell/extensions/materialshell/tweaks]
+cycle-through-windows=true
+cycle-through-workspaces=true
+
+[shell/extensions/pop-shell]
+activate-launcher=['<Control><Super>d']
+focus-down=['<Super>n']
+focus-left=['<Super>b']
+focus-right=['<Super>f']
+focus-up=['<Super>p']
+gap-inner=uint32 1
+gap-outer=uint32 1
+pop-monitor-right=['<Shift><Super>f']
+pop-monitor-up=@as []
+pop-workspace-down=@as []
+show-title=false
+smart-gaps=true
+snap-to-grid=false
+tile-by-default=true
+tile-enter=['<Super>m']
+tile-move-down=['<Primary>n']
+tile-move-left=['<Primary>b']
+tile-move-right=['<Primary>f']
+tile-move-up=['<Primary>p']
+tile-swap-down=['<Primary><Super>n']
+tile-swap-left=['<Primary><Super>b']
+tile-swap-right=['<Primary><Super>f']
+tile-swap-up=['<Primary><Super>p']
+toggle-floating=['<Super>Escape']
+
+[shell/keybindings]
+focus-active-notification=@as []
+open-application-menu=@as []
+switch-to-application-1=@as []
+switch-to-application-2=@as []
+switch-to-application-3=@as []
+switch-to-application-4=@as []
+switch-to-application-5=['<Super>5']
+switch-to-application-6=['<Super>6']
+switch-to-application-7=['<Super>7']
+switch-to-application-8=['<Super>8']
+switch-to-application-9=['<Super>9']
+toggle-application-view=@as []
+toggle-message-tray=@as []
+toggle-overview=@as []
+
+[shell/world-clocks]
+locations=@av []
+
+[tweaks]
+show-extensions-notice=false
