@@ -1,15 +1,42 @@
-[Chess]
+[com/github/maoschanz/DynamicWallpaperEditor]
+display-mode='list'
+
+[de/haeckerfelix/Fragments]
+client-last-connection='00000000-0000-0000-0000-000000000000'
+window-height=822
+window-width=1022
+
+[desktop/ibus/general]
+preload-engines=['xkb:us::eng', 'libpinyin']
+version='1.5.25'
+
+[io/github/celluloid-player/celluloid]
+settings-migrated=true
+
+[io/github/celluloid-player/celluloid/window-state]
+height=801
+loop-playlist=false
+maximized=false
+playlist-width=250
+show-playlist=false
+volume=0.80000000000000004
+width=1280
+
+[net/launchpad/caffeine]
+show-notification=true
+
+[org/gnome/Chess]
 height=672
 last-played-as='white'
 maximized=false
 width=822
 
-[Geary]
+[org/gnome/Geary]
 migrated-config=true
 window-height=1048
 window-width=1920
 
-[boxes]
+[org/gnome/boxes]
 first-run=false
 shared-folders="[<{'uuid': <'b62296d6-af31-4e37-b010-7102f02579e8'>, 'path': <'/home/daiwz/Downloads'>, 'name': <'Downloads'>}>]"
 view='icon-view'
@@ -17,28 +44,28 @@ window-maximized=false
 window-position=[0, 0]
 window-size=[1920, 1048]
 
-[control-center]
-last-panel='wacom'
+[org/gnome/control-center]
+last-panel='default-apps'
 window-state=(954, 1072, false)
 
-[desktop/a11y/applications]
+[org/gnome/desktop/a11y/applications]
 screen-reader-enabled=false
 
-[desktop/app-folders]
+[org/gnome/desktop/app-folders]
 folder-children=['Utilities', 'YaST']
 
-[desktop/app-folders/folders/Utilities]
+[org/gnome/desktop/app-folders/folders/Utilities]
 apps=['gnome-abrt.desktop', 'gnome-system-log.desktop', 'nm-connection-editor.desktop', 'org.gnome.baobab.desktop', 'org.gnome.Connections.desktop', 'org.gnome.DejaDup.desktop', 'org.gnome.Dictionary.desktop', 'org.gnome.DiskUtility.desktop', 'org.gnome.eog.desktop', 'org.gnome.Evince.desktop', 'org.gnome.FileRoller.desktop', 'org.gnome.fonts.desktop', 'org.gnome.seahorse.Application.desktop', 'org.gnome.tweaks.desktop', 'org.gnome.Usage.desktop', 'vinagre.desktop']
 categories=['X-GNOME-Utilities']
 name='X-GNOME-Utilities.directory'
 translate=true
 
-[desktop/app-folders/folders/YaST]
+[org/gnome/desktop/app-folders/folders/YaST]
 categories=['X-SuSE-YaST']
 name='suse-yast.directory'
 translate=true
 
-[desktop/background]
+[org/gnome/desktop/background]
 color-shading-type='solid'
 picture-options='zoom'
 picture-uri='file:///home/daiwz/.local/share/backgrounds/2022-05-17-00-19-14-DD.jpg'
@@ -46,16 +73,16 @@ picture-uri-dark='file:///home/daiwz/.local/share/backgrounds/2022-05-17-00-19-1
 primary-color='#000000000000'
 secondary-color='#000000000000'
 
-[desktop/calendar]
+[org/gnome/desktop/calendar]
 show-weekdate=false
 
-[desktop/input-sources]
+[org/gnome/desktop/input-sources]
 mru-sources=[('ibus', 'libpinyin'), ('xkb', 'us')]
 per-window=false
 sources=[('xkb', 'us')]
 xkb-options=@as []
 
-[desktop/interface]
+[org/gnome/desktop/interface]
 clock-show-weekday=true
 cursor-size=24
 cursor-theme='Paper'
@@ -73,84 +100,97 @@ monospace-font-name='Noto Sans Mono 12'
 text-scaling-factor=1.0
 toolbar-style='text'
 
-[desktop/media-handling]
+[org/gnome/desktop/media-handling]
 autorun-never=true
 autorun-x-content-ignore=['x-content/audio-cdda', 'x-content/video-dvd', 'x-content/audio-player', 'x-content/image-dcf']
 autorun-x-content-open-folder=@as []
 autorun-x-content-start-app=['x-content/unix-software', 'x-content/ostree-repository']
 
-[desktop/notifications]
-application-children=['org-manjaro-pamac-manager', 'caffeine', 'google-chrome', 'baidunetdisk', 'xdg-desktop-portal-gtk', 'org-gnome-boxes', 'de-haeckerfelix-fragments', 'alacritty', 'teams', 'org-gnome-geary', 'com-qq-weixin-deepin', 'emacs', 'org-gnome-nautilus', 'org-gnome-chromegnomeshell']
+[org/gnome/desktop/notifications]
+application-children=['org-manjaro-pamac-manager', 'caffeine', 'google-chrome', 'baidunetdisk', 'xdg-desktop-portal-gtk', 'org-gnome-boxes', 'de-haeckerfelix-fragments', 'alacritty', 'teams', 'org-gnome-geary', 'com-qq-weixin-deepin', 'emacs', 'org-gnome-nautilus', 'org-gnome-chromegnomeshell', 'org-gnome-extensions-desktop', 'skypeforlinux', 'material-shell-papyelgringo']
 show-banners=false
 
-[desktop/notifications/application/alacritty]
+[org/gnome/desktop/notifications/application/alacritty]
 application-id='Alacritty.desktop'
 
-[desktop/notifications/application/baidunetdisk]
+[org/gnome/desktop/notifications/application/baidunetdisk]
 application-id='baidunetdisk.desktop'
 
-[desktop/notifications/application/caffeine]
+[org/gnome/desktop/notifications/application/caffeine]
 application-id='caffeine.desktop'
 
-[desktop/notifications/application/com-qq-weixin-deepin]
+[org/gnome/desktop/notifications/application/com-qq-weixin-deepin]
 application-id='com.qq.weixin.deepin.desktop'
 
-[desktop/notifications/application/de-haeckerfelix-fragments]
+[org/gnome/desktop/notifications/application/de-haeckerfelix-fragments]
 application-id='de.haeckerfelix.Fragments.desktop'
 
-[desktop/notifications/application/emacs]
+[org/gnome/desktop/notifications/application/emacs]
 application-id='emacs.desktop'
 
-[desktop/notifications/application/google-chrome]
+[org/gnome/desktop/notifications/application/google-chrome]
 application-id='google-chrome.desktop'
 
-[desktop/notifications/application/org-gnome-boxes]
+[org/gnome/desktop/notifications/application/material-shell-papyelgringo]
+application-id='material-shell@papyelgringo.desktop'
+
+[org/gnome/desktop/notifications/application/org-gnome-boxes]
 application-id='org.gnome.Boxes.desktop'
 
-[desktop/notifications/application/org-gnome-chromegnomeshell]
+[org/gnome/desktop/notifications/application/org-gnome-chromegnomeshell]
 application-id='org.gnome.ChromeGnomeShell.desktop'
 
-[desktop/notifications/application/org-gnome-geary]
+[org/gnome/desktop/notifications/application/org-gnome-extensions-desktop]
+application-id='org.gnome.Extensions.desktop.desktop'
+
+[org/gnome/desktop/notifications/application/org-gnome-geary]
 application-id='org.gnome.Geary.desktop'
 
-[desktop/notifications/application/org-gnome-nautilus]
+[org/gnome/desktop/notifications/application/org-gnome-nautilus]
 application-id='org.gnome.Nautilus.desktop'
 
-[desktop/notifications/application/org-manjaro-pamac-manager]
+[org/gnome/desktop/notifications/application/org-manjaro-pamac-manager]
 application-id='org.manjaro.pamac.manager.desktop'
 
-[desktop/notifications/application/teams]
+[org/gnome/desktop/notifications/application/skypeforlinux]
+application-id='skypeforlinux.desktop'
+
+[org/gnome/desktop/notifications/application/teams]
 application-id='teams.desktop'
 
-[desktop/notifications/application/xdg-desktop-portal-gtk]
+[org/gnome/desktop/notifications/application/xdg-desktop-portal-gtk]
 application-id='xdg-desktop-portal-gtk.desktop'
 
-[desktop/peripherals/mouse]
+[org/gnome/desktop/peripherals/mouse]
 accel-profile='default'
 
-[desktop/peripherals/tablets/056a:037a]
+[org/gnome/desktop/peripherals/tablets/056a:037a]
 output=['SGT', 'C FORCE', 'demoset-1']
 
-[desktop/peripherals/touchpad]
+[org/gnome/desktop/peripherals/touchpad]
 two-finger-scrolling-enabled=true
 
-[desktop/privacy]
+[org/gnome/desktop/privacy]
 disable-microphone=false
 
-[desktop/screensaver]
+[org/gnome/desktop/screensaver]
 color-shading-type='solid'
 picture-options='zoom'
 picture-uri='file:///home/daiwz/.local/share/backgrounds/2022-05-17-00-19-14-DD.jpg'
 primary-color='#000000000000'
 secondary-color='#000000000000'
 
-[desktop/search-providers]
+[org/gnome/desktop/search-providers]
 sort-order=['org.gnome.Contacts.desktop', 'org.gnome.Documents.desktop', 'org.gnome.Nautilus.desktop']
 
-[desktop/session]
+[org/gnome/desktop/session]
 idle-delay=uint32 0
 
-[desktop/wm/keybindings]
+[org/gnome/desktop/sound]
+event-sounds=true
+theme-name='__custom'
+
+[org/gnome/desktop/wm/keybindings]
 close=['<Shift><Super>q']
 cycle-windows=['<Super>w']
 cycle-windows-backward=['<Shift><Super>w']
@@ -193,85 +233,95 @@ switch-windows-backward=['<Shift><Super>Tab']
 toggle-fullscreen=['<Super>equal']
 toggle-maximized=['<Super>j']
 
-[desktop/wm/preferences]
+[org/gnome/desktop/wm/preferences]
+action-middle-click-titlebar='minimize'
+auto-raise=true
 button-layout='icon:minimize,maximize,close'
+focus-mode='sloppy'
 num-workspaces=9
 titlebar-font='方正屏显雅宋_GBK 12'
 
-[evince/default]
+[org/gnome/evince/default]
 window-ratio=(2.9871645274212368, 0.10942312712085617)
 
-[evolution-data-server]
+[org/gnome/evolution-data-server]
 migrated=true
 network-monitor-gio-name=''
 
-[file-roller/listing]
+[org/gnome/file-roller/listing]
 list-mode='as-folder'
 name-column-width=456
 show-path=false
 sort-method='name'
 sort-type='ascending'
 
-[file-roller/ui]
+[org/gnome/file-roller/ui]
 sidebar-width=200
 window-height=480
 window-width=600
 
-[gedit/plugins]
+[org/gnome/gedit/plugins]
 active-plugins=['sort', 'spell', 'filebrowser', 'openlinks', 'docinfo', 'modelines']
 
-[gedit/plugins/filebrowser]
+[org/gnome/gedit/plugins/filebrowser]
 root='file:///'
 tree-view=true
-virtual-root='file:///home/daiwz/.minecraft/mods'
+virtual-root='file:///home/daiwz/Documents/2021/Huawei/%E5%9C%BA%E6%99%AF2/Problog/exps/logic'
 
-[gedit/preferences/ui]
+[org/gnome/gedit/preferences/ui]
 show-tabs-mode='auto'
 
-[gedit/state/window]
+[org/gnome/gedit/state/window]
 bottom-panel-size=140
 side-panel-active-page='GeditWindowDocumentsPanel'
 side-panel-size=200
-size=(900, 700)
+size=(954, 486)
 state=87168
 
-[gnome-system-monitor]
+[org/gnome/gnome-system-monitor]
 current-tab='resources'
 maximized=false
 network-total-in-bits=false
 show-dependencies=false
 show-whose-processes='user'
-window-state=(954, 518, 962, 526)
+window-state=(954, 1072, 962, 4)
 
-[gnome-system-monitor/disktreenew]
+[org/gnome/gnome-system-monitor/disktreenew]
 col-6-visible=true
 col-6-width=0
 
-[mutter]
+[org/gnome/gnome-system-monitor/proctree]
+columns-order=[0, 1, 2, 3, 4, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26]
+sort-col=8
+sort-order=0
+
+[org/gnome/mutter]
+center-new-windows=false
 dynamic-workspaces=false
+edge-tiling=true
 overlay-key='Super_R'
 workspaces-only-on-primary=false
 
-[mutter/keybindings]
+[org/gnome/mutter/keybindings]
 toggle-tiled-left=['<Super>Left']
 toggle-tiled-right=['<Super>Right']
 
-[mutter/wayland/keybindings]
+[org/gnome/mutter/wayland/keybindings]
 restore-shortcuts=@as []
 
-[nautilus/preferences]
+[org/gnome/nautilus/preferences]
 default-folder-viewer='list-view'
 search-filter-time-type='last_modified'
 search-view='list-view'
 
-[nautilus/window-state]
+[org/gnome/nautilus/window-state]
 initial-size=(1920, 1080)
 maximized=false
 
-[settings-daemon/plugins/color]
+[org/gnome/settings-daemon/plugins/color]
 night-light-enabled=false
 
-[settings-daemon/plugins/media-keys]
+[org/gnome/settings-daemon/plugins/media-keys]
 area-screenshot=@as []
 area-screenshot-clip=@as []
 custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom6/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom7/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom8/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom9/']
@@ -290,80 +340,88 @@ volume-up=['AudioRaiseVolume']
 window-screenshot=@as []
 window-screenshot-clip=@as []
 
-[settings-daemon/plugins/media-keys/custom-keybindings/custom0]
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0]
 binding='<Super>Return'
 command='alacritty'
 name='Alacritty'
 
-[settings-daemon/plugins/media-keys/custom-keybindings/custom1]
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1]
 binding='<Super>F2'
 command='emacsclient -c -a emacs'
 name='Emacs client'
 
-[settings-daemon/plugins/media-keys/custom-keybindings/custom2]
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2]
 binding='<Super>F3'
 command='google-chrome-stable'
 name='Chrome'
 
-[settings-daemon/plugins/media-keys/custom-keybindings/custom3]
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3]
 binding='<Super>F5'
 command='nautilus'
 name='Nautilus'
 
-[settings-daemon/plugins/media-keys/custom-keybindings/custom4]
-binding='<Super>c'
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4]
 command='/home/daiwz/.scripts/myclip.sh'
 name='Greenclip'
 
-[settings-daemon/plugins/media-keys/custom-keybindings/custom5]
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom5]
 binding='Print'
 command='flameshot full -c -p /home/daiwz/Pictures/Flameshot'
 name='Print full screen'
 
-[settings-daemon/plugins/media-keys/custom-keybindings/custom6]
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom6]
 binding='<Super>Print'
 command='flameshot gui'
 name='Print screen'
 
-[settings-daemon/plugins/media-keys/custom-keybindings/custom7]
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom7]
 binding='<Primary><Super>c'
 command='greenclip clear'
 name='Clear clip board'
 
-[settings-daemon/plugins/media-keys/custom-keybindings/custom8]
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom8]
 binding='<Super>d'
 command='rofi -show'
 name='Rofi'
 
-[settings-daemon/plugins/media-keys/custom-keybindings/custom9]
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom9]
 binding='<Super>e'
 command='/home/daiwz/.scripts/myexit'
 name='Exit menu'
 
-[settings-daemon/plugins/power]
+[org/gnome/settings-daemon/plugins/power]
 power-button-action='interactive'
 sleep-inactive-ac-type='nothing'
 
-[settings-daemon/plugins/sharing/gnome-user-share-webdav]
+[org/gnome/settings-daemon/plugins/sharing/gnome-user-share-webdav]
 enabled-connections=['44d2d415-4df8-4304-9db5-0199b9c1a6e8']
 
-[settings-daemon/plugins/sharing/rygel]
+[org/gnome/settings-daemon/plugins/sharing/rygel]
 enabled-connections=['44d2d415-4df8-4304-9db5-0199b9c1a6e8']
 
-[shell]
+[org/gnome/shell]
 command-history=['gnome-session-properties']
 disable-user-extensions=false
 disabled-extensions=['workspace-indicator@gnome-shell-extensions.gcampax.github.com', 'arcmenu@arcmenu.com', 'tiling-assistant@leleat-on-github', 'material-shell@papyelgringo', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'x11gestures@joseexposito.github.io', 'dash-to-dock@micxgx.gmail.com']
-enabled-extensions=['pamac-updates@manjaro.org', 'appindicatorsupport@rgcjonas.gmail.com', 'gnome-ui-tune@itstime.tech', 'drive-menu@gnome-shell-extensions.gcampax.github.com', 'pop-shell@system76.com', 'Additional_Workspace_Shortcuts@denis.voskvitsov.gmail.com', 'gnome-shell-go-to-last-workspace@github.com', 'dash-to-panel@jderose9.github.com']
+enabled-extensions=['pamac-updates@manjaro.org', 'appindicatorsupport@rgcjonas.gmail.com', 'gnome-ui-tune@itstime.tech', 'drive-menu@gnome-shell-extensions.gcampax.github.com', 'pop-shell@system76.com', 'Additional_Workspace_Shortcuts@denis.voskvitsov.gmail.com', 'dash-to-panel@jderose9.github.com', 'gnome-shell-go-to-last-workspace@github.com', 'clipboard-history@alexsaveau.dev']
 favorite-apps=['google-chrome.desktop', 'emacs.desktop', 'Alacritty.desktop', 'org.gnome.Nautilus.desktop']
 had-bluetooth-devices-setup=true
 welcome-dialog-last-shown-version='41.4'
 
-[shell/extensions/arcmenu]
+[org/gnome/shell/extensions/arcmenu]
 available-placement=[false, true, false]
 pinned-app-list=['Google Chrome', '', 'google-chrome.desktop', 'Files', '', 'org.gnome.Nautilus.desktop', 'Terminal', '', 'org.gnome.Terminal.desktop', 'ArcMenu Settings', 'ArcMenu_ArcMenuIcon', 'gnome-extensions prefs arcmenu@arcmenu.com']
 
-[shell/extensions/dash-to-dock]
+[org/gnome/shell/extensions/clipboard-history]
+clear-history=['<Shift><Super>c']
+disable-down-arrow=true
+display-mode=3
+enable-keybindings=true
+next-entry=@as []
+prev-entry=@as []
+toggle-menu=['<Super>c']
+
+[org/gnome/shell/extensions/dash-to-dock]
 background-opacity=1.0
 dash-max-icon-size=48
 dock-position='BOTTOM'
@@ -371,7 +429,7 @@ height-fraction=1.0
 preferred-monitor=-2
 preferred-monitor-by-connector='HDMI-0'
 
-[shell/extensions/dash-to-panel]
+[org/gnome/shell/extensions/dash-to-panel]
 animate-appicon-hover=true
 animate-appicon-hover-animation-extent={'RIPPLE': 4, 'PLANK': 4, 'SIMPLE': 1}
 app-ctrl-hotkey-1=['<Control><Alt><Super>1']
@@ -437,13 +495,17 @@ app-shift-hotkey-kp-9=['<Shift><Alt><Super>KP_9']
 appicon-margin=4
 appicon-padding=4
 available-monitors=[0]
-dot-style-focused='SQUARES'
+dot-style-focused='DASHES'
 dot-style-unfocused='DOTS'
+group-apps=true
 hot-keys=true
 hotkey-prefix-text='SuperAlt'
 hotkeys-overlay-combo='TEMPORARILY'
 intellihide=true
+intellihide-use-pressure=true
 leftbox-padding=-1
+middle-click-action='LAUNCH'
+overview-click-to-exit=false
 panel-anchors='{"0":"MIDDLE"}'
 panel-element-positions='{"0":[{"element":"showAppsButton","visible":false,"position":"stackedTL"},{"element":"activitiesButton","visible":false,"position":"stackedTL"},{"element":"leftBox","visible":false,"position":"stackedTL"},{"element":"taskbar","visible":true,"position":"stackedTL"},{"element":"centerBox","visible":false,"position":"stackedBR"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"dateMenu","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":false,"position":"stackedBR"}]}'
 panel-element-positions-monitors-sync=true
@@ -452,25 +514,32 @@ panel-positions='{"0":"BOTTOM"}'
 panel-sizes='{"0":48}'
 primary-monitor=0
 progress-show-count=false
+secondarymenu-contains-showdetails=true
+shift-click-action='MINIMIZE'
+shift-middle-click-action='LAUNCH'
 show-appmenu=false
 show-favorites=true
 show-favorites-all-monitors=true
 show-running-apps=true
+show-window-previews-timeout=600
 status-icon-padding=-1
 taskbar-locked=false
 trans-bg-color='#000000'
-trans-panel-opacity=0.5
+trans-dynamic-anim-target=0.70000000000000007
+trans-gradient-bottom-opacity=0.5
+trans-gradient-top-color='#000000'
+trans-panel-opacity=0.0
 trans-use-custom-bg=true
 trans-use-custom-gradient=false
 trans-use-custom-opacity=true
-trans-use-dynamic-opacity=false
+trans-use-dynamic-opacity=true
 tray-padding=-1
 window-preview-title-position='TOP'
 
-[shell/extensions/go-to-last-workspace]
+[org/gnome/shell/extensions/go-to-last-workspace]
 shortcut-key=['<Super>k']
 
-[shell/extensions/materialshell/bindings]
+[org/gnome/shell/extensions/materialshell/bindings]
 app-launcher=['<Super>d']
 focus-monitor-down=['']
 focus-monitor-left=['']
@@ -485,21 +554,21 @@ resize-window-right=['']
 resize-window-up=['']
 toggle-material-shell-ui=['']
 
-[shell/extensions/materialshell/layouts]
+[org/gnome/shell/extensions/materialshell/layouts]
 default-layout='half'
 half-horizontal=true
 
-[shell/extensions/materialshell/theme]
+[org/gnome/shell/extensions/materialshell/theme]
 blur-background=false
 focus-effect='border'
 horizontal-panel-position='bottom'
 panel-size=50
 
-[shell/extensions/materialshell/tweaks]
+[org/gnome/shell/extensions/materialshell/tweaks]
 cycle-through-windows=true
 cycle-through-workspaces=true
 
-[shell/extensions/pop-shell]
+[org/gnome/shell/extensions/pop-shell]
 activate-launcher=['<Control><Super>d']
 focus-down=['<Super>n']
 focus-left=['<Super>b']
@@ -525,7 +594,7 @@ tile-swap-right=['<Primary><Super>f']
 tile-swap-up=['<Primary><Super>p']
 toggle-floating=['<Super>Escape']
 
-[shell/keybindings]
+[org/gnome/shell/keybindings]
 focus-active-notification=@as []
 open-application-menu=@as []
 switch-to-application-1=@as []
@@ -541,8 +610,51 @@ toggle-application-view=@as []
 toggle-message-tray=@as []
 toggle-overview=@as []
 
-[shell/world-clocks]
+[org/gnome/shell/world-clocks]
 locations=@av []
 
-[tweaks]
+[org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
+background-color='rgb(0,43,54)'
+foreground-color='rgb(131,148,150)'
+use-theme-colors=false
+
+[org/gnome/tweaks]
 show-extensions-notice=false
+
+[org/gtk/gtk4/settings/color-chooser]
+custom-colors=[(0.86274510622024536, 0.86274510622024536, 0.80000001192092896, 1.0)]
+selected-color=(true, 0.0, 0.0, 0.0, 1.0)
+
+[org/gtk/gtk4/settings/file-chooser]
+date-format='regular'
+location-mode='path-bar'
+show-hidden=false
+show-size-column=true
+show-type-column=true
+sidebar-width=150
+sort-column='name'
+sort-directories-first=false
+sort-order='ascending'
+type-format='category'
+window-size=(1920, 1080)
+
+[org/gtk/settings/color-chooser]
+custom-colors=[(0.17647058823529413, 0.49019607843137253, 0.70196078431372544, 1.0), (0.6705882352941176, 0.094117647058823528, 0.32156862745098042, 1.0)]
+selected-color=(true, 0.17647058823529413, 0.49019607843137253, 0.70196078431372544, 1.0)
+
+[org/gtk/settings/file-chooser]
+date-format='regular'
+location-mode='path-bar'
+show-hidden=false
+show-size-column=true
+show-type-column=true
+sidebar-width=148
+sort-column='name'
+sort-directories-first=true
+sort-order='ascending'
+type-format='category'
+window-position=(359, 65)
+window-size=(1203, 902)
+
+[org/gtkhash/plugin]
+hash-functions=['MD5', 'SHA1', 'SHA256', 'CRC32']

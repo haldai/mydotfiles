@@ -22,7 +22,17 @@
   (use-package live-py-mode :straight t)
   (use-package py-autopep8
     :straight t
-    :hook (python-mode . py-autopep8-enable-on-save)))
+    :hook (python-mode . py-autopep8-enable-on-save))
+
+  ;; lsp-pyright
+  (use-package lsp-pyright
+    :straight t
+    :ensure t
+    :hook (python-mode . (lambda ()
+                           (require 'lsp-pyright)
+                           (lsp))))  ; or lsp-deferred
+
+  )
 
 (provide 'init-python)
 
