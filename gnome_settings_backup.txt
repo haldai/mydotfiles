@@ -92,6 +92,7 @@ sources=[('xkb', 'us')]
 xkb-options=@as []
 
 [org/gnome/desktop/interface]
+clock-show-seconds=false
 clock-show-weekday=true
 color-scheme='prefer-dark'
 cursor-size=24
@@ -420,10 +421,10 @@ enabled-connections=['44d2d415-4df8-4304-9db5-0199b9c1a6e8']
 enabled-connections=['44d2d415-4df8-4304-9db5-0199b9c1a6e8']
 
 [org/gnome/shell]
-command-history=['gnome-session-properties']
+command-history=['gnome-session-properties', 'r']
 disable-user-extensions=false
-disabled-extensions=['arcmenu@arcmenu.com', 'tiling-assistant@leleat-on-github', 'material-shell@papyelgringo', 'x11gestures@joseexposito.github.io', 'pamac-updates@manjaro.org', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'dash-to-panel@jderose9.github.com']
-enabled-extensions=['appindicatorsupport@rgcjonas.gmail.com', 'gnome-ui-tune@itstime.tech', 'drive-menu@gnome-shell-extensions.gcampax.github.com', 'pop-shell@system76.com', 'Additional_Workspace_Shortcuts@denis.voskvitsov.gmail.com', 'gnome-shell-go-to-last-workspace@github.com', 'clipboard-history@alexsaveau.dev', 'auto-move-windows@gnome-shell-extensions.gcampax.github.com', 'workspace-indicator@gnome-shell-extensions.gcampax.github.com', 'dash-to-dock@micxgx.gmail.com']
+disabled-extensions=['arcmenu@arcmenu.com', 'tiling-assistant@leleat-on-github', 'material-shell@papyelgringo', 'x11gestures@joseexposito.github.io', 'pamac-updates@manjaro.org', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'dash-to-dock@micxgx.gmail.com']
+enabled-extensions=['appindicatorsupport@rgcjonas.gmail.com', 'gnome-ui-tune@itstime.tech', 'drive-menu@gnome-shell-extensions.gcampax.github.com', 'pop-shell@system76.com', 'Additional_Workspace_Shortcuts@denis.voskvitsov.gmail.com', 'gnome-shell-go-to-last-workspace@github.com', 'clipboard-history@alexsaveau.dev', 'auto-move-windows@gnome-shell-extensions.gcampax.github.com', 'workspace-indicator@gnome-shell-extensions.gcampax.github.com', 'dash-to-panel@jderose9.github.com']
 favorite-apps=['google-chrome.desktop', 'emacs.desktop', 'Alacritty.desktop', 'org.gnome.Nautilus.desktop']
 had-bluetooth-devices-setup=true
 welcome-dialog-last-shown-version='41.4'
@@ -472,6 +473,7 @@ shortcut=['<Super>q']
 shortcut-text='<Super>q'
 shortcut-timeout=2.0
 show-mounts=false
+show-show-apps-button=false
 show-trash=false
 transparency-mode='DYNAMIC'
 
@@ -549,7 +551,7 @@ hotkey-prefix-text='SuperAlt'
 hotkeys-overlay-combo='TEMPORARILY'
 intellihide=true
 intellihide-hide-from-windows=true
-intellihide-use-pressure=false
+intellihide-use-pressure=true
 leftbox-padding=-1
 middle-click-action='LAUNCH'
 overview-click-to-exit=false
@@ -640,6 +642,9 @@ tile-swap-left=['<Primary><Super>b']
 tile-swap-right=['<Primary><Super>f']
 tile-swap-up=['<Primary><Super>p']
 toggle-floating=['<Super>Escape']
+
+[org/gnome/shell/extensions/user-theme]
+name='Equilux-compact'
 
 [org/gnome/shell/keybindings]
 focus-active-notification=@as []
