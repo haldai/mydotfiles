@@ -1,10 +1,10 @@
 [ca/desrt/dconf-editor]
-saved-pathbar-path='/org/gnome/shell/extensions/wsmatrix/num-rows'
-saved-view='/org/gnome/shell/extensions/wsmatrix/'
+saved-pathbar-path='/org/gnome/shell/extensions/window-list/'
+saved-view='/org/gnome/shell/extensions/'
 show-warning=false
-window-height=1032
+window-height=1024
 window-is-maximized=false
-window-width=1920
+window-width=954
 
 [com/github/maoschanz/DynamicWallpaperEditor]
 display-mode='list'
@@ -57,8 +57,8 @@ window-size=[1920, 1048]
 burst-delay=1000
 
 [org/gnome/control-center]
-last-panel='keyboard'
-window-state=(954, 1072, false)
+last-panel='wifi'
+window-state=(954, 534, false)
 
 [org/gnome/desktop/a11y/applications]
 screen-reader-enabled=false
@@ -261,7 +261,7 @@ button-layout='icon:minimize,maximize,close'
 focus-mode='sloppy'
 num-workspaces=9
 titlebar-font='方正屏显雅宋_GBK 12'
-workspace-names=@as []
+workspace-names=['壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖']
 
 [org/gnome/evince/default]
 window-ratio=(2.9871645274212368, 0.10942312712085617)
@@ -424,8 +424,8 @@ enabled-connections=['44d2d415-4df8-4304-9db5-0199b9c1a6e8']
 [org/gnome/shell]
 command-history=['gnome-session-properties', 'r']
 disable-user-extensions=false
-disabled-extensions=['arcmenu@arcmenu.com', 'tiling-assistant@leleat-on-github', 'material-shell@papyelgringo', 'x11gestures@joseexposito.github.io', 'pamac-updates@manjaro.org', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'dash-to-dock@micxgx.gmail.com', 'workspace-indicator@gnome-shell-extensions.gcampax.github.com']
-enabled-extensions=['appindicatorsupport@rgcjonas.gmail.com', 'gnome-ui-tune@itstime.tech', 'drive-menu@gnome-shell-extensions.gcampax.github.com', 'pop-shell@system76.com', 'Additional_Workspace_Shortcuts@denis.voskvitsov.gmail.com', 'gnome-shell-go-to-last-workspace@github.com', 'clipboard-history@alexsaveau.dev', 'auto-move-windows@gnome-shell-extensions.gcampax.github.com', 'dash-to-panel@jderose9.github.com', 'wsmatrix@martin.zurowietz.de']
+disabled-extensions=['arcmenu@arcmenu.com', 'tiling-assistant@leleat-on-github', 'material-shell@papyelgringo', 'x11gestures@joseexposito.github.io', 'pamac-updates@manjaro.org', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'dash-to-dock@micxgx.gmail.com', 'TopIcons@phocean.net', 'unite@hardpixel.eu', 'window-list@gnome-shell-extensions.gcampax.github.com', 'windowsNavigator@gnome-shell-extensions.gcampax.github.com', 'workspace-indicator@gnome-shell-extensions.gcampax.github.com']
+enabled-extensions=['appindicatorsupport@rgcjonas.gmail.com', 'gnome-ui-tune@itstime.tech', 'drive-menu@gnome-shell-extensions.gcampax.github.com', 'pop-shell@system76.com', 'Additional_Workspace_Shortcuts@denis.voskvitsov.gmail.com', 'gnome-shell-go-to-last-workspace@github.com', 'clipboard-history@alexsaveau.dev', 'auto-move-windows@gnome-shell-extensions.gcampax.github.com', 'dash-to-panel@jderose9.github.com', 'improved-workspace-indicator@michaelaquilina.github.io', 'wsmatrix@martin.zurowietz.de', 'workspace-indicator-mod@hal9001']
 favorite-apps=['emacsclient.desktop', 'google-chrome.desktop', 'Alacritty.desktop', 'org.gnome.Nautilus.desktop']
 had-bluetooth-devices-setup=true
 welcome-dialog-last-shown-version='41.4'
@@ -558,9 +558,9 @@ leftbox-padding=-1
 middle-click-action='LAUNCH'
 overview-click-to-exit=false
 panel-anchors='{"0":"MIDDLE"}'
-panel-element-positions='{"0":[{"element":"showAppsButton","visible":false,"position":"stackedTL"},{"element":"activitiesButton","visible":false,"position":"stackedTL"},{"element":"leftBox","visible":false,"position":"stackedTL"},{"element":"taskbar","visible":true,"position":"stackedTL"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"centerBox","visible":false,"position":"stackedBR"},{"element":"dateMenu","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":false,"position":"stackedBR"}]}'
+panel-element-positions='{"0":[{"element":"showAppsButton","visible":false,"position":"stackedTL"},{"element":"activitiesButton","visible":false,"position":"stackedTL"},{"element":"leftBox","visible":true,"position":"stackedTL"},{"element":"taskbar","visible":true,"position":"centerMonitor"},{"element":"centerBox","visible":false,"position":"stackedBR"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"dateMenu","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":false,"position":"stackedBR"}]}'
 panel-element-positions-monitors-sync=true
-panel-lengths='{"0":60}'
+panel-lengths='{"0":100}'
 panel-positions='{"0":"BOTTOM"}'
 panel-sizes='{"0":48}'
 primary-monitor=0
@@ -574,6 +574,8 @@ show-favorites-all-monitors=true
 show-running-apps=true
 show-window-previews-timeout=600
 status-icon-padding=-1
+stockgs-keep-dash=false
+stockgs-keep-top-panel=false
 taskbar-locked=false
 trans-bg-color='#3f3f3f'
 trans-dynamic-anim-target=0.70000000000000007
@@ -589,6 +591,11 @@ window-preview-title-position='TOP'
 
 [org/gnome/shell/extensions/go-to-last-workspace]
 shortcut-key=['<Super>k']
+
+[org/gnome/shell/extensions/improved-workspace-indicator]
+change-on-click=true
+panel-position='right'
+skip-taskbar-mode=true
 
 [org/gnome/shell/extensions/materialshell/bindings]
 app-launcher=['<Super>d']
@@ -646,6 +653,14 @@ tile-swap-left=['<Primary><Super>b']
 tile-swap-right=['<Primary><Super>f']
 tile-swap-up=['<Primary><Super>p']
 toggle-floating=['<Super>Escape']
+
+[org/gnome/shell/extensions/unite]
+autofocus-windows=true
+enable-titlebar-actions=true
+extend-left-box=true
+greyscale-tray-icons=false
+show-desktop-name=true
+show-legacy-tray=true
 
 [org/gnome/shell/extensions/user-theme]
 name='Equilux-compact'
