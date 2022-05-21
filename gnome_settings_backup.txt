@@ -1,3 +1,11 @@
+[ca/desrt/dconf-editor]
+saved-pathbar-path='/org/gnome/desktop/wm/keybindings/move-to-workspace-down'
+saved-view='/org/gnome/'
+show-warning=false
+window-height=1000
+window-is-maximized=false
+window-width=1920
+
 [com/github/maoschanz/DynamicWallpaperEditor]
 display-mode='list'
 
@@ -33,7 +41,8 @@ width=822
 
 [org/gnome/Geary]
 migrated-config=true
-window-height=1048
+window-height=1080
+window-maximize=false
 window-width=1920
 
 [org/gnome/boxes]
@@ -45,8 +54,8 @@ window-position=[0, 0]
 window-size=[1920, 1048]
 
 [org/gnome/control-center]
-last-panel='default-apps'
-window-state=(954, 1072, false)
+last-panel='keyboard'
+window-state=(1920, 1048, false)
 
 [org/gnome/desktop/a11y/applications]
 screen-reader-enabled=false
@@ -84,6 +93,7 @@ xkb-options=@as []
 
 [org/gnome/desktop/interface]
 clock-show-weekday=true
+color-scheme='prefer-dark'
 cursor-size=24
 cursor-theme='Paper'
 document-font-name='方正屏显雅宋_GBK 12'
@@ -96,7 +106,7 @@ gtk-key-theme='Default'
 gtk-theme='Equilux'
 icon-theme='Numix-Circle'
 locate-pointer=false
-monospace-font-name='Noto Sans Mono 12'
+monospace-font-name='SauceCodePro Nerd Font Mono 12'
 text-scaling-factor=1.0
 toolbar-style='text'
 
@@ -107,7 +117,7 @@ autorun-x-content-open-folder=@as []
 autorun-x-content-start-app=['x-content/unix-software', 'x-content/ostree-repository']
 
 [org/gnome/desktop/notifications]
-application-children=['org-manjaro-pamac-manager', 'caffeine', 'google-chrome', 'baidunetdisk', 'xdg-desktop-portal-gtk', 'org-gnome-boxes', 'de-haeckerfelix-fragments', 'alacritty', 'teams', 'org-gnome-geary', 'com-qq-weixin-deepin', 'emacs', 'org-gnome-nautilus', 'org-gnome-chromegnomeshell', 'org-gnome-extensions-desktop', 'skypeforlinux', 'material-shell-papyelgringo']
+application-children=['org-manjaro-pamac-manager', 'caffeine', 'google-chrome', 'baidunetdisk', 'xdg-desktop-portal-gtk', 'org-gnome-boxes', 'de-haeckerfelix-fragments', 'alacritty', 'teams', 'org-gnome-geary', 'com-qq-weixin-deepin', 'emacs', 'org-gnome-nautilus', 'org-gnome-chromegnomeshell', 'org-gnome-extensions-desktop', 'skypeforlinux', 'material-shell-papyelgringo', 'ca-desrt-dconf-editor']
 show-banners=false
 
 [org/gnome/desktop/notifications/application/alacritty]
@@ -115,6 +125,9 @@ application-id='Alacritty.desktop'
 
 [org/gnome/desktop/notifications/application/baidunetdisk]
 application-id='baidunetdisk.desktop'
+
+[org/gnome/desktop/notifications/application/ca-desrt-dconf-editor]
+application-id='ca.desrt.dconf-editor.desktop'
 
 [org/gnome/desktop/notifications/application/caffeine]
 application-id='caffeine.desktop'
@@ -161,6 +174,9 @@ application-id='teams.desktop'
 [org/gnome/desktop/notifications/application/xdg-desktop-portal-gtk]
 application-id='xdg-desktop-portal-gtk.desktop'
 
+[org/gnome/desktop/notifications/application/yelp]
+enable=false
+
 [org/gnome/desktop/peripherals/mouse]
 accel-profile='default'
 
@@ -197,16 +213,19 @@ cycle-windows-backward=['<Shift><Super>w']
 minimize=@as []
 move-to-monitor-down=@as []
 move-to-monitor-left=@as []
+move-to-monitor-right=@as []
 move-to-workspace-1=['<Primary><Super>1']
 move-to-workspace-10=['<Shift><Super>0']
 move-to-workspace-2=['<Primary><Super>2']
 move-to-workspace-3=['<Primary><Super>3']
 move-to-workspace-4=['<Primary><Super>4']
-move-to-workspace-5=['<Shift><Super>5']
-move-to-workspace-6=['<Shift><Super>6']
-move-to-workspace-7=['<Shift><Super>7']
-move-to-workspace-8=['<Shift><Super>8']
-move-to-workspace-9=['<Shift><Super>9']
+move-to-workspace-5=['<Primary><Super>5']
+move-to-workspace-6=['<Primary><Super>6']
+move-to-workspace-7=['<Primary><Super>7']
+move-to-workspace-8=['<Primary><Super>8']
+move-to-workspace-9=['<Primary><Super>9']
+move-to-workspace-down=@as []
+move-to-workspace-last=@as []
 move-to-workspace-left=['<Primary><Super>comma']
 move-to-workspace-right=['<Primary><Super>period']
 show-desktop=['<Super>z']
@@ -240,6 +259,7 @@ button-layout='icon:minimize,maximize,close'
 focus-mode='sloppy'
 num-workspaces=9
 titlebar-font='方正屏显雅宋_GBK 12'
+workspace-names=@as []
 
 [org/gnome/evince/default]
 window-ratio=(2.9871645274212368, 0.10942312712085617)
@@ -402,8 +422,8 @@ enabled-connections=['44d2d415-4df8-4304-9db5-0199b9c1a6e8']
 [org/gnome/shell]
 command-history=['gnome-session-properties']
 disable-user-extensions=false
-disabled-extensions=['workspace-indicator@gnome-shell-extensions.gcampax.github.com', 'arcmenu@arcmenu.com', 'tiling-assistant@leleat-on-github', 'material-shell@papyelgringo', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'x11gestures@joseexposito.github.io', 'dash-to-dock@micxgx.gmail.com']
-enabled-extensions=['pamac-updates@manjaro.org', 'appindicatorsupport@rgcjonas.gmail.com', 'gnome-ui-tune@itstime.tech', 'drive-menu@gnome-shell-extensions.gcampax.github.com', 'pop-shell@system76.com', 'Additional_Workspace_Shortcuts@denis.voskvitsov.gmail.com', 'dash-to-panel@jderose9.github.com', 'gnome-shell-go-to-last-workspace@github.com', 'clipboard-history@alexsaveau.dev']
+disabled-extensions=['arcmenu@arcmenu.com', 'tiling-assistant@leleat-on-github', 'material-shell@papyelgringo', 'x11gestures@joseexposito.github.io', 'pamac-updates@manjaro.org', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'dash-to-panel@jderose9.github.com']
+enabled-extensions=['appindicatorsupport@rgcjonas.gmail.com', 'gnome-ui-tune@itstime.tech', 'drive-menu@gnome-shell-extensions.gcampax.github.com', 'pop-shell@system76.com', 'Additional_Workspace_Shortcuts@denis.voskvitsov.gmail.com', 'gnome-shell-go-to-last-workspace@github.com', 'clipboard-history@alexsaveau.dev', 'auto-move-windows@gnome-shell-extensions.gcampax.github.com', 'workspace-indicator@gnome-shell-extensions.gcampax.github.com', 'dash-to-dock@micxgx.gmail.com']
 favorite-apps=['google-chrome.desktop', 'emacs.desktop', 'Alacritty.desktop', 'org.gnome.Nautilus.desktop']
 had-bluetooth-devices-setup=true
 welcome-dialog-last-shown-version='41.4'
@@ -412,22 +432,48 @@ welcome-dialog-last-shown-version='41.4'
 available-placement=[false, true, false]
 pinned-app-list=['Google Chrome', '', 'google-chrome.desktop', 'Files', '', 'org.gnome.Nautilus.desktop', 'Terminal', '', 'org.gnome.Terminal.desktop', 'ArcMenu Settings', 'ArcMenu_ArcMenuIcon', 'gnome-extensions prefs arcmenu@arcmenu.com']
 
+[org/gnome/shell/extensions/auto-move-windows]
+application-list=['google-chrome.desktop:3', 'qqmusic.desktop:6', 'com.qq.music.deepin.desktop:6', 'wemeetapp.desktop:4', 'com.qq.weixin.deepin.desktop:6', 'skypeforlinux.desktop:4', 'Zhumu.desktop:4', 'steam.desktop:9', 'Zoom.desktop:4', 'teams.desktop:4']
+
 [org/gnome/shell/extensions/clipboard-history]
 clear-history=['<Shift><Super>c']
 disable-down-arrow=true
 display-mode=3
 enable-keybindings=true
 next-entry=@as []
+paste-on-selection=false
 prev-entry=@as []
 toggle-menu=['<Super>c']
 
 [org/gnome/shell/extensions/dash-to-dock]
+apply-custom-theme=false
+background-color='rgb(63,63,63)'
 background-opacity=1.0
+custom-theme-shrink=false
+customize-alphas=true
 dash-max-icon-size=48
 dock-position='BOTTOM'
+extend-height=false
 height-fraction=1.0
+hot-keys=false
+hotkeys-overlay=true
+hotkeys-show-dock=true
+icon-size-fixed=true
+intellihide-mode='ALL_WINDOWS'
+isolate-monitors=false
+max-alpha=0.55000000000000004
+min-alpha=0.0
 preferred-monitor=-2
 preferred-monitor-by-connector='HDMI-0'
+running-indicator-style='SEGMENTED'
+scroll-action='switch-workspace'
+scroll-to-focused-application=true
+shortcut=['<Super>q']
+shortcut-text='<Super>q'
+shortcut-timeout=2.0
+show-mounts=false
+show-trash=false
+transparency-mode='DYNAMIC'
 
 [org/gnome/shell/extensions/dash-to-panel]
 animate-appicon-hover=true
@@ -502,7 +548,8 @@ hot-keys=true
 hotkey-prefix-text='SuperAlt'
 hotkeys-overlay-combo='TEMPORARILY'
 intellihide=true
-intellihide-use-pressure=true
+intellihide-hide-from-windows=true
+intellihide-use-pressure=false
 leftbox-padding=-1
 middle-click-action='LAUNCH'
 overview-click-to-exit=false
@@ -601,11 +648,11 @@ switch-to-application-1=@as []
 switch-to-application-2=@as []
 switch-to-application-3=@as []
 switch-to-application-4=@as []
-switch-to-application-5=['<Super>5']
-switch-to-application-6=['<Super>6']
-switch-to-application-7=['<Super>7']
-switch-to-application-8=['<Super>8']
-switch-to-application-9=['<Super>9']
+switch-to-application-5=@as []
+switch-to-application-6=@as []
+switch-to-application-7=@as []
+switch-to-application-8=@as []
+switch-to-application-9=@as []
 toggle-application-view=@as []
 toggle-message-tray=@as []
 toggle-overview=@as []
@@ -622,8 +669,8 @@ use-theme-colors=false
 show-extensions-notice=false
 
 [org/gtk/gtk4/settings/color-chooser]
-custom-colors=[(0.86274510622024536, 0.86274510622024536, 0.80000001192092896, 1.0)]
-selected-color=(true, 0.0, 0.0, 0.0, 1.0)
+custom-colors=[(0.24705882370471954, 0.24705882370471954, 0.24705882370471954, 1.0), (0.86274510622024536, 0.86274510622024536, 0.80000001192092896, 1.0)]
+selected-color=(true, 0.24705882370471954, 0.24705882370471954, 0.24705882370471954, 1.0)
 
 [org/gtk/gtk4/settings/file-chooser]
 date-format='regular'
@@ -658,3 +705,6 @@ window-size=(1203, 902)
 
 [org/gtkhash/plugin]
 hash-functions=['MD5', 'SHA1', 'SHA256', 'CRC32']
+
+[system/proxy]
+mode='none'
