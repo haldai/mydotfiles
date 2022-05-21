@@ -1,8 +1,8 @@
 [ca/desrt/dconf-editor]
-saved-pathbar-path='/org/gnome/desktop/wm/keybindings/move-to-workspace-down'
-saved-view='/org/gnome/'
+saved-pathbar-path='/org/gnome/shell/extensions/wsmatrix/num-rows'
+saved-view='/org/gnome/shell/extensions/wsmatrix/'
 show-warning=false
-window-height=1000
+window-height=1032
 window-is-maximized=false
 window-width=1920
 
@@ -22,13 +22,13 @@ version='1.5.25'
 settings-migrated=true
 
 [io/github/celluloid-player/celluloid/window-state]
-height=801
+height=534
 loop-playlist=false
 maximized=false
 playlist-width=250
 show-playlist=false
 volume=0.80000000000000004
-width=1280
+width=954
 
 [net/launchpad/caffeine]
 show-notification=true
@@ -53,9 +53,12 @@ window-maximized=false
 window-position=[0, 0]
 window-size=[1920, 1048]
 
+[org/gnome/cheese]
+burst-delay=1000
+
 [org/gnome/control-center]
 last-panel='keyboard'
-window-state=(1920, 1048, false)
+window-state=(954, 1072, false)
 
 [org/gnome/desktop/a11y/applications]
 screen-reader-enabled=false
@@ -209,8 +212,6 @@ theme-name='__custom'
 
 [org/gnome/desktop/wm/keybindings]
 close=['<Shift><Super>q']
-cycle-windows=['<Super>w']
-cycle-windows-backward=['<Shift><Super>w']
 minimize=@as []
 move-to-monitor-down=@as []
 move-to-monitor-left=@as []
@@ -300,7 +301,7 @@ size=(954, 486)
 state=87168
 
 [org/gnome/gnome-system-monitor]
-current-tab='resources'
+current-tab='processes'
 maximized=false
 network-total-in-bits=false
 show-dependencies=false
@@ -423,9 +424,9 @@ enabled-connections=['44d2d415-4df8-4304-9db5-0199b9c1a6e8']
 [org/gnome/shell]
 command-history=['gnome-session-properties', 'r']
 disable-user-extensions=false
-disabled-extensions=['arcmenu@arcmenu.com', 'tiling-assistant@leleat-on-github', 'material-shell@papyelgringo', 'x11gestures@joseexposito.github.io', 'pamac-updates@manjaro.org', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'dash-to-dock@micxgx.gmail.com']
-enabled-extensions=['appindicatorsupport@rgcjonas.gmail.com', 'gnome-ui-tune@itstime.tech', 'drive-menu@gnome-shell-extensions.gcampax.github.com', 'pop-shell@system76.com', 'Additional_Workspace_Shortcuts@denis.voskvitsov.gmail.com', 'gnome-shell-go-to-last-workspace@github.com', 'clipboard-history@alexsaveau.dev', 'auto-move-windows@gnome-shell-extensions.gcampax.github.com', 'workspace-indicator@gnome-shell-extensions.gcampax.github.com', 'dash-to-panel@jderose9.github.com']
-favorite-apps=['google-chrome.desktop', 'emacs.desktop', 'Alacritty.desktop', 'org.gnome.Nautilus.desktop']
+disabled-extensions=['arcmenu@arcmenu.com', 'tiling-assistant@leleat-on-github', 'material-shell@papyelgringo', 'x11gestures@joseexposito.github.io', 'pamac-updates@manjaro.org', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'dash-to-dock@micxgx.gmail.com', 'workspace-indicator@gnome-shell-extensions.gcampax.github.com']
+enabled-extensions=['appindicatorsupport@rgcjonas.gmail.com', 'gnome-ui-tune@itstime.tech', 'drive-menu@gnome-shell-extensions.gcampax.github.com', 'pop-shell@system76.com', 'Additional_Workspace_Shortcuts@denis.voskvitsov.gmail.com', 'gnome-shell-go-to-last-workspace@github.com', 'clipboard-history@alexsaveau.dev', 'auto-move-windows@gnome-shell-extensions.gcampax.github.com', 'dash-to-panel@jderose9.github.com', 'wsmatrix@martin.zurowietz.de']
+favorite-apps=['emacsclient.desktop', 'google-chrome.desktop', 'Alacritty.desktop', 'org.gnome.Nautilus.desktop']
 had-bluetooth-devices-setup=true
 welcome-dialog-last-shown-version='41.4'
 
@@ -546,17 +547,18 @@ available-monitors=[0]
 dot-style-focused='DASHES'
 dot-style-unfocused='DOTS'
 group-apps=true
-hot-keys=true
+hot-keys=false
 hotkey-prefix-text='SuperAlt'
 hotkeys-overlay-combo='TEMPORARILY'
 intellihide=true
 intellihide-hide-from-windows=true
 intellihide-use-pressure=true
+isolate-workspaces=false
 leftbox-padding=-1
 middle-click-action='LAUNCH'
 overview-click-to-exit=false
 panel-anchors='{"0":"MIDDLE"}'
-panel-element-positions='{"0":[{"element":"showAppsButton","visible":false,"position":"stackedTL"},{"element":"activitiesButton","visible":false,"position":"stackedTL"},{"element":"leftBox","visible":false,"position":"stackedTL"},{"element":"taskbar","visible":true,"position":"stackedTL"},{"element":"centerBox","visible":false,"position":"stackedBR"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"dateMenu","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":false,"position":"stackedBR"}]}'
+panel-element-positions='{"0":[{"element":"showAppsButton","visible":false,"position":"stackedTL"},{"element":"activitiesButton","visible":false,"position":"stackedTL"},{"element":"leftBox","visible":false,"position":"stackedTL"},{"element":"taskbar","visible":true,"position":"stackedTL"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"centerBox","visible":false,"position":"stackedBR"},{"element":"dateMenu","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":false,"position":"stackedBR"}]}'
 panel-element-positions-monitors-sync=true
 panel-lengths='{"0":60}'
 panel-positions='{"0":"BOTTOM"}'
@@ -573,7 +575,7 @@ show-running-apps=true
 show-window-previews-timeout=600
 status-icon-padding=-1
 taskbar-locked=false
-trans-bg-color='#000000'
+trans-bg-color='#3f3f3f'
 trans-dynamic-anim-target=0.70000000000000007
 trans-gradient-bottom-opacity=0.5
 trans-gradient-top-color='#000000'
@@ -619,12 +621,14 @@ cycle-through-workspaces=true
 
 [org/gnome/shell/extensions/pop-shell]
 activate-launcher=['<Control><Super>d']
+active-hint=false
 focus-down=['<Super>n']
 focus-left=['<Super>b']
 focus-right=['<Super>f']
 focus-up=['<Super>p']
 gap-inner=uint32 1
 gap-outer=uint32 1
+hint-color-rgba='rgb(220,220,204)'
 pop-monitor-right=['<Shift><Super>f']
 pop-monitor-up=@as []
 pop-workspace-down=@as []
@@ -645,6 +649,20 @@ toggle-floating=['<Super>Escape']
 
 [org/gnome/shell/extensions/user-theme]
 name='Equilux-compact'
+
+[org/gnome/shell/extensions/wsmatrix]
+enable-popup-workspace-hover=false
+multi-monitor=false
+num-columns=3
+num-rows=3
+show-overview-grid=false
+show-thumbnails=true
+show-workspace-names=false
+workspace-overview-down=['<Control>N']
+workspace-overview-left=['<Control>B']
+workspace-overview-right=['<Control>F']
+workspace-overview-up=['<Control>P']
+wraparound-mode='none'
 
 [org/gnome/shell/keybindings]
 focus-active-notification=@as []
@@ -691,8 +709,8 @@ type-format='category'
 window-size=(1920, 1080)
 
 [org/gtk/settings/color-chooser]
-custom-colors=[(0.17647058823529413, 0.49019607843137253, 0.70196078431372544, 1.0), (0.6705882352941176, 0.094117647058823528, 0.32156862745098042, 1.0)]
-selected-color=(true, 0.17647058823529413, 0.49019607843137253, 0.70196078431372544, 1.0)
+custom-colors=[(0.86274509803921573, 0.86274509803921573, 0.80000000000000004, 1.0), (0.0, 0.52941176470588236, 0.52941176470588236, 1.0), (0.17647058823529413, 0.49019607843137253, 0.70196078431372544, 1.0), (0.6705882352941176, 0.094117647058823528, 0.32156862745098042, 1.0)]
+selected-color=(true, 0.86274509803921573, 0.86274509803921573, 0.80000000000000004, 1.0)
 
 [org/gtk/settings/file-chooser]
 date-format='regular'
