@@ -6,6 +6,19 @@ window-height=1024
 window-is-maximized=false
 window-width=954
 
+[com/github/amezin/ddterm]
+background-color='rgb(63,63,63)'
+bold-is-bright=false
+custom-font='Sarasa Fixed SC 12'
+ddterm-toggle-hotkey=['<Super>F1']
+foreground-color='rgb(220,220,204)'
+hide-window-on-esc=false
+palette=['rgb(63,63,63)', 'rgb(204,147,147)', 'rgb(127,159,127)', 'rgb(240,223,175)', 'rgb(140,208,211)', 'rgb(220,140,195)', 'rgb(147,224,227)', 'rgb(220,220,204)', 'rgb(127,127,127)', 'rgb(156,99,99)', 'rgb(95,127,95)', 'rgb(208,191,143)', 'rgb(148,191,243)', 'rgb(203,123,178)', 'rgb(130,207,210)', 'rgb(255,255,239)']
+panel-icon-type='menu-button'
+theme-variant='dark'
+use-system-font=false
+use-theme-colors=false
+
 [com/github/maoschanz/DynamicWallpaperEditor]
 display-mode='list'
 
@@ -58,7 +71,7 @@ burst-delay=1000
 
 [org/gnome/control-center]
 last-panel='wifi'
-window-state=(954, 534, false)
+window-state=(1920, 1080, false)
 
 [org/gnome/desktop/a11y/applications]
 screen-reader-enabled=false
@@ -425,7 +438,7 @@ enabled-connections=['44d2d415-4df8-4304-9db5-0199b9c1a6e8']
 command-history=['gnome-session-properties', 'r']
 disable-user-extensions=false
 disabled-extensions=['arcmenu@arcmenu.com', 'tiling-assistant@leleat-on-github', 'material-shell@papyelgringo', 'x11gestures@joseexposito.github.io', 'pamac-updates@manjaro.org', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'dash-to-dock@micxgx.gmail.com', 'TopIcons@phocean.net', 'unite@hardpixel.eu', 'window-list@gnome-shell-extensions.gcampax.github.com', 'windowsNavigator@gnome-shell-extensions.gcampax.github.com', 'workspace-indicator@gnome-shell-extensions.gcampax.github.com']
-enabled-extensions=['appindicatorsupport@rgcjonas.gmail.com', 'gnome-ui-tune@itstime.tech', 'drive-menu@gnome-shell-extensions.gcampax.github.com', 'pop-shell@system76.com', 'Additional_Workspace_Shortcuts@denis.voskvitsov.gmail.com', 'gnome-shell-go-to-last-workspace@github.com', 'clipboard-history@alexsaveau.dev', 'auto-move-windows@gnome-shell-extensions.gcampax.github.com', 'dash-to-panel@jderose9.github.com', 'improved-workspace-indicator@michaelaquilina.github.io', 'wsmatrix@martin.zurowietz.de', 'workspace-indicator-mod@hal9001']
+enabled-extensions=['appindicatorsupport@rgcjonas.gmail.com', 'gnome-ui-tune@itstime.tech', 'drive-menu@gnome-shell-extensions.gcampax.github.com', 'pop-shell@system76.com', 'Additional_Workspace_Shortcuts@denis.voskvitsov.gmail.com', 'gnome-shell-go-to-last-workspace@github.com', 'clipboard-history@alexsaveau.dev', 'auto-move-windows@gnome-shell-extensions.gcampax.github.com', 'dash-to-panel@jderose9.github.com', 'improved-workspace-indicator@michaelaquilina.github.io', 'wsmatrix@martin.zurowietz.de', 'workspace-indicator-mod@hal9001', 'ddterm@amezin.github.com']
 favorite-apps=['emacsclient.desktop', 'google-chrome.desktop', 'Alacritty.desktop', 'org.gnome.Nautilus.desktop']
 had-bluetooth-devices-setup=true
 welcome-dialog-last-shown-version='41.4'
@@ -672,7 +685,7 @@ num-columns=3
 num-rows=3
 show-overview-grid=false
 show-thumbnails=true
-show-workspace-names=false
+show-workspace-names=true
 workspace-overview-down=['<Control>N']
 workspace-overview-left=['<Control>B']
 workspace-overview-right=['<Control>F']
@@ -707,8 +720,8 @@ use-theme-colors=false
 show-extensions-notice=false
 
 [org/gtk/gtk4/settings/color-chooser]
-custom-colors=[(0.24705882370471954, 0.24705882370471954, 0.24705882370471954, 1.0), (0.86274510622024536, 0.86274510622024536, 0.80000001192092896, 1.0)]
-selected-color=(true, 0.24705882370471954, 0.24705882370471954, 0.24705882370471954, 1.0)
+custom-colors=[(1.0, 1.0, 0.93725490570068359, 1.0), (0.86274510622024536, 0.86274510622024536, 0.80000001192092896, 1.0), (0.98039215803146362, 0.92156863212585449, 0.84313726425170898, 1.0), (0.50980395078659058, 0.81176471710205078, 0.82352942228317261, 1.0), (0.0, 1.0, 1.0, 1.0), (0.57647061347961426, 0.87843137979507446, 0.89019608497619629, 1.0), (0.0, 0.80392158031463623, 0.80392158031463623, 1.0), (0.79607844352722168, 0.48235294222831726, 0.69803923368453979, 1.0)]
+selected-color=(true, 1.0, 1.0, 0.93725490570068359, 1.0)
 
 [org/gtk/gtk4/settings/file-chooser]
 date-format='regular'
