@@ -1,10 +1,10 @@
 [ca/desrt/dconf-editor]
-saved-pathbar-path='/org/gnome/shell/extensions/window-list/'
-saved-view='/org/gnome/shell/extensions/'
+saved-pathbar-path='/org/gnome/shell/extensions/wsmatrix/workspace-overview-toggle'
+saved-view='/org/gnome/shell/extensions/wsmatrix/workspace-overview-toggle'
 show-warning=false
-window-height=1024
+window-height=1032
 window-is-maximized=false
-window-width=954
+window-width=1920
 
 [com/github/amezin/ddterm]
 background-color='rgb(63,63,63)'
@@ -689,6 +689,7 @@ show-workspace-names=true
 workspace-overview-down=['<Control>N']
 workspace-overview-left=['<Control>B']
 workspace-overview-right=['<Control>F']
+workspace-overview-toggle=['<Super>w']
 workspace-overview-up=['<Control>P']
 wraparound-mode='none'
 
