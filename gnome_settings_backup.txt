@@ -6,6 +6,22 @@ window-height=1032
 window-is-maximized=false
 window-width=1920
 
+[com/github/Ory0n/Resource_Monitor]
+cpustatus=true
+diskdeviceslist=['dev /dev false false', '/dev/nvme0n1p1 / false false', '/dev/nvme0n1p2 /home false false', '/dev/nvme0n1p3 /boot/efi false false']
+diskspacestatus=false
+diskstatsmode='multiple'
+diskstatsstatus=false
+extensionposition='right'
+iconsposition='left'
+iconsstatus=true
+leftclickstatus='gnome-system-monitor'
+netautohidestatus=true
+rightclickstatus=true
+swapstatus=false
+thermalcputemperaturedeviceslist=['acpitz: temp1-false-/sys/class/hwmon/hwmon0/temp1_input', 'acpitz: temp2-false-/sys/class/hwmon/hwmon0/temp2_input', 'nvme: Composite-false-/sys/class/hwmon/hwmon1/temp1_input', 'iwlwifi_1: temp1-false-/sys/class/hwmon/hwmon2/temp1_input', 'coretemp: Package id 0-false-/sys/class/hwmon/hwmon3/temp1_input', 'coretemp: Core 0-false-/sys/class/hwmon/hwmon3/temp2_input', 'coretemp: Core 1-false-/sys/class/hwmon/hwmon3/temp3_input', 'coretemp: Core 2-false-/sys/class/hwmon/hwmon3/temp4_input', 'coretemp: Core 3-false-/sys/class/hwmon/hwmon3/temp5_input', 'coretemp: Core 4-false-/sys/class/hwmon/hwmon3/temp6_input', 'coretemp: Core 5-false-/sys/class/hwmon/hwmon3/temp7_input']
+thermalcputemperaturestatus=false
+
 [com/github/amezin/ddterm]
 background-color='rgb(63,63,63)'
 bold-is-bright=false
@@ -62,11 +78,11 @@ window-width=1920
 
 [org/gnome/boxes]
 first-run=false
-shared-folders="[<{'uuid': <'b62296d6-af31-4e37-b010-7102f02579e8'>, 'path': <'/home/daiwz/Downloads'>, 'name': <'Downloads'>}>]"
+shared-folders="[<{'uuid': <'b62296d6-af31-4e37-b010-7102f02579e8'>, 'path': <'/home/daiwz/Downloads'>, 'name': <'Downloads'>}>, <{'uuid': <'b62296d6-af31-4e37-b010-7102f02579e8'>, 'path': <'/home/daiwz/Games'>, 'name': <'Games'>}>]"
 view='icon-view'
 window-maximized=false
-window-position=[0, 0]
-window-size=[1920, 1048]
+window-position=[962, 4]
+window-size=[954, 534]
 
 [org/gnome/cheese]
 burst-delay=1000
@@ -78,8 +94,8 @@ video-x-resolution=1280
 video-y-resolution=960
 
 [org/gnome/control-center]
-last-panel='sound'
-window-state=(1920, 1080, false)
+last-panel='bluetooth'
+window-state=(954, 1072, false)
 
 [org/gnome/desktop/a11y/applications]
 screen-reader-enabled=false
@@ -96,6 +112,30 @@ translate=true
 [org/gnome/desktop/app-folders/folders/YaST]
 categories=['X-SuSE-YaST']
 name='suse-yast.directory'
+translate=true
+
+[org/gnome/desktop/app-folders/folders/accessories]
+apps=['yad-icon-browser.desktop', 'de.haeckerfelix.Fragments.desktop']
+categories=['Utility']
+excluded-apps=['gnome-layouts.desktop', 'manjaro-documentation.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Maps.desktop']
+name='Accessories'
+translate=true
+
+[org/gnome/desktop/app-folders/folders/games]
+categories=['Game']
+name='Games'
+translate=true
+
+[org/gnome/desktop/app-folders/folders/office]
+categories=['Office']
+name='Office'
+translate=true
+
+[org/gnome/desktop/app-folders/folders/system-tools]
+apps=['qvidcap.desktop', 'qv4l2.desktop', 'bssh.desktop', 'bvnc.desktop', 'hp-uiscan.desktop']
+categories=['System', 'Settings']
+excluded-apps=['org.manjaro.pamac.manager.desktop']
+name='System Tools'
 translate=true
 
 [org/gnome/desktop/background]
@@ -142,7 +182,7 @@ autorun-x-content-open-folder=@as []
 autorun-x-content-start-app=['x-content/unix-software', 'x-content/ostree-repository']
 
 [org/gnome/desktop/notifications]
-application-children=['org-manjaro-pamac-manager', 'caffeine', 'google-chrome', 'baidunetdisk', 'xdg-desktop-portal-gtk', 'org-gnome-boxes', 'de-haeckerfelix-fragments', 'alacritty', 'teams', 'org-gnome-geary', 'com-qq-weixin-deepin', 'emacs', 'org-gnome-nautilus', 'org-gnome-chromegnomeshell', 'org-gnome-extensions-desktop', 'skypeforlinux', 'material-shell-papyelgringo', 'ca-desrt-dconf-editor', 'emacsclient', 'org-kde-okular', 'com-github-xournalpp-xournalpp', 'gnome-system-monitor', 'steam']
+application-children=['org-manjaro-pamac-manager', 'caffeine', 'google-chrome', 'baidunetdisk', 'xdg-desktop-portal-gtk', 'org-gnome-boxes', 'de-haeckerfelix-fragments', 'alacritty', 'teams', 'org-gnome-geary', 'com-qq-weixin-deepin', 'emacs', 'org-gnome-nautilus', 'org-gnome-chromegnomeshell', 'org-gnome-extensions-desktop', 'skypeforlinux', 'material-shell-papyelgringo', 'ca-desrt-dconf-editor', 'emacsclient', 'org-kde-okular', 'com-github-xournalpp-xournalpp', 'gnome-system-monitor', 'steam', 'org-gnome-fileroller', 'manjaro-settings-manager', 'pavucontrol']
 show-banners=false
 
 [org/gnome/desktop/notifications/application/alacritty]
@@ -178,6 +218,9 @@ application-id='gnome-system-monitor.desktop'
 [org/gnome/desktop/notifications/application/google-chrome]
 application-id='google-chrome.desktop'
 
+[org/gnome/desktop/notifications/application/manjaro-settings-manager]
+application-id='manjaro-settings-manager.desktop'
+
 [org/gnome/desktop/notifications/application/material-shell-papyelgringo]
 application-id='material-shell@papyelgringo.desktop'
 
@@ -190,6 +233,9 @@ application-id='org.gnome.ChromeGnomeShell.desktop'
 [org/gnome/desktop/notifications/application/org-gnome-extensions-desktop]
 application-id='org.gnome.Extensions.desktop.desktop'
 
+[org/gnome/desktop/notifications/application/org-gnome-fileroller]
+application-id='org.gnome.FileRoller.desktop'
+
 [org/gnome/desktop/notifications/application/org-gnome-geary]
 application-id='org.gnome.Geary.desktop'
 
@@ -201,6 +247,9 @@ application-id='org.kde.okular.desktop'
 
 [org/gnome/desktop/notifications/application/org-manjaro-pamac-manager]
 application-id='org.manjaro.pamac.manager.desktop'
+
+[org/gnome/desktop/notifications/application/pavucontrol]
+application-id='pavucontrol.desktop'
 
 [org/gnome/desktop/notifications/application/skypeforlinux]
 application-id='skypeforlinux.desktop'
@@ -306,6 +355,10 @@ window-ratio=(2.9871645274212368, 0.10942312712085617)
 migrated=true
 network-monitor-gio-name=''
 
+[org/gnome/file-roller/dialogs/extract]
+recreate-folders=true
+skip-newer=false
+
 [org/gnome/file-roller/listing]
 list-mode='as-folder'
 name-column-width=456
@@ -315,8 +368,8 @@ sort-type='ascending'
 
 [org/gnome/file-roller/ui]
 sidebar-width=200
-window-height=480
-window-width=600
+window-height=1025
+window-width=954
 
 [org/gnome/gedit/plugins]
 active-plugins=['sort', 'spell', 'filebrowser', 'openlinks', 'docinfo', 'modelines']
@@ -342,7 +395,7 @@ maximized=false
 network-total-in-bits=false
 show-dependencies=false
 show-whose-processes='user'
-window-state=(1920, 1080, 0, 0)
+window-state=(954, 518, 962, 558)
 
 [org/gnome/gnome-system-monitor/disktreenew]
 col-6-visible=true
@@ -367,13 +420,16 @@ toggle-tiled-right=['<Super>Right']
 [org/gnome/mutter/wayland/keybindings]
 restore-shortcuts=@as []
 
+[org/gnome/nautilus/compression]
+default-compression-format='zip'
+
 [org/gnome/nautilus/preferences]
 default-folder-viewer='list-view'
 search-filter-time-type='last_modified'
 search-view='list-view'
 
 [org/gnome/nautilus/window-state]
-initial-size=(954, 1072)
+initial-size=(1920, 1080)
 maximized=false
 sidebar-width=200
 
@@ -459,10 +515,10 @@ enabled-connections=['44d2d415-4df8-4304-9db5-0199b9c1a6e8']
 enabled-connections=['44d2d415-4df8-4304-9db5-0199b9c1a6e8']
 
 [org/gnome/shell]
-command-history=['gnome-session-properties', 'r', 'rt']
+command-history=['gnome-session-properties', 'rt', 'r']
 disable-user-extensions=false
-disabled-extensions=['arcmenu@arcmenu.com', 'tiling-assistant@leleat-on-github', 'material-shell@papyelgringo', 'x11gestures@joseexposito.github.io', 'pamac-updates@manjaro.org', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'dash-to-dock@micxgx.gmail.com', 'TopIcons@phocean.net', 'unite@hardpixel.eu', 'window-list@gnome-shell-extensions.gcampax.github.com', 'windowsNavigator@gnome-shell-extensions.gcampax.github.com', 'workspace-indicator@gnome-shell-extensions.gcampax.github.com']
-enabled-extensions=['appindicatorsupport@rgcjonas.gmail.com', 'gnome-ui-tune@itstime.tech', 'drive-menu@gnome-shell-extensions.gcampax.github.com', 'pop-shell@system76.com', 'Additional_Workspace_Shortcuts@denis.voskvitsov.gmail.com', 'gnome-shell-go-to-last-workspace@github.com', 'clipboard-history@alexsaveau.dev', 'auto-move-windows@gnome-shell-extensions.gcampax.github.com', 'dash-to-panel@jderose9.github.com', 'improved-workspace-indicator@michaelaquilina.github.io', 'wsmatrix@martin.zurowietz.de', 'workspace-indicator-mod@hal9001', 'ddterm@amezin.github.com', 'user-theme@gnome-shell-extensions.gcampax.github.com']
+disabled-extensions=['arcmenu@arcmenu.com', 'tiling-assistant@leleat-on-github', 'x11gestures@joseexposito.github.io', 'pamac-updates@manjaro.org', 'TopIcons@phocean.net', 'ding@rastersoft.com', 'launch-new-instance@gnome-shell-extensions.gcampax.github.com', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'workspace-indicator@gnome-shell-extensions.gcampax.github.com', 'apps-menu@gnome-shell-extensions.gcampax.github.com']
+enabled-extensions=['pop-shell@system76.com', 'Additional_Workspace_Shortcuts@denis.voskvitsov.gmail.com', 'clipboard-history@alexsaveau.dev', 'improved-workspace-indicator@michaelaquilina.github.io', 'ddterm@amezin.github.com', 'espresso@coadmunkee.github.com', 'Resource_Monitor@Ory0n', 'auto-move-windows@gnome-shell-extensions.gcampax.github.com', 'wsmatrix@martin.zurowietz.de', 'gnome-shell-go-to-last-workspace@github.com', 'freon@UshakovVasilii_Github.yahoo.com', 'gnome-ui-tune@itstime.tech', 'drive-menu@gnome-shell-extensions.gcampax.github.com', 'user-theme@gnome-shell-extensions.gcampax.github.com', 'appindicatorsupport@rgcjonas.gmail.com', 'workspace-indicator-mod@hal9001', 'dash-to-panel@jderose9.github.com']
 favorite-apps=['emacs.desktop', 'google-chrome.desktop', 'Alacritty.desktop', 'org.gnome.Nautilus.desktop']
 had-bluetooth-devices-setup=true
 welcome-dialog-last-shown-version='41.4'
@@ -491,6 +547,7 @@ background-opacity=1.0
 custom-theme-shrink=false
 customize-alphas=true
 dash-max-icon-size=48
+dock-fixed=false
 dock-position='BOTTOM'
 extend-height=false
 height-fraction=1.0
@@ -578,12 +635,14 @@ app-shift-hotkey-kp-6=['<Shift><Alt><Super>KP_6']
 app-shift-hotkey-kp-7=['<Shift><Alt><Super>KP_7']
 app-shift-hotkey-kp-8=['<Shift><Alt><Super>KP_8']
 app-shift-hotkey-kp-9=['<Shift><Alt><Super>KP_9']
-appicon-margin=4
+appicon-margin=2
 appicon-padding=4
 available-monitors=[0]
+dot-position='BOTTOM'
 dot-style-focused='DASHES'
 dot-style-unfocused='DOTS'
 group-apps=true
+hide-overview-on-startup=false
 hot-keys=false
 hotkey-prefix-text='SuperAlt'
 hotkeys-overlay-combo='TEMPORARILY'
@@ -595,7 +654,7 @@ leftbox-padding=-1
 middle-click-action='LAUNCH'
 overview-click-to-exit=false
 panel-anchors='{"0":"MIDDLE"}'
-panel-element-positions='{"0":[{"element":"showAppsButton","visible":true,"position":"stackedTL"},{"element":"leftBox","visible":true,"position":"stackedTL"},{"element":"activitiesButton","visible":false,"position":"stackedTL"},{"element":"taskbar","visible":true,"position":"centerMonitor"},{"element":"centerBox","visible":false,"position":"stackedBR"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"dateMenu","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":false,"position":"stackedBR"}]}'
+panel-element-positions='{"0":[{"element":"showAppsButton","visible":true,"position":"stackedTL"},{"element":"leftBox","visible":true,"position":"stackedTL"},{"element":"activitiesButton","visible":false,"position":"stackedTL"},{"element":"taskbar","visible":true,"position":"centered"},{"element":"centerBox","visible":false,"position":"stackedBR"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"dateMenu","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":false,"position":"stackedBR"}]}'
 panel-element-positions-monitors-sync=true
 panel-lengths='{"0":100}'
 panel-positions='{"0":"BOTTOM"}'
@@ -608,13 +667,17 @@ shift-middle-click-action='LAUNCH'
 show-appmenu=false
 show-apps-icon-file='/usr/share/icons/Numix-Circle/48/apps/distributor-logo-linux.svg'
 show-apps-override-escape=true
-show-favorites=true
+show-favorites=false
 show-favorites-all-monitors=true
 show-running-apps=true
+show-tooltip=true
+show-window-previews=true
 show-window-previews-timeout=600
 status-icon-padding=-1
+stockgs-force-hotcorner=false
 stockgs-keep-dash=false
 stockgs-keep-top-panel=false
+stockgs-panelbtn-click-only=false
 taskbar-locked=false
 trans-bg-color='#3f3f3f'
 trans-dynamic-anim-target=0.70000000000000007
@@ -627,6 +690,32 @@ trans-use-custom-opacity=true
 trans-use-dynamic-opacity=true
 tray-padding=-1
 window-preview-title-position='TOP'
+
+[org/gnome/shell/extensions/espresso]
+has-battery=false
+user-enabled=true
+
+[org/gnome/shell/extensions/freon]
+hot-sensors=['Package id 0', 'NVIDIA GeForce RTX 3050', 'Composite']
+panel-box-index=0
+position-in-panel='right'
+show-decimal-value=true
+show-icon-on-panel=true
+show-rotationrate=true
+show-rotationrate-unit=true
+show-temperature=true
+show-temperature-unit=false
+show-voltage=true
+show-voltage-unit=true
+use-drive-nvmecli=true
+use-drive-smartctl=false
+use-drive-udisks2=false
+use-generic-liquidctl=false
+use-gpu-nvidia=true
+
+[org/gnome/shell/extensions/gnome-ui-tune]
+hide-search=true
+overview-firefox-pip=false
 
 [org/gnome/shell/extensions/go-to-last-workspace]
 shortcut-key=['<Super>k']
@@ -675,6 +764,7 @@ focus-up=['<Super>p']
 gap-inner=uint32 1
 gap-outer=uint32 1
 hint-color-rgba='rgb(220,220,204)'
+log-level=uint32 0
 pop-monitor-right=['<Shift><Super>f']
 pop-monitor-up=@as []
 pop-workspace-down=@as []
@@ -781,7 +871,7 @@ sort-column='name'
 sort-directories-first=true
 sort-order='ascending'
 type-format='category'
-window-position=(359, 65)
+window-position=(359, 66)
 window-size=(1203, 902)
 
 [org/gtkhash/plugin]
