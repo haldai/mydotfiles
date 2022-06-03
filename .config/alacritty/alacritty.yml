@@ -4,6 +4,7 @@ window:
   padding:
     x: 6
     y: 6
+  opacity: .93
 
 font:
   size: 12
@@ -22,9 +23,6 @@ font:
     family: Sarasa Term SC
     style: Italic
 
-# Background Opacity
-
-background_opacity: .93
 
 # Colors Schemes
 schemes:
