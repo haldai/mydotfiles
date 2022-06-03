@@ -64,6 +64,15 @@ width=954
 [net/launchpad/caffeine]
 show-notification=true
 
+[org/blueman/general]
+window-properties=[954, 1072, 962, 4]
+
+[org/blueman/plugins/powermanager]
+auto-power-on=@mb true
+
+[org/blueman/plugins/recentconns]
+recent-connections=[{'adapter': '08:6A:C5:15:F6:75', 'address': 'CC:98:8B:94:A8:F5', 'alias': 'LE_WH-1000XM3', 'icon': 'audio-headset', 'name': '音频和输入配置文件', 'uuid': '00000000-0000-0000-0000-000000000000', 'time': '1654222709.9505136'}]
+
 [org/gnome/Chess]
 height=672
 last-played-as='white'
@@ -94,7 +103,7 @@ video-x-resolution=1280
 video-y-resolution=960
 
 [org/gnome/control-center]
-last-panel='bluetooth'
+last-panel='wifi'
 window-state=(954, 1072, false)
 
 [org/gnome/desktop/a11y/applications]
@@ -182,7 +191,7 @@ autorun-x-content-open-folder=@as []
 autorun-x-content-start-app=['x-content/unix-software', 'x-content/ostree-repository']
 
 [org/gnome/desktop/notifications]
-application-children=['org-manjaro-pamac-manager', 'caffeine', 'google-chrome', 'baidunetdisk', 'xdg-desktop-portal-gtk', 'org-gnome-boxes', 'de-haeckerfelix-fragments', 'alacritty', 'teams', 'org-gnome-geary', 'com-qq-weixin-deepin', 'emacs', 'org-gnome-nautilus', 'org-gnome-chromegnomeshell', 'org-gnome-extensions-desktop', 'skypeforlinux', 'material-shell-papyelgringo', 'ca-desrt-dconf-editor', 'emacsclient', 'org-kde-okular', 'com-github-xournalpp-xournalpp', 'gnome-system-monitor', 'steam', 'org-gnome-fileroller', 'manjaro-settings-manager', 'pavucontrol']
+application-children=['org-manjaro-pamac-manager', 'caffeine', 'google-chrome', 'baidunetdisk', 'xdg-desktop-portal-gtk', 'org-gnome-boxes', 'de-haeckerfelix-fragments', 'alacritty', 'teams', 'org-gnome-geary', 'com-qq-weixin-deepin', 'emacs', 'org-gnome-nautilus', 'org-gnome-chromegnomeshell', 'org-gnome-extensions-desktop', 'skypeforlinux', 'material-shell-papyelgringo', 'ca-desrt-dconf-editor', 'emacsclient', 'org-kde-okular', 'com-github-xournalpp-xournalpp', 'gnome-system-monitor', 'steam', 'org-gnome-fileroller', 'manjaro-settings-manager', 'pavucontrol', 'org-gnome-settings']
 show-banners=false
 
 [org/gnome/desktop/notifications/application/alacritty]
@@ -241,6 +250,9 @@ application-id='org.gnome.Geary.desktop'
 
 [org/gnome/desktop/notifications/application/org-gnome-nautilus]
 application-id='org.gnome.Nautilus.desktop'
+
+[org/gnome/desktop/notifications/application/org-gnome-settings]
+application-id='org.gnome.Settings.desktop'
 
 [org/gnome/desktop/notifications/application/org-kde-okular]
 application-id='org.kde.okular.desktop'
@@ -323,7 +335,6 @@ switch-input-source-backward=@as []
 switch-panels=@as []
 switch-panels-backward=@as []
 switch-to-workspace-1=['<Super>1']
-switch-to-workspace-10=['<Super>0']
 switch-to-workspace-2=['<Super>2']
 switch-to-workspace-3=['<Super>3']
 switch-to-workspace-4=['<Super>4']
@@ -395,7 +406,7 @@ maximized=false
 network-total-in-bits=false
 show-dependencies=false
 show-whose-processes='user'
-window-state=(954, 518, 962, 558)
+window-state=(1920, 1080, 0, 0)
 
 [org/gnome/gnome-system-monitor/disktreenew]
 col-6-visible=true
@@ -500,7 +511,7 @@ command='rofi -show'
 name='Rofi'
 
 [org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom9]
-binding='<Super>e'
+binding='<Super>0'
 command='/home/daiwz/.scripts/myexit'
 name='Exit menu'
 
@@ -517,8 +528,8 @@ enabled-connections=['44d2d415-4df8-4304-9db5-0199b9c1a6e8']
 [org/gnome/shell]
 command-history=['gnome-session-properties', 'rt', 'r']
 disable-user-extensions=false
-disabled-extensions=['arcmenu@arcmenu.com', 'tiling-assistant@leleat-on-github', 'x11gestures@joseexposito.github.io', 'pamac-updates@manjaro.org', 'TopIcons@phocean.net', 'ding@rastersoft.com', 'launch-new-instance@gnome-shell-extensions.gcampax.github.com', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'workspace-indicator@gnome-shell-extensions.gcampax.github.com', 'apps-menu@gnome-shell-extensions.gcampax.github.com']
-enabled-extensions=['pop-shell@system76.com', 'Additional_Workspace_Shortcuts@denis.voskvitsov.gmail.com', 'clipboard-history@alexsaveau.dev', 'improved-workspace-indicator@michaelaquilina.github.io', 'ddterm@amezin.github.com', 'espresso@coadmunkee.github.com', 'Resource_Monitor@Ory0n', 'auto-move-windows@gnome-shell-extensions.gcampax.github.com', 'wsmatrix@martin.zurowietz.de', 'gnome-shell-go-to-last-workspace@github.com', 'freon@UshakovVasilii_Github.yahoo.com', 'gnome-ui-tune@itstime.tech', 'drive-menu@gnome-shell-extensions.gcampax.github.com', 'user-theme@gnome-shell-extensions.gcampax.github.com', 'appindicatorsupport@rgcjonas.gmail.com', 'workspace-indicator-mod@hal9001', 'dash-to-panel@jderose9.github.com']
+disabled-extensions=['arcmenu@arcmenu.com', 'tiling-assistant@leleat-on-github', 'x11gestures@joseexposito.github.io', 'pamac-updates@manjaro.org', 'TopIcons@phocean.net', 'ding@rastersoft.com', 'launch-new-instance@gnome-shell-extensions.gcampax.github.com', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'workspace-indicator@gnome-shell-extensions.gcampax.github.com', 'apps-menu@gnome-shell-extensions.gcampax.github.com', 'window-list@gnome-shell-extensions.gcampax.github.com']
+enabled-extensions=['pop-shell@system76.com', 'Additional_Workspace_Shortcuts@denis.voskvitsov.gmail.com', 'improved-workspace-indicator@michaelaquilina.github.io', 'gnome-ui-tune@itstime.tech', 'dash-to-panel@jderose9.github.com', 'appindicatorsupport@rgcjonas.gmail.com', 'auto-move-windows@gnome-shell-extensions.gcampax.github.com', 'clipboard-history@alexsaveau.dev', 'ddterm@amezin.github.com', 'espresso@coadmunkee.github.com', 'freon@UshakovVasilii_Github.yahoo.com', 'gnome-shell-go-to-last-workspace@github.com', 'drive-menu@gnome-shell-extensions.gcampax.github.com', 'Resource_Monitor@Ory0n', 'user-theme@gnome-shell-extensions.gcampax.github.com', 'workspace-indicator-mod@hal9001', 'wsmatrix@martin.zurowietz.de']
 favorite-apps=['emacs.desktop', 'google-chrome.desktop', 'Alacritty.desktop', 'org.gnome.Nautilus.desktop']
 had-bluetooth-devices-setup=true
 welcome-dialog-last-shown-version='41.4'
@@ -828,6 +839,10 @@ toggle-overview=@as []
 [org/gnome/shell/world-clocks]
 locations=@av []
 
+[org/gnome/software]
+check-timestamp=int64 1654218101
+first-run=false
+
 [org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
 background-color='rgb(0,43,54)'
 foreground-color='rgb(131,148,150)'
@@ -871,7 +886,7 @@ sort-column='name'
 sort-directories-first=true
 sort-order='ascending'
 type-format='category'
-window-position=(359, 66)
+window-position=(358, 65)
 window-size=(1203, 902)
 
 [org/gtkhash/plugin]
