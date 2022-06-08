@@ -18,20 +18,21 @@
   (setq python-indent-guess-indent-offset-verbose nil)
   :config
 
-  ;; language server
-  (use-package lsp-python-ms
-    :straight t
-    :ensure t
-    :init (setq lsp-python-ms-auto-install-server t)
-    :hook (python-mode . (lambda ()
-                           (require 'lsp-python-ms)
-                           (lsp))))  ; or lsp-deferred
-
   ;; Live Coding in Python
   (use-package live-py-mode :straight t)
   (use-package py-autopep8
     :straight t
-    :hook (python-mode . py-autopep8-enable-on-save)))
+    :hook (python-mode . py-autopep8-enable-on-save))
+
+  ;; lsp-pyright
+  (use-package lsp-pyright
+    :straight t
+    :ensure t
+    :hook (python-mode . (lambda ()
+                           (require 'lsp-pyright)
+                           (lsp))))  ; or lsp-deferred
+
+  )
 
 (provide 'init-python)
 

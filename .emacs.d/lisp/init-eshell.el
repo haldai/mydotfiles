@@ -119,6 +119,11 @@
            .
            (lambda () (require 'eshell-z)))))
 
+(use-package exec-path-from-shell
+  :straight t
+  :init
+  (exec-path-from-shell-initialize))
+
 (provide 'init-eshell)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

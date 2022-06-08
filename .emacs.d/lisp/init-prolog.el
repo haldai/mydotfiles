@@ -8,10 +8,11 @@
 ;; Prolog Mode
 (use-package prolog
   :load-path "~/.emacs.d/lisp/prolog.el"
-  :mode (("\\.pl$" . prolog-mode)
-         ("\\.m$" . mercury-mode))
-  :bind (("C-c %" . prolog-insert-comment-block)
-         ("C-c C-c l" . prolog-insert-library))
+  :mode (("\\.pl\\'" . prolog-mode)
+         ("\\.m\\'" . mercury-mode))
+  :bind (:map prolog-mode-map
+              ("C-c %" . prolog-insert-comment-block)
+              ("C-c C-c l" . prolog-insert-library))
   :hook ((prolog-mode . display-line-numbers-mode)
          (prolog-mode . hl-todo-mode))
   :config
@@ -24,43 +25,45 @@
         prolog-electric-if-then-else-flag t)
 
   (defun prolog-insert-comment-block ()
-    "Insert a PceEmacs-style comment block like /* - - ... - - */ "
+    "Insert a comment block like %%%%%% "
     (interactive)
-    (let ((dashes "-"))
-      (dotimes (_ 36) (setq dashes (concat "- " dashes)))
-      (insert (format "/* %s\n\n%s */" dashes dashes))
+    (let ((percentages "%"))
+      (dotimes (_ 72) (setq percentages (concat "%" percentages)))
+      (insert (format "%s\n%% \n%s" percentages percentages))
       (forward-line -1)
-      (indent-for-tab-command))
+      (forward-char  2))
     )
 
   (defun prolog-insert-library ()
     "Insert a module"
     (interactive)
     (insert ":- use_module(library()).")
-    (forward-char -3)))
+    (forward-char -3))
 
-(use-package etrace :load-path "~/.emacs.d/lisp/")
+  (use-package etrace :load-path "~/.emacs.d/lisp/")
 
-(use-package ediprolog
-  :straight t
-  :init
-  (defun insert-prolog-query-mark ()
-    "Insert an epiprolog query mark in prolog mode."
-    (interactive)
-    (insert "%%?- "))
-  :bind (("<f10>" . ediprolog-dwim)
-         ("C-c <f10>" . ediprolog-consult)
-         ("C-c q" . insert-prolog-query-mark))
-  :config
-  (setq ediprolog-prefix "%%@"))
+  (use-package ediprolog
+    :straight t
+    :init
+    (defun insert-prolog-query-mark ()
+      "Insert an epiprolog query mark in prolog mode."
+      (interactive)
+      (insert "%%?- "))
+    :bind (:map prolog-mode-map
+                ("<f10>" . ediprolog-dwim)
+                ("C-c <f10>" . ediprolog-consult)
+                ("C-c q" . insert-prolog-query-mark))
+    :config
+    (setq ediprolog-prefix "%%@"))
 
-;; ob-prolog
-(use-package ob-prolog :straight t)
+  ;; ob-prolog
+  (use-package ob-prolog :straight t))
 
 ;; Potassco Answer Set Program
-(use-package pasp-mode
-  :straight t
-  :mode ("\\.lp$" . pasp-mode))
+(use-package clingo-mode
+  :straight (clingo-mode :type git :host github :repo "llaisdy/clingo-mode")
+  :mode ("\\.lp\\'" . clingo-mode)
+  :hook (clingo-mode . (lambda () (aggressive-indent-mode -1))))
 
 (provide 'init-prolog)
 

@@ -71,7 +71,7 @@
     ("l" dumb-jump-quick-look "Quick look")
     ("b" dumb-jump-back "Back")
     ("q" nil "quit"))
-  (bind-key "C-M-j" #'dumb-jump-hydra/body dumb-jump-mode-map))
+  (bind-key "C-c C-j" #'dumb-jump-hydra/body dumb-jump-mode-map))
 
 ;; Run commands quickly
 (use-package quickrun
@@ -84,10 +84,7 @@
   :diminish editorconfig-mode
   :hook (after-init . editorconfig-mode))
 
-;; R language
-(use-package ess
-  :straight t
-  :mode ("\\.r$" . ess-r-mode))
+(use-package yaml-mode :straight t)
 
 (provide 'init-prog)
 

@@ -9,17 +9,20 @@ function run {
 # Startups
 run nosleep on
 # run no_lid_suspend
-# run /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+run /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 # run picom --experimental-backends --config ~/.config/compton.conf
-run picom --config ~/.config/compton.conf
+run picom --config ~/.config/picom.conf
 run udiskie -ans
-run /home/daiwz/.scripts/lock.sh
+run /home/daiwz/.scripts/nodimming.sh
 run blueman-applet
 run libinput-gestures-setup start
 # run ss-qt5
 # run emacs --daemon
+run solaar --window=hide
 run fcitx5
+greenclip daemon
 run /home/daiwz/.conky/myconky-start.sh
+run minidlnad -f /home/daiwz/.config/minidlna/minidlna.conf -P /home/daiwz/.config/minidlna/minidlna.pid
 
 # Settings
 # xbacklight -set 50

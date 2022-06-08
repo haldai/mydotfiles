@@ -21,6 +21,7 @@
 (setq auto-window-vscroll nil)
 ;; (setq-default kill-whole-line t)           ; Kill line including '\n'
 (setq global-visual-line-mode t)
+(setq visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow))
 
 (setq-default major-mode 'text-mode)
 
@@ -105,10 +106,10 @@
   :config
   ;; Disable in some modes
   (dolist (mode '(asm-mode web-mode html-mode css-mode robot-mode go-mode
-                           c-mode c++-mode csharp-mode))
+                           c-mode c++-mode csharp-mode julia-mode prolog-mode))
     (push mode aggressive-indent-excluded-modes))
 
-  ;; Be slightly less aggressive in C/C++/C#/Java/Go/Swift
+  ;; Be slightly less aggressive in C/C++/C#/Java/Go/Swift/Julia/Prolog
   (add-to-list
    'aggressive-indent-dont-indent-if
    '(and (or (derived-mode-p 'c-mode)
@@ -116,6 +117,8 @@
              (derived-mode-p 'csharp-mode)
              (derived-mode-p 'java-mode)
              (derived-mode-p 'go-mode)
+             (derived-mode-p 'prolog-mode)
+             (derived-mode-p 'julia-mode)
              (derived-mode-p 'swift-mode))
          (null (string-match "\\([;{}]\\|\\b\\(if\\|for\\|while\\)\\b\\)"
                              (thing-at-point 'line))))))
@@ -208,7 +211,8 @@
   (setq flyspell-issue-message-flag nil)
   (setq ispell-program-name "aspell")
   (setq ispell-list-command "--list")
-  (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_GB" " --dont-tex-check-comments" "--run-together")))
+  (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_GB" " --dont-tex-check-comments" "--run-together"))
+  (setq flyspell-issue-message-flag nil))
 
 ;; Hungry deletion
 (use-package hungry-delete
@@ -301,7 +305,7 @@
     ("R" origami-reset))
 
   :bind (:map origami-mode-map
-              ("C-`" . origami-hydra/body))
+              ("C-<tab>" . origami-hydra/body))
   :config
   (face-spec-reset-face 'origami-fold-header-face))
 
@@ -312,8 +316,8 @@
   :hook (after-init . fancy-narrow-mode))
 
 ;; Huge files
-
-(straight-use-package 'vlf)
+(use-package vlf
+  :straight t)
 (require 'vlf)
 (require 'tramp)
 
@@ -325,47 +329,71 @@
       (error "File does not exist: %s" file))
     (vlf file)))
 
+;; meow
+;; (use-package meow
+;;   :straight t
+;;   :config
+;;   (meow-setup)
+;;   (meow-global-mode 1))
+
 ;; Input Method
 (use-package posframe
   :straight t)
 
-(use-package pyim
-  :straight t
-  :after posframe
-  :hook (emacs-startup-hook . (lambda () (pyim-restart-1 t)))
-  :init
-  (use-package posframe :defer t)
+(use-package rime
+  :straight (rime :type git
+                  :host github
+                  :repo "DogLooksGood/emacs-rime"
+                  :files ("*.el" "Makefile" "lib.c"))
+  :bind (:map rime-active-mode-map
+              ("<tab>" . 'rime-inline-ascii)
+              :map rime-mode-map
+              ("C-`"  . 'rime-send-keybinding)
+              ("M-j" . 'rime-force-enable))
   :custom
-  (default-input-method "pyim")
-  (pyim-default-scheme 'quanpin)
-  (pyim-page-tooltip 'posframe)
-  (pyim-page-length 9)
+  (default-input-method "rime")
+  (mode-line-mule-info '((:eval (rime-lighter))))
+  ;; display in modeline
+  (rime-show-candidate 'posframe)
+  (rime-posframe-style 'vertical)
+  (liberime-select-schema "luna_pinyin_simp")
+  (rime-disable-predicates
+   '(rime-predicate-after-ascii-char-p
+     rime-predicate-prog-in-code-p
+     rime-predicate-in-code-string-p
+     my/rime-predicate-zero-length-space-after-cc-p
+     rime-predicate-space-after-cc-p
+     rime-predicate-current-uppercase-letter-p
+     my/rime-predicate-punctuation-next-char-is-paired-p
+     rime-predicate-tex-math-or-command-p))
+  :init
+  (defun my/rime-predicate-punctuation-next-char-is-paired-p ()
+    (if (not (eq (point) (point-max)))
+        (and (rime-predicate-current-input-punctuation-p)
+             (not (string-match-p
+                 (rx (any "\"\(\[\{"))
+                 (buffer-substring (point) (1- (point)))))
+             (string-match-p
+              (rx (any "\}\]\)\""))
+              (buffer-substring (point) (1+ (point)))))
+      nil))
+  (defun my/rime-predicate-zero-length-space-after-cc-p ()
+    "If cursor is after a whitespace which follow a non-ascii character."
+    (and (> (point) (save-excursion (back-to-indentation) (point)))
+         (let ((string (buffer-substring (point) (max (line-beginning-position) (- (point) 80)))))
+           (string-match-p "\\cc\u200B+$" string))))
   :config
-  ;; 词库
-  (use-package pyim-basedict
-    :straight t
-    :after pyim
-    :config (pyim-basedict-enable))
+  ;; Any single character that not trigger auto commit
+  (setq rime-inline-ascii-holder ?x)
+  ;;; support shift-l, shift-r, control-l, control-r
+  (setq rime-inline-ascii-trigger 'shift-l))
 
-  ;; 智能切换
-  (pyim-isearch-mode 1)
-  (setq-default pyim-english-input-switch-functions
-                '(pyim-probe-auto-english
-                  pyim-probe-isearch-mode
-                  pyim-probe-program-mode
-                  pyim-probe-org-structure-template))
 
-  (setq-default pyim-punctuation-half-width-functions
-                '(pyim-probe-punctuation-line-beginning
-                  pyim-probe-punctuation-after-punctuation))
+(defun insert-zero-width-space ()
+  (interactive (insert "\u200B")))
 
-  ;; 翻页设置
-  (define-key pyim-mode-map "." 'pyim-page-next-page)
-  (define-key pyim-mode-map "," 'pyim-page-previous-page)
-
-  :bind
-  ("M-j" . pyim-convert-string-at-point)) ; M-j 强制将光标前的拼音字符串转换为中文。
-
+(defun insert-thin-space ()
+  (interactive (insert "\u2009")))
 
 (provide 'init-edit)
 

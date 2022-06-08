@@ -5,23 +5,29 @@
 ;; color theme
 (straight-use-package 'zenburn-theme)
 (load-theme 'zenburn t)
+;; (use-package vscode-dark-plus-theme
+;;   :straight t
+;;   :config
+;;   (load-theme 'vscode-dark-plus t))
 
 ;; font settings
 (defvar emacs-english-font "SauceCodePro Nerd Font Mono"
   "The font name of English.")
 
-(defvar emacs-cjk-font "方正宋刻本秀楷"
+(defvar emacs-cjk-font "方正屏显雅宋_GBK"
   "The font name for CJK.")
 
-(defvar emacs-font-size-pair '(13 . 16)
+(defvar emacs-font-size-pair '(15 . 20)
   "Default font size pair for (english . chinese)")
 
 (defvar emacs-font-size-pair-list
-  '(( 5 .  6) (10 . 12)
-    (13 . 16) (15 . 18) (17 . 20)
-    (19 . 22) (20 . 24) (21 . 26)
-    (24 . 28) (26 . 32) (28 . 34)
-    (30 . 36) (34 . 40) (36 . 44))
+  '(( 5 .  6) (10 . 14)
+    (13 . 16) (15 . 20) (17 . 22)
+    (19 . 24) (20 . 26) (21 . 28)
+    (24 . 32) (26 . 34) (28 . 36)
+    (30 . 38) (34 . 44) (36 . 46)
+    (40 . 52) (44 . 56))
+
   "This list is used to store matching (englis . chinese) font-size.")
 
 (defun font-exist-p (fontname)
@@ -66,7 +72,7 @@
 (defun restore-emacs-font-size ()
   "Restore emacs's font-size acording emacs-font-size-pair-list."
   (interactive)
-  (setq emacs-font-size-pair '(13 . 16))
+  (setq emacs-font-size-pair '(15 . 20))
   (when emacs-font-size-pair
     (message "emacs font size set to %.1f" (car emacs-font-size-pair))
     (set-font emacs-english-font emacs-cjk-font emacs-font-size-pair)))
@@ -303,8 +309,21 @@
   (setq x-gtk-use-system-tooltips nil))
 
 ;; transparent
-(set-frame-parameter (selected-frame) 'alpha '(95 . 70))
-(add-to-list 'default-frame-alist '(alpha . (95 . 70)))
+(set-frame-parameter (selected-frame) 'alpha '(100 . 95))
+(add-to-list 'default-frame-alist '(alpha . (100 . 95)))
+
+;; keycast
+(use-package keycast
+  :straight t
+  :config
+  (define-minor-mode keycast-mode
+    "Show current command and its key binding in the mode line (fix for use with doom-mode-line)."
+    :global t
+    (if keycast-mode
+        (add-hook 'pre-command-hook 'keycast--update t)
+      (remove-hook 'pre-command-hook 'keycast--update)))
+  (add-to-list 'global-mode-string '("" mode-line-keycast))
+  (keycast-mode 1))
 
 (provide 'init-themes)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -21,16 +21,23 @@
   ;; Configure LSP clients
   (setq lsp-eslint-server-command
         '("node"
-          "/home/daiwz/.vscode-oss/extensions/dbaeumer.vscode-eslint-2.0.11/server/out/eslintServer.js"
+          "/home/daiwz/.vscode/extensions/dbaeumer.vscode-eslint-2.2.2/server/out/eslintServer.js"
           "--stdio"))
+  (setq gc-cons-threshold 100000000)
+  (setq read-process-output-max (* 1024 1024)) ;; 1mb
+  (setq lsp-idle-delay 0.500)
+
+  (add-to-list 'lsp-disabled-clients '((emmet-ls . t)
+                                       (html-ls . t)))
+
   (use-package lsp-clients
     :init
     (setq lsp-clients-python-library-directories '("/usr/local/" "/usr/"))))
 
-(use-package lsp-julia
-  ;; Make sure to install "pkg> dev LanguageServer"
-  :straight (lsp-julia :type git :host github :repo "non-Jedi/lsp-julia")
-  :init (setq lsp-julia-default-environment "/home/daiwz/.julia/environments/v1.3/"))
+;; if you are ivy user
+(use-package lsp-ivy
+  :straight t
+  :commands lsp-ivy-workspace-symbol)
 
 (use-package lsp-ui
   :straight t

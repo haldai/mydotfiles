@@ -93,10 +93,10 @@ end
 -- However, you can use another modifier like Mod1, but it may interact with others.
 local modkey = "Mod4"
 local altkey = "Mod1"
-local terminal = "st"
+local terminal = "alacritty"
 local editor = "emacsclient -c -a emacs"
 local editor_cmd = terminal .. " -e " .. editor
-local browser = "chromium --disable-gpu --disable-software-rasterizer"
+local browser = "google-chrome-stable --disable-gpu --disable-software-rasterizer"
 local filemanager = "pcmanfm"
 
 -- {{{ taglist and tasklist buttons
@@ -157,7 +157,7 @@ lain.layout.cascade.tile.ncol          = 2
 beautiful.init(awful.util.getdir("config") .. "/themes/zenburn/theme.lua")
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
--- awful.util.tagnames = { "壹", "貳", "叄", "肆", "伍", "陸", "柒", "捌", "玖" }
+-- awful.util.tagnames = { "壹", "贰", "叁", "肆", "伍", "陸", "柒", "捌", "玖" }
 -- awful.util.tagnames = { "☰", "☱", "☲", "☳", "☴", "☵", "☶", "☷", "☯" }
 awful.layout.append_default_layouts({
       awful.layout.suit.tile,
@@ -229,10 +229,11 @@ awful.util.mymainmenu = awful.menu({
       items = {
          { " 終端", function () awful.spawn(terminal) end, icon_path .. "apps/utilities-terminal.png" },
          { " 編輯", function () awful.spawn("emacsclient -c -a emacs") end, icon_path .. "apps/emacs.png" },
-         { " 衝浪", function () awful.spawn("chromium --disable-software-rasterizer") end, icon_path .. "apps/chromium.png" },
+         { " 衝浪", function () awful.spawn("google-chrome-stable --disable-software-rasterizer") end, icon_path .. "apps/chrome.png" },
          { " 文件", function () awful.spawn("pcmanfm") end, icon_path .. "apps/file-manager.png" },
-         { " 監控", function () awful.spawn("st -e gotop -s") end, icon_path .. "apps/utilities-system-monitor.png" },
+         { " 監控", function () awful.spawn("alacritty -e htop") end, icon_path .. "apps/utilities-system-monitor.png" },
          { " 聲音", function () awful.spawn("pavucontrol") end, icon_path .. "apps/sound.png" },
+         { " 托盤", function () awful.spawn.with_shell("~/.scripts/toggle_systray") end, icon_path .. "places/workspace-switcher-right-bottom.png" },
          { " 輸入", myinputmenu, icon_path .. "categories/cs-region.png"},
          { " 窗口", myawesomemenu, beautiful.awesome_icon },
          { " 演示", myxrandrmenu, icon_path .. "devices/system.png" },
@@ -284,6 +285,10 @@ globalkeys = gears.table.join(
    awful.key({ modkey }, ",", awful.tag.viewprev,
       {description = "view previous", group = "tag"}),
    awful.key({ modkey }, ".", awful.tag.viewnext,
+      {description = "view next", group = "tag"}),
+   awful.key({ modkey }, "Right", awful.tag.viewprev,
+      {description = "view previous", group = "tag"}),
+   awful.key({ modkey }, "Left", awful.tag.viewnext,
       {description = "view next", group = "tag"}),
    awful.key({ modkey }, "k", awful.tag.history.restore,
       {description = "go back", group = "tag"}),
@@ -383,15 +388,15 @@ globalkeys = gears.table.join(
    -- Applications
    awful.key({ modkey }, "F2", function () awful.spawn("emacsclient -c -a emacs") end,
       {description = "launch Emacs", group = "launcher"}),
-   awful.key({ modkey }, "F3", function () awful.spawn("chromium") end,
+   awful.key({ modkey }, "F3", function () awful.spawn("google-chrome-stable") end,
       {description = "launch chrome", group = "launcher"}),
    awful.key({ modkey, "Ctrl" }, "F3", function () awful.spawn("qutebrowser") end,
       {description = "launch qutebrowser", group = "launcher"}),
-   awful.key({ modkey, "Shift" }, "F3", function () awful.spawn("chromium --disable-web-security --user-data-dir") end,
+   awful.key({ modkey, "Shift" }, "F3", function () awful.spawn("google-chrome-stable --disable-web-security --user-data-dir") end,
       {description = "launch Chrome with user data dir", group = "launcher"}),
    awful.key({ modkey }, "F4", function () awful.spawn.with_shell("~/.scripts/toggle_systray") end,
       {description = "launch system tray", group = "launcher"}),
-   awful.key({ modkey }, "F5", function () awful.spawn("st -e ranger") end,
+   awful.key({ modkey }, "F5", function () awful.spawn("alacritty -e ranger") end,
       {description = "launch ranger", group = "launcher"}),
    awful.key({ modkey }, "F6", function () awful.spawn("electronic-wechat") end,
       {description = "launch wechat", group = "launcher"}),
@@ -412,13 +417,13 @@ globalkeys = gears.table.join(
    awful.key({ modkey }, "BackSpace", function ()
          awful.spawn.with_shell("~/.scripts/flash-win.sh") end,
       {description = "flash current screen", group = "launcher"}),
-   awful.key({ modkey }, "F8", function ()
+   awful.key({ }, "XF86Display", function ()
          awful.spawn.with_shell("~/.scripts/presentation") end,
       {description = "External screen copy", group = "launcher"}),
-   awful.key({ modkey, "Ctrl" }, "F8", function ()
+   awful.key({ "Ctrl" }, "XF86Display", function ()
          awful.spawn.with_shell("~/.scripts/presentation-x -r") end,
       {description = "External screen on the right", group = "launcher"}),
-   awful.key({ modkey, "Shift" }, "F8", function ()
+   awful.key({ "Shift" }, "XF86Display", function ()
          awful.spawn.with_shell("~/.scripts/presentation-x -l") end,
       {description = "External screen on the left", group = "launcher"})
 )
@@ -672,7 +677,7 @@ awful.rules.rules = {
    --   properties = { screen = 1, tag = "2" } },
    -- { rule = {class = "Emacs"},
    -- properties = { tag = awful.util.tagnames[2] } },
-   { rule_any = {class = {"Chromium", "qutebrowser" } },
+   { rule_any = {class = {"chrome", "qutebrowser" } },
      properties = { tag = awful.util.tagnames[3], maximized = true } },
    { rule = {class = "Thunderbird"},
      properties = { tag = awful.util.tagnames[4] } },
@@ -680,7 +685,7 @@ awful.rules.rules = {
      properties = { tag = awful.util.tagnames[4], minimized = true } },
    { rule = {class = "Pcmanfm"},
      properties = { tag = awful.util.tagnames[5] } },
-   { rule_any = {class = { "electronic-wechat", "qq.exe", "wechat.exe", "ao", "Ao" } },
+   { rule_any = {class = { "electronic-wechat", "qq.exe", "wechat.exe", "微信" } },
      properties = { tag = awful.util.tagnames[6] } },
 }
 -- }}}
@@ -711,6 +716,7 @@ client.connect_signal("request::activate", function(c, context, hints)
                             awful.ewmh.activate(c, context, hints)
                          end
 end)
+
 
 -- Add a titlebar if titlebars_enabled is set to true in the rules.
 client.connect_signal(

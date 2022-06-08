@@ -18,13 +18,14 @@ local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 -- {{{ Main
 local theme = {
    wallpapers = { os.getenv("HOME") .. "/.config/awesome/themes/zenburn/DD.jpg",
-                  os.getenv("HOME") .. "/.config/awesome/themes/zenburn/pw.jpg" },
-   wallpaper_scales = {0.80, 0.25}
+                  os.getenv("HOME") .. "/.config/awesome/themes/zenburn/pw.jpg"
+   },
+   wallpaper_scales = {0.75, 1.5}
 }
 -- }}}
 
 -- {{{ Styles
-theme.font = "方正宋刻本秀楷 13"
+theme.font = "方正屏显雅宋_GBK 13"
 
 -- {{{ Colors
 local black0 = "#2B2B2B"
@@ -126,13 +127,13 @@ theme.menu_height = dpi(28)
 theme.menu_width  = dpi(98)
 theme.menu_border_color = white1
 theme.menu_border_width = 2
-theme.menu_font = "方正宋刻本秀楷 Bold 13"
+theme.menu_font = "方正屏显雅宋_GBK Bold 13"
 -- }}}
 
 -- {{{ Icons
 theme.lain_icons = os.getenv("HOME") .. "/.config/awesome/lain/icons/layout/zenburn/"
 -- {{{ Taglist
-theme.taglist_font = "方正宋刻本秀楷 Bold 16"
+theme.taglist_font = "方正屏显雅宋_GBK Bold 13"
 theme.taglist_bg_focus = black1
 theme.taglist_fg_focus = orange
 --theme.taglist_squares_resize = "false"
@@ -140,8 +141,8 @@ theme.taglist_fg_focus = orange
 
 -- {{{ Misc
 theme.awesome_icon = themes_path .. "zenburn/awesome-icon.png"
-theme.tasklist_font = "方正宋刻本秀楷 10"
-theme.tasklist_font_focus = "方正宋刻本秀楷 Bold 10"
+theme.tasklist_font = "方正屏显雅宋_GBK 10"
+theme.tasklist_font_focus = "方正屏显雅宋_GBK Bold 10"
 theme.tasklist_bg_focus = orange
 theme.tasklist_fg_focus = white1
 -- }}}
@@ -209,11 +210,11 @@ local separators = lain.util.separators
 
 --- {{{ Widgets
 local mytextclock = wibox.widget.textclock(" %a %m/%d %H:%M ")
-mytextclock.font = "方正宋刻本秀楷 Bold 12"
+mytextclock.font = "方正屏显雅宋_GBK Bold 10"
 
 -- {{{ CPU load
 theme.cpugraph = wibox.widget {
-   forced_width = 32,
+   forced_width = 36,
    paddings = 1,
    border_width = 1,
    border_color = white2,
@@ -230,10 +231,9 @@ awful.widget.watch('bash -c "mpstat -P ALL 2 1 | awk \'$12 ~ /[0-9.]+/ { print 1
                             table.insert(args, tonumber(val))
                          end
                          theme.cpugraph:add_value(args[1] / 100, 1)
-                         cpuwidget_t:set_text(string.format("CPU使用率: \n%.2f%%\n核心使用率: \n%.2f%%, %.2f%%, %.2f%%, %.2f%%,\n%.2f%%, %.2f%%, %.2f%%, %.2f%%,\n%.2f%%, %.2f%%, %.2f%%, %.2f%%,\n%.2f%%, %.2f%%, %.2f%%, %.2f%%,\n%.2f%%, %.2f%%, %.2f%%, %.2f%%,\n%.2f%%, %.2f%%, %.2f%%, %.2f%%.",
+                         cpuwidget_t:set_text(string.format("CPU使用率: \n%.2f%%\n核心使用率: \n%.2f%%, %.2f%%, %.2f%%, %.2f%%,\n%.2f%%, %.2f%%, %.2f%%, %.2f%%,\n%.2f%%, %.2f%%, %.2f%%, %.2f%%.",
                                                             args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9],
-                                                            args[10], args[11], args[12], args[13], args[14], args[15], args[16], args[17],
-                                                            args[18], args[19], args[20], args[21], args[22], args[23], args[24], args[25]))
+                                                            args[10], args[11], args[12], args[13]))
                       else
                          theme.cpugraph:add_value(0, 1)
                          cpuwidget_t:set_text(string.format("CPU使用率: 不明"))
@@ -248,9 +248,10 @@ local cpuwidget = wibox.container.margin(cpubg, 5, 8, 5, 5)
 local myalsabar = require("myalsabar")
 theme.volume = myalsabar {
    ticks = false,
+   height = 4,
    width = 64,
-   height = 16,
-   paddings = 1,
+   margins = 4,
+   paddings = 2,
    border_width = 1,
    border_color = white2,
    timeout = 11, -- time interval
@@ -259,7 +260,7 @@ theme.volume = myalsabar {
       mute = red1,
       unmute = white1
    },
-   notification_preset = { font = "方正宋刻本秀楷 10" }
+   notification_preset = { font = "方正屏显雅宋_GBK 10" }
 }
 theme.volume.bar:buttons(
    my_table.join (
@@ -284,7 +285,7 @@ local volumewidget = wibox.container.margin(volumebg, 5, 8, 7, 7)
 local mygpubar = require("mygpubar")
 theme.gputhermal = mygpubar {
    ticks = false,
-   width = 10,
+   width = 12,
    height = 5,
    paddings = 1,
    border_width = 1,
@@ -315,7 +316,7 @@ theme.membar = wibox.widget {
       widget = wibox.widget.progressbar,
    },
    forced_height = 5,
-   forced_width = 10,
+   forced_width = 12,
    direction = 'east',
    layout = wibox.container.rotate,
 }
@@ -368,12 +369,12 @@ theme.thermalbar = wibox.widget {
       widget = wibox.widget.progressbar,
    },
    forced_height = 5,
-   forced_width = 10,
+   forced_width = 12,
    direction = 'east',
    layout = wibox.container.rotate,
 }
 thermalwidget_t = awful.tooltip({ objects = { theme.thermalbar },})
-awful.widget.watch('bash -c "sensors | grep Tctl"', 7,
+awful.widget.watch('bash -c "sensors | grep Package | awk \'{ print $4 }\'"', 7,
                    function (widget, stdout)
                       if stdout ~= nil and stdout ~= "" then
                          temp = tonumber(string.match(stdout, '[%d.]+'))
@@ -428,7 +429,7 @@ awful.widget.watch('bash -c "liquidctl status | tail -n 4 | grep -o \'[0-9.]\\+\
                             theme.pumpbar.widget:set_color(orange)
                          elseif pumpargs[3] < 90 and pumpargs[3] >= 70 then
                             theme.pumpbar.widget:set_color(white1)
-                         elseif pumpargs[3] < 70 and pumpargs[3] >= 30 then
+                         elseif pumpargs[3] < 70 and pumpargs[3] >= 10 then
                             theme.pumpbar.widget:set_color(blue1)
                          else
                             theme.pumpbar.widget:set_background_color(red1)
@@ -518,7 +519,7 @@ local emailwidget = wibox.container.margin(emailbg, 5, 8, 5, 5)
 
 --- {{{ Net
 theme.netgraph = wibox.widget {
-   forced_width = 32,
+   forced_width = 36,
    paddings = 1,
    border_width = 1,
    border_color = white2,
@@ -565,10 +566,12 @@ local netwidget = wibox.container.margin(netbg, 5, 8, 5, 5)
 local mylayouts = {
    { lain.layout.centerwork, awful.layout.suit.tile, awful.layout.suit.tile,
      awful.layout.suit.tile, awful.layout.suit.tile, awful.layout.suit.floating,
-     awful.layout.suit.tile, awful.layout.suit.tile, awful.layout.suit.tile },
+     awful.layout.suit.tile, awful.layout.suit.tile, awful.layout.suit.tile
+   },
    { awful.layout.suit.fair.horizontal, awful.layout.suit.fair.horizontal, awful.layout.suit.fair.horizontal,
      awful.layout.suit.fair.horizontal, awful.layout.suit.fair.horizontal, awful.layout.suit.fair.horizontal,
-     awful.layout.suit.fair.horizontal, awful.layout.suit.fair.horizontal, awful.layout.suit.fair.horizontal}
+     awful.layout.suit.fair.horizontal, awful.layout.suit.fair.horizontal, awful.layout.suit.fair.horizontal
+   }
 }
 
 function theme.at_screen_connect(s)
@@ -667,7 +670,7 @@ function theme.at_screen_connect(s)
       },
    }
    -- Create the wibox
-   s.mywibox = awful.wibar({ position = "top", height = 28, screen = s,
+   s.mywibox = awful.wibar({ position = "top", height = 36, screen = s,
                              bg = "#00000000",
                              border_width = 1,
                              border_color = "#00000000",
@@ -695,8 +698,8 @@ function theme.at_screen_connect(s)
          -- brightnesswidget,
          wibox.widget.textbox("<b>聲</b>"),
          volumewidget,
-         wibox.widget.textbox("<b>泵</b>"),
-         pumpwidget,
+         -- wibox.widget.textbox("<b>泵</b>"),
+         -- pumpwidget,
          wibox.widget.textbox("<b>溫</b>"),
          thermalwidget,
          gputhermalwidget,

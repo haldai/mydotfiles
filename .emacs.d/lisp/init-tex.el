@@ -6,6 +6,7 @@
 ;;; Code:
 (use-package tex
   :straight auctex
+  :mode ("\\.tex\\'" . latex-mode)
   :init
   (progn
     (setq TeX-auto-save t
@@ -28,16 +29,10 @@
   :config
   (use-package auctex-latexmk
     :straight t
+    :init
+    (require 'tex-buf nil t)
     :config
     (auctex-latexmk-setup))
-
-  (use-package pdf-tools
-    :straight t
-    :mode (("\\.pdf$" . pdf-view-mode))
-    :init (pdf-tools-install)
-    :config
-    (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
-    (add-hook 'pdf-view-mode-hook #'pdf-view-midnight-minor-mode))
 
   (use-package company-auctex :straight t)
 
@@ -57,6 +52,16 @@
               (lambda ()
                 (setq TeX-view-program-selection '((output-pdf "PDF Tools")
                                                    (output-dvi "gv"))))))))
+;; PDF-view mode
+(use-package pdf-tools
+  :straight t
+  :mode (("\\.pdf\\'" . pdf-view-mode))
+  :init (pdf-tools-install)
+  :config
+  (setq pdf-view-midnight-colors '("#dcdccc" . "#3f3f3f" ))
+  (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
+  (add-hook 'pdf-view-mode-hook #'pdf-view-midnight-minor-mode))
+
 
 (provide 'init-tex)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

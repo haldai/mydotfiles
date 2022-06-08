@@ -6,7 +6,7 @@
 ;;; Code:
 
 ;; A tree layout file explorer
-(use-package treemacs
+(use-package treemacs-all-the-icons
   :straight t
   :defines winum-keymap
   :commands (treemacs-follow-mode
@@ -26,6 +26,9 @@
   :init
   (with-eval-after-load 'winum
     (bind-key (kbd "M-9") #'treemacs-select-window winum-keymap))
+  ;; use all-the-icons theme
+  (require 'treemacs-all-the-icons)
+  (treemacs-load-theme "all-the-icons")
   :config
   (setq treemacs-collapse-dirs                 (if (executable-find "python") 3 0)
         treemacs-deferred-git-apply-delay      0.5
