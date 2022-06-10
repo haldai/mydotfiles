@@ -61,17 +61,101 @@ show-playlist=false
 volume=0.80000000000000004
 width=954
 
+[io/github/realmazharhussain/GdmSettings]
+never-applied=false
+
+[io/github/realmazharhussain/GdmSettings/appearance]
+background-color='rgb(40,40,40)'
+background-image='/home/daiwz/.config/awesome/themes/zenburn/disco.png'
+background-type='Image'
+cursor-theme='Paper'
+icon-theme='Numix-Circle'
+shell-theme='default'
+
+[io/github/realmazharhussain/GdmSettings/fonts]
+antialiasing='rgba'
+font='方正屏显雅宋_GBK 12'
+hinting='medium'
+scaling-factor=1.0
+
+[io/github/realmazharhussain/GdmSettings/misc]
+disable-restart-buttons=false
+disable-user-list=false
+enable-logo=false
+enable-welcome-message=false
+logo=''
+welcome-message=''
+
+[io/github/realmazharhussain/GdmSettings/night-light]
+night-light-enabled=false
+night-light-end-hour=6
+night-light-end-minute=0
+night-light-schedule-automatic=true
+night-light-start-hour=20
+night-light-start-minute=0
+night-light-temperature=uint32 2700
+
+[io/github/realmazharhussain/GdmSettings/pointing/mouse]
+inverse-scrolling=false
+mouse-speed=0.0
+pointer-acceleration='default'
+
+[io/github/realmazharhussain/GdmSettings/pointing/touchpad]
+disable-while-typing=true
+natural-scrolling=true
+tap-to-click=false
+touchpad-speed=0.0
+two-finger-scrolling=true
+
+[io/github/realmazharhussain/GdmSettings/sound]
+event-sounds=true
+feedback-sounds=false
+over-amplification=false
+sound-theme='freedesktop'
+
+[io/github/realmazharhussain/GdmSettings/tools]
+top-bar-tweaks=false
+
+[io/github/realmazharhussain/GdmSettings/top-bar]
+change-top-bar-background-color=false
+change-top-bar-text-color=false
+disable-top-bar-arrows=false
+disable-top-bar-rounded-corners=false
+show-battery-percentage=false
+show-seconds=false
+show-weekday=true
+time-format='24h'
+top-bar-background-color='rgb(0,0,0)'
+top-bar-text-color='rgb(250,250,250)'
+
+[io/github/realmazharhussain/GdmSettings/window-state]
+height=uint32 1080
+last-visited-page='appearance'
+paned-position=uint32 190
+width=uint32 1920
+
 [net/launchpad/caffeine]
 show-notification=true
 
 [org/blueman/general]
+plugin-list=['AppIndicator']
+show-statusbar=true
 window-properties=[954, 1072, 962, 4]
+
+[org/blueman/network]
+nap-enable=false
+
+[org/blueman/plugins/autoconnect]
+services=[('/org/bluez/hci0/dev_CC_98_8B_94_A8_F5', '00000000-0000-0000-0000-000000000000')]
 
 [org/blueman/plugins/powermanager]
 auto-power-on=@mb true
 
 [org/blueman/plugins/recentconns]
 recent-connections=[{'adapter': '08:6A:C5:15:F6:75', 'address': 'CC:98:8B:94:A8:F5', 'alias': 'LE_WH-1000XM3', 'icon': 'audio-headset', 'name': '音频和输入配置文件', 'uuid': '00000000-0000-0000-0000-000000000000', 'time': '1654222709.9505136'}]
+
+[org/gnome/Characters]
+recent-characters=['✓', '❾', '❽', '❼', '❻', '❺', '❹', '❸', '❷', '❶', '🌒', '🌑']
 
 [org/gnome/Chess]
 height=672
@@ -84,6 +168,10 @@ migrated-config=true
 window-height=1080
 window-maximize=false
 window-width=1920
+
+[org/gnome/baobab/ui]
+is-maximized=false
+window-size=(1920, 1080)
 
 [org/gnome/boxes]
 first-run=false
@@ -104,10 +192,16 @@ video-y-resolution=960
 
 [org/gnome/control-center]
 last-panel='wifi'
-window-state=(954, 1072, false)
+window-state=(1920, 1080, false)
+
+[org/gnome/desktop/a11y]
+always-show-universal-access-status=false
 
 [org/gnome/desktop/a11y/applications]
 screen-reader-enabled=false
+
+[org/gnome/desktop/a11y/magnifier]
+mouse-tracking='proportional'
 
 [org/gnome/desktop/app-folders]
 folder-children=['Utilities', 'YaST']
@@ -200,6 +294,9 @@ application-id='Alacritty.desktop'
 [org/gnome/desktop/notifications/application/baidunetdisk]
 application-id='baidunetdisk.desktop'
 
+[org/gnome/desktop/notifications/application/blueman-manager]
+enable=false
+
 [org/gnome/desktop/notifications/application/ca-desrt-dconf-editor]
 application-id='ca.desrt.dconf-editor.desktop'
 
@@ -221,6 +318,9 @@ application-id='emacs.desktop'
 [org/gnome/desktop/notifications/application/emacsclient]
 application-id='emacsclient.desktop'
 
+[org/gnome/desktop/notifications/application/gnome-network-panel]
+application-id='gnome-network-panel.desktop'
+
 [org/gnome/desktop/notifications/application/gnome-system-monitor]
 application-id='gnome-system-monitor.desktop'
 
@@ -232,6 +332,9 @@ application-id='manjaro-settings-manager.desktop'
 
 [org/gnome/desktop/notifications/application/material-shell-papyelgringo]
 application-id='material-shell@papyelgringo.desktop'
+
+[org/gnome/desktop/notifications/application/org-fontforge-fontforge]
+application-id='org.fontforge.FontForge.desktop'
 
 [org/gnome/desktop/notifications/application/org-gnome-boxes]
 application-id='org.gnome.Boxes.desktop'
@@ -254,6 +357,15 @@ application-id='org.gnome.Nautilus.desktop'
 [org/gnome/desktop/notifications/application/org-gnome-settings]
 application-id='org.gnome.Settings.desktop'
 
+[org/gnome/desktop/notifications/application/org-gnome-software]
+enable=false
+
+[org/gnome/desktop/notifications/application/org-gnome-tweaks]
+application-id='org.gnome.tweaks.desktop'
+
+[org/gnome/desktop/notifications/application/org-inkscape-inkscape]
+application-id='org.inkscape.Inkscape.desktop'
+
 [org/gnome/desktop/notifications/application/org-kde-okular]
 application-id='org.kde.okular.desktop'
 
@@ -272,11 +384,17 @@ application-id='steam.desktop'
 [org/gnome/desktop/notifications/application/teams]
 application-id='teams.desktop'
 
+[org/gnome/desktop/notifications/application/wemeetapp]
+application-id='wemeetapp.desktop'
+
 [org/gnome/desktop/notifications/application/xdg-desktop-portal-gtk]
 application-id='xdg-desktop-portal-gtk.desktop'
 
 [org/gnome/desktop/notifications/application/yelp]
 enable=false
+
+[org/gnome/desktop/notifications/application/zhumu]
+application-id='Zhumu.desktop'
 
 [org/gnome/desktop/peripherals/mouse]
 accel-profile='default'
@@ -289,6 +407,8 @@ two-finger-scrolling-enabled=true
 
 [org/gnome/desktop/privacy]
 disable-microphone=false
+old-files-age=uint32 30
+recent-files-max-age=-1
 
 [org/gnome/desktop/screensaver]
 color-shading-type='solid'
@@ -298,6 +418,7 @@ primary-color='#000000000000'
 secondary-color='#000000000000'
 
 [org/gnome/desktop/search-providers]
+disabled=['org.gnome.Software.desktop']
 sort-order=['org.gnome.Contacts.desktop', 'org.gnome.Documents.desktop', 'org.gnome.Nautilus.desktop']
 
 [org/gnome/desktop/session]
@@ -401,6 +522,7 @@ size=(954, 486)
 state=87168
 
 [org/gnome/gnome-system-monitor]
+cpu-colors=[(uint32 0, '#e6194B'), (1, '#f58231'), (2, '#ffe119'), (3, '#bfef45'), (4, '#3cb44b'), (5, '#42d4f4'), (6, '#4363d8'), (7, '#911eb4'), (8, '#f032e6'), (9, '#fabebe'), (10, '#ffd8b1'), (11, '#fffac8'), (12, '#aaffc3'), (13, '#469990'), (14, '#000075'), (15, '#e6beff'), (16, '#a4fef3327999'), (17, '#f3327999c879'), (18, '#7999ebf5f332'), (19, '#f332d6f37999')]
 current-tab='resources'
 maximized=false
 network-total-in-bits=false
@@ -443,6 +565,10 @@ search-view='list-view'
 initial-size=(1920, 1080)
 maximized=false
 sidebar-width=200
+
+[org/gnome/nm-applet/eap/5e8b1938-c112-4e84-bc2f-f6b46597c524]
+ignore-ca-cert=false
+ignore-phase2-ca-cert=false
 
 [org/gnome/settings-daemon/plugins/color]
 night-light-enabled=false
@@ -676,7 +802,8 @@ secondarymenu-contains-showdetails=true
 shift-click-action='MINIMIZE'
 shift-middle-click-action='LAUNCH'
 show-appmenu=false
-show-apps-icon-file='/usr/share/icons/Numix-Circle/48/apps/distributor-logo-linux.svg'
+show-apps-icon-file='/usr/share/icons/Numix-Circle/48/apps/distributor-logo-archlinux.svg'
+show-apps-icon-side-padding=8
 show-apps-override-escape=true
 show-favorites=false
 show-favorites-all-monitors=true
@@ -707,7 +834,7 @@ has-battery=false
 user-enabled=true
 
 [org/gnome/shell/extensions/freon]
-hot-sensors=['Package id 0', 'NVIDIA GeForce RTX 3050', 'Composite']
+hot-sensors=['Package id 0', 'Composite', 'NVIDIA GeForce RTX 2080 Ti']
 panel-box-index=0
 position-in-panel='right'
 show-decimal-value=true
@@ -788,6 +915,7 @@ tile-move-down=['<Primary>n']
 tile-move-left=['<Primary>b']
 tile-move-right=['<Primary>f']
 tile-move-up=['<Primary>p']
+tile-orientation=['<Super>o']
 tile-swap-down=['<Primary><Super>n']
 tile-swap-left=['<Primary><Super>b']
 tile-swap-right=['<Primary><Super>f']
@@ -836,8 +964,15 @@ toggle-application-view=@as []
 toggle-message-tray=@as []
 toggle-overview=@as []
 
+[org/gnome/shell/weather]
+automatic-location=true
+locations=@av []
+
 [org/gnome/shell/world-clocks]
 locations=@av []
+
+[org/gnome/simple-scan]
+document-type='photo'
 
 [org/gnome/software]
 check-timestamp=int64 1654218101
