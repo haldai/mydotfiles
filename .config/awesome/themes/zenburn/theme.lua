@@ -19,7 +19,7 @@ local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 local theme = {
    wallpapers = { os.getenv("HOME") .. "/.config/awesome/themes/zenburn/DD.jpg",
                   os.getenv("HOME") .. "/.config/awesome/themes/zenburn/pw.jpg" },
-   wallpaper_scales = {1.00, 0.295}
+   wallpaper_scales = {1.5, 0.295}
 }
 -- }}}
 
@@ -223,9 +223,9 @@ mytextclock.font = "丁卯点阵体 9px Bold 12"
 
 -- {{{ CPU load
 theme.cpugraph = wibox.widget {
-   forced_width = 32,
-   paddings = 1,
-   border_width = 1,
+   forced_width = dpi(48),
+   paddings = dpi(1),
+   border_width = dpi(1),
    border_color = white2,
    color = white1,
    background_color = black1,
@@ -248,21 +248,22 @@ awful.widget.watch('bash -c "mpstat -P ALL 2 1 | awk \'$12 ~ /[0-9.]+/ { print 1
 end)
 
 local cpubg = wibox.container.background(theme.cpugraph, black2, gears.shape.rectangle)
-local cpuwidget = wibox.container.margin(cpubg, 5, 8, 5, 5)
+local cpuwidget = wibox.container.margin(cpubg, dpi(5), dpi(8), dpi(5), dpi(5))
 --- }}}
 
 --- {{{ Volume bar, add borders to lain.widget.alsabar
 local myalsabar = require("myalsabar")
 theme.volume = myalsabar {
    ticks = false,
-   width = 64,
-   height = 16,
-   paddings = 1,
-   border_width = 1,
+   width = dpi(64),
+   height = dpi(8),
+   paddings = dpi(1),
+   margins = dpi(4),
+   border_width = dpi(1),
    border_color = white2,
    timeout = 11, -- time interval
    colors = {
-      background = black1,
+      background = "#00000000",
       mute = red1,
       unmute = white1
    },
@@ -285,17 +286,17 @@ theme.volume.bar:buttons(
       end)
 ))
 local volumebg = wibox.container.background(theme.volume.bar, black2, gears.shape.rectangle)
-local volumewidget = wibox.container.margin(volumebg, 5, 8, 7, 7)
+local volumewidget = wibox.container.margin(volumebg, dpi(5), dpi(8), dpi(7), dpi(7))
 --- }}}
 
 --- {{{ GPU bar
 local mygpubar = require("mygpubar")
 theme.gputhermal = mygpubar {
    ticks = false,
-   width = 10,
-   height = 5,
-   paddings = 1,
-   border_width = 1,
+   width = dpi(12),
+   height = dpi(5),
+   paddings = dpi(1),
+   border_width = dpi(1),
    border_color = white1,
    timeout = 7, -- time interval
    colors = {
@@ -307,7 +308,7 @@ theme.gputhermal = mygpubar {
 }
 
 local gputhermalbg = wibox.container.background(theme.gputhermal.bar, black2, gears.shape.rectangle)
-local gputhermalwidget = wibox.container.margin(gputhermalbg, -2, 8, 5, 5)
+local gputhermalwidget = wibox.container.margin(gputhermalbg, dpi(-2), dpi(8), dpi(5), dpi(5))
 --- }}}
 
 --- {{{ RAM
@@ -316,14 +317,14 @@ theme.membar = wibox.widget {
       max_value = 100,
       color = white1,
       background_color = black1,
-      paddings = 1,
-      border_width = 1,
+      paddings = dpi(1),
+      border_width = dpi(1),
       border_color = white1,
       ticks = false,
       widget = wibox.widget.progressbar,
    },
-   forced_height = 5,
-   forced_width = 10,
+   forced_height = dpi(5),
+   forced_width = dpi(12),
    direction = 'east',
    layout = wibox.container.rotate,
 }
@@ -360,7 +361,7 @@ awful.widget.watch('bash -c "free -h --si | sed -n 2p"', 13,
 end)
 
 local membg = wibox.container.background(theme.membar, black2, gears.shape.rectangle)
-local memwidget = wibox.container.margin(membg, 5, 8, 5, 5)
+local memwidget = wibox.container.margin(membg, dpi(5), dpi(8), dpi(5), dpi(5))
 --- }}}
 
 -- {{{ Thermal
@@ -369,14 +370,14 @@ theme.thermalbar = wibox.widget {
       max_value = 100,
       -- color = white1,
       background_color = black1,
-      paddings = 1,
-      border_width = 1,
+      paddings = dpi(1),
+      border_width = dpi(1),
       border_color = white1,
       ticks = false,
       widget = wibox.widget.progressbar,
    },
-   forced_height = 5,
-   forced_width = 10,
+   forced_height = dpi(5),
+   forced_width = dpi(12),
    direction = 'east',
    layout = wibox.container.rotate,
 }
@@ -408,7 +409,7 @@ awful.widget.watch('bash -c "sensors | grep \'Package id 0:\'"', 7,
 end)
 
 local thermalbg = wibox.container.background(theme.thermalbar, black2, gears.shape.rectangle)
-local thermalwidget = wibox.container.margin(thermalbg, 5, 8, 5, 5)
+local thermalwidget = wibox.container.margin(thermalbg, dpi(5), dpi(8), dpi(5), dpi(5))
 --- }}}
 
 --- {{{ Pump
@@ -416,14 +417,14 @@ theme.pumpbar = wibox.widget {
    {
       -- color = white1,
       background_color = black1,
-      paddings = 1,
+      paddings = dpi(1),
       border_width = 1,
       border_color = white1,
       ticks = false,
       widget = wibox.widget.progressbar,
    },
-   forced_height = 5,
-   forced_width = 10,
+   forced_height = dpi(5),
+   forced_width = dpi(10),
    direction = 'east',
    layout = wibox.container.rotate,
 }
@@ -464,7 +465,7 @@ awful.widget.watch('bash -c "liquidctl status | tail -n 4 | grep -o \'[0-9.]\\+\
 end)
 
 local pumpbg = wibox.container.background(theme.pumpbar, black2, gears.shape.rectangle)
-local pumpwidget = wibox.container.margin(pumpbg, 5, 8, 5, 5)
+local pumpwidget = wibox.container.margin(pumpbg, dpi(5), dpi(8), dpi(5), dpi(5))
 --- }}}
 
 --- {{{ Calendar
@@ -476,7 +477,7 @@ local calendar = awful.widget.calendar_popup.year({
       long_weekdays = true,
       opacity       = 0.9,
       bg            = black3,
-      margin        = 10,
+      margin        = dpi(10),
       style_focus   = {
          fg_color   = yellow1,
          bg_color   = black0
@@ -496,21 +497,21 @@ local emailbg = wibox.widget {
    theme.emailnum,
    bg = black1,
    shape = gears.shape.rectangle,
-   shape_border_width = 1,
+   shape_border_width = dpi(1),
    shape_border_color = white1,
-   forced_width = 20,
+   forced_width = dpi(32),
    widget = wibox.container.background
 }
 awful.widget.watch(
-   script_path .. "offlineimap-count.sh", 600,
+   script_path .. "mail-count.sh", 600,
    function(widget, stdout, stderr, exitreason, exitcode)
       local unread_emails_num = tonumber(stdout) or 0
       if (unread_emails_num > 0) then
-         theme.emailnum:set_markup_silently("<span color=\"" .. white2 .. "\" font_desc=\"DinkieBitmap 7px\" size=\"9000\"><b>" .. tostring(unread_emails_num) .. "</b></span>")
+         theme.emailnum:set_markup_silently("<span color=\"" .. white2 .. "\" font_desc=\"DinkieBitmap 9px\" size=\"9000\"><b>" .. tostring(unread_emails_num) .. "</b></span>")
          emailbg:set_bg(red1)
          emailnum_t:set_text("郵件！右鍵！")
       elseif (unread_emails_num == 0) then
-         theme.emailnum:set_markup_silently("<span color=\"" .. white1 .. "\" font_desc=\"DinkieBitmap 7px\" size=\"9700\">無</span>")
+         theme.emailnum:set_markup_silently("<span color=\"" .. white1 .. "\" font_desc=\"DinkieBitmap 9px\" size=\"9700\">無</span>")
          emailbg:set_bg(black1)
          emailnum_t:set_text("暫無新郵件")
       end
@@ -520,19 +521,19 @@ theme.emailnum:buttons(
    my_table.join(
       awful.button({}, 3, function()
             awful.spawn("emacsclient -c -a emacs --eval \"(mu4e)\"")
-            theme.emailnum:set_markup_silently("<span color=\"" .. white1 .. "\" font_desc=\"DinkieBitmap 7px\" size=\"9700\">無</span>")
+            theme.emailnum:set_markup_silently("<span color=\"" .. white1 .. "\" font_desc=\"DinkieBitmap 9px\" size=\"9700\">無</span>")
             emailbg:set_bg(black1)
             emailnum_t:set_text("暫無新郵件")
       end)
 ))
-local emailwidget = wibox.container.margin(emailbg, 5, 8, 5, 5)
+local emailwidget = wibox.container.margin(emailbg, dpi(5), dpi(8), dpi(5), dpi(5))
 --- }}}
 
 --- {{{ Net
 theme.netgraph = wibox.widget {
-   forced_width = 32,
-   paddings = 1,
-   border_width = 1,
+   forced_width = dpi(48),
+   paddings = dpi(1),
+   border_width = dpi(1),
    border_color = white2,
    stack_colors = { blue1, red1 },
    step_width = 2,
@@ -568,7 +569,7 @@ awful.widget.watch('bash -c "~/.scripts/mynetstat"', 3,
 end)
 
 local netbg = wibox.container.background(theme.netgraph, black2, gears.shape.rectangle)
-local netwidget = wibox.container.margin(netbg, 5, 8, 5, 5)
+local netwidget = wibox.container.margin(netbg, dpi(5), dpi(8), dpi(5), dpi(5))
 --- }}}
 
 -- {{{ Battery
@@ -577,14 +578,14 @@ theme.batbar = wibox.widget {
       max_value = 100,
       -- color = white1,
       background_color = black1,
-      paddings = 1,
-      border_width = 1,
+      paddings = dpi(1),
+      border_width = dpi(1),
       border_color = white1,
       ticks = false,
       widget = wibox.widget.progressbar,
    },
-   forced_height = 5,
-   forced_width = 10,
+   forced_height = dpi(5),
+   forced_width = dpi(10),
    direction = 'east',
    layout = wibox.container.rotate,
 }
@@ -615,17 +616,17 @@ awful.widget.watch('bash -c "acpi -b | grep -v "unavailable" | tail -1"', 61,
                       end
 end)
 local batbg = wibox.container.background(theme.batbar, black2, gears.shape.rectangle)
-local batwidget = wibox.container.margin(batbg, 5, 8, 5, 5)
+local batwidget = wibox.container.margin(batbg, dpi(5), dpi(8), dpi(5), dpi(5))
 --- }}}
 
 --- {{{ Brightness
 local mybrightnessbar = require("mybrightnessbar")
 theme.brightness = mybrightnessbar {
    ticks = false,
-   width = 64,
-   height = 16,
-   paddings = 1,
-   border_width = 1,
+   width = dpi(64),
+   height = dpi(16),
+   paddings = dpi(1),
+   border_width = dpi(1),
    border_color = white2,
    timeout = 31,
    background_color = black1,
@@ -653,7 +654,7 @@ theme.brightness.bar:buttons(
       end)
 ))
 local brightnessbg = wibox.container.background(theme.brightness.bar, black2, gears.shape.rectangle)
-local brightnesswidget = wibox.container.margin(brightnessbg, 5, 8, 7, 7)
+local brightnesswidget = wibox.container.margin(brightnessbg, dpi(5), dpi(8), dpi(7), dpi(7))
 --- }}}
 
 --- }}}
@@ -704,7 +705,7 @@ function theme.at_screen_connect(s)
       buttons = awful.util.taglist_buttons,
       style   = {
          shape = gears.shape.square,
-         shape_border_width_focus = 0.5,
+         shape_border_width_focus = dpi(0.5),
          shape_border_color_focus = orange,
          fg_occupied = orange,
          bg_urgent = black1,
@@ -713,7 +714,7 @@ function theme.at_screen_connect(s)
          fg_focus = orange,
       },
       layout   = {
-         spacing = 7,
+         spacing = dpi(7),
          spacing_widget = wibox.widget.textbox("ꞏ"),
          layout  = wibox.layout.fixed.horizontal
       },
@@ -727,7 +728,7 @@ function theme.at_screen_connect(s)
       style = {
          spacing_widget = {
             {
-               thickness = 1,
+               thickness = dpi(1),
                color = white1,
             },
             valign = 'center',
@@ -740,7 +741,7 @@ function theme.at_screen_connect(s)
       widget_template = {
          {
             wibox.widget.base.make_widget(),
-            forced_height = 3,
+            forced_height = dpi(3),
             id = 'background_role',
             widget = wibox.container.background,
          },
@@ -750,7 +751,7 @@ function theme.at_screen_connect(s)
                   id = 'icon_role',
                   widget = wibox.widget.imagebox,
                },
-               margins = 2,
+               margins = dpi(2),
                widget = wibox.container.margin
             },
             {
@@ -758,7 +759,7 @@ function theme.at_screen_connect(s)
                   id = 'text_role',
                   widget = wibox.widget.textbox,
                },
-               margins = 2,
+               margins = dpi(2),
                widget = wibox.container.margin
             },
             layout = wibox.layout.align.horizontal,
@@ -767,9 +768,9 @@ function theme.at_screen_connect(s)
       },
    }
    -- Create the wibox
-   s.mywibox = awful.wibar({ position = "top", height = 28, screen = s,
+   s.mywibox = awful.wibar({ position = "top", height = dpi(36), screen = s,
                              bg = "#00000000",
-                             border_width = 1,
+                             border_width = dpi(1),
                              border_color = "#00000000",
                              fg = theme.fg_normal })
 
