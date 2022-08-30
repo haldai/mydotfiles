@@ -45,7 +45,7 @@ Misc:
 * [spaceship-prompt](https://github.com/denysdovhan/spaceship-prompt)
 * [dunst](https://dunst-project.org/)
 * [ranger](https://github.com/ranger/ranger)
-
+* [mu-wizard](https://github.com/cemkeylan/mu-wizard) for setting up mu4e.
 
 
 For conky weather script:
