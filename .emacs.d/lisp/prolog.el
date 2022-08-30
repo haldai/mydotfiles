@@ -8,7 +8,7 @@
 ;;          * See below for more details
 ;; Keywords: prolog major mode sicstus swi mercury
 
-(defvar prolog-mode-version "1.28"
+(defvar prolog-mode-version "1.29"
   "Prolog mode version number")
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -104,6 +104,14 @@
 
 ;; Changelog:
 
+;; Version 1.29:
+;;  o Fixed an issue with different buffers being consulted using the
+;;    same file name.  A different temporary file name is now used for
+;;    each buffer, but the name persists throughout the Emacs session.
+;;    Consulting regions or predicates is also done using file names
+;;    that are different from the name used to consult the whole
+;;    buffer (but once more persistent throughout the session for each
+;;    combination buffer-region and buffer-predicate).
 ;; Version 1.28:
 ;;  o Fixed the handling of backquoted entities.
 ;;  o Modified the default of `prolog-electric-if-then-else-flag' to
@@ -1275,12 +1283,18 @@ the variable `prolog-prompt-regexp'."
 ;; Old consulting and compiling functions
 ;;------------------------------------------------------------
 
-(defun prolog-old-process-region (compilep start end)
+(defun prolog-old-process-region (thing compilep start end &optional name)
   "Process the region limited by START and END positions.
-If COMPILEP is non-nil then use compilation, otherwise consulting."
+If COMPILEP is non-nil then use compilation, otherwise consulting.
+THING controls the name of the temporary file used to pass the
+region to the Prolog inferior process.  Distinct file names are
+used when THING is either region or predicate, case in which NAME
+(the name of the predicate or the start of the region as the case
+might be) is incorporated in the file name; NAME has otherwise no
+purpose."
    (prolog-ensure-process)
    ;(let ((tmpfile prolog-temp-filename)
-   (let ((tmpfile (prolog-bsts (prolog-temporary-file)))
+   (let ((tmpfile (prolog-bsts (prolog-temporary-file thing name)))
          ;(process (get-process "prolog"))
          (first-line (1+ (count-lines 
                           (point-min) 
@@ -1297,13 +1311,15 @@ If COMPILEP is non-nil then use compilation, otherwise consulting."
 (defun prolog-old-process-predicate (compilep)
   "Process the predicate around point.
 If COMPILEP is non-nil then use compilation, otherwise consulting."
-  (prolog-old-process-region
-   compilep (prolog-pred-start) (prolog-pred-end)))
+  (let* ((predicate (prolog-pred-start t))
+         (start (car predicate))
+         (name (cdr predicate)))
+    (prolog-old-process-region 'predicate compilep start (prolog-pred-end) name)))
 
 (defun prolog-old-process-buffer (compilep)
   "Process the entire buffer.
 If COMPILEP is non-nil then use compilation, otherwise consulting."
-  (prolog-old-process-region compilep (point-min) (point-max)))
+  (prolog-old-process-region 'buffer compilep (point-min) (point-max)))
 
 (defun prolog-old-process-file (compilep)
   "Process the file of the current buffer.
@@ -1341,8 +1357,8 @@ If COMPILEP is non-nil then use compilation, otherwise consulting."
   "Consult region between BEG and END."
   (interactive "r")
   (if prolog-use-standard-consult-compile-method-flag
-      (prolog-old-process-region nil beg end)
-    (prolog-consult-compile-region nil beg end)))
+      (prolog-old-process-region 'region nil beg end beg)
+    (prolog-consult-compile-region 'region nil beg end beg)))
 
 (defun prolog-consult-predicate ()
   "Consult the predicate around current point."
@@ -1369,8 +1385,8 @@ If COMPILEP is non-nil then use compilation, otherwise consulting."
   "Compile region between BEG and END."
   (interactive "r")
   (if prolog-use-standard-consult-compile-method-flag
-      (prolog-old-process-region t beg end)
-    (prolog-consult-compile-region t beg end)))
+      (prolog-old-process-region thing t beg end beg)
+    (prolog-consult-compile-region 'region t beg end beg)))
 
 (defun prolog-compile-predicate ()
   "Compile the predicate around current point."
@@ -1658,18 +1674,24 @@ If COMPILEP is non-nil, compile, otherwise consult."
         (progn
           (save-some-buffers)
           (prolog-consult-compile compilep file))
-      (prolog-consult-compile-region compilep (point-min) (point-max)))))
+      (prolog-consult-compile-region 'file compilep (point-min) (point-max)))))
 
 (defun prolog-consult-compile-buffer (compilep)
   "Consult/compile current buffer.
 If COMPILEP is non-nil, compile, otherwise consult."
-  (prolog-consult-compile-region compilep (point-min) (point-max)))
+  (prolog-consult-compile-region 'buffer compilep (point-min) (point-max)))
 
-(defun prolog-consult-compile-region (compilep beg end)
+(defun prolog-consult-compile-region (thing compilep beg end &optional name)
   "Consult/compile region between BEG and END.
-If COMPILEP is non-nil, compile, otherwise consult."
+If COMPILEP is non-nil, compile, otherwise consult.
+THING controls the name of the temporary file used to pass the
+region to the Prolog inferior process.  Distinct file names are
+used when THING is either region or predicate, case in which NAME
+(the name of the predicate or the start of the region as the case
+might be) is incorporated in the file name; NAME has otherwise no
+purpose."
   ;(let ((file prolog-temp-filename)
-  (let ((file (prolog-bsts (prolog-temporary-file)))
+  (let ((file (prolog-bsts (prolog-temporary-file thing name)))
         (lines (count-lines 1 beg)))
     (write-region beg end file nil 'no-message)
     (write-region "\n" nil file t 'no-message)
@@ -1680,8 +1702,10 @@ If COMPILEP is non-nil, compile, otherwise consult."
 (defun prolog-consult-compile-predicate (compilep)
   "Consult/compile the predicate around current point.
 If COMPILEP is non-nil, compile, otherwise consult."
-  (prolog-consult-compile-region
-   compilep (prolog-pred-start) (prolog-pred-end)))
+  (let* ((predicate (prolog-pred-start t))
+         (start (car predicate))
+         (name (cdr predicate)))
+    (prolog-consult-compile-region 'predicate compilep start (prolog-pred-end) name)))
 
 
 ;;-------------------------------------------------------------------
@@ -3013,56 +3037,35 @@ and end of list building."
       (setq i (1+ i)))
     str1))
 
-;(defun prolog-temporary-file ()
-;  "Make temporary file name for compilation."
-;  (make-temp-name 
-;   (concat 
-;    (or
-;     (getenv "TMPDIR")
-;     (getenv "TEMP") 
-;     (getenv "TMP")
-;     (getenv "SYSTEMP")
-;     "/tmp")
-;    "/prolcomp")))
-;(setq prolog-temp-filename (prolog-bsts (prolog-temporary-file)))
-
-(defun prolog-temporary-file ()
-  "Make temporary file name for compilation."
-  (if prolog-temporary-file-name
-      ;; We already have a file, erase content and continue
-      (progn
-        (write-region "" nil prolog-temporary-file-name nil 'silent)
-        prolog-temporary-file-name)
-    ;; Actually create the file and set `prolog-temporary-file-name' accordingly
-    (let* ((umask  (default-file-modes))
-           (temporary-file-directory (or
-                                      (getenv "TMPDIR")
-                                      (getenv "TEMP") 
-                                      (getenv "TMP")
-                                      (getenv "SYSTEMP")
-                                      "/tmp"))
-           (prefix (expand-file-name "prolcomp" temporary-file-directory))
-           (suffix ".pl")
-           file)
-      (unwind-protect
-          (progn
-            ;; Create temp files with strict access rights.
-            (set-default-file-modes #o700)
-            (while (condition-case ()
-                       (progn
-                         (setq file (concat (make-temp-name prefix) suffix))
-                         ;; (concat (make-temp-name "/tmp/prolcomp") ".pl")
-                         (unless (file-exists-p file)
-                           (write-region "" nil file nil 'silent))
-                         nil)
-                     (file-already-exists t))
-              ;; the file was somehow created by someone else between
-              ;; `make-temp-name' and `write-region', let's try again.
-              nil)
-            (setq prolog-temporary-file-name file))
-        ;; Reset the umask.
-        (set-default-file-modes umask)))    
-    ))
+(defun prolog-temporary-file (&optional thing name-or-start)
+  "Provide a temporary file name for compilation or consulting.
+A unique file name is generated for each buffer, but all these
+names are persistent throughout the Emacs session.  Additionally,
+when THING is either region or predicate the file name also
+incorporates NAME-OR-START."
+  (let ((umask  (default-file-modes))
+        (temporary-file-directory (or
+                                   (getenv "TMPDIR")
+                                   (getenv "TEMP") 
+                                   (getenv "TMP")
+                                   (getenv "SYSTEMP")
+                                   "/tmp"))
+        (suffix (if buffer-file-name (file-name-nondirectory buffer-file-name) (buffer-name)))
+        file)
+    (unless prolog-temporary-file-name
+      (setq prolog-temporary-file-name (make-temp-name (expand-file-name "prolcomp" temporary-file-directory))))
+    (cond 
+     ((eq thing 'region)  (setq suffix (format "%s-%s" name-or-start suffix)))
+     ((eq thing 'predicate)  (setq suffix (concat name-or-start suffix)))
+     ; file buffer fall-through
+     )
+    (unless (file-name-extension suffix) (setq suffix (concat suffix ".pl")))
+    (setq file (concat prolog-temporary-file-name suffix))
+    ;; We have a file name unique for the current entity.
+    (set-default-file-modes #o700) ; in case we create the file
+    (write-region "" nil file nil 'silent) ; erase
+    (set-default-file-modes umask)
+    file))
 
 (defun prolog-goto-prolog-process-buffer ()
   "Switch to the prolog process buffer and go to its end."
@@ -3209,14 +3212,16 @@ STRING should be given if the last search was by `string-match' on STRING."
           (substring string (match-beginning num) (match-end num))
         (buffer-substring (match-beginning num) (match-end num))))))
 
-(defun prolog-pred-start ()
-  "Return the starting point of the first clause of the current predicate."
+(defun prolog-pred-start (&optional name)
+  "Return the starting point of the first clause of the current predicate.
+If `name' is non-nil returns a cons cell containing the start
+point and also the predicate name (or nil whenever we are not
+inside a predicate)."
   (save-excursion
     (goto-char (prolog-clause-start))
     ;; Find first clause, unless it was a directive
     (if (and (not (looking-at "[:?]-"))
              (not (looking-at "[ \t]*[%/]"))  ; Comment
-             
              )
         (let* ((pinfo (prolog-clause-info))
                (predname (nth 0 pinfo))
@@ -3238,8 +3243,12 @@ STRING should be given if the last search was by `string-match' on STRING."
                                      predname)))
                   (setq op (point))
                   (goto-char (prolog-beginning-of-clause)))))
-          op)
-      (point))))
+          (if name (cons op predname)
+            op)
+          )
+      (if name (cons (point) nil)
+        (point))
+      )))
 
 (defun prolog-pred-end ()
   "Return the position at the end of the last clause of the current predicate."
