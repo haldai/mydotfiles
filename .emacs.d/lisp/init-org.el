@@ -443,7 +443,14 @@
                                    :tag ("Trivial" "Unimportant")
                                    :todo ("SOMEDAY" )
                                    :order 90)
-                            (:discard (:tag ("Chore" "Routine" "Daily"))))))))))))
+                            (:discard (:tag ("Chore" "Routine" "Daily")))))))))))
+
+  ;; Agenda
+  (define-key global-map "\C-cl" 'org-store-link)
+  (define-key global-map "\C-ca" 'org-agenda)
+  (setq org-log-done t)
+  (setq org-agenda-files
+        (file-expand-wildcards "~/Org/agenda/*.org")))
 
 (use-package org-roam
   :straight t
