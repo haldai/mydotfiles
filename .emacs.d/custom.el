@@ -128,9 +128,6 @@
      (gnu "gprolog")
      (t "prolog")))
  '(prolog-program-switches '((swi ("-G128M" "-T128M" "-L128M" "-O")) (t nil)))
- '(pyim-dicts
-   '((:name "greatdict" :file "/home/daiwz/.emacs.d/pyim-greatdict.pyim.gz")
-     (:name "bigdict" :file "/home/daiwz/.emacs.d/pyim-bigdict.pyim.gz")))
  '(straight-recipes-gnu-elpa-url "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
