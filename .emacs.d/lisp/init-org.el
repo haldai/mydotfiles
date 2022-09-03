@@ -11,7 +11,9 @@
   :functions hydra-org-template/body
   :bind (:map org-mode-map
               ("C-c a" . org-agenda)
+              ("C-c s" . org-schedule)
               ("C-c b" . org-switchb)
+              ("C-c l" . org-store-link)
               ("C-c SPC" . insert-zero-width-space)
               ("ESC SPC" . insert-thin-space))
   :hook ((org-indent-mode . (lambda () (diminish 'org-indent-mode)))
@@ -21,7 +23,7 @@
   (use-package org-contrib :straight t)
   (use-package simple-httpd :straight t)
   :config
-  (setq org-directory "~/.org"                      ; let's put files here
+  (setq org-directory "~/Org"                       ; let's put files here
         org-use-property-inheritance t              ; it's convenient to have properties inherited
         org-log-done 'time                          ; having the time a item is done sounds convenient
         org-list-allow-alphabetical t               ; have a. A. a) A) list bullets
@@ -29,6 +31,17 @@
         org-catch-invisible-edits 'smart            ; try not to accidently do weird stuff in invisible regions
         org-export-with-sub-superscripts '{})       ; don't treat lone _ / ^ as sub/superscripts, require _{} / ^{}
 
+  (define-key global-map "\C-cl" 'org-store-link)
+  (define-key global-map "\C-ca" 'org-agenda)
+  (define-key global-map "\C-cs" 'org-schedule)
+  (setq org-agenda-files (list "~/Org/agenda/Teaching.org"
+                               "~/Org/agenda/Research.org"
+                               "~/Org/agenda/Admin.org"
+                               "~/Org/agenda/Advice.org"
+                               "~/Org/agenda/Home.org"
+                               "~/Org/agenda/Service.org"
+                               "~/Org/agenda/Project.org"
+                               "~/Org/agenda/Talk.org"))
 
   (add-hook 'text-mode-hook #'visual-line-mode)
   (remove-hook 'text-mode-hook #'auto-fill-mode)
@@ -38,21 +51,6 @@
 
   ;; indent in source code block
   (setq org-src-tab-acts-natively t)
-
-  (setq org-agenda-files (list "~/.org/work.org"
-                               "~/.org/home.org")
-        org-todo-keywords '((sequence "TODO(T)" "DOING(I)" "HANGUP(H)" "|" "DONE(D)" "CANCEL(C)")
-                            (sequence "⚑(t)" "🏴(i)" "❓(h)" "|" "✔(d)" "✘(c)"))
-        org-todo-keyword-faces '(("HANGUP" . warning)
-                                 ("❓" . warning))
-        org-log-done 'time
-        org-startup-indented t
-        org-startup-with-inline-images t
-        org-ellipsis (if (char-displayable-p ?) " " nil)
-        org-cycle-separator-lines -1
-        org-pretty-entities t
-        org-hide-emphasis-markers t
-        org-image-actual-width nil)
 
   (defun my/org-mode/load-prettify-symbols ()
     (interactive)
@@ -373,6 +371,20 @@
             (lambda () (add-hook 'before-save-hook #'org-syntax-convert-keyword-case-to-lower nil 'local)))
 
   ;; Super agenda
+
+  (setq org-todo-keywords '((sequence "TODO(T)" "DOING(I)" "HANGUP(H)" "|" "DONE(D)" "CANCEL(C)")
+                            (sequence "⚑(t)" "🏴(i)" "❓(h)" "|" "✔(d)" "✘(c)"))
+        org-todo-keyword-faces '(("HANGUP" . warning)
+                                 ("❓" . warning))
+        org-log-done 'time
+        org-startup-indented t
+        org-startup-with-inline-images t
+        org-ellipsis (if (char-displayable-p ?) " " nil)
+        org-cycle-separator-lines -1
+        org-pretty-entities t
+        org-hide-emphasis-markers t
+        org-image-actual-width nil)
+
   (use-package org-super-agenda
     :straight t
     :after org-agenda
@@ -414,43 +426,36 @@
                                    :deadline past
                                    :face error
                                    :order 7)
-                            (:name "Assignments"
-                                   :tag "Assignment"
+                            (:name "Teaching"
+                                   :tag "Teaching"
                                    :order 10)
-                            (:name "Issues"
-                                   :tag "Issue"
-                                   :order 12)
-                            (:name "Emacs"
-                                   :tag "Emacs"
-                                   :order 13)
-                            (:name "Projects"
-                                   :tag "Project"
-                                   :order 14)
                             (:name "Research"
                                    :tag "Research"
+                                   :order 12)
+                            (:name "Admin"
+                                   :tag "Admin"
+                                   :order 13)
+                            (:name "Project"
+                                   :tag "Project"
+                                   :order 14)
+                            (:name "Advice"
+                                   :tag "Advice"
                                    :order 15)
-                            (:name "To read"
-                                   :tag "Read"
+                            (:name "Home"
+                                   :tag "Home"
+                                   :order 30)
+                            (:name "Talk"
+                                   :tag "Talk"
                                    :order 30)
                             (:name "Waiting"
                                    :todo "WAITING"
                                    :order 20)
-                            (:name "University"
-                                   :tag "uni"
-                                   :order 32)
                             (:name "Trivial"
                                    :priority<= "E"
                                    :tag ("Trivial" "Unimportant")
                                    :todo ("SOMEDAY" )
                                    :order 90)
-                            (:discard (:tag ("Chore" "Routine" "Daily")))))))))))
-
-  ;; Agenda
-  (define-key global-map "\C-cl" 'org-store-link)
-  (define-key global-map "\C-ca" 'org-agenda)
-  (setq org-log-done t)
-  (setq org-agenda-files
-        (file-expand-wildcards "~/Org/agenda/*.org")))
+                            (:discard (:tag ("Chore" "Routine" "Daily"))))))))))))
 
 (use-package org-roam
   :straight t
