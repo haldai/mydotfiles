@@ -23,7 +23,8 @@
   (use-package org-contrib :straight t)
   (use-package simple-httpd :straight t)
   :config
-  (setq org-directory "~/Org"                       ; let's put files here
+  (setq org-agenda-files '("~/Org/agenda/")
+        org-directory "~/Org"                       ; let's put files here
         org-use-property-inheritance t              ; it's convenient to have properties inherited
         org-log-done 'time                          ; having the time a item is done sounds convenient
         org-list-allow-alphabetical t               ; have a. A. a) A) list bullets
@@ -34,14 +35,6 @@
   (define-key global-map "\C-cl" 'org-store-link)
   (define-key global-map "\C-ca" 'org-agenda)
   (define-key global-map "\C-cs" 'org-schedule)
-  (setq org-agenda-files (list "~/Org/agenda/Teaching.org"
-                               "~/Org/agenda/Research.org"
-                               "~/Org/agenda/Admin.org"
-                               "~/Org/agenda/Advice.org"
-                               "~/Org/agenda/Home.org"
-                               "~/Org/agenda/Service.org"
-                               "~/Org/agenda/Project.org"
-                               "~/Org/agenda/Talk.org"))
 
   (add-hook 'text-mode-hook #'visual-line-mode)
   (remove-hook 'text-mode-hook #'auto-fill-mode)
