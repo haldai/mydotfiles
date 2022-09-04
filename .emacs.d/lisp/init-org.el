@@ -131,19 +131,20 @@
   (use-package org-mime :straight t)
 
   ;; fonts
+  (setq org-tags-column -77)
   (custom-theme-set-faces
    'user
-   '(variable-pitch ((t (:family "Vollkorn" :height 1.2))))
-   '(fixed-pitch ((t (:family "SauceCodePro Nerd Font Mono" :slant normal :weight normal :height .9))))
-   '(org-level-1 ((t (:family "Vollkorn" :height 1.5 :weight bold))))
-   '(org-level-2 ((t (:family "Vollkorn" :height 1.2 :weight bold))))
-   '(org-level-3 ((t (:family "Vollkorn" :height 1.2 :weight bold))))
-   '(org-level-4 ((t (:family "Vollkorn" :height 1.2 :weight bold))))
-   '(org-level-5 ((t (:family "Vollkorn" :height 1.2 :weight bold))))
-   '(org-level-6 ((t (:family "Vollkorn" :height 1.2 :weight bold))))
-   '(org-level-7 ((t (:family "Vollkorn" :height 1.2 :weight bold))))
-   '(org-level-8 ((t (:family "Vollkorn" :height 1.2 :weight bold))))
-   '(org-document-title ((t (:family "Vollkorn" :height 2.0 :weight bold))))
+   '(variable-pitch ((t (:family "Vollkorn" :height 1.1))))
+   '(fixed-pitch ((t (:family "SauceCodePro Nerd Font Mono" :slant normal :weight normal :height .95))))
+   '(org-level-1 ((t (:inherit variable-pitch :height 1.5 :weight bold))))
+   '(org-level-2 ((t (:inherit variable-pitch :height 1.2 :weight bold))))
+   '(org-level-3 ((t (:inherit variable-pitch :height 1.2 :weight bold))))
+   '(org-level-4 ((t (:inherit variable-pitch :height 1.2 :weight bold))))
+   '(org-level-5 ((t (:inherit variable-pitch :height 1.2 :weight bold))))
+   '(org-level-6 ((t (:inherit variable-pitch :height 1.2 :weight bold))))
+   '(org-level-7 ((t (:inherit variable-pitch :height 1.2 :weight bold))))
+   '(org-level-8 ((t (:inherit variable-pitch :height 1.2 :weight bold))))
+   '(org-document-title ((t (:inherit variable-pitch :height 2.0 :weight bold))))
    '(org-block ((t (:inherit fixed-pitch))))
    '(org-todo ((t (:inherit fixed-pitch))))
    '(org-done ((t (:inherit fixed-pitch))))
@@ -405,8 +406,8 @@
                           '((:name "Next to do"
                                    :todo "NEXT"
                                    :order 1)
-                            (:name "Important"
-                                   :tag "Important"
+                            (:name "important"
+                                   :tag "important"
                                    :priority "A"
                                    :order 6)
                             (:name "Due Today"
@@ -419,33 +420,15 @@
                                    :deadline past
                                    :face error
                                    :order 7)
-                            (:name "Teaching"
-                                   :tag "Teaching"
-                                   :order 10)
-                            (:name "Research"
-                                   :tag "Research"
-                                   :order 12)
-                            (:name "Admin"
-                                   :tag "Admin"
-                                   :order 13)
-                            (:name "Project"
-                                   :tag "Project"
-                                   :order 14)
-                            (:name "Advice"
-                                   :tag "Advice"
-                                   :order 15)
-                            (:name "Home"
-                                   :tag "Home"
-                                   :order 30)
-                            (:name "Talk"
-                                   :tag "Talk"
-                                   :order 30)
+                            (:name "meeting"
+                                   :tag "meeting"
+                                   :order 7)
                             (:name "Waiting"
                                    :todo "WAITING"
                                    :order 20)
                             (:name "Trivial"
                                    :priority<= "E"
-                                   :tag ("Trivial" "Unimportant")
+                                   :tag ("trivial" "unimportant")
                                    :todo ("SOMEDAY" )
                                    :order 90)
                             (:discard (:tag ("Chore" "Routine" "Daily"))))))))))))
