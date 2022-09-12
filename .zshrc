@@ -158,12 +158,14 @@ export OPENCV_LOG_LEVEL="ERROR"
 
 # My alias
 # alias emacs='emacs -nw'
-alias pl='LD_PRELOAD=/usr/lib/libc.so.6 swipl'
+# alias pl='LD_PRELOAD=/usr/lib/libc.so.6 swipl'
+alias pl='swipl'
 alias jl='julia'
 alias sc='scheme'
 alias jlo='optirun julia'
 alias matlab='LANG=en_US.utf-8 matlab'
 alias f='fuck'
+alias fo='handlr open "$(fzf)"'
 
 # optimus
 PRIMUS_PREFIX="primusrun"
