@@ -207,6 +207,7 @@
                                (perl . t)
                                (julia . t)
                                (python . t)
+                               (prolog . t)
                                (ruby . t)
                                (js . t)
                                (css . t)
@@ -444,6 +445,7 @@
          ("C-c n f" . org-roam-node-find)
          ("C-c n g" . org-roam-graph)
          ("C-c n i" . org-roam-node-insert)
+         ("C-c n d" . org-id-get-create)
          ("C-c n c" . org-roam-capture)
          ;; Dailies
          ("C-c n j" . org-roam-dailies-capture-today))
