@@ -175,8 +175,7 @@ OPTIMUS_PREFIX="optirun"
 export JULIA_NUM_THREADS=32
 
 # spaceship promp
-autoload -U promptinit; promptinit
-prompt spaceship
+source /usr/lib/spaceship-prompt/spaceship.zsh
 SPACESHIP_PROMPT_ORDER=(
     # time        # Time stampts section (Disabled)
     user          # Username section
@@ -206,7 +205,6 @@ SPACESHIP_PROMPT_ORDER=(
     exec_time     # Execution time
     line_sep      # Line break
     battery       # Battery level and status
-    vi_mode     # Vi-mode indicator (Disabled)
     jobs          # Background jobs indicator
     exit_code     # Exit code section
     char          # Prompt character
