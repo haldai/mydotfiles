@@ -106,5 +106,12 @@
 (use-package scratch
   :straight t)
 
+;; bind F5 to previous buffer
+(global-set-key (kbd "<f5>") 'previous-buffer)
+;; bind F6 to previous buffer
+(global-set-key (kbd "<f6>") 'next-buffer)
+;; bind F7 to kill current buffer
+(global-set-key (kbd "<f7>") 'kill-current-buffer)
+
 (provide 'init-utils)
 ;;; init-utils.el ends here
