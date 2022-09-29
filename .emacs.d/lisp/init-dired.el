@@ -72,6 +72,23 @@
               (forward-line 1))))))
     (advice-add #'all-the-icons-dired--display :override #'my-all-the-icons-dired--display))
 
+  ;; OpenWith
+  (use-package openwith
+    :straight t
+    :ensure t
+    :config
+    (setq openwith-associations
+          (cond
+           ((string-equal system-type "darwin")
+            '(("\\.\\(dmg\\|doc\\|docs\\|xls\\|xlsx\\)$"
+               "open" (file))
+              ("\\.\\(mp4\\|mp3\\|webm\\|avi\\|flv\\|mov\\)$"
+               "open" ("-a" "VLC" file))))
+           ((string-equal system-type "gnu/linux")
+            '(("\\.\\(mp4\\|mp3\\|webm\\|avi\\|flv\\|mov\\|doc\\|docx\\|xls\\|xlsx\\|ppt\\|pptx\\)$"
+               "xdg-open" (file))))))
+    (openwith-mode +1))
+
   ;; Extra Dired functionality
   (use-package dired-aux)
   (use-package dired-x
@@ -81,6 +98,7 @@
       (setq dired-guess-shell-alist-user
             `(("\\.pdf\\'" ,cmd)
               ("\\.docx\\'" ,cmd)
+              ("\\.doc\\'" ,cmd)
               ("\\.\\(?:djvu\\|eps\\)\\'" ,cmd)
               ("\\.\\(?:jpg\\|jpeg\\|png\\|gif\\|xpm\\)\\'" ,cmd)
               ("\\.\\(?:xcf\\)\\'" ,cmd)
