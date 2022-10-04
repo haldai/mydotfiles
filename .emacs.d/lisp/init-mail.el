@@ -4,9 +4,8 @@
 ;;
 
 ;;; Code:
-
+(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
 (load-file "~/.config/mu4e/mu4e-config.el")
-
 
 ;; don't keep message buffers around
 (setq message-kill-buffer-on-exit t)
@@ -36,7 +35,7 @@
 
 ;; convert org content in mu4e to html and send
 (require 'org-mime)
-(require 'org-mu4e)
+(require 'mu4e-org)
 
 (defun htmlize-and-send ()
   "When in an org-mu4e-compose-org-mode message, htmlize and send it."
