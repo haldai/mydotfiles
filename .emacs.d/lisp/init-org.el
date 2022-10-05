@@ -202,6 +202,12 @@
         org-src-fontify-natively t
         org-src-tab-acts-natively t)
 
+  (use-package ob-julia
+    :straight (ob-julia :type git :host nil :repo "https://git.nixo.xyz/nixo/ob-julia"))
+
+  (use-package ob-prolog
+    :straight (ob-prolog :type git :host github :repo "ljos/ob-prolog"))
+
   (defvar load-language-list '((emacs-lisp . t)
                                (latex . t)
                                (perl . t)
@@ -335,9 +341,6 @@
     :straight t)
 
   (require 'org-tempo)
-
-  (use-package ob-julia
-    :straight (ob-julia :type git :host nil :repo "https://git.nixo.xyz/nixo/ob-julia"))
 
   ;; reveal
   (use-package ox-reveal
