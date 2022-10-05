@@ -56,9 +56,6 @@
     :config
     (setq ediprolog-prefix "%%@"))
 
-  ;; ob-prolog
-  (use-package ob-prolog :straight t))
-
 ;; Potassco Answer Set Program
 (use-package clingo-mode
   :straight (clingo-mode :type git :host github :repo "llaisdy/clingo-mode")

@@ -205,8 +205,7 @@
   (use-package ob-julia
     :straight (ob-julia :type git :host nil :repo "https://git.nixo.xyz/nixo/ob-julia"))
 
-  (use-package ob-prolog
-    :straight (ob-prolog :type git :host github :repo "ljos/ob-prolog"))
+  (use-package ob-prolog :straight t)
 
   (defvar load-language-list '((emacs-lisp . t)
                                (latex . t)
