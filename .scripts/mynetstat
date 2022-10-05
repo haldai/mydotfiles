@@ -13,7 +13,7 @@ do
     if [ $face != "lo" ] && [ $(cat "$dir/operstate") == "up" ]; then
         if [ $(cat "$dir/carrier") == "1" ]; then
             if_name=$face
-            sar_re=$(LC_ALL=en_US.UTF-8 sar -n DEV $t 1 | grep 'Average' | grep $if_name)
+            sar_re=$(LC_ALL=en_GB.UTF-8 sar -n DEV $t 1 | grep 'Average' | grep $if_name)
             rx=$(echo $sar_re | awk -F' ' '{print $5}')
             tx=$(echo $sar_re | awk -F' ' '{print $6}')
             break
