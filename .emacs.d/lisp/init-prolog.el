@@ -54,7 +54,7 @@
                 ("C-c <f10>" . ediprolog-consult)
                 ("C-c q" . insert-prolog-query-mark))
     :config
-    (setq ediprolog-prefix "%%@"))
+    (setq ediprolog-prefix "%%@")))
 
 ;; Potassco Answer Set Program
 (use-package clingo-mode
