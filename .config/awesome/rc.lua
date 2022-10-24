@@ -97,7 +97,7 @@ local terminal = "alacritty"
 local editor = "emacsclient -c -a emacs"
 local editor_cmd = terminal .. " -e " .. editor
 local browser = "google-chrome-stable --disable-gpu --disable-software-rasterizer"
-local filemanager = "pcmanfm"
+local filemanager = "nautilus"
 
 -- {{{ taglist and tasklist buttons
 awful.util.taglist_buttons = my_table.join(
@@ -230,7 +230,7 @@ awful.util.mymainmenu = awful.menu({
          { " 終端", function () awful.spawn(terminal) end, icon_path .. "apps/utilities-terminal.png" },
          { " 編輯", function () awful.spawn("emacsclient -c -a emacs") end, icon_path .. "apps/emacs.png" },
          { " 衝浪", function () awful.spawn("google-chrome-stable --disable-software-rasterizer") end, icon_path .. "apps/chrome.png" },
-         { " 文件", function () awful.spawn("pcmanfm") end, icon_path .. "apps/file-manager.png" },
+         { " 文件", function () awful.spawn("nautilus") end, icon_path .. "apps/file-manager.png" },
          { " 監控", function () awful.spawn("alacritty -e htop") end, icon_path .. "apps/utilities-system-monitor.png" },
          { " 聲音", function () awful.spawn("pavucontrol") end, icon_path .. "apps/sound.png" },
          { " 托盤", function () awful.spawn.with_shell("~/.scripts/toggle_systray") end, icon_path .. "places/workspace-switcher-right-bottom.png" },
@@ -658,6 +658,7 @@ awful.rules.rules = {
            "PeaZip",
            "hp-toolbox",
            "wechat.exe",
+           "qqmusic",
         },
 
         -- Note that the name property shown in xprop might be set slightly after creation of the client
@@ -665,6 +666,7 @@ awful.rules.rules = {
         name = {
            "Event Tester",  -- xev.
            "画中画",
+           "保存文件",
         },
         role = {
            "AlarmWindow",  -- Thunderbird's calendar.
@@ -689,8 +691,6 @@ awful.rules.rules = {
      properties = { tag = awful.util.tagnames[4] } },
    { rule = {class = "shadowsocks-qt5"},
      properties = { tag = awful.util.tagnames[4], minimized = true } },
-   { rule = {class = "Pcmanfm"},
-     properties = { tag = awful.util.tagnames[5] } },
    { rule_any = {class = { "electronic-wechat", "qq.exe", "wechat.exe", "微信" } },
      properties = { tag = awful.util.tagnames[6] } },
 }
