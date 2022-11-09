@@ -37,16 +37,35 @@
 (require 'org-mime)
 (require 'mu4e-org)
 
-(defun htmlize-and-send ()
-  "When in an org-mu4e-compose-org-mode message, htmlize and send it."
-  (interactive)
-  (when (member 'org~mu4e-mime-switch-headers-or-body post-command-hook)
-    (org-mime-htmlize)
-    (message-send-and-exit)))
+(setq org-mime-export-options '(:with-latex dvipng
+                                            :section-numbers nil
+                                            :with-author nil
+                                            :with-toc nil))
+(add-hook 'org-mime-html-hook
+          (lambda ()
+            (org-mime-change-element-style
+             "pre" (format "color: %s; background-color: %s; padding: 0.5em;"
+                           "#DCDCCC" "#3F3F3F"))))
+;; the following can be used to nicely offset block quotes in email bodies
+(add-hook 'org-mime-html-hook
+          (lambda ()
+            (org-mime-change-element-style
+             "blockquote" "border-left: 2px solid gray; padding-left: 4px;")))
+;; renders string between "#" in red
+(add-hook 'org-mime-html-hook
+          (lambda ()
+            (while (re-search-forward "#\\([^#]*\\)#" nil t)
+              (replace-match "<span style=\"color:red\">\\1</span>"))))
+(add-hook 'message-mode-hook
+          (lambda ()
+            (local-set-key (kbd "C-c M-o") 'org-mime-htmlize)))
+(add-hook 'org-mode-hook
+          (lambda ()
+            (local-set-key (kbd "C-c M-o") 'org-mime-org-buffer-htmlize)))
 
-(add-hook 'org-ctrl-c-ctrl-c-hook 'htmlize-and-send t)
 (add-hook 'mu4e-compose-mode-hook
-          (lambda () (local-set-key (kbd "C-c C-o") #'org-mu4e-compose-org-mode)))
+          (lambda () (local-set-key (kbd "C-c C-o") #'org-mime-edit-mail-in-org-mode)))
+
 
 ;; give me ISO(ish) format date-time stamps in the header list
 (setq  mu4e-headers-date-format "%Y-%m-%d %H:%M")
@@ -111,7 +130,6 @@
 
 (add-hook 'mu4e-compose-mode-hook
           (lambda () (local-set-key (kbd "C-c C-w") #'my-mu4e-choose-signature)))
-
 
 (provide 'init-mail)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
