@@ -7,7 +7,7 @@
 
 (use-package dashboard
   :straight t
-  :after all-the-icons projectile
+  :after all-the-icons projectile page-break-lines
   :diminish (dashboard-mode page-break-lines-mode)
   :functions (all-the-icons-faicon
               all-the-icons-material
@@ -25,11 +25,12 @@
   :config
   (setq initial-buffer-choice (lambda () (get-buffer dashboard-buffer-name)))
   (setq dashboard-banner-logo-title "HAL9001 - 知行合一")
-  (setq dashboard-startup-banner 'logo)
+  (setq dashboard-startup-banner "/home/daiwz/Org/img/LAMDA_light.svg")
   (setq dashboard-show-shortcuts nil)
   (setq dashboard-items '((recents  . 10)
                           (bookmarks . 5)
-                          (projects . 5)))
+                          (projects . 5)
+                          (agenda . 5)))
 
   (defvar dashboard-recover-layout-p nil
     "Wether recovers the layout.")
@@ -81,80 +82,6 @@
     "Go to bookmarks."
     (interactive)
     (funcall (local-key-binding "m")))
-
-  (defun dashboard-insert-buttons (_list-size)
-    (insert "\n")
-    (insert (make-string (max 0 (floor (/ (- dashboard-banner-length
-                                             (if (display-graphic-p) 51 42)
-                                             ) 2))) ?\ ))
-    (insert " ")
-    (widget-create 'push-button
-                   :help-echo "Restore previous session"
-                   :action (lambda (&rest _) (restore-session))
-                   :mouse-face 'highlight
-                   :tag (concat
-                         (if (display-graphic-p)
-                             (concat
-                              (all-the-icons-material "restore"
-                                                      :height 1.35
-                                                      :v-adjust -0.24
-                                                      :face 'font-lock-keyword-face)
-                              (propertize " " 'face 'variable-pitch)))
-                         (propertize "Session" 'face 'font-lock-keyword-face)))
-    (insert " ")
-    (widget-create 'file-link
-                   :tag (concat
-                         (if (display-graphic-p)
-                             (concat
-                              (all-the-icons-faicon "cog"
-                                                    :height 1.2
-                                                    :v-adjust -0.1
-                                                    :face 'font-lock-keyword-face)
-                              (propertize " " 'face 'variable-pitch)))
-                         (propertize "Settings" 'face 'font-lock-keyword-face))
-                   :help-echo "Open custom file"
-                   :mouse-face 'highlight
-                   custom-file)
-    (insert " ")
-    (widget-create 'push-button
-                   :help-echo "Update Emacs"
-                   :action (lambda (&rest _) (straight-normalize-all))
-                   :mouse-face 'highlight
-                   :tag (concat
-                         (if (display-graphic-p)
-                             (concat
-                              (all-the-icons-material "update"
-                                                      :height 1.35
-                                                      :v-adjust -0.24
-                                                      :face 'font-lock-keyword-face)
-                              (propertize " " 'face 'variable-pitch)))
-                         (propertize "Update" 'face 'font-lock-keyword-face)))
-    (insert " ")
-    (widget-create 'push-button
-                   :help-echo "Help (?/h)"
-                   :action (lambda (&rest _) (dashboard-hydra/body))
-                   :mouse-face 'highlight
-                   :tag (concat
-                         (if (display-graphic-p)
-                             (all-the-icons-faicon "question"
-                                                   :height 1.2
-                                                   :v-adjust -0.1
-                                                   :face 'font-lock-string-face)
-                           (propertize "?" 'face 'font-lock-string-face))))
-    (insert "\n")
-    (insert "\n")
-    (insert (make-string (max 0 (floor (/ (- dashboard-banner-length
-                                             (if (display-graphic-p) 49 51))
-                                          2))) ?\ ))
-    (insert (concat
-             (propertize (format "Emacs loaded in %s "
-                                 (emacs-init-time))
-                         'face 'font-lock-comment-face)
-             (propertize "(h/? for help)"
-                         'face 'font-lock-doc-face))))
-
-  (add-to-list 'dashboard-item-generators '(buttons . dashboard-insert-buttons))
-  (add-to-list 'dashboard-items '(buttons))
 
   (dashboard-insert-startupify-lists)
 
