@@ -45,50 +45,6 @@
   ;; indent in source code block
   (setq org-src-tab-acts-natively t)
 
-  (defun my/org-mode/load-prettify-symbols ()
-    (interactive)
-    (setq prettify-symbols-alist
-          '(("#+begin_src" . ?)
-            ("#+BEGIN_SRC" . ?)
-            ("#+end_src" . ?)
-            ("#+END_SRC" . ?)
-            ("#+begin_example" . ?)
-            ("#+BEGIN_EXAMPLE" . ?)
-            ("#+begin_quote" . ?)
-            ("#+BEGIN_QUOTE" . ?)
-            ("#+end_example" . ?)
-            ("#+END_EXAMPLE" . ?)
-            ("#+end_quote" . ?)
-            ("#+END_QUOTE" . ?)
-            ("#+begin_center" . ?)
-            ("#+BEGIN_CENTER" . ?)
-            ("#+end_center" . ?)
-            ("#+END_CENTER" . ?)
-            ("#+caption" . ?)
-            ("#+CAPTION" . ?)
-            ("#+header:" . ?)
-            ("#+HEADER:" . ?)
-            ("#+name:" . ?)
-            ("#+NAME:" . ?)
-            ("#+begin_notes" . ?)
-            ("#+BEGIN_NOTES" . ?)
-            ("#+end_notes" . ?)
-            ("#+END_NOTES" . ?)
-            ("#+results:" . ?)
-            ("#+RESULTS:" . ?)
-            ("#+call:" . ?)
-            ("#+CALL:" . ?)
-            (":PROPERTIES:" . ?)
-            (":properties:" . ?)
-            (":END:" . ?)
-            (":end:" . ?)
-            (":LOGBOOK:" . ?)
-            (":logbook:" . ?)))
-    (prettify-symbols-mode 1))
-  (if (char-displayable-p ?)
-      (add-hook 'org-mode-hook 'my/org-mode/load-prettify-symbols)
-    nil)
-
   (add-to-list 'org-export-backends 'md)
 
   (setq org-ditaa-jar-path "/usr/share/java/ditaa/ditaa-0.11.jar") ;; ditaa
@@ -134,16 +90,16 @@
   (setq org-tags-column -77)
   (custom-theme-set-faces
    'user
-   '(variable-pitch ((t (:family "Vollkorn" :height 1.1))))
-   '(fixed-pitch ((t (:family "SauceCodePro Nerd Font Mono" :slant normal :weight normal :height .95))))
-   '(org-level-1 ((t (:inherit variable-pitch :height 1.5 :weight bold))))
-   '(org-level-2 ((t (:inherit variable-pitch :height 1.2 :weight bold))))
-   '(org-level-3 ((t (:inherit variable-pitch :height 1.2 :weight bold))))
-   '(org-level-4 ((t (:inherit variable-pitch :height 1.2 :weight bold))))
-   '(org-level-5 ((t (:inherit variable-pitch :height 1.2 :weight bold))))
-   '(org-level-6 ((t (:inherit variable-pitch :height 1.2 :weight bold))))
-   '(org-level-7 ((t (:inherit variable-pitch :height 1.2 :weight bold))))
-   '(org-level-8 ((t (:inherit variable-pitch :height 1.2 :weight bold))))
+   '(variable-pitch ((t (:family "Vollkorn"))))
+   '(fixed-pitch ((t (:family "SauceCodePro Nerd Font Mono" :slant normal :weight normal))))
+   '(org-level-1 ((t (:inherit variable-pitch :weight bold))))
+   '(org-level-2 ((t (:inherit variable-pitch :weight bold))))
+   '(org-level-3 ((t (:inherit variable-pitch :weight bold))))
+   '(org-level-4 ((t (:inherit variable-pitch :weight bold))))
+   '(org-level-5 ((t (:inherit variable-pitch :weight bold))))
+   '(org-level-6 ((t (:inherit variable-pitch :weight bold))))
+   '(org-level-7 ((t (:inherit variable-pitch :weight bold))))
+   '(org-level-8 ((t (:inherit variable-pitch :weight bold))))
    '(org-document-title ((t (:inherit variable-pitch :height 2.0 :weight bold))))
    '(org-block ((t (:inherit fixed-pitch))))
    '(org-todo ((t (:inherit fixed-pitch))))
@@ -151,14 +107,14 @@
    '(org-keywords ((t (:inherit fixed-pitch))))
    '(org-formula ((t (:inherit fixed-pitch :height 0.8))))
    '(org-code ((t (:inherit (shadow fixed-pitch)))))
-   '(org-document-info ((t (:inherit variable-pitch :slant italic :height 0.9))))
+   '(org-document-info ((t (:inherit variable-pitch :slant italic))))
    '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch) :weight bold))))
    '(org-indent ((t (:inherit (org-hide fixed-pitch)))))
    '(org-link ((t (:inherid fixed-pitch :underline t))))
    '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch) :weight bold))))
    '(org-property-value ((t (:inherit fixed-pitch))) t)
    '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
-   '(org-table ((t (:inherit fixed-pitch))))
+   ;; '(org-table ((t (:inherit fixed-pitch))))
    '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
    '(org-verbatim ((t (:inherit (shadow fixed-pitch))))))
 
@@ -324,16 +280,32 @@
                 ("S-SPC" . org-tree-slide-move-previous-tree)
                 ("SPC" . org-tree-slide-move-next-tree))
     :hook ((org-tree-slide-play . (lambda ()
-                                    (text-scale-increase 4)
                                     (org-display-inline-images)
-                                    (read-only-mode 1)))
+                                    (read-only-mode -1)))
            (org-tree-slide-stop . (lambda ()
-                                    (text-scale-increase 0)
                                     (org-remove-inline-images)
                                     (read-only-mode -1))))
     :config
     (org-tree-slide-presentation-profile)
-    (setq org-tree-slide-skip-outline-level 5))
+    (setq org-tree-slide-skip-outline-level 5)
+    (with-eval-after-load "org-tree-slide"
+      (defvar my-hide-org-meta-line-p nil)
+      (defun my-hide-org-meta-line ()
+        (interactive)
+        (setq my-hide-org-meta-line-p t)
+        (set-face-attribute 'org-meta-line nil
+                            :foreground (face-attribute 'default :background)))
+      (defun my-show-org-meta-line ()
+        (interactive)
+        (setq my-hide-org-meta-line-p nil)
+        (set-face-attribute 'org-meta-line nil :foreground nil))
+
+      (defun my-toggle-org-meta-line ()
+        (interactive)
+        (if my-hide-org-meta-line-p
+            (my-show-org-meta-line) (my-hide-org-meta-line)))
+
+      (add-hook 'org-tree-slide-play-hook #'my-hide-org-meta-line)))
 
   ;; Visually summarize progress
   (use-package org-dashboard
@@ -369,14 +341,14 @@
 
   ;; Super agenda
 
-  (setq org-todo-keywords '((sequence "TODO(T)" "DOING(I)" "HANGUP(H)" "|" "DONE(D)" "CANCEL(C)")
-                            (sequence "⚑(t)" "🏴(i)" "❓(h)" "|" "✔(d)" "✘(c)"))
+  (setq org-todo-keywords '((sequence "TODO (T)" "DOING (I)" " HANGUP(H)" "|" "DONE (D)" "CANCEL (C)")
+                            (sequence " (t)" "金 (i)" " (h)" "|" " (d)" " (c)"))
         org-todo-keyword-faces '(("HANGUP" . warning)
                                  ("❓" . warning))
         org-log-done 'time
         org-startup-indented t
         org-startup-with-inline-images t
-        org-ellipsis (if (char-displayable-p ?) " " nil)
+        org-ellipsis (if (char-displayable-p ?…) " …" nil)
         org-cycle-separator-lines -1
         org-pretty-entities t
         org-hide-emphasis-markers t

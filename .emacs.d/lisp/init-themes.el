@@ -10,84 +10,33 @@
 ;;   :config
 ;;   (load-theme 'vscode-dark-plus t))
 
-;; font settings
-(defvar emacs-english-font "SauceCodePro Nerd Font Mono"
-  "The font name of English.")
+(use-package cnfonts
+  :straight (cnfonts :type git :host github :repo "tumashu/cnfonts")
+  :ensure t
+  ;; :after all-the-icons
+  :hook (cnfonts-set-font-finish
+         . (lambda (fontsizes-list)
+             (set-fontset-font t 'unicode (font-spec :family "all-the-icons") nil 'append)
+             (set-fontset-font t 'unicode (font-spec :family "file-icons") nil 'append)
+             (set-fontset-font t 'unicode (font-spec :family "github-octicons") nil 'append)
+             (set-fontset-font t 'unicode (font-spec :family "FontAwesome") nil 'append)
+             (set-fontset-font t 'unicode (font-spec :family "Weather Icons") nil 'append)))
+  :custom
+  (cnfonts-personal-fontnames '(("Iosevka Nerd Font" "SauceCodePro Nerd Font Mono" "等距更纱黑体 SC" "Noto Sans Mono CJK SC")
+                                ("方正屏显雅宋_GBK" "方正宋刻本秀楷" "Yahei Mono" "SauceCodePro Nerd Font Mono" "Noto Sans Mono CJK SC")
+                                ("Iosevka Nerd Font" "Noto Sans Symbols" "SauceCodePro Nerd Font Mono")
+                                ("Iosevka Nerd Font" "Symbols Nerd Font Mono" "Noto Sans Symbols" "HanaMinB" "SauceCodePro Nerd Font Mono")
+                                ("Iosevka Nerd Font" "Symbols Nerd Font Mono" "Noto Sans Symbols" "SauceCodePro Nerd Font Mono")))
+  :config
+  (cnfonts-mode 1)
+  (define-key cnfonts-mode-map (kbd "C--") #'cnfonts-decrease-fontsize)
+  (define-key cnfonts-mode-map (kbd "C-=") #'cnfonts-increase-fontsize))
 
-(defvar emacs-cjk-font "方正屏显雅宋_GBK"
-  "The font name for CJK.")
-
-(defvar emacs-font-size-pair '(13 . 16)
-  "Default font size pair for (english . chinese)")
-
-(defvar emacs-font-size-pair-list
-  '(( 5 .  6) (10 . 12)
-    (13 . 16) (15 . 18) (17 . 20)
-    (19 . 22) (20 . 24) (21 . 26)
-    (24 . 28) (26 . 32) (28 . 34)
-    (30 . 36) (34 . 40) (36 . 44))
-  "This list is used to store matching (englis . chinese) font-size.")
-
-(defun font-exist-p (fontname)
-  "Test if this font is exist or not."
-  (if (or (not fontname) (string= fontname ""))
-      nil
-    (if (not (x-list-fonts fontname)) nil t)))
-
-(defun set-font (english chinese size-pair)
-  "Setup emacs English and Chinese font on x window-system."
-
-  (if (font-exist-p english)
-      (set-frame-font (format "%s:pixelsize=%d" english (car size-pair)) t))
-
-  (if (font-exist-p chinese)
-      (dolist (charset '(kana han symbol cjk-misc bopomofo))
-        (set-fontset-font (frame-parameter nil 'font) charset
-                          (font-spec :family chinese :size (cdr size-pair))))))
-
-;; Setup font size based on emacs-font-size-pair
-(when (display-graphic-p)
-  (set-font emacs-english-font emacs-cjk-font emacs-font-size-pair))
-
-;; apply for every frame when using server daemon
-(add-hook 'after-make-window-system-frame-hooks
-          (lambda () (set-font emacs-english-font emacs-cjk-font emacs-font-size-pair)))
-(add-hook 'after-make-window-system-frame-hooks
-          (lambda () (reset-font-scale-keybind)))
-
-
-(defun emacs-step-font-size (step)
-  "Increase/Decrease emacs's font size."
-  (let ((scale-steps emacs-font-size-pair-list))
-    (if (< step 0) (setq scale-steps (reverse scale-steps)))
-    (setq emacs-font-size-pair
-          (or (cadr (member emacs-font-size-pair scale-steps))
-              emacs-font-size-pair))
-    (when emacs-font-size-pair
-      (message "emacs font size set to %.1f" (car emacs-font-size-pair))
-      (set-font emacs-english-font emacs-cjk-font emacs-font-size-pair))))
-
-(defun restore-emacs-font-size ()
-  "Restore emacs's font-size acording emacs-font-size-pair-list."
-  (interactive)
-  (setq emacs-font-size-pair '(13 . 16))
-  (when emacs-font-size-pair
-    (message "emacs font size set to %.1f" (car emacs-font-size-pair))
-    (set-font emacs-english-font emacs-cjk-font emacs-font-size-pair)))
-
-(defun increase-emacs-font-size ()
-  "Decrease emacs's font-size acording emacs-font-size-pair-list."
-  (interactive) (emacs-step-font-size 1))
-
-(defun decrease-emacs-font-size ()
-  "Increase emacs's font-size acording emacs-font-size-pair-list."
-  (interactive) (emacs-step-font-size -1))
-
-(defun reset-font-scale-keybind ()
-  (when (display-graphic-p)
-    (global-set-key (kbd "C-x C-=") 'increase-emacs-font-size)
-    (global-set-key (kbd "C-x C--") 'decrease-emacs-font-size)
-    (global-set-key (kbd "C-x C-0") 'restore-emacs-font-size)))
+(use-package mixed-pitch
+  :straight t
+  :hook
+  ;; If you want it in all text modes:
+  (text-mode . mixed-pitch-mode))
 
 ;; mode-line
 (use-package doom-modeline
