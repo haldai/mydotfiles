@@ -18,7 +18,8 @@
               ("ESC SPC" . insert-thin-space))
   :hook ((org-indent-mode . (lambda () (diminish 'org-indent-mode)))
          (org-src-mode . display-line-numbers-mode)
-         (org-mode . variable-pitch-mode))
+         (org-mode . variable-pitch-mode)
+         (org-mode . hl-todo-mode))
   :init
   (use-package org-contrib :straight t)
   (use-package simple-httpd :straight t)
@@ -91,7 +92,7 @@
   (custom-theme-set-faces
    'user
    '(variable-pitch ((t (:family "Vollkorn"))))
-   '(fixed-pitch ((t (:family "SauceCodePro Nerd Font Mono" :slant normal :weight normal))))
+   '(fixed-pitch ((t (:family "Iosevka Nerd Font" :slant normal :weight normal))))
    '(org-level-1 ((t (:inherit variable-pitch :weight bold))))
    '(org-level-2 ((t (:inherit variable-pitch :weight bold))))
    '(org-level-3 ((t (:inherit variable-pitch :weight bold))))
@@ -339,8 +340,6 @@
   (add-hook 'org-mode-hook
             (lambda () (add-hook 'before-save-hook #'org-syntax-convert-keyword-case-to-lower nil 'local)))
 
-  ;; Super agenda
-
   (setq org-todo-keywords '((sequence "TODO (T)" "DOING (I)" " HANGUP(H)" "|" "DONE (D)" "CANCEL (C)")
                             (sequence " (t)" "金 (i)" " (h)" "|" " (d)" " (c)"))
         org-todo-keyword-faces '(("HANGUP" . warning)
@@ -354,6 +353,7 @@
         org-hide-emphasis-markers t
         org-image-actual-width nil)
 
+  ;; Super agenda
   (use-package org-super-agenda
     :straight t
     :after org-agenda

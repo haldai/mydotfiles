@@ -96,7 +96,7 @@
 ;; Highlight TODO and similar keywords in comments and strings
 (use-package hl-todo
   :straight t
-  :custom-face (hl-todo ((t (:box t :inherit))))
+  :custom-face (hl-todo ((t (:underline (:style line) :family "Iosevka Nerd Font"))))
   :bind (:map hl-todo-mode-map
               ([C-f3] . hl-todo-occur)
               ("C-c t p" . hl-todo-previous)
@@ -104,9 +104,9 @@
               ("C-c t o" . hl-todo-occur))
   :hook (after-init . global-hl-todo-mode)
   :config
-  (dolist (keyword '("BUG" "DEFECT" "ISSUE"))
+  (dolist (keyword '("BUG" "DEFECT" "ISSUE" "HANGUP"))
     (cl-pushnew `(,keyword . ,(face-foreground 'error)) hl-todo-keyword-faces))
-  (dolist (keyword '("WORKAROUND" "HACK" "TRICK"))
+  (dolist (keyword '("WORKAROUND" "HACK" "TRICK" "DOING"))
     (cl-pushnew `(,keyword . ,(face-foreground 'warning)) hl-todo-keyword-faces)))
 
 ;; Highlight uncommitted changes
