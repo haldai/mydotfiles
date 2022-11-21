@@ -29,8 +29,7 @@
   (setq dashboard-show-shortcuts nil)
   (setq dashboard-items '((recents  . 10)
                           (bookmarks . 5)
-                          (projects . 5)
-                          (agenda . 5)))
+                          (projects . 5)))
 
   (defvar dashboard-recover-layout-p nil
     "Wether recovers the layout.")
