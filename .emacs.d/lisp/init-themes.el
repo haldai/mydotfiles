@@ -13,16 +13,17 @@
 (use-package cnfonts
   :straight (cnfonts :type git :host github :repo "tumashu/cnfonts")
   :ensure t
-  ;; :after all-the-icons
+  :after all-the-icons
   :hook (cnfonts-set-font-finish
          . (lambda (fontsizes-list)
              (set-fontset-font t 'unicode (font-spec :family "all-the-icons") nil 'append)
              (set-fontset-font t 'unicode (font-spec :family "file-icons") nil 'append)
+             (set-fontset-font t 'unicode (font-spec :family "Material Icons") nil 'append)
              (set-fontset-font t 'unicode (font-spec :family "github-octicons") nil 'append)
              (set-fontset-font t 'unicode (font-spec :family "FontAwesome") nil 'append)
              (set-fontset-font t 'unicode (font-spec :family "Weather Icons") nil 'append)))
   :custom
-  (cnfonts-personal-fontnames '(("Iosevka Nerd Font" "SauceCodePro Nerd Font Mono" "等距更纱黑体 SC" "Noto Sans Mono CJK SC")
+  (cnfonts-personal-fontnames '(("Iosevka Nerd Font" "等距更纱黑体 SC" "Noto Sans Mono CJK SC")
                                 ("方正屏显雅宋_GBK" "方正宋刻本秀楷" "Yahei Mono" "SauceCodePro Nerd Font Mono" "Noto Sans Mono CJK SC")
                                 ("Noto Sans Symbols" "SauceCodePro Nerd Font Mono")
                                 ("Symbols Nerd Font Mono" "Noto Sans Symbols" "HanaMinB" "SauceCodePro Nerd Font Mono")
@@ -48,7 +49,11 @@
   :config
   (use-package ghub :straight t)
   ;; How tall the mode-line should be (only respected in GUI Emacs).
-  (setq doom-modeline-height 25)
+  (setq doom-modeline-height 1) ; optional
+  (custom-set-faces
+   '(mode-line ((t (:family "Fira Code" :height 0.9))))
+   '(mode-line-active ((t (:family "Fira Code" :height 0.9)))) ; For 29+
+   '(mode-line-inactive ((t (:family "Fira Code" :height 0.9)))))
 
   ;; How wide the mode-line bar should be (only respected in GUI Emacs).
   (setq doom-modeline-bar-width 3)
