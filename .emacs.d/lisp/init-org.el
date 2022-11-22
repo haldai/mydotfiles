@@ -87,7 +87,6 @@
   (use-package org-mime :straight t)
 
   ;; fonts
-  (setq org-tags-column -77)
   (custom-theme-set-faces
    'user
    '(variable-pitch ((t (:family "Vollkorn"))))
@@ -116,7 +115,7 @@
    '(org-property-value ((t (:inherit fixed-pitch))) t)
    '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
    ;; '(org-table ((t (:inherit fixed-pitch))))
-   '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
+   '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.7))))
    '(org-verbatim ((t (:inherit (shadow fixed-pitch))))))
 
   ;; no export of zero-width spaces
@@ -340,10 +339,8 @@
   (add-hook 'org-mode-hook
             (lambda () (add-hook 'before-save-hook #'org-syntax-convert-keyword-case-to-lower nil 'local)))
 
-  (setq org-todo-keywords '((sequence "TODO(T)" "DOING(I)" "HANGUP(H)" "|" "DONE(D)" "CANCEL(C)")
+  (setq org-todo-keywords '((sequence "TODO(T)" "DOING(I)" "HANGUP(H)" "|" "DONE(D)" "CANCELED(C)")
                             (sequence "(t)" "金(i)" "(h)" "|" "(d)" "(c)"))
-        org-todo-keyword-faces '(("HANGUP" . warning)
-                                 ("❓" . warning))
         org-log-done 'time
         org-startup-indented t
         org-startup-with-inline-images t
@@ -352,6 +349,11 @@
         org-pretty-entities t
         org-hide-emphasis-markers t
         org-image-actual-width nil)
+
+  (setq org-todo-keyword-faces
+        '(("DOING"    . (:inherit org-todo))
+          ("HANGUP"   . (:inherit org-todo))
+          ("CANCELED" . (:inherit org-done))))
 
   ;; Super agenda
   (use-package org-super-agenda

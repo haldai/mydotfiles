@@ -4,8 +4,8 @@
 ;;
 
 ;;; Code:
-(autoload 'mu4e "/usr/local/share/emacs/site-lisp/mu4e"
-  "Start mu4e daemon and show its main window." t)
+(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e/")
+(require 'mu4e)
 (mu4e 'background)
 ;; load the muw configuration
 (load-file "~/.config/mu4e/mu4e-config.el")
