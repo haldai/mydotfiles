@@ -4,7 +4,10 @@
 ;;
 
 ;;; Code:
-(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
+(autoload 'mu4e "/usr/local/share/emacs/site-lisp/mu4e"
+  "Start mu4e daemon and show its main window." t)
+(mu4e 'background)
+;; load the muw configuration
 (load-file "~/.config/mu4e/mu4e-config.el")
 
 ;; don't keep message buffers around
