@@ -8,27 +8,6 @@
 ;; Prettify Symbols
 ;; e.g. display “lambda” as “λ”
 (use-package prog-mode
-  :hook ((after-init . global-prettify-symbols-mode)
-         (prog-mode . (lambda ()
-                        (setq prettify-symbols-alist
-                              '(("lambda" . ?λ)
-                                ("->" . ?→)
-                                ("->>" . ?↠)
-                                ("=>" . ?⇒)
-                                ("map" . ?↦)
-                                ("/=" . ?≠)
-                                ("!=" . ?≠)
-                                ("==" . ?≡)
-                                ("<=" . ?≤)
-                                (">=" . ?≥)
-                                ("=<<" . (?= (Br . Bl) ?≪))
-                                (">>=" . (?≫ (Br . Bl) ?=))
-                                ("<=<" . ?↢)
-                                (">=>" . ?↣)
-                                ("&&" . ?∧)
-                                ("||" . ?∨)
-                                ("not" . ?¬))))))
-  :init (setq prettify-symbols-unprettify-at-point 'right-edge)
   :config
   ;; for debug
   (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)

@@ -24,9 +24,9 @@
   :custom
   (cnfonts-personal-fontnames '(("Iosevka Nerd Font" "SauceCodePro Nerd Font Mono" "等距更纱黑体 SC" "Noto Sans Mono CJK SC")
                                 ("方正屏显雅宋_GBK" "方正宋刻本秀楷" "Yahei Mono" "SauceCodePro Nerd Font Mono" "Noto Sans Mono CJK SC")
-                                ("Iosevka Nerd Font" "Noto Sans Symbols" "SauceCodePro Nerd Font Mono")
-                                ("Iosevka Nerd Font" "Symbols Nerd Font Mono" "Noto Sans Symbols" "HanaMinB" "SauceCodePro Nerd Font Mono")
-                                ("Iosevka Nerd Font" "Symbols Nerd Font Mono" "Noto Sans Symbols" "SauceCodePro Nerd Font Mono")))
+                                ("Noto Sans Symbols" "SauceCodePro Nerd Font Mono")
+                                ("Symbols Nerd Font Mono" "Noto Sans Symbols" "HanaMinB" "SauceCodePro Nerd Font Mono")
+                                ("Symbols Nerd Font Mono" "Noto Sans Symbols" "SauceCodePro Nerd Font Mono")))
   :config
   (cnfonts-mode 1)
   (define-key cnfonts-mode-map (kbd "C--") #'cnfonts-decrease-fontsize)

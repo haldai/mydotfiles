@@ -96,7 +96,7 @@
 ;; Highlight TODO and similar keywords in comments and strings
 (use-package hl-todo
   :straight t
-  :custom-face (hl-todo ((t (:underline (:style line) :family "Iosevka Nerd Font"))))
+  :custom-face (hl-todo ((t (:underline (:style line) :family "Fira Code"))))
   :bind (:map hl-todo-mode-map
               ([C-f3] . hl-todo-occur)
               ("C-c t p" . hl-todo-previous)
