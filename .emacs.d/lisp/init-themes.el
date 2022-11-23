@@ -13,15 +13,15 @@
 (use-package cnfonts
   :straight (cnfonts :type git :host github :repo "tumashu/cnfonts")
   :ensure t
-  :after all-the-icons
-  :hook (cnfonts-set-font-finish
-         . (lambda (fontsizes-list)
-             (set-fontset-font t 'unicode (font-spec :family "all-the-icons") nil 'append)
-             (set-fontset-font t 'unicode (font-spec :family "file-icons") nil 'append)
-             (set-fontset-font t 'unicode (font-spec :family "Material Icons") nil 'append)
-             (set-fontset-font t 'unicode (font-spec :family "github-octicons") nil 'append)
-             (set-fontset-font t 'unicode (font-spec :family "FontAwesome") nil 'append)
-             (set-fontset-font t 'unicode (font-spec :family "Weather Icons") nil 'append)))
+  ;; :after all-the-icons
+  ;; :hook (cnfonts-set-font-finish
+  ;;        . (lambda (fontsizes-list)
+  ;;            (set-fontset-font t 'unicode (font-spec :family "all-the-icons") nil 'append)
+  ;;            (set-fontset-font t 'unicode (font-spec :family "file-icons") nil 'append)
+  ;;            (set-fontset-font t 'unicode (font-spec :family "Material Icons") nil 'append)
+  ;;            (set-fontset-font t 'unicode (font-spec :family "github-octicons") nil 'append)
+  ;;            (set-fontset-font t 'unicode (font-spec :family "FontAwesome") nil 'append)
+  ;;            (set-fontset-font t 'unicode (font-spec :family "Weather Icons") nil 'append)))
   :custom
   (cnfonts-personal-fontnames '(("Iosevka Nerd Font" "等距更纱黑体 SC" "Noto Sans Mono CJK SC")
                                 ("方正屏显雅宋_GBK" "方正宋刻本秀楷" "Yahei Mono" "SauceCodePro Nerd Font Mono" "Noto Sans Mono CJK SC")
@@ -295,19 +295,19 @@
   ;; `variable-pitch' face supports it
   (ligature-set-ligatures 'eww-mode '("ff" "fi" "ffi"))
   ;; Enable Fira Code ligatures in text modes
-  (ligature-set-ligatures 'text-mode '("|||>" "<|||" "<==>" "<!--" "####" "~~>" "***" "||=" "||>"
+  (ligature-set-ligatures 'text-mode '("|||>" "<|||" "<==>" "<!--" "####" "~~>" "***" "||>"
                                        ":::" "::=" "=:=" "===" "==>" "=!=" "=>>" "=<<" "=/=" "!=="
-                                       "!!." ">=>" ">>=" ">>>" ">>-" ">->" "->>" "-->" "---" "-<<"
+                                       "!!." ">=>" ">>=" ">>>" ">>-" ">->" "->>" "-->" "-<<"
                                        "<~~" "<~>" "<*>" "<||" "<|>" "<$>" "<==" "<=>" "<=<" "<->"
                                        "<--" "<-<" "<<=" "<<-" "<<<" "<+>" "</>" "###" "#_(" "..<"
-                                       "..." "+++" "/==" "///" "_|_" "www" "&&" "^=" "~~" "~@" "~="
-                                       "~>" "~-" "**" "*>" "*/" "||" "|}" "|]" "|=" "|>" "|-" "{|"
+                                       "..." "+++" "/==" "///" "www" "&&" "^=" "~~" "~@" "~="
+                                       "~>" "~-" "**" "*>" "*/" "||" "|}" "|]" "|=" "|>" "{|"
                                        "[|" "]#" "::" ":=" ":>" ":<" "$>" "==" "=>" "!=" "!!" ">:"
-                                       ">=" ">>" ">-" "-~" "-|" "->" "--" "-<" "<~" "<*" "<|" "<:"
+                                       ">=" ">>" ">-" "-~" "->" "-<" "<~" "<*" "<|" "<:"
                                        "<$" "<=" "<>" "<-" "<<" "<+" "</" "#{" "#[" "#:" "#=" "#!"
                                        "##" "#(" "#?" "#_" "%%" ".=" ".-" ".." ".?" "+>" "++" "?:"
                                        "?=" "?." "??" ";;" "/*" "/=" "/>" "//" "__" "~~" "(*" "*)"
-                                       "\\\\" "://" "_|_" "/\\" "\\/" "\\n" "|-" "||-" "|=" "||="
+                                       "\\\\" "://" "_|_" "/\\" "\\/" "\\n"
                                        "ff" "fi" "ffi" "Fl" "Tl" "Il" "fj"))
   (ligature-set-ligatures 'prog-mode '("\\*" "*/" "!=" "==" "%%" ":=" ";;" "&&" "||" ">=" "<="
                                        "</>" ">>" "<<" ">>>" "<<<" "0xF" "//" "\\\\" "**" "#!"
