@@ -87,7 +87,7 @@
   (setq org-latex-classes
         '(("article"
            "
-\\documentclass[12pt,a4paper]{article}
+\\documentclass[10pt,a4paper]{article}
 [DEFAULT-PACKAGES]
 [PACKAGES]
 \\RequirePackage{xeCJK}
@@ -156,9 +156,6 @@
   urlcolor=[rgb]{0,0.37,0.53},
   pagebackref=true,
   linktoc=all,}
-\\renewcommand{\\headrulewidth}{0.4pt}
-\\renewcommand{\\footrulewidth}{0.4pt}
-\\pagestyle{fancy}
 [EXTRA]
 "
            ("\\section{%s}" . "\\section*{%s}")
@@ -399,7 +396,7 @@
                           :image-input-type "xdv"
                           :image-output-type "svg"
                           :image-size-adjust (1.7 . 1.5)
-                          :latex-compiler ("xelatex -interaction nonstopmode -output-directory %o -no-pdf %f")
+                          :latex-compiler ("xelatex -interaction=nonstopmode -output-directory %o -no-pdf %f")
                           :image-converter ("dvisvgm %f --no-fonts --exact-bbox --scale=%S --output=%O")))
   (setq org-preview-latex-default-process 'xdvisvgm)
 
