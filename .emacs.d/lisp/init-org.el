@@ -40,7 +40,7 @@
   (remove-hook 'text-mode-hook #'auto-fill-mode)
 
   ;; latex preview scale
-  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
+  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.2))
 
   ;; indent in source code block
   (setq org-src-tab-acts-natively t)
@@ -74,13 +74,140 @@
                '("AUTO" "polyglossia" t ("xelatex" "lualatex")))
   (setq org-latex-pdf-process '("latexmk -f -pdf -xelatex -interaction=nonstopmode -output-directory=%o %f"))
 
+  ;; automatically remove latex files
+  ;; https://answer-id.com/53623039
+  (setq org-latex-logfiles-extensions
+        (quote ("lof" "lot" "tex" "tex~" "aux"
+                "idx" "log" "out" "toc" "nav"
+                "snm" "vrb" "dvi" "fdb_latexmk"
+                "blg" "brf" "fls" "entoc" "ps"
+                "spl" "bbl" "xdv")))
+
+  ;; latex export format
+  (setq org-latex-classes
+        '(("article"
+           "
+\\documentclass[12pt,a4paper]{article}
+[DEFAULT-PACKAGES]
+[PACKAGES]
+\\RequirePackage{xeCJK}
+\\RequirePackage{imakeidx}
+\\RequirePackage{xstring}
+\\RequirePackage{xcolor}
+\\RequirePackage{tikz}
+\\RequirePackage{amsmath}
+\\RequirePackage{amssymb}
+\\definecolor{zenfg+1}{HTML}{FFFFEF}
+\\definecolor{zenfg}{HTML}{DCDCCC}
+\\definecolor{zenfg-1}{HTML}{656555}
+\\definecolor{zenbg-2}{HTML}{000000}
+\\definecolor{zenbg-1}{HTML}{2B2B2B}
+\\definecolor{zenbg-05}{HTML}{383838}
+\\definecolor{zenbg}{HTML}{3F3F3F}
+\\definecolor{zenbg+05}{HTML}{494949}
+\\definecolor{zenbg+1}{HTML}{4F4F4F}
+\\definecolor{zenbg+2}{HTML}{5F5F5F}
+\\definecolor{zenbg+3}{HTML}{6F6F6F}
+\\definecolor{zenred+2}{HTML}{ECB3B3}
+\\definecolor{zenred+1}{HTML}{DCA3A3}
+\\definecolor{zenred}{HTML}{CC9393}
+\\definecolor{zenred-1}{HTML}{BC8383}
+\\definecolor{zenred-2}{HTML}{AC7373}
+\\definecolor{zenred-3}{HTML}{9C6363}
+\\definecolor{zenred-4}{HTML}{8C5353}
+\\definecolor{zenred-5}{HTML}{7C4343}
+\\definecolor{zenred-6}{HTML}{6C3333}
+\\definecolor{zenorange}{HTML}{DFAF8F}
+\\definecolor{zenyellow}{HTML}{F0DFAF}
+\\definecolor{zenyellow-1}{HTML}{E0CF9F}
+\\definecolor{zenyellow-2}{HTML}{D0BF8F}
+\\definecolor{zengreen-5}{HTML}{2F4F2F}
+\\definecolor{zengreen-4}{HTML}{3F5F3F}
+\\definecolor{zengreen-3}{HTML}{4F6F4F}
+\\definecolor{zengreen-2}{HTML}{5F7F5F}
+\\definecolor{zengreen-1}{HTML}{6F8F6F}
+\\definecolor{zengreen}{HTML}{7F9F7F}
+\\definecolor{zengreen+1}{HTML}{8FB28F}
+\\definecolor{zengreen+2}{HTML}{9FC59F}
+\\definecolor{zengreen+3}{HTML}{AFD8AF}
+\\definecolor{zengreen+4}{HTML}{BFEBBF}
+\\definecolor{zencyan}{HTML}{93E0E3}
+\\definecolor{zenblue+3}{HTML}{BDE0F3}
+\\definecolor{zenblue+2}{HTML}{ACE0E3}
+\\definecolor{zenblue+1}{HTML}{94BFF3}
+\\definecolor{zenblue}{HTML}{8CD0D3}
+\\definecolor{zenblue-1}{HTML}{7CB8BB}
+\\definecolor{zenblue-2}{HTML}{6CA0A3}
+\\definecolor{zenblue-3}{HTML}{5C888B}
+\\definecolor{zenblue-4}{HTML}{4C7073}
+\\definecolor{zenblue-5}{HTML}{366060}
+\\definecolor{zenmagenta}{HTML}{DC8CC3}
+\\setmainfont{Vollkorn}
+\\setCJKmainfont[BoldFont={FZCuHeiSong-B-JF}]{FZPingXianYaSong-R-GBK}
+\\AtBeginEnvironment{quote}{\\quotefont\\small}
+\\XeTeXlinebreaklocale ``zh''
+\\XeTeXlinebreakskip = 0pt plus 1pt
+\\linespread{1.0}
+\\hypersetup{
+  colorlinks=true,
+  linkcolor=[rgb]{0,0.37,0.53},
+  citecolor=[rgb]{0,0.47,0.68},
+  filecolor=[rgb]{0,0.37,0.53},
+  urlcolor=[rgb]{0,0.37,0.53},
+  pagebackref=true,
+  linktoc=all,}
+\\renewcommand{\\headrulewidth}{0.4pt}
+\\renewcommand{\\footrulewidth}{0.4pt}
+\\pagestyle{fancy}
+[EXTRA]
+"
+           ("\\section{%s}" . "\\section*{%s}")
+           ("\\subsection{%s}" . "\\subsection*{%s}")
+           ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+           ("\\paragraph{%s}" . "\\paragraph*{%s}")
+           ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
+
+  ;; [FIXME]
+  ;; 原本是不要讓 org 插入 hypersetup（因為 org-mode 這部份設計成沒辦法自訂，或許可以去 report 一下？
+  ;; 改成自行插入，但這樣 pdfcreator 沒辦法根據 Emacs 版本插入，pdfkeyword 也會無效...幹。
+  (setq org-latex-with-hyperref t)
+
+  ;; Export source code using minted
+  (setq org-latex-listings 'minted)
+
+  (setq org-latex-default-packages-alist
+        '(("" "nopageno" t)
+          ("" "hyperref" t)
+          ("" "fontspec" t)
+          ("" "etoolbox" t) ;; Quote 部份的字型設定
+          ("margin=2cm" "geometry" nil)
+          ;; ("AUTO" "inputenc" t)
+          ;; ("" "fixltx2e" nil)
+          ("dvipdfmx" "graphicx" t)
+          ("" "longtable" nil)
+          ("" "float" nil)
+          ("" "wrapfig" nil)
+          ("" "rotating" nil)
+          ("normalem" "ulem" t)
+          ("" "amsmath" t)
+          ("" "textcomp" t)
+          ("" "marvosym" t)
+          ("" "wasysym" t)
+          ("" "multicol" t)  ; 這是我另外加的，因為常需要多欄位文件版面。
+          ("" "amssymb" t)
+          ("" "fancyhdr" nil) ;; 页眉页脚
+          ("cache=false" "minted" nil) ;; Code color
+          "\\tolerance=1000"))
+
   ;; custom babel latex source code preambles
   (setq org-babel-latex-preamble '(lambda (_)
                                     "\\documentclass[preview]{standalone}
 \\usepackage{tikz}
+\\usepackage{xeCJK}
 \\usepackage{amsmath}
 \\usepackage{amssymb}
-\\usepackage{xeCJK}
+\\setmainfont{Vollkorn}
+\\setCJKmainfont[BoldFont={FZCuHeiSong-B-JF}]{FZPingXianYaSong-R-GBK}
 \\def\\pgfsysdriver{pgfsys-dvisvgm4ht.def}"))
 
   ;; mime support
@@ -264,7 +391,17 @@
     :diminish org-preview-html-mode)
 
   ;; preview latex with svg
-  (setq org-preview-latex-default-process 'dvisvgm)
+  (add-to-list 'org-preview-latex-process-alist
+               '(xdvisvgm :programs
+                          ("xelatex" "dvisvgm")
+                          :description "dvi > svg"
+                          :message "you need to install the programs: xelatex and dvisvgm."
+                          :image-input-type "xdv"
+                          :image-output-type "svg"
+                          :image-size-adjust (1.7 . 1.5)
+                          :latex-compiler ("xelatex -interaction nonstopmode -output-directory %o -no-pdf %f")
+                          :image-converter ("dvisvgm %f --no-fonts --exact-bbox --scale=%S --output=%O")))
+  (setq org-preview-latex-default-process 'xdvisvgm)
 
   ;; Presentation
   (use-package org-tree-slide
