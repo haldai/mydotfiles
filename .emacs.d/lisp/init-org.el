@@ -81,7 +81,7 @@
                 "idx" "log" "out" "toc" "nav"
                 "snm" "vrb" "dvi" "fdb_latexmk"
                 "blg" "brf" "fls" "entoc" "ps"
-                "spl" "bbl" "xdv")))
+                "spl" "bbl" "xdv" "pyg")))
 
   ;; latex export format
   (setq org-latex-classes
@@ -282,9 +282,6 @@
         org-src-fontify-natively t
         org-src-tab-acts-natively t)
 
-  (use-package ob-julia
-    :straight (ob-julia :type git :host nil :repo "https://git.nixo.xyz/nixo/ob-julia"))
-
   (use-package ob-prolog :straight t)
 
   (defvar load-language-list '((emacs-lisp . t)
@@ -340,7 +337,7 @@
   ;; juypter-julia settings
   (setq org-babel-default-header-args:jupyter-julia '((:async . "yes")
                                                       (:session . "jl")
-                                                      (:kernel . "julia-1.7")
+                                                      (:kernel . "julia-1.8")
                                                       (:exports . "both")))
 
   ;; juypter-python settings
@@ -449,7 +446,6 @@
 
   ;; reveal
   (use-package ox-reveal
-    :requires ob-julia
     :straight (ox-reveal :type git :host github :repo "yjwen/org-reveal")
     :bind (("C-c \" B" . org-reveal-export-to-html-and-browse)
            ("C-c \" R" . org-reveal-export-to-html)))
