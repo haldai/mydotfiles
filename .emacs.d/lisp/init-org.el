@@ -90,13 +90,13 @@
 \\documentclass[10pt,a4paper]{article}
 [DEFAULT-PACKAGES]
 [PACKAGES]
-\\RequirePackage{xeCJK}
-\\RequirePackage{imakeidx}
-\\RequirePackage{xstring}
-\\RequirePackage{xcolor}
-\\RequirePackage{tikz}
-\\RequirePackage{amsmath}
-\\RequirePackage{amssymb}
+\\usepackage{xeCJK}
+\\usepackage{imakeidx}
+\\usepackage{xstring}
+\\usepackage{xcolor}
+\\usepackage{tikz}
+\\usepackage{amsmath}
+\\usepackage{amssymb}
 \\definecolor{zenfg+1}{HTML}{FFFFEF}
 \\definecolor{zenfg}{HTML}{DCDCCC}
 \\definecolor{zenfg-1}{HTML}{656555}
@@ -156,6 +156,9 @@
   urlcolor=[rgb]{0,0.37,0.53},
   pagebackref=true,
   linktoc=all,}
+\\renewcommand{\\headrulewidth}{0.4pt}
+\\renewcommand{\\footrulewidth}{0.4pt}
+\\pagestyle{fancy}
 [EXTRA]
 "
            ("\\section{%s}" . "\\section*{%s}")
@@ -314,7 +317,7 @@
   (add-to-list 'org-structure-template-alist '("jj" . "src jupyter-julia"))
   (add-to-list 'org-structure-template-alist '("j" . "src julia :exports code :eval never"))
   (add-to-list 'org-structure-template-alist '("jp" . "src jupyter-python"))
-  (add-to-list 'org-structure-template-alist '("ls" . "src latex :file TMP.svg :headers '(\"\\\\usepackage{tikz}\\\\n\\\\usepackage{xeCJK}\\\\n\") :results file raw"))
+  (add-to-list 'org-structure-template-alist '("ls" . "src latex :file TMP.svg :headers '(\"\\\\usepackage{tikz}\\\\n\\\\usepackage{xeCJK}\\\\n\\\\usepackage{zenburn}\\\\n\\\\usetikzlibrary{backgrounds}\\\\n\\\\usetikzlibrary{shapes}\\\\n\\\\setCJKmainfont{FZPingXianYaSong-R-GBK}\\\\n\") :results file raw"))
   (add-to-list 'org-structure-template-alist '("ln" . "src latex :file TMP.png :imagemagick yes :headers '(\"\\\\usepackage{tikz}\\\\n\\\\usepackage{xeCJK}\\\\n\") :iminoptions \"-density 600\" :results file raw"))
   (add-to-list 'org-structure-template-alist '("lp" . "src latex :file TMP.pdf :headers '(\"\\\\usepackage{tikz}\\\\n\\\\usepackage{xeCJK}\\\\n\") :results file raw"))
   (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
@@ -393,7 +396,7 @@
                           :image-input-type "xdv"
                           :image-output-type "svg"
                           :image-size-adjust (1.7 . 1.5)
-                          :latex-compiler ("xelatex -interaction=nonstopmode -output-directory %o -no-pdf %f")
+                          :latex-compiler ("xelatex -interaction nonstopmode -output-directory %o -no-pdf %f")
                           :image-converter ("dvisvgm %f --no-fonts --exact-bbox --scale=%S --output=%O")))
   (setq org-preview-latex-default-process 'xdvisvgm)
 
