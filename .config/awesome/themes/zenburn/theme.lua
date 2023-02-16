@@ -130,7 +130,7 @@ theme.menu_submenu_icon = themes_path .. "default/submenu.png"
 theme.menu_height = dpi(28)
 theme.menu_width  = dpi(98)
 theme.menu_border_color = white1
-theme.menu_border_width = 2
+theme.menu_border_width = dpi(2)
 -- theme.menu_font = "方正宋刻本秀楷 Bold 13"
 theme.menu_font = "丁卯点阵体 9px 12"
 -- }}}

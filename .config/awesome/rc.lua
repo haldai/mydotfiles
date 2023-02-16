@@ -659,6 +659,9 @@ awful.rules.rules = {
            "hp-toolbox",
            "wechat.exe",
            "qqmusic",
+           "Breach",
+           "Skype",
+           "wemeetapp",
         },
 
         -- Note that the name property shown in xprop might be set slightly after creation of the client
