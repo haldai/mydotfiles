@@ -119,6 +119,7 @@
              (derived-mode-p 'go-mode)
              (derived-mode-p 'prolog-mode)
              (derived-mode-p 'julia-mode)
+             (derived-mode-p 'lua-mode)
              (derived-mode-p 'swift-mode))
          (null (string-match "\\([;{}]\\|\\b\\(if\\|for\\|while\\)\\b\\)"
                              (thing-at-point 'line))))))

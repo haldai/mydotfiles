@@ -74,7 +74,8 @@
   :init (setq company-lsp-cache-candidates 'auto)
   :config
   ;; lua
-  (add-to-list 'company-lsp-filter-candidates '(lsp-emmy-lua . t)))
+  (add-to-list 'company-lsp-filter-candidates '(lsp-emmy-lua . t))
+  (setq lsp-lua-hint-enable t))
 
 (provide 'init-lsp)
 
