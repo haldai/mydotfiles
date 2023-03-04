@@ -17,7 +17,8 @@
 ;; attempt to show images when viewing messages
 (setq mu4e-view-show-images t
       mu4e-show-images t
-      mu4e-view-image-max-width 800)
+      mu4e-view-image-max-width 800
+      mu4e~compose-buffer-max-name-length 100)
 
 
 ;; (setq mu4e-html2text-command "html2text -utf8 -width 72") ;; nil "Shel command that converts HTML
@@ -113,6 +114,7 @@
 
 ;; use C-1 c for add cc if already in composition mode
 (define-key mu4e-compose-mode-map (kbd "C-1 c") 'message-goto-cc)
+(define-key mu4e-compose-mode-map (kbd "C-2 c") 'message-goto-bcc)
 
 ;; signature
 (setq mu4e-compose-signature-auto-include nil)
