@@ -50,7 +50,6 @@
   (setq org-ditaa-jar-path "/usr/share/java/ditaa/ditaa-0.11.jar") ;; ditaa
 
   (use-package websocket :straight t)
-  (use-package zmq :straight t)
 
   ;; jupyter mode
   (use-package jupyter

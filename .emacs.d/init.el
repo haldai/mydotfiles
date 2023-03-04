@@ -10,7 +10,7 @@
 ;; (server-start)
 
 ;; debug
-(setq debug-on-error nil)
+(setq debug-on-error t)
 (setq warning-minimum-level :emergency)
 
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
@@ -39,7 +39,7 @@
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 5))
+      (bootstrap-version 6))
   (unless (file-exists-p bootstrap-file)
     (with-current-buffer
         (url-retrieve-synchronously
@@ -62,6 +62,7 @@
 (global-set-key (kbd "M-]") (kbd "C-u 3 C-v"))
 (global-set-key (kbd "M-[") (kbd "C-u 3 M-v"))
 
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 ;;----------------------------------------------------------------------------
 ;; Load configs for specific features and modes
 ;;----------------------------------------------------------------------------
@@ -77,6 +78,7 @@
 (require 'init-dashboard)
 (require 'init-frame-hooks)
 (require 'init-themes)
+;; (require 'init-emms)
 
 ;; Shell
 (require 'init-eshell)
@@ -97,6 +99,7 @@
 
 (require 'init-emacs-lisp)
 (require 'init-c)
+(require 'init-rust)
 (require 'init-prolog)
 (require 'init-julia)
 (require 'init-go)

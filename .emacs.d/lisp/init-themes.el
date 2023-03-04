@@ -2,6 +2,9 @@
 ;;; Commentary:
 ;;; Code:
 
+;; pixel-scroll-precision-mode
+(setq pixel-scroll-precision-mode t)
+
 ;; color theme
 (straight-use-package 'zenburn-theme)
 (load-theme 'zenburn t)
