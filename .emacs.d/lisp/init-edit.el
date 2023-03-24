@@ -372,8 +372,8 @@
     (if (not (eq (point) (point-max)))
         (and (rime-predicate-current-input-punctuation-p)
              (not (string-match-p
-                 (rx (any "\"\(\[\{"))
-                 (buffer-substring (point) (1- (point)))))
+                   (rx (any "\"\(\[\{"))
+                   (buffer-substring (point) (1- (point)))))
              (string-match-p
               (rx (any "\}\]\)\""))
               (buffer-substring (point) (1+ (point)))))
@@ -389,6 +389,9 @@
   ;;; support shift-l, shift-r, control-l, control-r
   (setq rime-inline-ascii-trigger 'shift-l))
 
+(use-package kbd-mode
+  :straight (kbd-mode :type git :host github :repo "kmonad/kbd-mode")
+  :mode "\\.kbd\\'")
 
 (defun insert-zero-width-space ()
   (interactive (insert "\u200B")))
