@@ -71,7 +71,7 @@
                '("AUTO" "babel" t ("xelatex" "lualatex" "pdflatex")))
   (add-to-list 'org-latex-packages-alist
                '("AUTO" "polyglossia" t ("xelatex" "lualatex")))
-  (setq org-latex-pdf-process '("latexmk -f -pdf -xelatex -interaction=nonstopmode -output-directory=%o %f"))
+  (setq org-latex-pdf-process '("latexmk -f -pdf -xelatex --shell-escape -interaction=nonstopmode -output-directory=%o %f"))
 
   ;; automatically remove latex files
   ;; https://answer-id.com/53623039
@@ -395,7 +395,7 @@
                           :image-input-type "xdv"
                           :image-output-type "svg"
                           :image-size-adjust (1.7 . 1.5)
-                          :latex-compiler ("xelatex -interaction nonstopmode -output-directory %o -no-pdf %f")
+                          :latex-compiler ("xelatex -shell-escape -interaction nonstopmode -output-directory %o -no-pdf %f")
                           :image-converter ("dvisvgm %f --no-fonts --exact-bbox --scale=%S --output=%O")))
   (setq org-preview-latex-default-process 'xdvisvgm)
 

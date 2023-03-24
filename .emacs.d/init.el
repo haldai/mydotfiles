@@ -10,8 +10,9 @@
 ;; (server-start)
 
 ;; debug
-(setq debug-on-error t)
+(setq debug-on-error nil)
 (setq warning-minimum-level :emergency)
+(defvar native-comp-deferred-compilation-deny-list nil)
 
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 

@@ -14,9 +14,11 @@
   :bind (:map lsp-mode-map
               ("C-c C-d" . lsp-describe-thing-at-point))
   :init
+  (setq lsp-keymap-prefix "C-c l")   ; set prefix for lsp-command-keymap
   (setq lsp-auto-guess-root t)       ; Detect project root
   (setq lsp-prefer-flymake nil)      ; Use lsp-ui and flycheck
   (setq flymake-fringe-indicator-position 'right-fringe)
+  :commands lsp
   :config
   ;; Configure LSP clients
   (setq lsp-eslint-server-command
@@ -30,9 +32,9 @@
   (add-to-list 'lsp-disabled-clients '((emmet-ls . t)
                                        (html-ls . t)))
 
-  (use-package lsp-clients
-    :init
-    (setq lsp-clients-python-library-directories '("/usr/local/" "/usr/"))))
+  (use-package lsp-ui :commands lsp-ui-mode)
+  (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
+  (use-package lsp-treemacs :commands lsp-treemacs-errors-list))
 
 ;; if you are ivy user
 (use-package lsp-ivy
