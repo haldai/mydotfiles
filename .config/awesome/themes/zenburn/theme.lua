@@ -224,27 +224,30 @@ mytextclock.font = "丁卯点阵体 9px Bold 12"
 -- {{{ CPU load
 theme.cpugraph = wibox.widget {
    forced_width = dpi(48),
-   paddings = dpi(1),
-   border_width = dpi(1),
+   paddings = dpi(2),
+   border_width = dpi(2),
    border_color = white2,
    color = white1,
    background_color = black1,
    widget = wibox.widget.graph
 }
 cpuwidget_t = awful.tooltip({ objects = { theme.cpugraph },})
-awful.widget.watch('bash -c "mpstat -P ALL 2 1 | awk \'$12 ~ /[0-9.]+/ { print 100 - $12 }\'"', 5,
+awful.widget.watch('bash -c "LANG=en_US.UTF-8 mpstat -P ALL 2 1 | awk \'$12 ~ /[0-9.]+/ { print 100 - $12 }\'"', 5,
                    function(widget, stdout)
-                      if stdout ~= nil and stdout ~= "" then
-                         args = {}
-                         for val in stdout:gmatch("[^\r\n]+") do
-                            table.insert(args, tonumber(val))
-                         end
-                         theme.cpugraph:add_value(args[1] / 100, 1)
-                         cpuwidget_t:set_text(string.format("CPU使用率: \n%.2f%%\n核心使用率: \n%.2f%%, %.2f%%, %.2f%%, %.2f%%,\n%.2f%%, %.2f%%, %.2f%%, %.2f%%\n%.2f%%, %.2f%%, %.2f%%, %.2f%%,\n%.2f%%, %.2f%%, %.2f%%, %.2f%%.", args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9], args[10], args[11], args[12], args[13], args[14], args[15], args[16], args[17]))
-                      else
-                         theme.cpugraph:add_value(0, 1)
-                         cpuwidget_t:set_text(string.format("CPU使用率: 不明"))
-                      end
+                     if stdout ~= nil and stdout ~= "" then
+                       args = {}
+                       for val in stdout:gmatch("[^\r\n]+") do
+                         table.insert(args, tonumber(val))
+                       end
+                       theme.cpugraph:add_value(args[1] / 100, 1)
+                       cpuwidget_t:set_text(string.format(
+                                              "CPU使用率: \n%.2f%%\n核心使用率: \n%.2f%%, %.2f%%, %.2f%%, %.2f%%,\n%.2f%%, %.2f%%, %.2f%%, %.2f%%\n%.2f%%, %.2f%%, %.2f%%, %.2f%%,\n%.2f%%, %.2f%%, %.2f%%, %.2f%%.",
+                                              args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9], args[10], args[11], args[12],
+                                              args[13], args[14], args[15], args[16], args[17]))
+                     else
+                       theme.cpugraph:add_value(0, 1)
+                       cpuwidget_t:set_text(string.format("CPU使用率: 不明"))
+                     end
 end)
 
 local cpubg = wibox.container.background(theme.cpugraph, black2, gears.shape.rectangle)
@@ -257,9 +260,9 @@ theme.volume = myalsabar {
    ticks = false,
    width = dpi(64),
    height = dpi(8),
-   paddings = dpi(1),
+   paddings = dpi(2),
    margins = dpi(4),
-   border_width = dpi(1),
+   border_width = dpi(2),
    border_color = white2,
    timeout = 11, -- time interval
    colors = {
@@ -317,14 +320,14 @@ theme.membar = wibox.widget {
       max_value = 100,
       color = white1,
       background_color = black1,
-      paddings = dpi(1),
-      border_width = dpi(1),
+      paddings = dpi(2),
+      border_width = dpi(2),
       border_color = white1,
       ticks = false,
       widget = wibox.widget.progressbar,
    },
    forced_height = dpi(5),
-   forced_width = dpi(12),
+   forced_width = dpi(16),
    direction = 'east',
    layout = wibox.container.rotate,
 }
@@ -370,14 +373,15 @@ theme.thermalbar = wibox.widget {
       max_value = 100,
       -- color = white1,
       background_color = black1,
-      paddings = dpi(1),
-      border_width = dpi(1),
+      paddings = dpi(2),
+      width = dpi(32),
+      border_width = dpi(2),
       border_color = white1,
       ticks = false,
       widget = wibox.widget.progressbar,
    },
    forced_height = dpi(5),
-   forced_width = dpi(12),
+   forced_width = dpi(16),
    direction = 'east',
    layout = wibox.container.rotate,
 }
@@ -470,7 +474,7 @@ local pumpwidget = wibox.container.margin(pumpbg, dpi(5), dpi(8), dpi(5), dpi(5)
 
 --- {{{ Calendar
 local calendar = awful.widget.calendar_popup.year({
-      font          = 'SauceCodePro Nerd Font Mono',
+      font          = '丁卯点阵体 9px 12',
       spacing       = 2,
       week_numbers  = false,
       start_sunday  = false,
@@ -497,7 +501,7 @@ local emailbg = wibox.widget {
    theme.emailnum,
    bg = black1,
    shape = gears.shape.rectangle,
-   shape_border_width = dpi(1),
+   shape_border_width = dpi(2),
    shape_border_color = white1,
    forced_width = dpi(32),
    widget = wibox.container.background
@@ -532,8 +536,8 @@ local emailwidget = wibox.container.margin(emailbg, dpi(5), dpi(8), dpi(5), dpi(
 --- {{{ Net
 theme.netgraph = wibox.widget {
    forced_width = dpi(48),
-   paddings = dpi(1),
-   border_width = dpi(1),
+   paddings = dpi(2),
+   border_width = dpi(2),
    border_color = white2,
    stack_colors = { blue1, red1 },
    step_width = 2,
@@ -578,14 +582,15 @@ theme.batbar = wibox.widget {
       max_value = 100,
       -- color = white1,
       background_color = black1,
-      paddings = dpi(1),
-      border_width = dpi(1),
+      paddings = dpi(2),
+      width = dpi(16),
+      border_width = dpi(2),
       border_color = white1,
       ticks = false,
       widget = wibox.widget.progressbar,
    },
    forced_height = dpi(5),
-   forced_width = dpi(10),
+   forced_width = dpi(16),
    direction = 'east',
    layout = wibox.container.rotate,
 }
@@ -624,9 +629,10 @@ local mybrightnessbar = require("mybrightnessbar")
 theme.brightness = mybrightnessbar {
    ticks = false,
    width = dpi(64),
-   height = dpi(16),
-   paddings = dpi(1),
-   border_width = dpi(1),
+   height = dpi(8),
+   paddings = dpi(2),
+   margins = dpi(4),
+   border_width = dpi(2),
    border_color = white2,
    timeout = 31,
    background_color = black1,
