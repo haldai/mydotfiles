@@ -12,17 +12,18 @@
          ("\\.m\\'" . mercury-mode))
   :bind (:map prolog-mode-map
               ("C-c %" . prolog-insert-comment-block)
-              ("C-c C-c l" . prolog-insert-library))
+              ("C-c C-c l" . prolog-insert-library)
+              ("<f12>" . showterm))
   :hook ((prolog-mode . display-line-numbers-mode)
          (prolog-mode . hl-todo-mode))
   :config
   ;; no auto-indentation for comments
   (setq prolog-align-comments-flag nil)
   (setq prolog-indent-mline-comments-flag nil)
-  (setq prolog-system 'swi
-        prolog-program-switches '((swi ("-G128M" "-T128M" "-L128M" "-O"))
-                                  (t nil))
-        prolog-electric-if-then-else-flag t)
+  ;; (setq prolog-system 'swi
+  ;;       prolog-program-switches '((swi ("-G128M" "-T128M" "-L128M" "-O"))
+  ;;                                 (t nil))
+  ;;      prolog-electric-if-then-else-flag t)
 
   (defun prolog-insert-comment-block ()
     "Insert a comment block like %%%%%% "
@@ -54,7 +55,13 @@
                 ("C-c <f10>" . ediprolog-consult)
                 ("C-c q" . insert-prolog-query-mark))
     :config
-    (setq ediprolog-prefix "%%@")))
+    (setq ediprolog-prefix "%%@")
+    (setq ediprolog-system 'scryer)
+    (setq scryer-prolog-path "/home/daiwz/.local/local/bin/scryer-prolog")
+    )
+
+  ;; scryer-prolog
+  (load "~/Projects/scryer-prolog/tools/showterm.el"))
 
 ;; Potassco Answer Set Program
 (use-package clingo-mode

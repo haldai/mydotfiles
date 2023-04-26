@@ -14,6 +14,8 @@
 (setq warning-minimum-level :emergency)
 (defvar native-comp-deferred-compilation-deny-list nil)
 
+(setq pixel-scroll-precision-mode t)
+
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
 (defconst *spell-check-support-enabled* nil) ;; Enable with t if you prefer
