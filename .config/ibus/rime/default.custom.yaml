@@ -1,5 +1,6 @@
 patch:
-  "menu/page_size": 5
+  "menu/page_size": 10
+  "translator/enable_user_dict": true
   ascii_composer/good_old_caps_lock: true
   ascii_composer/switch_key:
     Caps_Lock: commit_code
@@ -9,3 +10,22 @@ patch:
     Control_R: noop
   schema_list:
     - schema: luna_pinyin_simp
+  key_binder/bindings:
+    - accept: "comma"
+      send: "Page_Up"
+      when: "paging"
+    - accept: "period"
+      send: "Page_Down"
+      when: "has_menu"
+    - accept: "Control+f"
+      send: "Page_Down"
+      when: "has_menu"
+    - accept: "Control+b"
+      send: "Page_Up"
+      when: "has_menu"      
+    - accept: "Control+n"
+      send: "Down"
+      when: "has_menu"      
+    - accept: "Control+p"
+      send: "Up"
+      when: "has_menu"      
