@@ -1,0 +1,49 @@
+[window]
+opacity = 0.93
+
+[window.padding]
+x = 10
+y = 0
+
+[font]
+size = 12
+
+[font.normal]
+family = "Sarasa Mono SC"
+style = "Regular"
+
+[font.bold]
+family = "Sarasa Mono SC"
+style = "Bold"
+
+[font.italic]
+family = "Sarasa Mono SC"
+style = "Italic"
+
+[colors.primary]
+background = "#3F3F3F"
+foreground = "#DCDCCC"
+
+[colors.cursor]
+text = "CellBackground"
+cursor = "#BFBFBF"
+
+[colors.normal]
+black = "#3F3F3F"
+red = "#CC9393"
+green = "#7F9F7F"
+yellow = "#F0DFAF"
+blue = "#8CD0D3"
+magenta = "#DC8CC3"
+cyan = "#93E0E3"
+white = "#DCDCCC"
+
+[colors.bright]
+black = "#7F7F7F"
+red = "#9C6363"
+green = "#5F7F5F"
+yellow = "#D0BF8F"
+blue = "#94BFF3"
+magenta = "#CB7BB2"
+cyan = "#82CFD2"
+white = "#FFFFEF"
