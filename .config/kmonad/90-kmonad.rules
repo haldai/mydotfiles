@@ -1,0 +1,1 @@
+ACTION=="add|change", SUBSYSTEM=="input", ENV{ID_INPUT_KEYBOARD}=="?*", ENV{ID_SERIAL}=="?*", TEST=="/etc/kmonad/$env{ID_SERIAL}", TAG+="systemd", ENV{SYSTEMD_WANTS}="kmonad@$env{ID_SERIAL}.service"
