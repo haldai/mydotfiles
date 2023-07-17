@@ -53,9 +53,11 @@
 
   ;; jupyter mode
   (use-package jupyter
-    :straight (emacs-jupyter :type git :host github :repo "nnicandro/emacs-jupyter")
+    :straight (emacs-jupyter :type git :host github :repo "emacs-jupyter/jupyter")
     :bind (("C-c C-x r" . jupyter-repl-restart-kernel)
            ("C-c C-x h" . jupyter-org-restart-and-execute-to-point))
+    :init
+    (setenv "PYDEVD_DISABLE_FILE_VALIDATION" "1")
     :config
     (setq jupyter--debug t))
 
@@ -234,9 +236,9 @@
    '(org-formula ((t (:inherit fixed-pitch :height 0.8))))
    '(org-code ((t (:inherit (shadow fixed-pitch)))))
    '(org-document-info ((t (:inherit variable-pitch :slant italic))))
-   '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch) :weight bold))))
+   '(org-document-info-keyword ((t (:inherit (shadow fixed-pitch) :weight normal))))
    '(org-indent ((t (:inherit (org-hide fixed-pitch)))))
-   '(org-link ((t (:inherid fixed-pitch :underline t))))
+   '(org-link ((t (:inherit fixed-pitch :underline t))))
    '(org-meta-line ((t (:inherit (font-lock-comment-face fixed-pitch) :weight bold))))
    '(org-property-value ((t (:inherit fixed-pitch))) t)
    '(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
@@ -289,7 +291,7 @@
   (defvar load-language-list '((emacs-lisp . t)
                                (latex . t)
                                (perl . t)
-                               (julia . t)
+                               ;; (julia . t)
                                (python . t)
                                (prolog . t)
                                (ruby . t)
@@ -302,9 +304,10 @@
                                (dot . t)
                                (gnuplot . t)
                                (plantuml . t)
-                               (jupyter . t)))
+                               (jupyter . t)
+                               ))
 
-  (setq inferior-julia-program-name "julia")
+  ;; (setq inferior-julia-program-name "julia")
 
   ;; ob-sh renamed to ob-shell since 26.1.
   (cl-pushnew '(shell . t) load-language-list)
@@ -400,6 +403,83 @@
   (setq org-preview-latex-default-process 'xdvisvgm)
 
   ;; Presentation
+  (use-package org-present
+    :straight t
+    :diminish
+    :config
+    ;; Configure fill width
+    (use-package visual-fill-column
+      :straight t
+      :init
+      (setq visual-fill-column-width 110))
+
+    ;; useful functions
+    (defun my/org-present-prepare-slide (buffer-name heading)
+      ;; Show only top-level headlines
+      (org-overview)
+
+      ;; Unfold the current entry
+      (org-show-entry)
+
+      ;; Show only direct subheadings of the slide but don't expand them
+      (org-show-children))
+
+    (defun my/org-present-start ()
+      ;; Fonts
+      (setq-local face-remapping-alist '((header-line (:height 2.0) variable-pitch)))
+
+      ;; Centering
+      (setq visual-fill-column-center-text t)
+
+      ;; Transparent: Let the desktop background show through
+      (set-frame-parameter (selected-frame) 'alpha '(97 . 100))
+      (add-to-list 'default-frame-alist '(alpha . (90 . 90)))
+
+      ;; Set a blank header line string to create blank space at the top
+      (setq header-line-format " ")
+
+      ;; Display inline images automatically
+      (org-display-inline-images)
+
+      ;; read-only
+      (setq buffer-read-only t)
+
+      ;; Center the presentation and wrap lines
+      (visual-fill-column-mode 1)
+      (visual-line-mode 1))
+
+    (defun my/org-present-end ()
+      ;; Fonts reset
+      (setq-local face-remapping-alist '((header-line (:height 1.0) variable-pitch)))
+      ;; disable centering
+      (setq visual-fill-column-center-text nil)
+
+      ;; disable transparency
+      (set-frame-parameter (selected-frame) 'alpha '(100 . 100))
+      (add-to-list 'default-frame-alist '(alpha . (100 . 100)))
+
+      ;; Clear the header line string so that it isn't displayed
+      (setq header-line-format nil)
+
+      ;; Stop displaying inline images
+      (org-remove-inline-images)
+
+      ;; Stop read-only
+      (setq buffer-read-only nil)
+
+      ;; Stop centering the document
+      (visual-fill-column-mode 0)
+      (visual-line-mode 0))
+
+    ;; Turn on variable pitch fonts in Org Mode buffers
+    (add-hook 'org-mode-hook 'variable-pitch-mode)
+
+    ;; Register hooks with org-present
+    (add-hook 'org-present-mode-hook 'my/org-present-start)
+    (add-hook 'org-present-mode-quit-hook 'my/org-present-end)
+    (add-hook 'org-present-after-navigate-functions 'my/org-present-prepare-slide)
+    )
+
   (use-package org-tree-slide
     :straight t
     :diminish
@@ -421,6 +501,8 @@
     :config
     (org-tree-slide-presentation-profile)
     (setq org-tree-slide-skip-outline-level 5)
+    (setq org-tree-slide-header nil)
+    (setq org-tree-slide-slide-in-effect nil)
     (with-eval-after-load "org-tree-slide"
       (defvar my-hide-org-meta-line-p nil)
       (defun my-hide-org-meta-line ()
