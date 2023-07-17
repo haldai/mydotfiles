@@ -57,8 +57,8 @@
     :config
     (setq ediprolog-prefix "%%@")
     (setq ediprolog-system 'scryer)
-    (setq scryer-prolog-path "/home/daiwz/.local/local/bin/scryer-prolog")
-    )
+    (setq ediprolog-program "scryer-prolog")
+    (setq scryer-prolog-path "/home/daiwz/.local/local/bin/scryer-prolog"))
 
   ;; scryer-prolog
   (load "~/Projects/scryer-prolog/tools/showterm.el"))
