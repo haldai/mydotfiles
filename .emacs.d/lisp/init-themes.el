@@ -44,7 +44,7 @@
 
 ;; mode-line
 (use-package doom-modeline
-  :straight t
+  :straight (doom-modeline :type git :host github :repo "seagle0128/doom-modeline")
   :hook (after-init . doom-modeline-mode)
   :init
   (setq doom-modeline-major-mode-color-icon t)
