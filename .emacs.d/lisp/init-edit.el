@@ -393,6 +393,10 @@
   :straight (kbd-mode :type git :host github :repo "kmonad/kbd-mode")
   :mode "\\.kbd\\'")
 
+(use-package emojify
+  :straight (emojify :type git :host github :repo "iqbalansari/emacs-emojify")
+  :hook (after-init . global-emojify-mode))
+
 (defun insert-zero-width-space ()
   (interactive (insert "\u200B")))
 
