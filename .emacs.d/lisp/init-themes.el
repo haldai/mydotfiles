@@ -42,110 +42,6 @@
   ;; If you want it in all text modes:
   (text-mode . mixed-pitch-mode))
 
-;; mode-line
-(use-package doom-modeline
-  :straight (doom-modeline :type git :host github :repo "seagle0128/doom-modeline")
-  :hook (after-init . doom-modeline-mode)
-  :init
-  (setq doom-modeline-major-mode-color-icon t)
-  (setq doom-modeline-github t)
-  :config
-  (use-package ghub :straight t)
-  ;; How tall the mode-line should be (only respected in GUI Emacs).
-  (setq doom-modeline-height 1) ; optional
-  (custom-set-faces
-   '(mode-line ((t (:family "Fira Code" :height 0.9))))
-   '(mode-line-active ((t (:family "Fira Code" :height 0.9)))) ; For 29+
-   '(mode-line-inactive ((t (:family "Fira Code" :height 0.9)))))
-
-  ;; How wide the mode-line bar should be (only respected in GUI Emacs).
-  (setq doom-modeline-bar-width 3)
-
-  ;; Determines the style used by `doom-modeline-buffer-file-name'.
-  ;;
-  ;; Given ~/Projects/FOSS/emacs/lisp/comint.el
-  ;;   truncate-upto-project => ~/P/F/emacs/lisp/comint.el
-  ;;   truncate-from-project => ~/Projects/FOSS/emacs/l/comint.el
-  ;;   truncate-with-project => emacs/l/comint.el
-  ;;   truncate-except-project => ~/P/F/emacs/l/comint.el
-  ;;   truncate-upto-root => ~/P/F/e/lisp/comint.el
-  ;;   truncate-all => ~/P/F/e/l/comint.el
-  ;;   relative-from-project => emacs/lisp/comint.el
-  ;;   relative-to-project => lisp/comint.el
-  ;;   file-name => comint.el
-  ;;   buffer-name => comint.el<2> (uniquify buffer name)
-  ;;
-  ;; If you are expereicing the laggy issue, especially while editing remote files
-  ;; with tramp, please try `file-name' style.
-  ;; Please refer to https://github.com/bbatsov/projectile/issues/657.
-  (setq doom-modeline-buffer-file-name-style 'truncate-upto-project)
-
-  ;; Whether display icons in mode-line or not.
-  (setq doom-modeline-icon t)
-
-  ;; Whether display the icon for major mode. It respects `doom-modeline-icon'.
-  (setq doom-modeline-major-mode-icon t)
-
-  ;; Whether display color icons for `major-mode'. It respects
-  ;; `doom-modeline-icon' and `all-the-icons-color-icons'.
-  (setq doom-modeline-major-mode-color-icon t)
-
-  ;; Whether display icons for buffer states. It respects `doom-modeline-icon'.
-  (setq doom-modeline-buffer-state-icon t)
-
-  ;; Whether display buffer modification icon. It respects `doom-modeline-icon'
-  ;; and `doom-modeline-buffer-state-icon'.
-  (setq doom-modeline-buffer-modification-icon t)
-
-  ;; Whether display minor modes in mode-line or not.
-  (setq doom-modeline-minor-modes nil)
-
-  ;; If non-nil, a word count will be added to the selection-info modeline segment.
-  (setq doom-modeline-enable-word-count nil)
-
-  ;; If non-nil, only display one number for checker information if applicable.
-  (setq doom-modeline-checker-simple-format t)
-
-  ;; The maximum displayed length of the branch name of version control.
-  (setq doom-modeline-vcs-max-length 12)
-
-  ;; Whether display perspective name or not. Non-nil to display in mode-line.
-  (setq doom-modeline-persp-name t)
-
-  ;; Whether display `lsp' state or not. Non-nil to display in mode-line.
-  (setq doom-modeline-lsp t)
-
-  ;; Whether display github notifications or not. Requires `ghub` package.
-  (setq doom-modeline-github nil)
-
-  ;; The interval of checking github.
-  (setq doom-modeline-github-interval (* 30 60))
-
-  ;; Whether display environment version or not
-  (setq doom-modeline-env-version t)
-  ;; Or for individual languages
-  (setq doom-modeline-env-enable-python t)
-  (setq doom-modeline-env-enable-ruby nil)
-  (setq doom-modeline-env-enable-perl nil)
-  (setq doom-modeline-env-enable-go t)
-  (setq doom-modeline-env-enable-elixir nil)
-  (setq doom-modeline-env-enable-rust nil)
-
-  ;; Change the executables to use for the language version string
-  (setq doom-modeline-env-python-executable "python")
-  (setq doom-modeline-env-ruby-executable "ruby")
-  (setq doom-modeline-env-perl-executable "perl")
-  (setq doom-modeline-env-go-executable "go")
-
-  ;; Whether display mu4e notifications or not. Requires `mu4e-alert' package.
-  (setq doom-modeline-mu4e t)
-
-  ;; Whether display irc notifications or not. Requires `circe' package.
-  (setq doom-modeline-irc t)
-
-  ;; Function to stylize the irc buffer names.
-  (setq doom-modeline-irc-stylize 'identity))
-
 (defun mode-line-height ()
   "Get current height of mode-line."
   (- (elt (window-pixel-edges) 3)
@@ -160,46 +56,10 @@
           . hide-mode-line-mode)))
 
 ;; Icons
-;; NOTE: Must run `M-x all-the-icons-install-fonts' manually on Windows
-(use-package all-the-icons
+;; NOTE: Must run `M-x nerd-icons-install-fonts' manually on Windows
+(use-package nerd-icons
   :straight t
-  :if (display-graphic-p)
-  :custom-face
-  ;; Reset colors since they are too dark in `doom-themes'
-  (all-the-icons-silver ((((background dark)) :foreground "#716E68")
-                         (((background light)) :foreground "#716E68")))
-  (all-the-icons-lsilver ((((background dark)) :foreground "#B9B6AA")
-                          (((background light)) :foreground "#7F7869")))
-  (all-the-icons-dsilver ((((background dark)) :foreground "#838484")
-                          (((background light)) :foreground "#838484")))
-  :init
-  (unless (member "all-the-icons" (font-family-list))
-    (all-the-icons-install-fonts t))
-  :config
-  (add-to-list 'all-the-icons-mode-icon-alist
-               '(help-mode all-the-icons-faicon "info-circle" :height 1.1 :v-adjust -0.1 :face all-the-icons-purple))
-  (add-to-list 'all-the-icons-mode-icon-alist
-               '(Info-mode all-the-icons-faicon "info-circle" :height 1.1 :v-adjust -0.1))
-  (add-to-list 'all-the-icons-icon-alist
-               '("NEWS$" all-the-icons-faicon "newspaper-o" :height 0.9 :v-adjust -0.2))
-  (add-to-list 'all-the-icons-icon-alist
-               '("Cask\\'" all-the-icons-fileicon "elisp" :height 1.0 :face all-the-icons-blue))
-  (add-to-list 'all-the-icons-mode-icon-alist
-               '(cask-mode all-the-icons-fileicon "elisp" :height 1.0 :face all-the-icons-blue))
-  (add-to-list 'all-the-icons-icon-alist
-               '(".*\\.ipynb\\'" all-the-icons-fileicon "jupyter" :height 1.2 :face all-the-icons-orange))
-  (add-to-list 'all-the-icons-mode-icon-alist
-               '(ein:notebooklist-mode all-the-icons-faicon "book" :face all-the-icons-orange))
-  (add-to-list 'all-the-icons-mode-icon-alist
-               '(ein:notebook-mode all-the-icons-fileicon "jupyter" :height 1.2 :face all-the-icons-orange))
-  (add-to-list 'all-the-icons-mode-icon-alist
-               '(ein:notebook-multilang-mode all-the-icons-fileicon "jupyter" :height 1.2 :face all-the-icons-orange))
-  (add-to-list 'all-the-icons-icon-alist
-               '("\\.epub\\'" all-the-icons-faicon "book" :height 1.0 :v-adjust -0.1 :face all-the-icons-green))
-  (add-to-list 'all-the-icons-mode-icon-alist
-               '(nov-mode all-the-icons-faicon "book" :height 1.0 :v-adjust -0.1 :face all-the-icons-green))
-  (add-to-list 'all-the-icons-mode-icon-alist
-               '(gfm-mode  all-the-icons-octicon "markdown" :face all-the-icons-blue)))
+  :if (display-graphic-p))
 
 ;; Line and Column
 (setq-default fill-column 80)

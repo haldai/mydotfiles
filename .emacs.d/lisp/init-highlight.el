@@ -40,32 +40,6 @@
   (setq show-paren-when-point-inside-paren t)
   (setq show-paren-when-point-in-periphery t))
 
-;; Highlight indentions
-(when (display-graphic-p)
-  (use-package highlight-indent-guides
-    :straight t
-    :diminish
-    :hook (prog-mode . (lambda ()
-                         ;; WORKAROUND:Fix the issue of not displaying plots
-                         ;; @see https://github.com/DarthFennec/highlight-indent-guides/issues/55
-                         (unless (eq major-mode 'ein:notebook-multilang-mode)
-                           (highlight-indent-guides-mode 1))))
-    :config
-    (setq highlight-indent-guides-method 'character)
-    (setq highlight-indent-guides-responsive 'top)
-
-    ;; Disable `highlight-indent-guides-mode' in `swiper'
-    ;; https://github.com/DarthFennec/highlight-indent-guides/issues/40
-    (with-eval-after-load 'ivy
-      (defadvice ivy-cleanup-string (after my-ivy-cleanup-hig activate)
-        (let ((pos 0) (next 0) (limit (length str)) (prop 'highlight-indent-guides-prop))
-          (while (and pos next)
-            (setq next (text-property-not-all pos limit prop nil str))
-            (when next
-              (setq pos (text-property-any next limit prop nil str))
-              (ignore-errors
-                (remove-text-properties next pos '(display nil face nil) str)))))))))
-
 ;; Colorize color names in buffers
 (use-package rainbow-mode
   :straight t

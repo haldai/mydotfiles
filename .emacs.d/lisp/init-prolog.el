@@ -56,9 +56,11 @@
                 ("C-c q" . insert-prolog-query-mark))
     :config
     (setq ediprolog-prefix "%%@")
-    (setq ediprolog-system 'scryer)
-    (setq ediprolog-program "scryer-prolog")
-    (setq scryer-prolog-path "/home/daiwz/.local/local/bin/scryer-prolog"))
+    (setq ediprolog-system 'swi)
+    (setq ediprolog-program "swipl"))
+    ;;(setq ediprolog-system 'scryer)
+    ;;(setq ediprolog-program "scryer-prolog")
+    ;;(setq scryer-prolog-path "/home/daiwz/.local/local/bin/scryer-prolog"))
 
   ;; scryer-prolog
   (load "~/Projects/scryer-prolog/tools/showterm.el"))
