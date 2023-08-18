@@ -20,10 +20,10 @@
   ;; no auto-indentation for comments
   (setq prolog-align-comments-flag nil)
   (setq prolog-indent-mline-comments-flag nil)
-  ;; (setq prolog-system 'swi
-  ;;       prolog-program-switches '((swi ("-G128M" "-T128M" "-L128M" "-O"))
-  ;;                                 (t nil))
-  ;;      prolog-electric-if-then-else-flag t)
+  (setq prolog-system 'swi
+        prolog-program-switches '((swi ("-G128M" "-T128M" "-L128M" "-O"))
+                                  (t nil))
+        prolog-electric-if-then-else-flag t)
 
   (defun prolog-insert-comment-block ()
     "Insert a comment block like %%%%%% "
