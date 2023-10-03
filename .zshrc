@@ -89,7 +89,7 @@ plugins=(
 #   export EDITOR='mvim'
 # fi
 
-EDITOR='micro'
+export EDITOR='micro'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -121,6 +121,7 @@ alias am='amixer sset Master toggle'
 alias ac='amixer sset Capture toggle'
 alias pip-upgrade="pip freeze --user | cut -d'=' -f1 | xargs -n1 pip install -U"
 alias pip-upgrade-venv="pip freeze | cut -d'=' -f1 | xargs -n1 pip install -U"
+alias wifi='sudo rfkill unblock all && sudo wifi-menu'
 
 # some aliases avoid make mistake
 alias mv='mv -i'
@@ -162,12 +163,14 @@ export OPENCV_LOG_LEVEL="ERROR"
 # alias emacs='emacs -nw'
 # alias pl='LD_PRELOAD=/usr/lib/libc.so.6 swipl'
 alias pl='swipl'
+alias spl='scryer-prolog'
 alias jl='julia'
 alias sc='scheme'
 alias jlo='optirun julia'
 alias matlab='LANG=en_US.utf-8 matlab'
 alias f='fuck'
 alias fo='handlr open "$(fzf)"'
+alias imgcat='wezterm imgcat'
 
 # optimus
 PRIMUS_PREFIX="primusrun"
