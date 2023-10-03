@@ -17,7 +17,7 @@ config.color_scheme = 'Zenburn (base16)'
 config.window_background_opacity = .92
 
 -- Fonts
-config.font = wezterm.font 'Sarasa Mono SC'
+config.font = wezterm.font 'Sarasa Fixed SC'
 
 -- No tab bar
 config.enable_tab_bar = false
