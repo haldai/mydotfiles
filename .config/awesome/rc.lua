@@ -93,7 +93,7 @@ end
 -- However, you can use another modifier like Mod1, but it may interact with others.
 local modkey = "Mod4"
 local altkey = "Mod1"
-local terminal = "alacritty"
+local terminal = "wezterm"
 local editor = "emacsclient -c -a emacs"
 local editor_cmd = terminal .. " -e " .. editor
 local browser = "google-chrome-stable --disable-gpu --disable-software-rasterizer"
@@ -231,7 +231,7 @@ awful.util.mymainmenu = awful.menu({
          { " 編輯", function () awful.spawn("emacsclient -c -a emacs") end, icon_path .. "apps/emacs.png" },
          { " 衝浪", function () awful.spawn("google-chrome-stable --disable-software-rasterizer") end, icon_path .. "apps/chrome.png" },
          { " 文件", function () awful.spawn("pcmanfm") end, icon_path .. "apps/file-manager.png" },
-         { " 監控", function () awful.spawn("alacritty -e htop") end, icon_path .. "apps/utilities-system-monitor.png" },
+         { " 監控", function () awful.spawn("wezterm -e htop") end, icon_path .. "apps/utilities-system-monitor.png" },
          { " 聲音", function () awful.spawn("pavucontrol") end, icon_path .. "apps/sound.png" },
          { " 托盤", function () awful.spawn.with_shell("~/.scripts/toggle_systray") end, icon_path .. "places/workspace-switcher-right-bottom.png" },
          { " 輸入", myinputmenu, icon_path .. "categories/cs-region.png"},
@@ -396,7 +396,7 @@ globalkeys = gears.table.join(
       {description = "launch Chrome with user data dir", group = "launcher"}),
    awful.key({ modkey }, "F4", function () awful.screen.focused().systray.visible = not awful.screen.focused().systray.visible end,
       {description = "toggle system tray", group = "launcher"}),
-   awful.key({ modkey }, "F5", function () awful.spawn("alacritty -e ranger") end,
+   awful.key({ modkey }, "F5", function () awful.spawn("wezterm -e ranger") end,
       {description = "launch ranger", group = "launcher"}),
    awful.key({ modkey }, "F6", function () awful.spawn("electronic-wechat") end,
       {description = "launch wechat", group = "launcher"}),
