@@ -80,7 +80,7 @@
   :config
   (dolist (keyword '("BUG" "DEFECT" "ISSUE" "HANGUP"))
     (cl-pushnew `(,keyword . ,(face-foreground 'error)) hl-todo-keyword-faces))
-  (dolist (keyword '("WORKAROUND" "HACK" "TRICK" "DOING" "CANCELED"))
+  (dolist (keyword '("WORKAROUND" "HACK" "TRICK" "DOING" "CANCELED" "DEBUG"))
     (cl-pushnew `(,keyword . ,(face-foreground 'warning)) hl-todo-keyword-faces)))
 
 ;; Highlight uncommitted changes
