@@ -112,6 +112,7 @@
 (require 'init-lua)
 (require 'init-r)
 (require 'init-scheme)
+(require 'init-lean4)
 (require 'init-prog)
 
 ;; Load custom files at last
