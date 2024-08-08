@@ -284,7 +284,6 @@
   :diminish
   :hook ((prog-mode . subword-mode)
      (minibuffer-setup . subword-mode)))
->>>>>>> refs/remotes/origin/master
 
 ;; Treat undo history as a tree
 (use-package undo-tree
