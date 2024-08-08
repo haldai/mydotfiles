@@ -114,6 +114,7 @@
 (require 'init-scheme)
 (require 'init-lean4)
 (require 'init-prog)
+(require 'init-ellama)
 
 ;; Load custom files at last
 (when (file-exists-p custom-file)

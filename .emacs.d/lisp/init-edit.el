@@ -264,10 +264,10 @@
   (face-spec-reset-face 'origami-fold-header-face))
 
 ;; Narrow/Widen
-(use-package fancy-narrow
-  :straight t
-  :diminish
-  :hook (after-init . fancy-narrow-mode))
+;;(use-package fancy-narrow
+;;  :straight t
+;;  :diminish
+;;  :hook (after-init . fancy-narrow-mode))
 
 ;; Huge files
 (use-package vlf
