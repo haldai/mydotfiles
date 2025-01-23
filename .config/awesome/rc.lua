@@ -678,7 +678,8 @@ awful.rules.rules = {
     properties = {
       border_width = beautiful.border_width,
       border_color = beautiful.border_normal,
-      focus = awful.client.focus.filter,
+      -- focus = awful.client.focus.filter,
+      focus = true,
       raise = true,
       keys = clientkeys,
       buttons = clientbuttons,
@@ -711,7 +712,10 @@ awful.rules.rules = {
         "PeaZip",
         "hp-toolbox",
         "wechat.exe",
+        "wechat",
         "qqmusic",
+        "EmojiFloatWnd",
+        "Skype",
       },
       -- Note that the name property shown in xprop might be set slightly after creation of the client
       -- and the name shown there might not match defined rules here.
@@ -719,6 +723,7 @@ awful.rules.rules = {
         "Event Tester", -- xev.
         "画中画",
         "保存文件",
+        "EmojiFloatWnd",
       },
       role = {
         "AlarmWindow",   -- Thunderbird's calendar.
@@ -839,9 +844,9 @@ client.connect_signal(
 
 -- Enable sloppy focus, so that focus follows mouse.
 client.connect_signal(
-  "mouse::enter", function(c)
+  "mouse::click", function(c)
     c:emit_signal("request::activate", "mouse_enter", { raise = false })
-  end)
+end)
 
 -- No border for maximized clients
 function border_adjust(c)
