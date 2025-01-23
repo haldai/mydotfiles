@@ -678,8 +678,7 @@ awful.rules.rules = {
     properties = {
       border_width = beautiful.border_width,
       border_color = beautiful.border_normal,
-      -- focus = awful.client.focus.filter,
-      focus = true,
+      focus = awful.client.focus.filter,
       raise = true,
       keys = clientkeys,
       buttons = clientbuttons,
@@ -687,6 +686,14 @@ awful.rules.rules = {
       size_hints_honor = false, -- gaps
       placement = awful.placement.no_overlap + awful.placement.no_offscreen
     }
+  },
+
+  { -- resolving the wechat pop-out window problem
+    rule_any = {
+      name = { "wechat" },
+      class = { "wechat" }
+    },
+    properties = { focus = false }
   },
 
   -- Floating clients.
