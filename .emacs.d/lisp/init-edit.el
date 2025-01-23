@@ -57,7 +57,7 @@
   :init
   ;; (with-eval-after-load 'dired
   ;;  (bind-key "C-c C-z f" #'browse-url-of-file dired-mode-map))
-  )
+)
 
 ;; Click to browse URL or to send to e-mail address
 (use-package goto-addr
@@ -115,7 +115,7 @@
   :straight t
   :hook(;; show org ediffs unfolded
         (ediff-prepare-buffer . outline-show-all)
-                                        ;restore window layout when done
+        ;; restore window layout when done
         (ediff-quit . winner-undo))
   :config
   (setq ediff-window-setup-function 'ediff-setup-windows-plain)
@@ -163,11 +163,128 @@
          :map mc/keymap
          ("C-|" . mc/vertical-align-with-space)))
 
-(defun insert-zero-width-space ()
-  (interactive (insert "\u200B")))
+;; Smartly select region, rectangle, multi cursors
+(use-package smart-region
+  :straight t
+  :hook (after-init . smart-region-on))
 
-(defun insert-thin-space ()
-  (interactive (insert "\u2009")))
+;; Hungry deletion
+(use-package hungry-delete
+  :straight t
+  :diminish
+  :hook (after-init . global-hungry-delete-mode)
+  :config (setq-default hungry-delete-chars-to-skip " \t\f\v"))
+
+;; Make bindings that stick around
+(straight-use-package 'hydra)
+
+;; Framework for mode-specific buffer indexes
+(use-package imenu
+  :straight t
+  :bind (("C-." . imenu)))
+
+;; Move to the beginning/end of line or code
+(use-package mwim
+  :straight t
+  :bind (([remap move-beginning-of-line] . mwim-beginning-of-code-or-line)
+         ([remap move-end-of-line] . mwim-end-of-code-or-line)))
+
+;; Treat undo history as a tree
+(use-package undo-tree
+  :straight t
+  :diminish
+  :hook (after-init . global-undo-tree-mode)
+  :init (setq undo-tree-visualizer-timestamps t
+              undo-tree-visualizer-diff t
+              undo-tree-enable-undo-in-region nil
+              undo-tree-auto-save-history nil
+              undo-tree-history-directory-alist
+              `(("." . ,(concat user-emacs-directory "undo-tree-hist/"))))
+  :config
+  ;; FIXME:  `undo-tree-visualizer-diff' is a local variable in *undo-tree* buffer.
+  (defun undo-tree-visualizer-show-diff (&optional node)
+    ;; show visualizer diff display
+    (setq-local undo-tree-visualizer-diff t)
+    (let ((buff (with-current-buffer undo-tree-visualizer-parent-buffer
+                  (undo-tree-diff node)))
+          (display-buffer-mark-dedicated 'soft)
+          win)
+      (setq win (split-window))
+      (set-window-buffer win buff)
+      (shrink-window-if-larger-than-buffer win)))
+
+  (defun undo-tree-visualizer-hide-diff ()
+    ;; hide visualizer diff display
+    (setq-local undo-tree-visualizer-diff nil)
+    (let ((win (get-buffer-window undo-tree-diff-buffer-name)))
+      (when win (with-selected-window win (kill-buffer-and-window))))))
+
+;; Goto last change
+(use-package goto-chg
+  :straight t
+  :bind ("C-," . goto-last-change))
+
+;; Handling capitalized subwords in a nomenclature
+(use-package subword
+  :straight t
+  :diminish
+  :hook ((prog-mode . subword-mode)
+         (minibuffer-setup . subword-mode)))
+
+;; Hideshow
+(use-package hideshow
+  :straight t
+  :diminish hs-minor-mode
+  :bind (:map hs-minor-mode-map
+              ("C-`" . hs-toggle-hiding)))
+
+;; Flexible text folding
+(use-package origami
+  :straight t
+  :hook (prog-mode . origami-mode)
+  :init (setq origami-show-fold-header t)
+  :config
+  (defhydra origami-hydra (:color blue :hint none)
+    "
+      _:_: recursively toggle node       _a_: toggle all nodes    _t_: toggle node
+      _o_: show only current node        _u_: undo                _r_: redo
+      _R_: reset
+      "
+    (":" origami-recursively-toggle-node)
+    ("a" origami-toggle-all-nodes)
+    ("t" origami-toggle-node)
+    ("o" origami-show-only-node)
+    ("u" origami-undo)
+    ("r" origami-redo)
+    ("R" origami-reset))
+
+  :bind (:map origami-mode-map
+              ("C-<tab>" . origami-hydra/body))
+  :config
+  (face-spec-reset-face 'origami-fold-header-face))
+
+;; Narrow/Widen
+;;(use-package fancy-narrow
+;;  :straight t
+;;  :diminish
+;;  :hook (after-init . fancy-narrow-mode))
+
+;; Huge files
+(use-package vlf
+  :straight t)
+(require 'vlf)
+(require 'tramp)
+
+(defun ffap-vlf ()
+  "Find file at point with VLF."
+  (interactive)
+  (let ((file (ffap-file-at-point)))
+    (unless (file-exists-p file)
+      (error "File does not exist: %s" file))
+    (vlf file)))
+
+
+
 
 ;; Input Method
 (use-package posframe
@@ -225,127 +342,32 @@
   :straight (kbd-mode :type git :host github :repo "kmonad/kbd-mode")
   :mode "\\.kbd\\'")
 
-;; Huge files
-(use-package vlf
-  :straight t)
-(require 'vlf)
-(require 'tramp)
+;; (use-package emojify
+;;   :straight (emojify :type git :host github :repo "iqbalansari/emacs-emojify")
+;;   :hook (after-init . global-emojify-mode))
 
-(defun ffap-vlf ()
-  "Find file at point with VLF."
-  (interactive)
-  (let ((file (ffap-file-at-point)))
-    (unless (file-exists-p file)
-      (error "File does not exist: %s" file))
-    (vlf file)))
+(defun insert-zero-width-space ()
+  (interactive (insert "\u200B")))
 
-;; Flexible text folding
-(use-package origami
-  :straight t
-  :hook (prog-mode . origami-mode)
-  :init (setq origami-show-fold-header t)
-  :config
-  (defhydra origami-hydra (:color blue :hint none)
-    "
-      _:_: recursively toggle node       _a_: toggle all nodes    _t_: toggle node
-      _o_: show only current node        _u_: undo                _r_: redo
-      _R_: reset
-      "
-    (":" origami-recursively-toggle-node)
-    ("a" origami-toggle-all-nodes)
-    ("t" origami-toggle-node)
-    ("o" origami-show-only-node)
-    ("u" origami-undo)
-    ("r" origami-redo)
-    ("R" origami-reset))
+(defun insert-thin-space ()
+  (interactive (insert "\u2009")))
 
-  :bind (:map origami-mode-map
-              ("C-<tab>" . origami-hydra/body))
-  :config
-  (face-spec-reset-face 'origami-fold-header-face))
-
-
-;; Narrow/Widen
-;;(use-package fancy-narrow
-;;  :straight t
-;;  :diminish
-;;  :hook (after-init . fancy-narrow-mode))
-
-;; Hideshow
-(use-package hideshow
-  :straight t
-  :diminish hs-minor-mode
-  :bind (:map hs-minor-mode-map
-              ("C-`" . hs-toggle-hiding)))
-
-;; Handling capitalized subwords in a nomenclature
-(use-package subword
-  :straight t
-  :diminish
-  :hook ((prog-mode . subword-mode)
-         (minibuffer-setup . subword-mode)))
-
-;; Treat undo history as a tree
-(use-package undo-tree
-  :straight t
-  :diminish
-  :hook (after-init . global-undo-tree-mode)
-  :init (setq undo-tree-visualizer-timestamps t
-              undo-tree-visualizer-diff t
-              undo-tree-enable-undo-in-region nil
-              undo-tree-auto-save-history nil
-              undo-tree-history-directory-alist
-              `(("." . ,(concat user-emacs-directory "undo-tree-hist/"))))
-  :config
-  ;; FIXME:  `undo-tree-visualizer-diff' is a local variable in *undo-tree* buffer.
-  (defun undo-tree-visualizer-show-diff (&optional node)
-    ;; show visualizer diff display
-    (setq-local undo-tree-visualizer-diff t)
-    (let ((buff (with-current-buffer undo-tree-visualizer-parent-buffer
-                  (undo-tree-diff node)))
-          (display-buffer-mark-dedicated 'soft)
-          win)
-      (setq win (split-window))
-      (set-window-buffer win buff)
-      (shrink-window-if-larger-than-buffer win)))
-
-  (defun undo-tree-visualizer-hide-diff ()
-    ;; hide visualizer diff display
-    (setq-local undo-tree-visualizer-diff nil)
-    (let ((win (get-buffer-window undo-tree-diff-buffer-name)))
-      (when win (with-selected-window win (kill-buffer-and-window))))))
-
-;; Goto last change
-(use-package goto-chg
-  :straight t
-  :bind ("C-," . goto-last-change))
-
-;; Make bindings that stick around
-(straight-use-package 'hydra)
-
-;; Framework for mode-specific buffer indexes
-(use-package imenu
-  :straight t
-  :bind (("C-." . imenu)))
-
-;; Move to the beginning/end of line or code
-(use-package mwim
-  :straight t
-  :bind (([remap move-beginning-of-line] . mwim-beginning-of-code-or-line)
-         ([remap move-end-of-line] . mwim-end-of-code-or-line)))
-
-;; Hungry deletion
-(use-package hungry-delete
-  :straight t
-  :diminish
-  :hook (after-init . global-hungry-delete-mode)
-  :config (setq-default hungry-delete-chars-to-skip " \t\f\v"))
-
-;; Smartly select region, rectangle, multi cursors
-(use-package smart-region
-  :straight t
-  :hook (after-init . smart-region-on))
-
+;; On-the-fly spell checker
+;; (use-package flyspell
+;;   :straight t
+;;   :diminish
+;;   :if (executable-find "aspell")
+;;   :hook (((text-mode outline-mode) . flyspell-mode)
+;;          (prog-mode . flyspell-prog-mode)
+;;          (flyspell-mode . (lambda ()
+;;                             (dolist (key '("C-;" "C-," "C-."))
+;;                               (unbind-key key flyspell-mode-map)))))
+;;   :init
+;;   (setq flyspell-issue-message-flag nil)
+;;   (setq ispell-program-name "aspell")
+;;   (setq ispell-list-command "--list")
+;;   (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_GB" " --dont-tex-check-comments" "--run-together"))
+;;   (setq flyspell-issue-message-flag nil))
 
 (provide 'init-edit)
 
