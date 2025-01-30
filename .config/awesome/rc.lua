@@ -731,6 +731,7 @@ awful.rules.rules = {
         "画中画",
         "保存文件",
         "EmojiFloatWnd",
+        "PyBoy",
       },
       role = {
         "AlarmWindow",   -- Thunderbird's calendar.
