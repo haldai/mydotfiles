@@ -14,7 +14,6 @@
   :bind (:map lsp-mode-map
               ("C-c C-d" . lsp-describe-thing-at-point))
   :init
-  (setq lsp-copilot-enabled nil)     ; disable copilot LSP
   (setq lsp-keymap-prefix "C-c l")   ; set prefix for lsp-command-keymap
   (setq lsp-auto-guess-root t)       ; Detect project root
   (setq lsp-prefer-flymake nil)      ; Use lsp-ui and flycheck
@@ -45,7 +44,7 @@
 (use-package lsp-julia
   ;; Make sure to install "pkg> dev LanguageServer"
   :straight (lsp-julia :type git :host github :repo "non-Jedi/lsp-julia")
-  :init (setq lsp-julia-default-environment "/home/daiwz/.julia/environments/v1.7/"))
+  :init (setq lsp-julia-default-environment "/home/daiwz/.julia/environments/v1.10/"))
 
 (use-package lsp-ui
   :straight t
