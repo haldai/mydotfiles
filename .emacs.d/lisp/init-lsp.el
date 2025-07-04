@@ -14,6 +14,7 @@
   :bind (:map lsp-mode-map
               ("C-c C-d" . lsp-describe-thing-at-point))
   :init
+  (setq lsp-copilot-enabled nil)     ; disable copilot LSP
   (setq lsp-keymap-prefix "C-c l")   ; set prefix for lsp-command-keymap
   (setq lsp-auto-guess-root t)       ; Detect project root
   (setq lsp-prefer-flymake nil)      ; Use lsp-ui and flycheck

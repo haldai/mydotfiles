@@ -57,7 +57,7 @@
     :config
     (setq ediprolog-prefix "%%@")
     ;;(setq ediprolog-system 'swi)
-    ;;(setq ediprolog-program "swipl"))
+    ;;(setq ediprolog-program "swipl")
     (setq ediprolog-system 'scryer)
     (setq ediprolog-program "scryer-prolog")
     (setq scryer-prolog-path "/home/daiwz/.local/local/bin/scryer-prolog"))
