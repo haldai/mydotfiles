@@ -362,6 +362,9 @@
   ;; do not evaluate code blocks while exporting
   (setq org-export-babel-evaluate t)
 
+  ;; indention removed
+  (setq org-edit-src-content-indentation 0)  ;; default = 2
+
   (use-package htmlize :straight t)
 
   ;; Make invisible parts of Org elements appear visible.

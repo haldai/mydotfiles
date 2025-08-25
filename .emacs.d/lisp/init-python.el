@@ -27,10 +27,7 @@
                            (lsp-deferred))))  ; or lsp-deferred
 
   ;; Live Coding in Python
-  (use-package live-py-mode :straight t)
-  (use-package py-autopep8
-    :straight t
-    :hook (python-mode . py-autopep8-enable-on-save)))
+  (use-package live-py-mode :straight t))
 
 (provide 'init-python)
 
