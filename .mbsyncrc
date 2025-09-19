@@ -1,0 +1,26 @@
+IMAPStore nju-remote
+Host imap.exmail.qq.com
+Port 993
+User daiwz@nju.edu.cn
+PassCmd "pass show muw/daiwz@nju.edu.cn"
+AuthMechs LOGIN
+# SSLType IMAPS
+TLSType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+MaildirStore nju-local
+Subfolders Verbatim
+Path ~/.local/share/mail/nju/
+Inbox ~/.local/share/mail/nju/INBOX
+Flatten _
+
+Channel nju
+Expunge Both
+Far  :nju-remote:
+Near :nju-local:
+Patterns * !"[Gmail]/All Mail"
+Create Both
+SyncState *
+MaxMessages 0
+ExpireUnread no
+# End profile
