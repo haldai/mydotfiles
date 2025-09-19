@@ -1,3 +1,5 @@
 #!/bin/sh
 sudo powertop --auto-tune
-xbacklight -set 5
+xbacklight -set 20
+xrandr --output eDP-1 --mode 2880x1800 --rate 60
+sudo tlp bat
