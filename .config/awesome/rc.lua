@@ -2,6 +2,29 @@
 --        "Zenburn" awesome theme        --
 --        By Wang-Zhou Dai (haldai)      --
 -------------------------------------------
+
+-- {{{ GLib/GIO GioUnix compat shim
+do
+  local lgi = require("lgi")
+  -- Load core Gio
+  local Gio = lgi.require("Gio", "2.0")
+
+  -- Try to load GioUnix explicitly; if it fails, keep going (we'll show a warning)
+  local ok, GioUnix = pcall(lgi.require, "GioUnix", "2.0")
+
+  if ok and GioUnix then
+    -- Mirror Unix* classes under Gio.* for older Awesome code
+    Gio.UnixInputStream   = Gio.UnixInputStream   or GioUnix.InputStream
+    Gio.UnixOutputStream  = Gio.UnixOutputStream  or GioUnix.OutputStream
+    Gio.UnixSocketAddress = Gio.UnixSocketAddress or GioUnix.SocketAddress
+    Gio.UnixFDMessage     = Gio.UnixFDMessage     or GioUnix.FDMessage
+  else
+    -- Optional: warn in the log so we know why async spawn might fail
+    print("⚠️  GioUnix-2.0 not available; check GioUnix-2.0.typelib / GI_TYPELIB_PATH")
+  end
+end
+--- }}} end shim
+
 -- {{{ Required libraries
 local awesome, client, mouse, screen, tag = awesome, client, mouse, screen, tag
 local ipairs, string, os, table, tostring, tonumber, type = ipairs, string, os, table, tostring, tonumber, type
