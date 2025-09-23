@@ -232,7 +232,7 @@ theme.cpugraph = wibox.widget {
    widget = wibox.widget.graph
 }
 cpuwidget_t = awful.tooltip({ objects = { theme.cpugraph },})
-awful.widget.watch('bash -c "LANG=en_US.UTF-8 mpstat -P ALL 2 1 | awk \'$12 ~ /[0-9.]+/ { print 100 - $12 }\'"', 5,
+awful.widget.watch('bash -c "LANG=en_GB.UTF-8 mpstat -P ALL 2 1 | awk \'$12 ~ /[0-9.]+/ { print 100 - $12 }\'"', 5,
                    function(widget, stdout)
                      if stdout ~= nil and stdout ~= "" then
                        args = {}
@@ -293,25 +293,25 @@ local volumewidget = wibox.container.margin(volumebg, dpi(5), dpi(8), dpi(7), dp
 --- }}}
 
 --- {{{ GPU bar
-local mygpubar = require("mygpubar")
-theme.gputhermal = mygpubar {
-   ticks = false,
-   width = dpi(12),
-   height = dpi(5),
-   paddings = dpi(1),
-   border_width = dpi(1),
-   border_color = white1,
-   timeout = 7, -- time interval
-   colors = {
-      background = black1,
-      low = blue1,
-      mid = white1,
-      high = red1
-   }
-}
-
-local gputhermalbg = wibox.container.background(theme.gputhermal.bar, black2, gears.shape.rectangle)
-local gputhermalwidget = wibox.container.margin(gputhermalbg, dpi(-2), dpi(8), dpi(5), dpi(5))
+-- local mygpubar = require("mygpubar")
+-- theme.gputhermal = mygpubar {
+--    ticks = false,
+--    width = dpi(12),
+--    height = dpi(5),
+--    paddings = dpi(1),
+--    border_width = dpi(1),
+--    border_color = white1,
+--    timeout = 7, -- time interval
+--    colors = {
+--       background = black1,
+--       low = blue1,
+--       mid = white1,
+--       high = red1
+--    }
+-- }
+--
+-- local gputhermalbg = wibox.container.background(theme.gputhermal.bar, black2, gears.shape.rectangle)
+-- local gputhermalwidget = wibox.container.margin(gputhermalbg, dpi(-2), dpi(8), dpi(5), dpi(5))
 --- }}}
 
 --- {{{ RAM
@@ -373,7 +373,7 @@ theme.thermalbar = wibox.widget {
       max_value = 100,
       -- color = white1,
       background_color = black1,
-      paddings = dpi(2),
+      paddings = dpi(3),
       width = dpi(32),
       border_width = dpi(2),
       border_color = white1,
@@ -417,59 +417,59 @@ local thermalwidget = wibox.container.margin(thermalbg, dpi(5), dpi(8), dpi(5), 
 --- }}}
 
 --- {{{ Pump
-theme.pumpbar = wibox.widget {
-   {
-      -- color = white1,
-      background_color = black1,
-      paddings = dpi(1),
-      border_width = 1,
-      border_color = white1,
-      ticks = false,
-      widget = wibox.widget.progressbar,
-   },
-   forced_height = dpi(5),
-   forced_width = dpi(10),
-   direction = 'east',
-   layout = wibox.container.rotate,
-}
-pumpwidget_t = awful.tooltip({ objects = { theme.pumpbar },})
-awful.widget.watch('bash -c "liquidctl status | tail -n 4 | grep -o \'[0-9.]\\+\'"', 61,
-                   function (widget, stdout)
-                      if stdout ~= nil and stdout ~= "" then
-                         pumpargs = {}
-                         for val in stdout:gmatch("[^\r\n]+") do
-                            table.insert(pumpargs, tonumber(val))
-                         end
-                         pumpwidget_t:set_text(string.format("水溫: %.1f℃\n泵速: %d rpm / %d%%", pumpargs[1], pumpargs[2], pumpargs[3]))
-                         if pumpargs[3] >= 90 then
-                            theme.pumpbar.widget:set_color(orange)
-                         elseif pumpargs[3] < 90 and pumpargs[3] >= 70 then
-                            theme.pumpbar.widget:set_color(white1)
-                         elseif pumpargs[3] < 70 and pumpargs[3] >= 30 then
-                            theme.pumpbar.widget:set_color(blue1)
-                         else
-                            theme.pumpbar.widget:set_background_color(red1)
-                            theme.pumpbar.widget:set_color(black1)
-                            pumpwidget_t:set_text(string.format("泵速過低！！！"))
-                            naughty.notify({ title = "警告",
-                                             text = "泵速過低！！！",
-                                             timeout = 0,
-                                             position = "top_middle",
-                                             fg = theme.fg_urgent,
-                                             bg = theme.bg_urgent,
-                                             border_width = theme.border_width,
-                                             border_color = white1 })
-                         end
-                         theme.pumpbar.widget:set_value(pumpargs[3] / 100)
-                      else
-                         theme.pumpbar.widget:set_background_color(red1)
-                         theme.pumpbar.widget:set_value(0)
-                         pumpwidget_t:set_text(string.format("泵速: 不明"))
-                      end
-end)
-
-local pumpbg = wibox.container.background(theme.pumpbar, black2, gears.shape.rectangle)
-local pumpwidget = wibox.container.margin(pumpbg, dpi(5), dpi(8), dpi(5), dpi(5))
+-- theme.pumpbar = wibox.widget {
+--    {
+--       -- color = white1,
+--       background_color = black1,
+--       paddings = dpi(1),
+--       border_width = dpi(1),
+--       border_color = white1,
+--       ticks = false,
+--       widget = wibox.widget.progressbar,
+--    },
+--    forced_height = dpi(5),
+--    forced_width = dpi(10),
+--    direction = 'east',
+--    layout = wibox.container.rotate,
+-- }
+-- pumpwidget_t = awful.tooltip({ objects = { theme.pumpbar },})
+-- awful.widget.watch('bash -c "liquidctl status | tail -n 4 | grep -o \'[0-9.]\\+\'"', 61,
+--                    function (widget, stdout)
+--                       if stdout ~= nil and stdout ~= "" then
+--                          pumpargs = {}
+--                          for val in stdout:gmatch("[^\r\n]+") do
+--                             table.insert(pumpargs, tonumber(val))
+--                          end
+--                          pumpwidget_t:set_text(string.format("水溫: %.1f℃\n泵速: %d rpm / %d%%", pumpargs[1], pumpargs[2], pumpargs[3]))
+--                          if pumpargs[3] >= 90 then
+--                             theme.pumpbar.widget:set_color(orange)
+--                          elseif pumpargs[3] < 90 and pumpargs[3] >= 70 then
+--                             theme.pumpbar.widget:set_color(white1)
+--                          elseif pumpargs[3] < 70 and pumpargs[3] >= 30 then
+--                             theme.pumpbar.widget:set_color(blue1)
+--                          else
+--                             theme.pumpbar.widget:set_background_color(red1)
+--                             theme.pumpbar.widget:set_color(black1)
+--                             pumpwidget_t:set_text(string.format("泵速過低！！！"))
+--                             naughty.notify({ title = "警告",
+--                                              text = "泵速過低！！！",
+--                                              timeout = 0,
+--                                              position = "top_middle",
+--                                              fg = theme.fg_urgent,
+--                                              bg = theme.bg_urgent,
+--                                              border_width = theme.border_width,
+--                                              border_color = white1 })
+--                          end
+--                          theme.pumpbar.widget:set_value(pumpargs[3] / 100)
+--                       else
+--                          theme.pumpbar.widget:set_background_color(red1)
+--                          theme.pumpbar.widget:set_value(0)
+--                          pumpwidget_t:set_text(string.format("泵速: 不明"))
+--                       end
+-- end)
+--
+-- local pumpbg = wibox.container.background(theme.pumpbar, black2, gears.shape.rectangle)
+-- local pumpwidget = wibox.container.margin(pumpbg, dpi(5), dpi(8), dpi(5), dpi(5))
 --- }}}
 
 --- {{{ Calendar
@@ -806,19 +806,19 @@ function theme.at_screen_connect(s)
                widget = wibox.widget.textbox,
          }),
          emailwidget,
-         -- wibox.widget({
-         --       markup = "<b>亮</b>",
-         --       font = "丁卯点阵体 9px 12",
-         --       widget = wibox.widget.textbox,
-         -- }),
-         -- brightnesswidget,
+         wibox.widget({
+             markup = "<b>亮</b>",
+             font = "丁卯点阵体 9px 12",
+             widget = wibox.widget.textbox,
+         }),
+         brightnesswidget,
          wibox.widget({
                markup = "<b>聲</b>",
                font = "丁卯点阵体 9px 12",
                widget = wibox.widget.textbox,
          }),
          volumewidget,
-         -- wibox.widget.textbox("泵"),
+         --wibox.widget.textbox("泵"),
          -- pumpwidget,
          wibox.widget({
                markup = "<b>溫</b>",
@@ -826,13 +826,13 @@ function theme.at_screen_connect(s)
                widget = wibox.widget.textbox,
          }),
          thermalwidget,
-         gputhermalwidget,
-         -- wibox.widget({
-         --       markup = "<b>電</b>",
-         --       font = "丁卯点阵体 9px 12",
-         --       widget = wibox.widget.textbox,
-         -- }),
-         -- batwidget,
+         -- gputhermalwidget,
+         wibox.widget({
+             markup = "<b>電</b>",
+             font = "丁卯点阵体 9px 12",
+             widget = wibox.widget.textbox,
+         }),
+         batwidget,
          wibox.widget({
                markup = "<b>存</b>",
                font = "丁卯点阵体 9px 12",
