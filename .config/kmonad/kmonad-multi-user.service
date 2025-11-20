@@ -1,0 +1,12 @@
+[Unit]
+Description=Kmonad Service
+After=network.target
+
+[Service]
+ExecStart=kmonad /home/daiwz/.config/kmonad/thinkpad_x1.kbd
+Restart=always
+User=root
+Group=root
+
+[Install]
+WantedBy=multi-user.target
