@@ -17,10 +17,14 @@ config.color_scheme = 'Zenburn (base16)'
 config.window_background_opacity = .92
 
 -- Fonts
-config.font = wezterm.font 'Sarasa Fixed SC'
+config.font = wezterm.font 'Maple Mono Normal NF CN'
+-- config.font = wezterm.font 'FiraCode Nerd Font Mono'
 
 -- No tab bar
 config.enable_tab_bar = false
+
+-- Cursor style
+-- config.default_cursor_style = 'BlinkingBar'
 
 -- and finally, return the configuration to wezterm
 return config

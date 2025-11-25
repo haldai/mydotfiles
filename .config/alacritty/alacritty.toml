@@ -9,15 +9,15 @@ y = 0
 size = 12
 
 [font.normal]
-family = "Sarasa Mono SC"
+family = "Maple Mono Normal NF CN"
 style = "Regular"
 
 [font.bold]
-family = "Sarasa Mono SC"
+family = "Maple Mono Normal NF CN"
 style = "Bold"
 
 [font.italic]
-family = "Sarasa Mono SC"
+family = "Maple Mono Normal NF CN"
 style = "Italic"
 
 [colors.primary]

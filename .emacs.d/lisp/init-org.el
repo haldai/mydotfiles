@@ -173,6 +173,9 @@
   ;; 改成自行插入，但這樣 pdfcreator 沒辦法根據 Emacs 版本插入，pdfkeyword 也會無效...幹。
   (setq org-latex-with-hyperref t)
 
+  ;; highlight latex
+  (setq org-highlight-latex-and-related '(latex))
+
   ;; Export source code using minted
   (setq org-latex-listings 'minted)
 
@@ -217,9 +220,9 @@
   ;; fonts
   (custom-theme-set-faces
    'user
-   '(variable-pitch ((t (:family "Vollkorn"))))
-   ;; '(variable-pitch ((t (:family "Fira Code"))))
-   '(fixed-pitch ((t (:family "Fira Code" :slant normal :weight normal))))
+   ;; '(variable-pitch ((t (:family "Vollkorn")))) ;; BUG in font rendering
+   '(variable-pitch ((t (:family "EB Garamond"))))
+   '(fixed-pitch ((t (:family "FiraCode Nerd Font" :slant normal :weight normal))))
    '(org-level-1 ((t (:inherit variable-pitch :height 1.5 :weight bold))))
    '(org-level-2 ((t (:inherit variable-pitch :height 1.4 :weight bold))))
    '(org-level-3 ((t (:inherit variable-pitch :height 1.3 :weight bold))))

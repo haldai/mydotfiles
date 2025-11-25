@@ -11,11 +11,11 @@
   :init (setq css-indent-offset 2))
 
 ;; SCSS mode
-(use-package scss-mode
-  :straight t
-  :init
-  ;; Disable complilation on save
-  (setq scss-compile-at-save nil))
+;; (use-package scss-mode
+;;   :straight t
+;;   :init
+;;   ;; Disable complilation on save
+;;   (setq scss-compile-at-save nil))
 
 ;; New `less-cs-mde' in Emacs 26
 (unless (fboundp 'less-css-mode)

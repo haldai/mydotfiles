@@ -264,10 +264,10 @@
   (face-spec-reset-face 'origami-fold-header-face))
 
 ;; Narrow/Widen
-;;(use-package fancy-narrow
-;;  :straight t
-;;  :diminish
-;;  :hook (after-init . fancy-narrow-mode))
+(use-package fancy-narrow
+  :straight t
+  :diminish
+  :hook (after-init . fancy-narrow-mode))
 
 ;; Huge files
 (use-package vlf
@@ -282,9 +282,6 @@
     (unless (file-exists-p file)
       (error "File does not exist: %s" file))
     (vlf file)))
-
-
-
 
 ;; Input Method
 (use-package posframe
@@ -353,21 +350,21 @@
   (interactive (insert "\u2009")))
 
 ;; On-the-fly spell checker
-;; (use-package flyspell
-;;   :straight t
-;;   :diminish
-;;   :if (executable-find "aspell")
-;;   :hook (((text-mode outline-mode) . flyspell-mode)
-;;          (prog-mode . flyspell-prog-mode)
-;;          (flyspell-mode . (lambda ()
-;;                             (dolist (key '("C-;" "C-," "C-."))
-;;                               (unbind-key key flyspell-mode-map)))))
-;;   :init
-;;   (setq flyspell-issue-message-flag nil)
-;;   (setq ispell-program-name "aspell")
-;;   (setq ispell-list-command "--list")
-;;   (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_GB" " --dont-tex-check-comments" "--run-together"))
-;;   (setq flyspell-issue-message-flag nil))
+(use-package flyspell
+  :straight t
+  :diminish
+  :if (executable-find "aspell")
+  :hook (((text-mode outline-mode) . flyspell-mode)
+         (prog-mode . flyspell-prog-mode)
+         (flyspell-mode . (lambda ()
+                            (dolist (key '("C-;" "C-," "C-."))
+                              (unbind-key key flyspell-mode-map)))))
+  :init
+  (setq ispell-program-name "aspell")
+  (setq ispell-list-command "--list")
+  (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_GB" " --dont-tex-check-comments" "--run-together"))
+  (setq ispell-dictionary "en_GB")
+  (setq flyspell-issue-message-flag nil))
 
 (provide 'init-edit)
 
