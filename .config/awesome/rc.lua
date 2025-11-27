@@ -456,7 +456,7 @@ globalkeys = gears.table.join(
   awful.key({ modkey }, "F4",
     function() awful.screen.focused().systray.visible = not awful.screen.focused().systray.visible end,
     { description = "toggle system tray", group = "launcher" }),
-  awful.key({ modkey }, "F5", function() awful.spawn("wezterm -e ranger") end,
+  awful.key({ modkey }, "F5", function() awful.spawn("wezterm -e yazi") end,
     { description = "launch ranger", group = "launcher" }),
   awful.key({ modkey }, "F6", function() awful.spawn("electronic-wechat") end,
     { description = "launch wechat", group = "launcher" }),

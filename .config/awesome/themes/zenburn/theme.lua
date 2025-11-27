@@ -257,21 +257,21 @@ local cpuwidget = wibox.container.margin(cpubg, dpi(5), dpi(8), dpi(5), dpi(5))
 --- {{{ Volume bar, add borders to lain.widget.alsabar
 local myalsabar = require("myalsabar")
 theme.volume = myalsabar {
-   ticks = false,
-   width = dpi(64),
-   height = dpi(8),
-   paddings = dpi(2),
-   margins = dpi(4),
-   border_width = dpi(2),
-   border_color = white2,
-   timeout = 11, -- time interval
-   colors = {
-      background = "#00000000",
-      mute = red1,
-      unmute = white1
-   },
-   -- notification_preset = { font = "方正宋刻本秀楷 10" }
-   notification_preset = { font = "丁卯点阵体 9px 12" }
+  ticks = false,
+  width = dpi(64),
+  height = dpi(8),
+  paddings = dpi(2),
+  margins = dpi(4),
+  border_width = dpi(2),
+  border_color = white2,
+  timeout = 11,  -- time interval
+  colors = {
+    background = "#00000000",
+    mute = red1,
+    unmute = white1
+  },
+  -- notification_preset = { font = "方正宋刻本秀楷 10" }
+  notification_preset = { font = "丁卯点阵体 9px 12" }
 }
 theme.volume.bar:buttons(
    my_table.join (
@@ -289,7 +289,7 @@ theme.volume.bar:buttons(
       end)
 ))
 local volumebg = wibox.container.background(theme.volume.bar, black2, gears.shape.rectangle)
-local volumewidget = wibox.container.margin(volumebg, dpi(5), dpi(8), dpi(7), dpi(7))
+local volumewidget = wibox.container.margin(volumebg, dpi(5), dpi(8), dpi(5), dpi(5))
 --- }}}
 
 --- {{{ GPU bar
@@ -373,8 +373,8 @@ theme.thermalbar = wibox.widget {
       max_value = 100,
       -- color = white1,
       background_color = black1,
-      paddings = dpi(3),
-      forced_width = dpi(32),
+      paddings = dpi(2),
+      forced_width = dpi(16),
       border_width = dpi(2),
       border_color = white1,
       ticks = false,
@@ -660,7 +660,7 @@ theme.brightness.bar:buttons(
       end)
 ))
 local brightnessbg = wibox.container.background(theme.brightness.bar, black2, gears.shape.rectangle)
-local brightnesswidget = wibox.container.margin(brightnessbg, dpi(5), dpi(8), dpi(7), dpi(7))
+local brightnesswidget = wibox.container.margin(brightnessbg, dpi(5), dpi(8), dpi(5), dpi(5))
 --- }}}
 
 --- }}}
