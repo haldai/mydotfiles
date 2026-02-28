@@ -16,8 +16,8 @@
 
 (use-package pico8-mode
   :straight (pico8-mode :type git :host github :repo "Kaali/pico8-mode")
-  :mode (("\\.p8\\'" . lua-mode)
-         ("\\.p8.png\\'" . lua-mode))
+  :mode (("\\.p8\\'" . pico8-mode)
+         ("\\.p8.png\\'" . pico8-mode))
   :init
   (setq lua-indent-level 2))
 
