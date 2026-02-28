@@ -284,6 +284,8 @@
     (unless (char-displayable-p ?❗)
       (setq org-fancy-priorities-list '("HIGH" "MID" "LOW" "OPTIONAL"))))
 
+  (use-package ob-typescript :straight t)
+
   ;; Babel
   (setq org-confirm-babel-evaluate nil
         org-src-fontify-natively t
@@ -308,6 +310,7 @@
                                (gnuplot . t)
                                (plantuml . t)
                                (jupyter . t)
+                               (typescript . t)
                                ))
 
   ;; (setq inferior-julia-program-name "julia")
