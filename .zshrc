@@ -142,9 +142,10 @@ export YAOURT_COLORS="nb=1:pkg=1:ver=1;32:lver=1;45:installed=1;42:grp=1;34:od=1
 # user environment
 SCRIPTS_PATH="/home/daiwz/.scripts"
 CUDAPATH="/opt/cuda"
-SWIPLPATH="/home/daiwz/.local/lib/swipl"
+#SWIPLPATH="/home/daiwz/.local/lib/swipl"
 CARGO_HOME="/home/daiwz/.cargo"
 GEM_HOME="/home/daiwz/.gem/ruby/2.7.0"
+ELANPATH="/home/daiwz/.elan/bin"
 
 # most
 export PAGER="most"
@@ -152,8 +153,8 @@ export TERM=xterm-256color
 
 # visual
 export VISUAL="emacs -Q -nw"
-export PATH="$SCRIPTS_PATH:$CARGO_HOME/bin:$CUDAPATH/bin:$HOME/.local/bin/:$GEM_HOME/bin:$PATH"
-export LD_LIBRARY_PATH="$SWIPLPATH/lib/x86_64-linux:$CUDAPATH/include/:${HOME}/.local/include/:${HOME}/.local/lib:$HOME/.local/lib64/:$LD_LIBRARY_PATH"
+export PATH="$ELANPATH:$SCRIPTS_PATH:$CARGO_HOME/bin:$CUDAPATH/bin:$HOME/.local/bin/:$HOME/.local/share/gem/ruby/3.0.0/bin:$GEM_HOME/bin:$PATH"
+export LD_LIBRARY_PATH="$CUDAPATH/include/:${HOME}/.local/include/:${HOME}/.local/lib:$HOME/.local/lib64/:$LD_LIBRARY_PATH"
 export LD_RUN_PATH="$CUDAPATH/lib64/:$LD_RUN_PATH"
 export PKG_CONFIG_PATH="$HOME/.local/share/pkgconfig:$HOME/.local/lib/pkgconfig/:$HOME/.local/lib64/pkgconfig/:$PKG_CONFIG_PATH"
 export PYTHON_EGG_CACHE="/tmp/python-eggs/"
@@ -171,6 +172,13 @@ alias matlab='LANG=en_US.utf-8 matlab'
 alias f='fuck'
 alias fo='handlr open "$(fzf)"'
 alias imgcat='wezterm imgcat'
+alias decktape='~/Projects/decktape/decktape.js --chrome-path=/usr/bin/google-chrome-stable'
+alias claude_lm='ANTHROPIC_BASE_URL=http://localhost:1234 ANTHROPIC_AUTH_TOKEN=lmstudio claude'
+alias codex_lm='OPENAI_API_KEY=lmstudio codex -m local-model -c
+  model_provider=\"lmstudio-local\" -c model_providers.lmstudio-local.name=\"LMStudio\" -c
+  model_providers.lmstudio-local.base_url=\"http://localhost:1234/v1\" -c
+  model_providers.lmstudio-local.env_key=\"OPENAI_API_KEY\" -c model_providers.lmstudio-
+  local.wire_api=\"responses\"'
 
 # optimus
 PRIMUS_PREFIX="primusrun"
@@ -181,3 +189,11 @@ export JULIA_NUM_THREADS=32
 
 # spaceship promp
 source /usr/lib/spaceship-prompt/spaceship.zsh
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/home/daiwz/.lmstudio/bin"
+# End of LM Studio CLI section
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/daiwz/.local/bin:$PATH"
