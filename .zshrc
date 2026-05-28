@@ -174,18 +174,16 @@ alias fo='handlr open "$(fzf)"'
 alias imgcat='wezterm imgcat'
 alias decktape='~/Projects/decktape/decktape.js --chrome-path=/usr/bin/google-chrome-stable'
 alias claude_lm='ANTHROPIC_BASE_URL=http://localhost:1234 ANTHROPIC_AUTH_TOKEN=lmstudio claude'
-alias codex_lm='OPENAI_API_KEY=lmstudio codex -m local-model -c
-  model_provider=\"lmstudio-local\" -c model_providers.lmstudio-local.name=\"LMStudio\" -c
-  model_providers.lmstudio-local.base_url=\"http://localhost:1234/v1\" -c
-  model_providers.lmstudio-local.env_key=\"OPENAI_API_KEY\" -c model_providers.lmstudio-
-  local.wire_api=\"responses\"'
+alias codex_lm='OPENAI_API_KEY=lmstudio codex -m local-model -c openai_base_url=\"http://localhost:1234/v1\"'
 
 # optimus
 PRIMUS_PREFIX="primusrun"
 OPTIMUS_PREFIX="optirun"
 
 # julia threading
-export JULIA_NUM_THREADS=32
+export JULIA_NUM_THREADS=16
+
+export GEMINI_API_KEY=$(pass show gemini)
 
 # spaceship promp
 source /usr/lib/spaceship-prompt/spaceship.zsh
