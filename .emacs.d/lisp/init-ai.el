@@ -6,11 +6,16 @@
 
 ;;; Code:
 
-;; ollama
-(use-package ollama-buddy
+;; gptel
+(use-package gptel
   :straight t
-  :bind
-  ("C-c o" . ollama-buddy-menu)
-  ("C-c O" . ollama-buddy-transient-menu-wrapper))
+  :config
+  (setq
+   gptel-model 'lm-studio
+   gptel-backend (gptel-make-openai "LM Studio"
+                   :host "localhost:1234"
+                   :protocol "http"
+                   :key "not-needed"
+                   :stream t)))
 
 (provide 'init-ai)
