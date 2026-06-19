@@ -10,7 +10,7 @@ tx="0"
 for dir in $if_dir/*
 do
     face=$(basename -- $dir)
-    if [ $face != "lo" ] && [ $(cat "$dir/operstate") == "up" ]; then
+    if [ $face != "lo" ] && [[ ! $face =~ ^br ]] && [[ ! $face =~ ^veth ]] && [ $(cat "$dir/operstate") == "up" ]; then
         if [ $(cat "$dir/carrier") == "1" ]; then
             if_name=$face
             sar_re=$(LC_ALL=en_GB.UTF-8 sar -n DEV $t 1 | grep 'Average' | grep $if_name)
