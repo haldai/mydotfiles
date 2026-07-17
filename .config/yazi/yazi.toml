@@ -1,0 +1,14 @@
+[mgr]
+sort_by = "extension"
+sort_dir_first = true
+
+[opener]
+play = [
+	{ run = "mpv %s", orphan = true, for = "unix" },
+]
+edit = [
+	{ run = "emacsclient -nw %s", block = true, for = "unix" },
+]
+open = [
+	{ run = "handlr %s1", desc = "Open" },
+]
