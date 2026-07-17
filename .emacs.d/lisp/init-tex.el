@@ -24,8 +24,7 @@
     (add-hook 'LaTeX-mode-hook 'TeX-source-correlate-mode)
     (add-hook 'LaTeX-mode-hook 'TeX-PDF-mode)
     (add-hook 'LaTeX-mode-hook 'flyspell-mode)
-    (add-hook 'LaTex-mode-hook 'company-mode)
-    (add-hook 'LaTex-mode-hook 'prog-mode))
+    (add-hook 'LaTeX-mode-hook 'company-mode))
   :config
   (use-package auctex-latexmk
     :straight t

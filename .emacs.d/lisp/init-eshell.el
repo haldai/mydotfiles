@@ -10,7 +10,7 @@
   :straight t
   :defines (compilation-last-buffer eshell-prompt-function)
   :commands (eshell/alias
-             eshell-send-input eshell-flatten-list
+             eshell-send-input flatten-tree
              eshell-interactive-output-p eshell-parse-command)
   :hook (eshell-mode . (lambda ()
                          (bind-key "C-l" 'eshell/clear eshell-mode-map)
@@ -37,7 +37,7 @@
       ;; We have to expand the file names or else naming a directory in an
       ;; argument causes later arguments to be looked for in that directory,
       ;; not the starting directory
-      (mapc #'find-file (mapcar #'expand-file-name (eshell-flatten-list (reverse args))))))
+      (mapc #'find-file (mapcar #'expand-file-name (flatten-tree (reverse args))))))
 
   (defalias 'eshell/e 'eshell/emacs)
 
@@ -51,7 +51,7 @@
           (compile (eshell-flatten-and-stringify args))
           (pop-to-buffer compilation-last-buffer))
       (throw 'eshell-replace-command
-             (let ((l (eshell-stringify-list (eshell-flatten-list args))))
+             (let ((l (eshell-stringify-list (flatten-tree args))))
                (eshell-parse-command (car l) (cdr l))))))
   (put 'eshell/ec 'eshell-no-numeric-conversions t)
 

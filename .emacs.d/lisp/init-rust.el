@@ -7,7 +7,6 @@
 
 (use-package rustic
   :straight t
-  :ensure t
   :bind (:map rustic-mode-map
               ("M-j" . lsp-ui-imenu)
               ("M-?" . lsp-find-references)
@@ -22,9 +21,9 @@
    '(rustic-compilation-column ((t (:inherit compilation-column-number))))
    '(rustic-compilation-line ((t (:foreground "LimeGreen")))))
 
-  (setq rustic-lsp-server 'rls)
+  (setq rustic-lsp-server 'rust-analyzer)
 
-  (setq lsp-rust-analyzer-server-command '("/usr/bin/rust-analyzer"))
+  (setq rustic-analyzer-command '("rust-analyzer"))
 
   (with-eval-after-load "lsp-rust"
     (lsp-register-client

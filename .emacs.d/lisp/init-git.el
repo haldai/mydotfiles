@@ -28,7 +28,7 @@
 ;; Show tasks
 (use-package magit-todos
   :straight t
-  :hook (ater-init . magit-todos-mode))
+  :hook (after-init . magit-todos-mode))
 
 ;; Walk through git revisions of a file
 (use-package git-timemachine
@@ -53,7 +53,6 @@
 ;; Resolve diff3 conflicts
 (use-package smerge-mode
   :straight t
-  :ensure nil
   :diminish
   :commands (smerge-mode
              smerge-auto-leave

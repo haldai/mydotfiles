@@ -7,7 +7,6 @@
 
 (use-package css-mode
   :straight t
-  :ensure nil
   :init (setq css-indent-offset 2))
 
 ;; SCSS mode
@@ -36,8 +35,7 @@
   :defines flycheck-javascript-eslint-executable
   :mode (("\\.js\\'" . js2-mode)
          ("\\.jsx\\'" . js2-jsx-mode))
-  :interpreter (("node" . js2-mode)
-                ("node" . js2-jsx-mode))
+  :interpreter ("node" . js2-mode)
   :hook ((js2-mode . js2-imenu-extras-mode)
          (js2-mode . js2-highlight-unused-variables-mode))
   :config
@@ -74,7 +72,7 @@
 (use-package web-mode
   :straight t
   :defines company-backends
-  :mode "\\.\\(phtml\\|php|[gj]sp\\|as[cp]x\\|erb\\|djhtml\\|html?\\|hbs\\|ejs\\|jade\\|swig\\|tm?pl\\|vue\\)\\'"
+  :mode "\\.\\(phtml\\|php\\|[gj]sp\\|as[cp]x\\|erb\\|djhtml\\|html?\\|hbs\\|ejs\\|jade\\|swig\\|tm?pl\\|vue\\)\\'"
   :config
   (setq web-mode-markup-indent-offset 2)
   (setq web-mode-css-indent-offset 2)

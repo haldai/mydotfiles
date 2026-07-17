@@ -10,7 +10,7 @@
   :straight t
   :mode ("\\.lua\\'" . lua-mode)
   :interpreter ("lua" . lua-mode)
-  :hook (lua-modeq . (lambda () (aggressive-indent-mode -1)))
+  :hook (lua-mode . (lambda () (aggressive-indent-mode -1)))
   :init
   (setq lua-indent-level 2))
 

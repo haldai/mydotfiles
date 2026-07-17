@@ -11,7 +11,7 @@
 
 ;; debug
 (setq debug-on-error nil)
-(setq warning-minimum-level :emergency)
+(setq warning-minimum-level :warning)
 (defvar native-comp-deferred-compilation-deny-list nil)
 
 (pixel-scroll-precision-mode 1)
@@ -40,10 +40,11 @@
 ;;----------------------------------------------------------------------------
 ;; Bootstrap straight.el
 ;;----------------------------------------------------------------------------
+(setq straight-use-version-specific-build-dir t)
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 6))
+      (bootstrap-version 7))
   (unless (file-exists-p bootstrap-file)
     (with-current-buffer
     (url-retrieve-synchronously
@@ -66,7 +67,6 @@
 (global-set-key (kbd "M-]") (kbd "C-u 3 C-v"))
 (global-set-key (kbd "M-[") (kbd "C-u 3 M-v"))
 
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 ;;----------------------------------------------------------------------------
 ;; Load configs for specific features and modes
 ;;----------------------------------------------------------------------------

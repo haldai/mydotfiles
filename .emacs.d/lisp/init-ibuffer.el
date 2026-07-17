@@ -7,7 +7,6 @@
 
 (use-package ibuffer
   :straight t
-  :ensure nil
   :functions (all-the-icons-icon-for-file
               all-the-icons-icon-for-mode
               all-the-icons-auto-mode-match?

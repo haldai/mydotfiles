@@ -7,7 +7,7 @@
 
 ;; Prolog Mode
 (use-package prolog
-  :load-path "~/.emacs.d/lisp/prolog.el"
+  :load-path "~/.emacs.d/lisp/"
   :mode (("\\.pl\\'" . prolog-mode)
          ("\\.m\\'" . mercury-mode))
   :bind (:map prolog-mode-map
@@ -60,7 +60,7 @@
     ;;(setq ediprolog-program "swipl")
     (setq ediprolog-system 'scryer)
     (setq ediprolog-program "scryer-prolog")
-    (setq scryer-prolog-path "/home/daiwz/.local/local/bin/scryer-prolog"))
+    (setq scryer-prolog-path "/home/daiwz/.local/bin/scryer-prolog"))
 
   ;; scryer-prolog
   (load "~/Projects/scryer-prolog/tools/showterm.el"))

@@ -29,7 +29,7 @@
         org-log-done 'time                          ; having the time a item is done sounds convenient
         org-list-allow-alphabetical t               ; have a. A. a) A) list bullets
         org-export-in-background t                  ; run export processes in external emacs process
-        org-catch-invisible-edits 'smart            ; try not to accidently do weird stuff in invisible regions
+        org-fold-catch-invisible-edits 'smart       ; try not to accidently do weird stuff in invisible regions
         org-export-with-sub-superscripts '{})       ; don't treat lone _ / ^ as sub/superscripts, require _{} / ^{}
 
   (define-key global-map "\C-cl" 'org-store-link)
@@ -168,16 +168,12 @@
            ("\\paragraph{%s}" . "\\paragraph*{%s}")
            ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
 
-  ;; [FIXME]
-  ;; 原本是不要讓 org 插入 hypersetup（因為 org-mode 這部份設計成沒辦法自訂，或許可以去 report 一下？
-  ;; 改成自行插入，但這樣 pdfcreator 沒辦法根據 Emacs 版本插入，pdfkeyword 也會無效...幹。
-  (setq org-latex-with-hyperref t)
 
   ;; highlight latex
   (setq org-highlight-latex-and-related '(latex))
 
   ;; Export source code using minted
-  (setq org-latex-listings 'minted)
+  (setq org-latex-src-block-backend 'minted)
 
   (setq org-latex-default-packages-alist
         '(("" "nopageno" t)
@@ -366,7 +362,7 @@
                                               (:eval . "never-export")))
 
   ;; do not evaluate code blocks while exporting
-  (setq org-export-babel-evaluate t)
+  (setq org-export-use-babel nil)
 
   ;; indention removed
   (setq org-edit-src-content-indentation 0)  ;; default = 2
@@ -428,10 +424,10 @@
       (org-overview)
 
       ;; Unfold the current entry
-      (org-show-entry)
+      (org-fold-show-entry)
 
       ;; Show only direct subheadings of the slide but don't expand them
-      (org-show-children))
+      (org-fold-show-children))
 
     (defun my/org-present-start ()
       ;; Fonts
@@ -442,7 +438,6 @@
 
       ;; Transparent: Let the desktop background show through
       (set-frame-parameter (selected-frame) 'alpha '(97 . 100))
-      (add-to-list 'default-frame-alist '(alpha . (90 . 90)))
 
       ;; Set a blank header line string to create blank space at the top
       (setq header-line-format " ")
@@ -465,7 +460,6 @@
 
       ;; disable transparency
       (set-frame-parameter (selected-frame) 'alpha '(100 . 100))
-      (add-to-list 'default-frame-alist '(alpha . (100 . 100)))
 
       ;; Clear the header line string so that it isn't displayed
       (setq header-line-format nil)
@@ -522,7 +516,7 @@
       (defun my-show-org-meta-line ()
         (interactive)
         (setq my-hide-org-meta-line-p nil)
-        (set-face-attribute 'org-meta-line nil :foreground nil))
+        (set-face-attribute 'org-meta-line nil :foreground unspecified))
 
       (defun my-toggle-org-meta-line ()
         (interactive)
@@ -635,7 +629,6 @@
 
 (use-package org-roam
   :straight t
-  :ensure t
   :init
   (setq org-roam-v2-ack t)
   :custom

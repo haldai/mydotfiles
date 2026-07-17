@@ -30,7 +30,7 @@ Selectively runs either `after-make-console-frame-hooks' or
           (lambda ()
             (when (current-local-map)
               (use-local-map (copy-keymap (current-local-map))))
-            (when (server-buffer-clients)
+            (when (bound-and-true-p server-buffer-clients)
               (local-set-key (kbd "C-x k") 'server-edit))))
 
           (provide 'init-frame-hooks)

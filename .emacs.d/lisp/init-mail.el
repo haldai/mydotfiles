@@ -4,11 +4,13 @@
 ;;
 
 ;;; Code:
-(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e/")
 (require 'mu4e)
 (mu4e 'background)
 ;; load the muw configuration
 (load-file "~/.config/mu4e/mu4e-config.el")
+;; Noninteractive updates cannot answer the default context prompt.  This
+;; configuration has one account, so select its sole context automatically.
+(setq mu4e-context-policy 'pick-first)
 
 ;; don't keep message buffers around
 (setq message-kill-buffer-on-exit t)

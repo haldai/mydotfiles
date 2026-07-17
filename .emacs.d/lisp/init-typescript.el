@@ -8,6 +8,6 @@
 ;; Typescript Mode
 (use-package typescript-mode
   :straight t
-  :mode (("\\.ts\\'" . typescript-ts-mode)))
+  :mode (("\\.ts\\'" . typescript-mode)))
 
 (provide 'init-typescript)

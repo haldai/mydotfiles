@@ -37,7 +37,7 @@
   (use-package all-the-icons-dired
     :straight t
     :diminish
-    :custom-face (all-the-icons-dired-dir-face ((t (:foreground nil))))
+    :custom-face (all-the-icons-dired-dir-face ((t (:foreground unspecified))))
     :hook (dired-mode . all-the-icons-dired-mode)
     :config
     (defun my-all-the-icons-dired--display ()
@@ -75,7 +75,6 @@
   ;; OpenWith
   (use-package openwith
     :straight t
-    :ensure t
     :config
     (setq openwith-associations
           (cond

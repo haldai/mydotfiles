@@ -5,7 +5,6 @@
 ;; some built in utility libs
 (require 'cl-lib)
 (require 'map)
-(package-initialize)
 
 ;; Setup use-package
 (eval-when-compile
@@ -94,13 +93,15 @@
 
 ;; Directional window-selection routines
 (use-package windmove
-  :ensure nil
   :hook (after-init . windmove-default-keybindings))
 
 ;; EasyPG
 (straight-use-package 'pinentry)
 (setq epa-file-select-keys nil)
-(pinentry-start)
+(condition-case err
+    (pinentry-start)
+  (error
+   (message "Could not start pinentry server: %s" (error-message-string err))))
 
 ;; new scratch
 (use-package scratch

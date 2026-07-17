@@ -27,9 +27,7 @@
 (use-package ccls
   :straight t
   :defines projectile-project-root-files-top-down-recurring
-  :hook ((c-mode c++-mode objc-mode cuda-mode) . (lambda ()
-                                                   (require 'ccls)
-                                                   (lsp)))
+  :hook ((c-mode c++-mode objc-mode cuda-mode) . (lambda () (require 'ccls)))
   :config
   (with-eval-after-load 'projectile
     (setq projectile-project-root-files-top-down-recurring

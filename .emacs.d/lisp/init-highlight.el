@@ -8,7 +8,6 @@
 ;; Highlight the current line
 (use-package hl-line
   :straight t
-  :ensure nil
   :hook (after-init . global-hl-line-mode))
 
 ;; Highlight symbols
@@ -34,7 +33,6 @@
 ;; Highlight matching parens
 (use-package paren
   :straight t
-  :ensure nil
   :hook (after-init . show-paren-mode)
   :config
   (setq show-paren-when-point-inside-paren t)
@@ -60,7 +58,7 @@
 
   (defun my-rainbow-clear-overlays ()
     (remove-overlays (point-min) (point-max) 'ovrainbow t))
-  (advice-add #'ranibow-turn-off :after #'my-rainbow-clear-overlays))
+  (advice-add #'rainbow-turn-off :after #'my-rainbow-clear-overlays))
 
 ;; Highlight brackets according to their depth
 (use-package rainbow-delimiters
@@ -128,7 +126,6 @@
 ;; Visualize TAB, (HARD) SPACE, NEWLINE
 (use-package whitespace
   :straight t
-  :ensure nil
   :diminish
   :hook ((prog-mode outline-mode conf-mode) . whitespace-mode)
   :config
@@ -145,23 +142,24 @@
     (defvar my-prev-whitespace-mode nil)
     (make-local-variable 'my-prev-whitespace-mode)
 
-    (defadvice popup-draw (before my-turn-off-whitespace activate compile)
+    (defun my-turn-off-whitespace (&rest _)
       "Turn off whitespace mode before showing autocomplete box."
       (if whitespace-mode
           (progn
             (setq my-prev-whitespace-mode t)
             (whitespace-mode -1))
         (setq my-prev-whitespace-mode nil)))
+    (advice-add #'popup-draw :before #'my-turn-off-whitespace)
 
-    (defadvice popup-delete (after my-restore-whitespace activate compile)
+    (defun my-restore-whitespace (&rest _)
       "Restore previous whitespace mode when deleting autocomplete box."
       (if my-prev-whitespace-mode
-          (whitespace-mode 1)))))
+          (whitespace-mode 1)))
+    (advice-add #'popup-delete :after #'my-restore-whitespace)))
 
 ;; Pulse current line
 (use-package pulse
   :straight t
-  :ensure nil
   :preface
   (defun my-pulse-momentary-line (&rest _)
     "Pulse the current line."

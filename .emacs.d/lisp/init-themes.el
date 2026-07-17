@@ -15,7 +15,6 @@
 
 (use-package cnfonts
   :straight (cnfonts :type git :host github :repo "tumashu/cnfonts")
-  :ensure t
   ;; :after all-the-icons
   ;; :hook (cnfonts-set-font-finish
   ;;        . (lambda (fontsizes-list)
@@ -86,8 +85,8 @@
       :custom-face (linum-highlight-face
                     ((t `(
                           :inherit default
-                          :background nil
-                          :foreground nil
+                          :background unspecified
+                          :foreground unspecified
                           ))))
       :init
       (setq linum-highlight-in-all-buffersp t))))
@@ -107,7 +106,7 @@
 (setq inhibit-startup-echo-area-message t)
 
 ;; Misc
-(fset 'yes-or-no-p 'y-or-n-p)
+(setq use-short-answers t)
 (setq visible-bell t)
 (size-indication-mode 1)
 ;; (blink-cursor-mode -1)
@@ -131,14 +130,7 @@
 (use-package keycast
   :straight t
   :config
-  (define-minor-mode keycast-mode
-    "Show current command and its key binding in the mode line (fix for use with doom-mode-line)."
-    :global t
-    (if keycast-mode
-        (add-hook 'pre-command-hook 'keycast--update t)
-      (remove-hook 'pre-command-hook 'keycast--update)))
-  (add-to-list 'global-mode-string '("" mode-line-keycast))
-  (keycast-mode 1))
+  (keycast-mode-line-mode 1))
 
 ;; rainbow-delimiters
 (use-package rainbow-delimiters

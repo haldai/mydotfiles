@@ -13,21 +13,23 @@
   (defun markdown-preview-grip ()
     "Render and preview with `grip'."
     (interactive)
-    (let ((program "grip")
-          (port "6419")
-          (buffer "*gfm-to-html*"))
+    (let* ((program (or (executable-find "grip")
+                        (user-error "Install grip before using this command")))
+           (file (or (buffer-file-name)
+                     (user-error "This buffer is not visiting a file")))
+           (port "6419")
+           (buffer "*gfm-to-html*"))
 
       ;; If process exists, kill it.
       (markdown-preview-kill-grip buffer)
 
       ;; Start a new `grip' process.
-      (start-process program buffer program (buffer-file-name) port)
+      (start-process program buffer program file port)
       (sleep-for 1) ; wait for process start
       (browse-url (format "http://localhost:%s/%s.%s"
                           port
-                          (file-name-base)
-                          (file-name-extension
-                           (buffer-file-name))))))
+                          (file-name-base file)
+                          (file-name-extension file)))))
 
   (defun markdown-preview-kill-grip (&optional buffer)
     "Kill `grip' process."
@@ -45,7 +47,7 @@
            (md-lint-dir (and md-file
                              (locate-dominating-file md-file md-lint))))
       (setq-local flycheck-markdown-markdownlint-cli-config
-                  (concat md-lint-dir md-lint))))
+                  (and md-lint-dir (expand-file-name md-lint md-lint-dir)))))
   :bind (:map markdown-mode-command-map
               ("g" .  markdown-preview-grip)
               ("k" .  markdown-preview-kill-grip))
@@ -57,8 +59,7 @@
 
   ;; use Pandoc
   (setq markdown-command
-        (concat
-         "/usr/local/bin/pandoc"
+        (concat (or (executable-find "pandoc") "pandoc")
          " --from=markdown --to=html"
          " --standalone --mathjax --highlight-style=pygments"))
 

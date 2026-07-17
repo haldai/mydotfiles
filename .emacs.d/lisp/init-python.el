@@ -11,7 +11,6 @@
 ;;   pip install autopep8
 (use-package python
   :straight t
-  :ensure nil
   :defines gud-pdb-command-name pdb-path
   :init
   (setq python-indent-guess-indent-offset t)
@@ -20,11 +19,8 @@
 
   ;; language server
   (use-package lsp-pyright
-    :ensure t
     :straight t
-    :hook (python-mode . (lambda ()
-                           (require 'lsp-pyright)
-                           (lsp-deferred))))  ; or lsp-deferred
+    :hook (python-mode . (lambda () (require 'lsp-pyright))))
 
   ;; Live Coding in Python
   (use-package live-py-mode :straight t))

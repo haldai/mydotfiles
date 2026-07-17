@@ -12,15 +12,13 @@
 ;; Miscs
 ;; (setq initial-scratch-message nil)
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets) ; Show path if names are same
-(setq adaptive-fill-regexp "[ t]+|[ t]*([0-9]+.|*+)[ t]*")
-(setq adaptive-fill-first-line-regexp "^* *$")
 (setq delete-by-moving-to-trash t)         ; Deleting files go to OS's trash folder
-(setq make-backup-files nil)               ; Forbide to make backup files
-(setq auto-save-default nil)               ; Disable auto save
+(setq make-backup-files t)                 ; Keep recovery copies of edited files
+(setq auto-save-default t)                 ; Enable crash recovery
 (setq set-mark-command-repeat-pop t)       ; Repeating C-SPC after popping mark pops it again
 (setq auto-window-vscroll nil)
 ;; (setq-default kill-whole-line t)           ; Kill line including '\n'
-(setq global-visual-line-mode t)
+(global-visual-line-mode 1)
 (setq visual-line-fringe-indicators '(left-curly-arrow right-curly-arrow))
 
 (setq-default major-mode 'text-mode)
@@ -241,7 +239,12 @@
 ;; Flexible text folding
 (use-package origami
   :straight t
-  :hook (prog-mode . origami-mode)
+  :preface
+  (defun my-origami-mode-maybe ()
+    "Enable Origami only where graphical face and fringe support is available."
+    (when (display-graphic-p)
+      (origami-mode 1)))
+  :hook (prog-mode . my-origami-mode-maybe)
   :init (setq origami-show-fold-header t)
   :config
   (defhydra origami-hydra (:color blue :hint none)
@@ -344,10 +347,12 @@
 ;;   :hook (after-init . global-emojify-mode))
 
 (defun insert-zero-width-space ()
-  (interactive (insert "\u200B")))
+  (interactive)
+  (insert "\u200B"))
 
 (defun insert-thin-space ()
-  (interactive (insert "\u2009")))
+  (interactive)
+  (insert "\u2009"))
 
 ;; On-the-fly spell checker
 (use-package flyspell
@@ -362,7 +367,7 @@
   :init
   (setq ispell-program-name "aspell")
   (setq ispell-list-command "--list")
-  (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_GB" " --dont-tex-check-comments" "--run-together"))
+  (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_GB" "--dont-tex-check-comments" "--run-together"))
   (setq ispell-dictionary "en_GB")
   (setq flyspell-issue-message-flag nil))
 
