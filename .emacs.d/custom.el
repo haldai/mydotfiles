@@ -168,4 +168,4 @@
  '(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.7))))
  '(org-todo ((t (:inherit fixed-pitch :underline t))))
  '(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
- '(variable-pitch ((t (:family "Vollkorn")))))
+ '(variable-pitch ((t (:family "Vollkorn" :weight normal)))))

@@ -5,12 +5,29 @@
 
 ;;; Code:
 (require 'mu4e)
-(mu4e 'background)
 ;; load the muw configuration
 (load-file "~/.config/mu4e/mu4e-config.el")
 ;; Noninteractive updates cannot answer the default context prompt.  This
 ;; configuration has one account, so select its sole context automatically.
 (setq mu4e-context-policy 'pick-first)
+
+(defun my-mu4e-start-background ()
+  "Start the mu4e backend in the primary Emacs server only."
+  (when (and (boundp 'server-process)
+             (process-live-p server-process)
+             (not (mu4e-running-p)))
+    (condition-case err
+        (mu4e 'background)
+      (error
+       (message "mu4e background startup failed: %s"
+                (error-message-string err))))))
+
+;; File and major-mode initialization must finish before the mail backend is
+;; started.  The idle timer also keeps mu's startup handshake off the critical
+;; path used by emacsclient when opening a file.
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (run-with-idle-timer 1 nil #'my-mu4e-start-background)))
 
 ;; don't keep message buffers around
 (setq message-kill-buffer-on-exit t)

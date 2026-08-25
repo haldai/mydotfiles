@@ -216,8 +216,8 @@
   ;; fonts
   (custom-theme-set-faces
    'user
-   ;; '(variable-pitch ((t (:family "Vollkorn")))) ;; BUG in font rendering
-   '(variable-pitch ((t (:family "EB Garamond"))))
+   ;; Use the current static TrueType Vollkorn; the old CFF build breaks Emacs 31.
+   '(variable-pitch ((t (:family "Vollkorn" :weight normal))))
    '(fixed-pitch ((t (:family "FiraCode Nerd Font" :slant normal :weight normal))))
    '(org-level-1 ((t (:inherit variable-pitch :height 1.5 :weight bold))))
    '(org-level-2 ((t (:inherit variable-pitch :height 1.4 :weight bold))))
@@ -361,8 +361,8 @@
                                               (:imoutoptions . "-flatten")
                                               (:eval . "never-export")))
 
-  ;; do not evaluate code blocks while exporting
-  (setq org-export-use-babel nil)
+  ;; do evaluate code blocks while exporting
+  (setq org-export-use-babel t)
 
   ;; indention removed
   (setq org-edit-src-content-indentation 0)  ;; default = 2
