@@ -7,7 +7,6 @@
 ;;; Code:
 
 ;; Produce backtraces when errors occur
-;; (server-start)
 
 ;; debug
 (setq debug-on-error nil)
@@ -121,6 +120,12 @@
 (when (file-exists-p custom-file)
   (load custom-file))
 (require 'init-keybind)
+
+;; Keep one long-lived Emacs process for desktop clients.  In particular,
+;; this prevents per-file Emacs instances from starting competing backends.
+(require 'server)
+(unless (or (daemonp) (server-running-p))
+  (server-start))
 
 (provide 'init)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
